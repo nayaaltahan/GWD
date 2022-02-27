@@ -36,12 +36,13 @@ public class GroundedChecker : MonoBehaviour
     {
         hitAmount = Physics.OverlapBoxNonAlloc(transform.position + offset, halfExtents, hit, Quaternion.identity, collidedLayers,
             queryTriggerInteraction);
-        IsGrounded = hitAmount == 0;
+        IsGrounded = hitAmount > 1;
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+
+        Gizmos.color = IsGrounded ? Color.green : Color.red;
         Gizmos.DrawWireCube(transform.position  + offset, halfExtents * 2);
     }
 }
