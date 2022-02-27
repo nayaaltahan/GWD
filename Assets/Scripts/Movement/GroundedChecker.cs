@@ -6,7 +6,6 @@ using UnityEngine.Serialization;
 
 public class GroundedChecker : MonoBehaviour
 {
-
     public bool IsGrounded { get; private set; } = false;
 
     [SerializeField] 
