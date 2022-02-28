@@ -5,11 +5,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
 {
-    public bool IsJumping { get; set; } = false;
+    public bool IsJumping { get; private set; } = false;
     
     public void Jump(InputAction.CallbackContext value)
     {
-        IsJumping = value.ReadValue<bool>();
+        IsJumping = value.ReadValueAsButton();
+        Debug.Log(IsJumping);
     }
     
 }
