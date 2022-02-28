@@ -47,7 +47,6 @@ public class Jump : MonoBehaviour
             {
                 rb.velocity = rb.velocity.WithY(rb.velocity.y + initialVelocity);
                 gotInitialBoost = true;
-
             }
             jumpTimer += Time.deltaTime;
             rb.velocity = rb.velocity.WithY(rb.velocity.y + upVelocity);
@@ -57,7 +56,6 @@ public class Jump : MonoBehaviour
             jumpTimer = 0;
             rb.velocity = rb.velocity.WithY(0);
             gotInitialBoost = false;
-
         }
         else if (!groundedChecker.IsGrounded && rb.velocity.y < 0) // falling
         {
