@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
+//TODO: This shouldn't be a singleton
 public class CharSelectManager : MonoBehaviour
 {
     public static CharSelectManager instance;
 
     public GameObject p1MidButton;
     public GameObject p2MidButton;
+    public GameObject p1Root;
+    public GameObject p2Root;
 
     [SerializeField] private PlayerInputManager playerInputManager;
 

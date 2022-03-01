@@ -36,12 +36,13 @@ public class PlayerMoveController : MonoBehaviour
 
         if (canTurnLeft == false && moveDirection.x < 0)
             moveDirection.x = 0;
-            
     }
 
     public void Move()
     {
         Vector3 velocity = moveDirection * speed;
+
+        Debug.Log("TEST VELOCITY: " + velocity);
         velocity.y = rb.velocity.y;
         rb.velocity = velocity;
 

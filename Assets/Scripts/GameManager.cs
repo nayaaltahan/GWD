@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     //TODO: Create a UI manager, instead of having variables being managed in GameManager
     public GameObject canvas;
 
-    private GameObject playerOne;
-    private GameObject playerTwo;
+    public GameObject playerOne;
+    public GameObject playerTwo;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         else
             Debug.LogError("More than one Game Manager in the scene");
 
+        state = GameStates.CHARACTERSELECT;
     }
 
     // Update is called once per frame
@@ -41,6 +42,10 @@ public class GameManager : MonoBehaviour
             case GameStates.PAUSEMENU:
                 break;
             case GameStates.PLAYGAME:
+                UIManager.instance.TurnCharSelectUIOn(false);
+                playerOne.GetComponent<PlayerController>().PlayGame();
+                playerTwo.GetComponent<PlayerController>().PlayGame();
+
                 //Turn off any U.I. or objects that don't belong to PlayGame State
                 break;
             default:

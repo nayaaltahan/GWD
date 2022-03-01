@@ -271,9 +271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 670ef46c5ac40eb47b70dc7446e265c0, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: b779f636bb0f5d4479ae4205d7c1f4f3, type: 3}
   m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
+  m_UIInputModule: {fileID: 1807498056397787872}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 76915751501971445}
         m_TargetAssemblyTypeName: PlayerMoveController, Assembly-CSharp
         m_MethodName: SetMove
         m_Mode: 0
@@ -298,15 +298,51 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 775000a7-34dd-4b51-bf28-7923e4d74c49
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+    m_ActionId: b6bf163e-2248-4af2-9752-67d6932c5c75
+    m_ActionName: Player/Move[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: b336b60a-5ce8-41d0-ae1c-37412be8ac08
-    m_ActionName: Player/Jump[/Keyboard/space]
+    m_ActionId: 08b83f13-19f2-4b6f-871a-e6670c060d35
+    m_ActionName: UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7678dc03-87d6-48be-a06e-1fc895473363
+    m_ActionName: UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3ca33a1f-4fee-4b7d-b24f-97651ce85764
+    m_ActionName: UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 05e152ee-e67d-4561-8eb4-5d04d6e87d4e
+    m_ActionName: UI/Point[/Mouse/position,/Pen/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: be1b8953-ece2-4d32-a816-e138196b3589
+    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f8d4a5a2-45f1-41db-9be6-a3f6d69edab3
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6e1d97ef-ed40-4f4b-9467-8cfaf82fb0e5
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bc306dc0-ec83-4fb4-9504-b9def675c7af
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6e5af582-17c1-4e6e-aaa1-690e4a756455
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e6fa7e18-afbd-4d43-a7ee-0107cdb3f75e
+    m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &5698822737149804350
@@ -340,17 +376,17 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: b779f636bb0f5d4479ae4205d7c1f4f3, type: 3}
+  m_PointAction: {fileID: -8144384031264820770, guid: b779f636bb0f5d4479ae4205d7c1f4f3, type: 3}
+  m_MoveAction: {fileID: 6017354638100429557, guid: b779f636bb0f5d4479ae4205d7c1f4f3, type: 3}
+  m_SubmitAction: {fileID: 4186930987101480697, guid: b779f636bb0f5d4479ae4205d7c1f4f3, type: 3}
+  m_CancelAction: {fileID: 8119033929472671571, guid: b779f636bb0f5d4479ae4205d7c1f4f3, type: 3}
+  m_LeftClickAction: {fileID: 5293640751184917535, guid: b779f636bb0f5d4479ae4205d7c1f4f3, type: 3}
+  m_MiddleClickAction: {fileID: -7748190094277439344, guid: b779f636bb0f5d4479ae4205d7c1f4f3, type: 3}
+  m_RightClickAction: {fileID: -4721024908878615724, guid: b779f636bb0f5d4479ae4205d7c1f4f3, type: 3}
+  m_ScrollWheelAction: {fileID: -969434450632018504, guid: b779f636bb0f5d4479ae4205d7c1f4f3, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6766620854116001614, guid: b779f636bb0f5d4479ae4205d7c1f4f3, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 5721718575272588821, guid: b779f636bb0f5d4479ae4205d7c1f4f3, type: 3}
   m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
 --- !u!114 &6631738200886430453
