@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2725766675649221202}
   - component: {fileID: 8973327478202349650}
   - component: {fileID: 5483838351669945342}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,10 @@ GameObject:
   - component: {fileID: 1071584351}
   - component: {fileID: 1071584350}
   - component: {fileID: 1071584349}
-  m_Layer: 0
+  - component: {fileID: 593648582}
+  - component: {fileID: 593648583}
+  - component: {fileID: 593648584}
+  m_Layer: 6
   m_Name: PlayerOne
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -253,7 +256,19 @@ MonoBehaviour:
     m_ActionId: 775000a7-34dd-4b51-bf28-7923e4d74c49
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 593648582}
+        m_TargetAssemblyTypeName: PlayerInputController, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b336b60a-5ce8-41d0-ae1c-37412be8ac08
     m_ActionName: Player/Jump[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
@@ -273,4 +288,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcda6e2a7810ee418914e5205a2a241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 10
+--- !u!114 &593648582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507386223301689629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7401736fce464b2eb9f3c1c4cca7067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &593648583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507386223301689629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b65c770332b54cdea5768a9980fcea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHoldTimer: 0.3
+  initialVelocity: 15
+  upVelocity: 0.2
+  downVelocity: -0.2
+  maxDownVelocity: -100
+--- !u!114 &593648584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507386223301689629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd5544ada83947f0ba576adda162680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: -0.86, z: 0}
+  halfExtents: {x: 0.46, y: 0.23, z: 0.55}
+  collidedLayers:
+    serializedVersion: 2
+    m_Bits: 55
+  queryTriggerInteraction: 0

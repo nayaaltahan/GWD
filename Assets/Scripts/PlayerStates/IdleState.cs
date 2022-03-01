@@ -9,9 +9,22 @@ public class IdleState : PlayerState
         throw new System.NotImplementedException();
     }
 
-    public override void Update(PlayerStateController player)
+    public override void FixedUpdate(PlayerStateController player)
     {
-        throw new System.NotImplementedException();
+        if (player.InputController.IsJumping)
+        {
+            player.SetCurrentState(new JumpState());
+        }
+
+        else if(player.InputController.MoveDirection != Vector3.zero)
+        {
+            player.SetCurrentState(new WalkState());
+        }
+
+        else if (player.Rigidbody.velocity.y < 0)
+        {
+            player.SetCurrentState(new FallState());
+        }
     }
 
     public override void OnCollisionEnter(PlayerStateController player, Collision collision)

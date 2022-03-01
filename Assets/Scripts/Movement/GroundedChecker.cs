@@ -35,7 +35,7 @@ public class GroundedChecker : MonoBehaviour
     {
         hitAmount = Physics.OverlapBoxNonAlloc(transform.position + offset, halfExtents, hit, Quaternion.identity, collidedLayers,
             queryTriggerInteraction);
-        IsGrounded = hitAmount > 1;
+        IsGrounded = hitAmount >= 1;
     }
 
     private void OnDrawGizmos()
