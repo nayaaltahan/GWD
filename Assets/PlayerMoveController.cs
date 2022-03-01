@@ -13,6 +13,10 @@ public class PlayerMoveController : MonoBehaviour
     private Vector3 moveDirection;
     private bool isFacingRight;
 
+    
+    [HideInInspector]
+    public bool canTurnLeft { get; set; }   //Variable is used when we want to make sure the player can only walk forward
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +33,10 @@ public class PlayerMoveController : MonoBehaviour
     {
         Vector2 tempVector = value.ReadValue<Vector2>();
         moveDirection = new Vector3(tempVector.x, 0, 0);
+
+        if (canTurnLeft == false && moveDirection.x < 0)
+            moveDirection.x = 0;
+            
     }
 
     public void Move()
@@ -36,6 +44,10 @@ public class PlayerMoveController : MonoBehaviour
         Vector3 velocity = moveDirection * speed;
         velocity.y = rb.velocity.y;
         rb.velocity = velocity;
+
+        isFacingRight = false;
+        if (moveDirection.x < 0)
+            isFacingRight = true;
 
         if (moveDirection.x > 0 && !isFacingRight)
         {
