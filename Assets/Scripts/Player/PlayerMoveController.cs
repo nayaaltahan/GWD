@@ -42,7 +42,6 @@ public class PlayerMoveController : MonoBehaviour
     {
         Vector3 velocity = moveDirection * speed;
 
-        Debug.Log("TEST VELOCITY: " + velocity);
         velocity.y = rb.velocity.y;
         rb.velocity = velocity;
 

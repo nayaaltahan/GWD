@@ -13,9 +13,15 @@ public class PlayerController : MonoBehaviour
         playerNumber = amountPlayers;
 
         if (amountPlayers == 1)
+        {
             GameManager.instance.playerOne = gameObject;
+            CharSelectManager.instance.SetP1MES();
+        }
         else
+        {
             GameManager.instance.playerTwo = gameObject;
+            CharSelectManager.instance.SetP2MES();
+        }
     }
 
     private void Start()
