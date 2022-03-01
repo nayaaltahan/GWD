@@ -33,15 +33,16 @@ public class PlayerMoveController : MonoBehaviour
     {
         Vector2 tempVector = value.ReadValue<Vector2>();
         moveDirection = new Vector3(tempVector.x, 0, 0);
+        //Debug.Log("Move: " + moveDirection);
+        //if (canTurnLeft == false && moveDirection.x < 0)
+        //    moveDirection.x = 0;
 
-        if (canTurnLeft == false && moveDirection.x < 0)
-            moveDirection.x = 0;
     }
 
     public void Move()
     {
         Vector3 velocity = moveDirection * speed;
-
+        //Debug.Log("TEST: " + moveDirection);
         velocity.y = rb.velocity.y;
         rb.velocity = velocity;
 

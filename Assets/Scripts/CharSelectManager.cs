@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using TMPro;
+using DG.Tweening;
 
 //TODO: This shouldn't be a singleton
 public class CharSelectManager : MonoBehaviour
@@ -56,11 +57,8 @@ public class CharSelectManager : MonoBehaviour
     public void ReadyP1(bool isLeft)
     {
         if (isP2Ready && isP2Left == isLeft)
-        {
-            Debug.Log("Meh");
             return;
-        }
-
+      
         isP1Left = isLeft;
         isP1Ready = !isP1Ready;
 
@@ -106,12 +104,17 @@ public class CharSelectManager : MonoBehaviour
         Ready();
     }
 
+    //Check if game is Ready to play, start PlayState and setup players
     public void Ready()
     {
         if(isP1Ready && isP2Ready)
             GameManager.instance.SwitchState(GameStates.PLAYGAME);
+
+        GameManager.instance.playerOne.GetComponent<PlayerController>().SetUpPlayer(isP1Left);
+        GameManager.instance.playerTwo.GetComponent<PlayerController>().SetUpPlayer(isP2Left);
     }
 
+    //Update images to make sure only selected one shows for player one
     private void UpdatePlayerOneSelection()
     {
         bool temp = false;
@@ -128,6 +131,7 @@ public class CharSelectManager : MonoBehaviour
         }
     }
 
+    //Update images to make sure only selected one shows for player Two
     private void UpdatePlayerTwoSelection()
     {
         bool temp = false;
@@ -138,17 +142,18 @@ public class CharSelectManager : MonoBehaviour
             if (p2Buttons[i].gameObject == p2multiplayerES.currentSelectedGameObject)
                 temp = true;
 
-
             p2Buttons[i].GetComponent<Image>().enabled = temp;
             p2Buttons[i].transform.GetChild(0).gameObject.SetActive(temp);
         }
     }
 
+    //Set Multiplayer Event System
     public void SetP1MES()
     {
         p1multiplayerES = GameManager.instance.playerOne.GetComponent<MultiplayerEventSystem>();
     }
 
+    //Set Multiplayer Event System
     public void SetP2MES()
     {
         p2multiplayerES = GameManager.instance.playerTwo.GetComponent<MultiplayerEventSystem>();

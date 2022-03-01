@@ -19,7 +19,8 @@ public class CameraManager : MonoBehaviour
 
     public void AddPlayersTargetGroup()
     {
-
+        targetGroup.AddMember(GameManager.instance.playerOne.transform, 1, 0);
+        targetGroup.AddMember(GameManager.instance.playerTwo.transform, 1, 0);
     }
     
 }

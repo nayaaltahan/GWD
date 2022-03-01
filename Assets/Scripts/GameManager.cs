@@ -43,8 +43,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStates.PLAYGAME:
                 UIManager.instance.TurnCharSelectUIOn(false);
-                playerOne.GetComponent<PlayerController>().PlayGame();
-                playerTwo.GetComponent<PlayerController>().PlayGame();
+                CameraManager.instance.AddPlayersTargetGroup();
 
                 //Turn off any U.I. or objects that don't belong to PlayGame State
                 break;

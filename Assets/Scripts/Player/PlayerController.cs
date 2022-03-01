@@ -26,15 +26,21 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.instance.state == GameStates.PLAYGAME)
-            PlayGame();
     }
 
-    public void PlayGame()
+    //Activate Children
+    private void PlayGame()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(true);
         }
+    }
+
+    //TODO: Implement this
+    public void SetUpPlayer(bool isPlayerOne)
+    {
+        PlayGame();
+        //Add differences here for players
     }
 }
