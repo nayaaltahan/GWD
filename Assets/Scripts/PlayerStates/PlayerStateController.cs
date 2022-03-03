@@ -12,6 +12,22 @@ public class PlayerStateController : MonoBehaviour
     public readonly WalkState WalkState = new WalkState();
     public readonly FallState FallState = new FallState();
     
+    [Header("Jump Settings")]
+    public float jumpHoldTimer = 0.3f;
+
+    public float initialVelocity = 15.0f;
+    
+    public float upVelocity = 0.2f;
+    
+    [Header("Fall Settings")]
+    public float downVelocity = -0.2f;
+    
+    public float maxDownVelocity = -100.0f;
+    
+    [Header("Walk Settings")]
+    [Tooltip("Walking speed of the player.")]
+    public float speed = 10f;
+    
     public PlayerInputController InputController { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
     private GroundedChecker GroundedChecker { get; set; }
@@ -43,6 +59,7 @@ public class PlayerStateController : MonoBehaviour
             isFacingRight = false;
         }
         currentState.FixedUpdate(this);
+        Debug.Log(currentState.GetType());
     }
 
     private void OnCollisionEnter(Collision other)

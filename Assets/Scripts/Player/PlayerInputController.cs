@@ -11,7 +11,6 @@ public class PlayerInputController : MonoBehaviour
     public void Jump(InputAction.CallbackContext value)
     {
         IsJumping = value.ReadValueAsButton();
-        Debug.Log(IsJumping);
     }
     
     public void SetMove(InputAction.CallbackContext value)

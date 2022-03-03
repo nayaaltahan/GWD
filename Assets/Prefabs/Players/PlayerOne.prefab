@@ -109,10 +109,9 @@ GameObject:
   - component: {fileID: 3380322076236052575}
   - component: {fileID: 1071584351}
   - component: {fileID: 1071584350}
-  - component: {fileID: 1071584349}
   - component: {fileID: 593648582}
-  - component: {fileID: 593648583}
   - component: {fileID: 593648584}
+  - component: {fileID: 1981721185}
   m_Layer: 6
   m_Name: PlayerOne
   m_TagString: Player
@@ -241,8 +240,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1071584349}
-        m_TargetAssemblyTypeName: PlayerMoveController, Assembly-CSharp
+      - m_Target: {fileID: 593648582}
+        m_TargetAssemblyTypeName: PlayerInputController, Assembly-CSharp
         m_MethodName: SetMove
         m_Mode: 0
         m_Arguments:
@@ -276,19 +275,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1071584349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5507386223301689629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afcda6e2a7810ee418914e5205a2a241, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
 --- !u!114 &593648582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,23 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7401736fce464b2eb9f3c1c4cca7067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &593648583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5507386223301689629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b65c770332b54cdea5768a9980fcea4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpHoldTimer: 0.3
-  initialVelocity: 15
-  upVelocity: 0.2
-  downVelocity: -0.2
-  maxDownVelocity: -100
 --- !u!114 &593648584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,3 +305,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   queryTriggerInteraction: 0
+--- !u!114 &1981721185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507386223301689629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781f9b6206dd82f4a8265c9408dc7ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHoldTimer: 0.3
+  initialVelocity: 20
+  upVelocity: 10
+  downVelocity: -0.2
+  maxDownVelocity: -100
+  speed: 20

@@ -6,7 +6,7 @@ public class IdleState : PlayerState
 {
     public override void EnterState(PlayerStateController player)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void FixedUpdate(PlayerStateController player)

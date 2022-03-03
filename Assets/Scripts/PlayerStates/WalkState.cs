@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class WalkState : PlayerState
 {
-    [Tooltip("Walking speed of the player.")]
-    [SerializeField]
-    private float speed = 20f;
-    
     public override void EnterState(PlayerStateController player)
     {
         
@@ -16,9 +12,7 @@ public class WalkState : PlayerState
     public override void FixedUpdate(PlayerStateController player)
     {
         //TODO change movedirection to property
-        Vector3 velocity = player.InputController.MoveDirection * speed;
-        velocity.y = player.Rigidbody.velocity.y;
-        player.Rigidbody.velocity = velocity;
+        player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(player.Rigidbody.velocity.y);
 
         if (player.InputController.IsJumping)
         {

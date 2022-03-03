@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class FallState : PlayerState
 {
-    [SerializeField]
-    private float downVelocity = -10.0f;
-    
-    [SerializeField]
-    private float maxDownVelocity = 50.0f;
-    
     public override void EnterState(PlayerStateController player)
     {
         
@@ -19,8 +13,9 @@ public class FallState : PlayerState
     {
         if (!player.IsGrounded && player.Rigidbody.velocity.y < 0) // falling
         {
-            var clamped = Mathf.Clamp(player.Rigidbody.velocity.y + downVelocity, maxDownVelocity, 100);
-            player.Rigidbody.velocity = player.Rigidbody.velocity.WithY(clamped);
+            var clamped = Mathf.Clamp(player.Rigidbody.velocity.y + player.downVelocity, player.maxDownVelocity, 100);
+            player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(clamped);
+
         }
         else if (player.IsGrounded) // landed
         {
@@ -37,7 +32,7 @@ public class FallState : PlayerState
 
     public override void OnCollisionEnter(PlayerStateController player, Collision collision)
     {
-        throw new System.NotImplementedException();
+        
     }
     
 }

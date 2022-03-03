@@ -4,30 +4,23 @@ using UnityEngine;
 
 public class JumpState : PlayerState
 {
-    [SerializeField]
-    private float jumpHoldTimer = 0.3f;
-
-    [SerializeField]
-    private float initialVelocity = 20.0f;
-    
-    [SerializeField]
-    private float upVelocity = 10.0f;
-
     private float jumpTimer;
     
     public override void EnterState(PlayerStateController player)
     {
         // Initial velocity on enter jump
         // TODO add property for velocity
-        player.Rigidbody.velocity = player.Rigidbody.velocity.WithY(player.Rigidbody.velocity.y + initialVelocity);
+        player.Rigidbody.velocity = player.Rigidbody.velocity.WithY(player.Rigidbody.velocity.y + player.initialVelocity);
+        jumpTimer = 0;
     }
 
     public override void FixedUpdate(PlayerStateController player)
     {
-        if (player.InputController.IsJumping && jumpTimer < jumpHoldTimer) // jumped and is holding
+        if (player.InputController.IsJumping && jumpTimer < player.jumpHoldTimer) // jumped and is holding
         {
             jumpTimer += Time.deltaTime;
-            player.Rigidbody.velocity = player.Rigidbody.velocity.WithY(player.Rigidbody.velocity.y + upVelocity);
+            player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(player.Rigidbody.velocity.y);
+
         }
         else if (player.Rigidbody.velocity.y < 0) // falling
         {
@@ -54,7 +47,7 @@ public class JumpState : PlayerState
 
     public override void OnCollisionEnter(PlayerStateController player, Collision collision)
     {
-        throw new System.NotImplementedException();
+        
     }
     
 }
