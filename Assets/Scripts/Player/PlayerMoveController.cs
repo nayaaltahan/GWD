@@ -21,6 +21,7 @@ public class PlayerMoveController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        Debug.Log("TEST");
     }
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class PlayerMoveController : MonoBehaviour
         //Debug.Log("Move: " + moveDirection);
         //if (canTurnLeft == false && moveDirection.x < 0)
         //    moveDirection.x = 0;
-
+        Debug.Log("WEIRD");
     }
 
     public void Move()

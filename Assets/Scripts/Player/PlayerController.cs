@@ -24,10 +24,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-    }
-
     //Activate Children
     private void PlayGame()
     {
@@ -41,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public void SetUpPlayer(bool isPlayerOne)
     {
         PlayGame();
+        //TODO: Set this as spawn point
+        GetComponent<Rigidbody>().position = Vector3.zero;
         //Add differences here for players
     }
 }
