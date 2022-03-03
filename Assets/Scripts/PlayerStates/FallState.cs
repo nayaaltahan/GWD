@@ -39,9 +39,5 @@ public class FallState : PlayerState
     {
         throw new System.NotImplementedException();
     }
-
-    public override void ExitState(PlayerStateController player)
-    {
-        throw new System.NotImplementedException();
-    }
+    
 }

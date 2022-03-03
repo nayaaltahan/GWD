@@ -38,12 +38,9 @@ public class WalkState : PlayerState
 
     public override void OnCollisionEnter(PlayerStateController player, Collision collision)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void ExitState(PlayerStateController player)
-    {
-        throw new System.NotImplementedException();
+        // TODO check if collision is pushable/draggable
     }
     
+    //TODO add onTriggerEnter base function for implementing pushable/draggable
+
 }

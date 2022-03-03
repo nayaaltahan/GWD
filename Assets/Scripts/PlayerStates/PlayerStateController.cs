@@ -52,7 +52,6 @@ public class PlayerStateController : MonoBehaviour
 
     public void SetCurrentState(PlayerState state)
     {
-        currentState.ExitState(this);
         currentState = state;
         currentState.EnterState(this);
     }

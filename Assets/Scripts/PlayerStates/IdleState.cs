@@ -13,27 +13,22 @@ public class IdleState : PlayerState
     {
         if (player.InputController.IsJumping)
         {
-            player.SetCurrentState(new JumpState());
+            player.SetCurrentState(player.JumpState);
         }
 
         else if(player.InputController.MoveDirection != Vector3.zero)
         {
-            player.SetCurrentState(new WalkState());
+            player.SetCurrentState(player.WalkState);
         }
 
         else if (player.Rigidbody.velocity.y < 0)
         {
-            player.SetCurrentState(new FallState());
+            player.SetCurrentState(player.FallState);
         }
     }
 
     public override void OnCollisionEnter(PlayerStateController player, Collision collision)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void ExitState(PlayerStateController player)
-    {
-        throw new System.NotImplementedException();
+        
     }
 }
