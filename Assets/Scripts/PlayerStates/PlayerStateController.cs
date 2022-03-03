@@ -43,6 +43,7 @@ public class PlayerStateController : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         GroundedChecker = GetComponent<GroundedChecker>();
         SetCurrentState(IdleState);
+        Debug.Log(currentState.GetType());
     }
 
     // Update is called once per frame
@@ -59,7 +60,6 @@ public class PlayerStateController : MonoBehaviour
             isFacingRight = false;
         }
         currentState.FixedUpdate(this);
-        Debug.Log(currentState.GetType());
     }
 
     private void OnCollisionEnter(Collision other)

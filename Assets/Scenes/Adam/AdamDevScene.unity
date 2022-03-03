@@ -943,6 +943,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1981721185, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+      propertyPath: upVelocity
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981721185, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+      propertyPath: initialVelocity
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1534068173897769885, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: m_RootOrder
       value: 2
