@@ -14,7 +14,7 @@ public class FallState : PlayerState
         if (!player.IsGrounded && player.Rigidbody.velocity.y < 0) // falling
         {
             var clamped = Mathf.Clamp(player.Rigidbody.velocity.y + player.downVelocity, player.maxDownVelocity, 100);
-            player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(clamped);
+            player.Rigidbody.velocity = (player.InputController.MoveDirection * (player.speed * 0.8f)).WithY(clamped);
 
         }
         else if (player.IsGrounded) // landed

@@ -19,7 +19,7 @@ public class JumpState : PlayerState
         if (player.InputController.IsJumping && jumpTimer < player.jumpHoldTimer) // jumped and is holding
         {
             jumpTimer += Time.deltaTime;
-            player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(player.Rigidbody.velocity.y);
+            player.Rigidbody.velocity = (player.InputController.MoveDirection * (player.speed * 0.8f)).WithY(player.Rigidbody.velocity.y + player.upVelocity);
 
         }
         else if (player.Rigidbody.velocity.y < 0) // falling
@@ -38,10 +38,11 @@ public class JumpState : PlayerState
                 player.SetCurrentState(new WalkState());
             }
         }
-        else if (!player.IsGrounded) // released jump but still jumping
+        // TODO do we need this? can we add breakpoints and see when we reach this condition?
+        else if (player.Rigidbody.velocity.y >= 0) // released jump but still jumping
         {
             jumpTimer = 1;
-            player.Rigidbody.velocity = player.Rigidbody.velocity.WithY(0);
+            player.Rigidbody.velocity = (player.InputController.MoveDirection * (player.speed * 0.5f)).WithY(player.Rigidbody.velocity.y * 0.8f);
         }    
     }
 
