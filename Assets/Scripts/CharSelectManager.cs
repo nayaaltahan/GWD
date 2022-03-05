@@ -32,7 +32,6 @@ public class CharSelectManager : MonoBehaviour
 
     [SerializeField] private PlayerInputManager playerInputManager;
 
-    int playersReady = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +42,9 @@ public class CharSelectManager : MonoBehaviour
 
         p1MidButton = p1Buttons[1].gameObject;
         p2MidButton = p2Buttons[1].gameObject;
+
+        p1multiplayerES = GameManager.instance.playerOne.GetComponent<MultiplayerEventSystem>();
+        p2multiplayerES = GameManager.instance.playerTwo.GetComponent<MultiplayerEventSystem>();
     }
 
     private void Update()
@@ -76,6 +78,8 @@ public class CharSelectManager : MonoBehaviour
             
             p1Buttons[i].transform.GetChild(0).GetComponent<TMP_Text>().text = tempString;
         }
+
+        Ready();
     }
 
     public void ReadyP2(bool isLeft)
@@ -107,9 +111,10 @@ public class CharSelectManager : MonoBehaviour
     //Check if game is Ready to play, start PlayState and setup players
     public void Ready()
     {
-        if(isP1Ready && isP2Ready)
-            GameManager.instance.SwitchState(GameStates.PLAYGAME);
+        if (isP1Ready == false || isP2Ready == false)
+            return;
 
+        GameManager.instance.SwitchState(GameStates.PLAYGAME);
         GameManager.instance.playerOne.GetComponent<PlayerController>().SetUpPlayer(isP1Left);
         GameManager.instance.playerTwo.GetComponent<PlayerController>().SetUpPlayer(isP2Left);
     }
@@ -145,17 +150,5 @@ public class CharSelectManager : MonoBehaviour
             p2Buttons[i].GetComponent<Image>().enabled = temp;
             p2Buttons[i].transform.GetChild(0).gameObject.SetActive(temp);
         }
-    }
-
-    //Set Multiplayer Event System
-    public void SetP1MES()
-    {
-        p1multiplayerES = GameManager.instance.playerOne.GetComponent<MultiplayerEventSystem>();
-    }
-
-    //Set Multiplayer Event System
-    public void SetP2MES()
-    {
-        p2multiplayerES = GameManager.instance.playerTwo.GetComponent<MultiplayerEventSystem>();
     }
 }

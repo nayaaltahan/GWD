@@ -15,21 +15,21 @@ public class PlayerUIController : MonoBehaviour
 
     private void SetSelections()
     {
-        multiplayerES = GetComponent<MultiplayerEventSystem>();
-        if (GameManager.instance.state == GameStates.CHARACTERSELECT)
-        {
-            GameObject midButton = CharSelectManager.instance.p1MidButton;
-            GameObject root = CharSelectManager.instance.p1Root;
+        //multiplayerES = GetComponent<MultiplayerEventSystem>();
+        //if (GameManager.instance.state == GameStates.CHARACTERSELECT)
+        //{
+        //    GameObject midButton = CharSelectManager.instance.p1MidButton;
+        //    GameObject root = CharSelectManager.instance.p1Root;
 
-            if (GetComponent<PlayerController>().playerNumber == 2)
-            {
-                midButton = CharSelectManager.instance.p2MidButton;
-                root = CharSelectManager.instance.p2Root;
-            }
+        //    if (GetComponent<PlayerController>().playerNumber == 2)
+        //    {
+        //        midButton = CharSelectManager.instance.p2MidButton;
+        //        root = CharSelectManager.instance.p2Root;
+        //    }
 
-            multiplayerES.firstSelectedGameObject = midButton;
-            multiplayerES.SetSelectedGameObject(midButton);
-            multiplayerES.playerRoot = root;
-        }
+        //    multiplayerES.firstSelectedGameObject = midButton;
+        //    multiplayerES.SetSelectedGameObject(midButton);
+        //    multiplayerES.playerRoot = root;
+        //}
     }
 }

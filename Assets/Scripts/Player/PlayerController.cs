@@ -11,17 +11,6 @@ public class PlayerController : MonoBehaviour
     {
         amountPlayers += 1;
         playerNumber = amountPlayers;
-
-        if (amountPlayers == 1)
-        {
-            GameManager.instance.playerOne = gameObject;
-            CharSelectManager.instance.SetP1MES();
-        }
-        else
-        {
-            GameManager.instance.playerTwo = gameObject;
-            CharSelectManager.instance.SetP2MES();
-        }
     }
 
     //Activate Children
