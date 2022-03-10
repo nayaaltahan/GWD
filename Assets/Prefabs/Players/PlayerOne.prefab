@@ -295,11 +295,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHoldTimer: 0.3
-  initialVelocity: 15
+  initialVelocity: 10
   upVelocity: 0.2
-  downVelocity: -0.2
+  downVelocity: -0.3
   maxDownVelocity: -100
-  speed: 20
+  speed: 10
 --- !u!114 &1565090068082970225
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,10 +19,11 @@ public class JumpState : PlayerState
         if (player.InputController.IsJumping && jumpTimer < player.jumpHoldTimer) // jumped and is holding
         {
             jumpTimer += Time.deltaTime;
-            player.Rigidbody.velocity = (player.InputController.MoveDirection * (player.speed * 0.8f)).WithY(player.Rigidbody.velocity.y + player.upVelocity);
+            float temp = player.Rigidbody.velocity.x;
+            player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(player.Rigidbody.velocity.y + player.upVelocity + player.downVelocity);
 
         }
-        else if (player.Rigidbody.velocity.y < 0) // falling
+        else if ((player.Rigidbody.velocity.y < 0) || (player.InputController.IsJumping && jumpTimer < player.jumpHoldTimer)) // falling
         {
             // enter falling state
             player.SetCurrentState(new FallState());
@@ -42,8 +43,10 @@ public class JumpState : PlayerState
         else if (player.Rigidbody.velocity.y >= 0) // released jump but still jumping
         {
             jumpTimer = 1;
-            player.Rigidbody.velocity = (player.InputController.MoveDirection * (player.speed * 0.5f)).WithY(player.Rigidbody.velocity.y * 0.8f);
-        }    
+            //player.Rigidbody.velocity = (player.InputController.MoveDirection * (player.speed * 0.5f)).WithY(player.Rigidbody.velocity.y * 0.8f);
+        }
+
+        player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(player.Rigidbody.velocity.y);
     }
 
     public override void OnCollisionEnter(PlayerStateController player, Collision collision)

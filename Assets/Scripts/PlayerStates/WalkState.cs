@@ -12,9 +12,9 @@ public class WalkState : PlayerState
     public override void FixedUpdate(PlayerStateController player)
     {
         //TODO change movedirection to property
-        player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(player.Rigidbody.velocity.y);
+        player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(player.Rigidbody.velocity.y + player.downVelocity);
 
-        if (player.InputController.IsJumping)
+        if (player.InputController.IsJumping && player.IsGrounded)
         {
             player.SetCurrentState(new JumpState());
         }
