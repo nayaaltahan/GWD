@@ -7,6 +7,8 @@ public class DialogueTrigger : MonoBehaviour
 
     [SerializeField]
     private TextAsset inkyStory;
+
+    private bool activated;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +23,10 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (!activated && other.gameObject.CompareTag("Player"))
         {
             Debug.Log("player triggered me!");
+            activated = true;
             DialogueManager.instance.StartStory(inkyStory);
         }
     }
