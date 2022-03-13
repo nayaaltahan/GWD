@@ -31,6 +31,9 @@ public class CharSelectManager : MonoBehaviour
     private bool isP2Left;
 
     [SerializeField] private PlayerInputManager playerInputManager;
+    [Header("Debug")]
+    // TODO: Spawn only 1 player when this is true
+    [SerializeField] private bool allowSinglePlayer = false;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +52,7 @@ public class CharSelectManager : MonoBehaviour
 
     private void Update()
     {
-        if(p1multiplayerES)
+        if (p1multiplayerES)
             UpdatePlayerOneSelection();
 
         if (p2multiplayerES)
@@ -60,7 +63,7 @@ public class CharSelectManager : MonoBehaviour
     {
         if (isP2Ready && isP2Left == isLeft)
             return;
-      
+
         isP1Left = isLeft;
         isP1Ready = !isP1Ready;
 
@@ -75,7 +78,7 @@ public class CharSelectManager : MonoBehaviour
             }
             else
                 p1Buttons[i].enabled = !isP1Ready;
-            
+
             p1Buttons[i].transform.GetChild(0).GetComponent<TMP_Text>().text = tempString;
         }
 
@@ -111,7 +114,7 @@ public class CharSelectManager : MonoBehaviour
     //Check if game is Ready to play, start PlayState and setup players
     public void Ready()
     {
-        if (isP1Ready == false || isP2Ready == false)
+        if (!allowSinglePlayer && (isP1Ready == false || isP2Ready == false))
             return;
 
         GameManager.instance.SwitchState(GameStates.PLAYGAME);
@@ -129,7 +132,7 @@ public class CharSelectManager : MonoBehaviour
 
             if (p1Buttons[i].gameObject == p1multiplayerES.currentSelectedGameObject)
                 temp = true;
-            
+
 
             p1Buttons[i].GetComponent<Image>().enabled = temp;
             p1Buttons[i].transform.GetChild(0).gameObject.SetActive(temp);
