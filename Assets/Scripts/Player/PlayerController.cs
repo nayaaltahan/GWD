@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject[] childrenToActivate;
+
     private static int amountPlayers;
     public int playerNumber;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -16,9 +20,9 @@ public class PlayerController : MonoBehaviour
     //Activate Children
     private void PlayGame()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        foreach (var child in childrenToActivate)
         {
-            transform.GetChild(i).gameObject.SetActive(true);
+            child.SetActive(true);
         }
     }
 
