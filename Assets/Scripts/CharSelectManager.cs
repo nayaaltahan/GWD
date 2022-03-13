@@ -114,7 +114,7 @@ public class CharSelectManager : MonoBehaviour
     //Check if game is Ready to play, start PlayState and setup players
     public void Ready()
     {
-        if (!allowSinglePlayer && (isP1Ready == false || isP2Ready == false))
+        if ((isP1Ready == false || isP2Ready == false))
             return;
 
         GameManager.instance.SwitchState(GameStates.PLAYGAME);

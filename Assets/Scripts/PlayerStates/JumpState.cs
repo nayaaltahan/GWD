@@ -5,17 +5,20 @@ using UnityEngine;
 public class JumpState : PlayerState
 {
     private float jumpTimer;
-    
+
     public override void EnterState(PlayerStateController player)
     {
         // Initial velocity on enter jump
         // TODO add property for velocity
+        player.Animations.SetTrigger("Jumping");
         player.Rigidbody.velocity = player.Rigidbody.velocity.WithY(player.Rigidbody.velocity.y + player.initialVelocity);
         jumpTimer = 0;
     }
 
     public override void FixedUpdate(PlayerStateController player)
     {
+        base.FixedUpdate(player);
+
         if (player.InputController.IsJumping && jumpTimer < player.jumpHoldTimer) // jumped and is holding
         {
             jumpTimer += Time.deltaTime;
@@ -46,12 +49,11 @@ public class JumpState : PlayerState
             //player.Rigidbody.velocity = (player.InputController.MoveDirection * (player.speed * 0.5f)).WithY(player.Rigidbody.velocity.y * 0.8f);
         }
 
-        player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(player.Rigidbody.velocity.y);
     }
 
     public override void OnCollisionEnter(PlayerStateController player, Collision collision)
     {
-        
+
     }
-    
+
 }

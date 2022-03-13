@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,20 +7,19 @@ public class WalkState : PlayerState
 {
     public override void EnterState(PlayerStateController player)
     {
-        
+
     }
 
     public override void FixedUpdate(PlayerStateController player)
     {
-        //TODO change movedirection to property
-        player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(player.Rigidbody.velocity.y + player.downVelocity);
+        base.FixedUpdate(player);
 
         if (player.InputController.IsJumping && player.IsGrounded)
         {
             player.SetCurrentState(new JumpState());
         }
 
-        else if(player.InputController.MoveDirection == Vector3.zero)
+        else if (player.InputController.MoveDirection == Vector3.zero)
         {
             player.SetCurrentState(new IdleState());
         }
@@ -34,7 +34,7 @@ public class WalkState : PlayerState
     {
         // TODO check if collision is pushable/draggable
     }
-    
+
     //TODO add onTriggerEnter base function for implementing pushable/draggable
 
 }

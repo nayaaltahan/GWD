@@ -6,42 +6,50 @@ using UnityEngine;
 public class PlayerStateController : MonoBehaviour
 {
     private PlayerState currentState;
-    
+
     public readonly IdleState IdleState = new IdleState();
     public readonly JumpState JumpState = new JumpState();
     public readonly WalkState WalkState = new WalkState();
     public readonly FallState FallState = new FallState();
-    
+
     [Header("Jump Settings")]
     public float jumpHoldTimer = 0.3f;
 
     public float initialVelocity = 15.0f;
-    
+
     public float upVelocity = 0.2f;
-    
+
     [Header("Fall Settings")]
     public float downVelocity = -0.2f;
-    
+
     public float maxDownVelocity = -100.0f;
-    
+
     [Header("Walk Settings")]
     [Tooltip("Walking speed of the player.")]
     public float speed = 10f;
-    
+
+    [Header("Components")]
+    [SerializeField]
+    private Animator animator;
+
+
     public PlayerInputController InputController { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
     private GroundedChecker GroundedChecker { get; set; }
+    public Animator Animations => animator;
+
     public bool IsGrounded => GroundedChecker.IsGrounded;
-    
+
     private bool isFacingRight;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        InputController = GetComponent<PlayerInputController>();
         Rigidbody = GetComponent<Rigidbody>();
         GroundedChecker = GetComponent<GroundedChecker>();
+        InputController = GetComponent<PlayerInputController>();
         SetCurrentState(IdleState);
         Debug.Log(currentState.GetType());
     }

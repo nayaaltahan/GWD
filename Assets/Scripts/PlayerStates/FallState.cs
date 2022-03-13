@@ -6,15 +6,15 @@ public class FallState : PlayerState
 {
     public override void EnterState(PlayerStateController player)
     {
-        
+
     }
 
     public override void FixedUpdate(PlayerStateController player)
     {
+        base.FixedUpdate(player);
         if (!player.IsGrounded) // falling
         {
-            var clamped = Mathf.Clamp(player.Rigidbody.velocity.y + player.downVelocity, player.maxDownVelocity, 100);
-            player.Rigidbody.velocity = (player.InputController.MoveDirection * (player.speed )).WithY(clamped);
+            ClampFallSpeed(player);
         }
         else if (player.IsGrounded) // landed
         {
@@ -29,9 +29,15 @@ public class FallState : PlayerState
         }
     }
 
+    private static void ClampFallSpeed(PlayerStateController player)
+    {
+        var clamped = Mathf.Clamp(player.Rigidbody.velocity.y + player.downVelocity, player.maxDownVelocity, 100);
+        player.Rigidbody.velocity = (player.InputController.MoveDirection * (player.speed)).WithY(clamped);
+    }
+
     public override void OnCollisionEnter(PlayerStateController player, Collision collision)
     {
-        
+
     }
-    
+
 }
