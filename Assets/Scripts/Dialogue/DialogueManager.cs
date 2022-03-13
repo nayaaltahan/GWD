@@ -79,7 +79,6 @@ public class DialogueManager : MonoBehaviour
             if (!currentStory.canContinue)
             {
                 return false;
-                break;
             }
             var text = currentStory.Continue();
             Debug.Log(text);
