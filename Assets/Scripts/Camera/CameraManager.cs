@@ -17,10 +17,9 @@ public class CameraManager : MonoBehaviour
             Debug.LogError("More than one Camera Manager in the scene");
     }
 
-    public void AddPlayersTargetGroup()
+    public void AddPlayerToTargetGroup(GameObject playerGO)
     {
-        targetGroup.AddMember(GameManager.instance.playerOne.transform, 1, 0);
-        targetGroup.AddMember(GameManager.instance.playerTwo.transform, 1, 0);
+        targetGroup.AddMember(playerGO.transform, 1, 0);
     }
     
 }

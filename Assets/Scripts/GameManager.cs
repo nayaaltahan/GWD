@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameStates { MAINMENU, CHARACTERSELECT, PAUSEMENU, PLAYGAME }
+public enum GameStates { MAINMENU, CHARACTERSELECT, PAUSEMENU, PLAYGAME, SINGLEPLAYGAME }
+internal enum PlayerType
+{
+    robot, frog
+}
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -13,6 +17,11 @@ public class GameManager : MonoBehaviour
 
     public GameObject playerOne;
     public GameObject playerTwo;
+    
+    [Header("Debug")]
+    // TODO: Spawn only 1 player when this is true
+    [SerializeField] private bool allowSinglePlayer = false;
+    [SerializeField] private PlayerType playerType = PlayerType.frog;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +31,26 @@ public class GameManager : MonoBehaviour
         else
             Debug.LogError("More than one Game Manager in the scene");
 
-        state = GameStates.CHARACTERSELECT;
+        if (allowSinglePlayer)
+        {
+            if (playerType == PlayerType.robot)
+            {
+                playerOne.GetComponent<PlayerController>().SetUpPlayer(true);
+                CameraManager.instance.AddPlayerToTargetGroup(playerOne);
+                playerTwo.SetActive(false);
+            }
+            else if(playerType == PlayerType.frog)
+            {
+                playerTwo.GetComponent<PlayerController>().SetUpPlayer(true);
+                CameraManager.instance.AddPlayerToTargetGroup(playerTwo);
+                playerOne.SetActive(false);
+            }
+            SwitchState(GameStates.SINGLEPLAYGAME);
+        }
+        else
+        {
+            state = GameStates.CHARACTERSELECT;
+        }
     }
 
     // Update is called once per frame
@@ -43,8 +71,12 @@ public class GameManager : MonoBehaviour
                 break;
             case GameStates.PLAYGAME:
                 UIManager.instance.TurnCharSelectUIOn(false);
-                CameraManager.instance.AddPlayersTargetGroup();
-
+                CameraManager.instance.AddPlayerToTargetGroup(playerOne);
+                CameraManager.instance.AddPlayerToTargetGroup(playerTwo);
+                //Turn off any U.I. or objects that don't belong to PlayGame State
+                break;
+            case GameStates.SINGLEPLAYGAME:
+                UIManager.instance.TurnCharSelectUIOn(false);
                 //Turn off any U.I. or objects that don't belong to PlayGame State
                 break;
             default:
