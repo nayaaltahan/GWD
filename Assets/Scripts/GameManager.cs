@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Core;
 using UnityEngine;
 
 public enum GameStates { MAINMENU, CHARACTERSELECT, PAUSEMENU, PLAYGAME, SINGLEPLAYGAME }
@@ -24,12 +25,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerType playerType = PlayerType.frog;
 
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
         if (instance == null)
             instance = this;
         else
             Debug.LogError("More than one Game Manager in the scene");
+        
+        await UnityServices.InitializeAsync();
 
         if (allowSinglePlayer)
         {
