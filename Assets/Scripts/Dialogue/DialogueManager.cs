@@ -22,8 +22,36 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private PlayerInputController frogInputController;
 
+    [Header("Audio Settings")]
+
+    [SerializeField]
+    [Tooltip("How long is the default value between speech bubbles if no audio is found")]
+    private float defaultAudioDelay = 2.0f;
+
+    [SerializeField]
+    [Tooltip("How long after the audio stops playing do we wait to show the next speech bubbles")]
+    private float delayBetweenSpeechBubbles = 0.5f;
+
+    [Header("Subtitle Settings")]
+    [SerializeField]
+    private Transform subtitleContainer;
+
+    [SerializeField]
+    private GameObject subtitlePrefab;
+
+    [SerializeField]
+    private Color subtitleColorFrog = Color.cyan;
+
+    [SerializeField]
+    private Color subtitleColorRobot = Color.white;
+
+
+
+
     private bool frogIsMakingChoice = false;
     private bool robotIsMakingChoice = false;
+    // used to see when we should stop the conversation while making choices
+    private bool hasMoreDialogue = false;
 
     void Start()
     {
@@ -39,24 +67,31 @@ public class DialogueManager : MonoBehaviour
             return;
 
         if (robotIsMakingChoice && robotInputController.HasMadeChoice)
-            SelectChoice(robotInputController.SelectedChoice);
+            StartCoroutine(SelectChoice(robotInputController.SelectedChoice));
         else if (frogIsMakingChoice && frogInputController.HasMadeChoice)
-            SelectChoice(frogInputController.SelectedChoice);
+            StartCoroutine(SelectChoice(frogInputController.SelectedChoice));
 
     }
 
     public void StartStory(string story, string knotName)
     {
         currentStory = new Story(story);
-        currentStory.ChoosePathString(knotName);
+        if (!string.IsNullOrEmpty(knotName))
+            currentStory.ChoosePathString(knotName);
         // Skip to first choice
-        GetNextChoice();
+        StartCoroutine(StartStoryCoroutine());
+    }
+
+    private IEnumerator StartStoryCoroutine()
+    {
+        var color = robotIsMakingChoice ? subtitleColorRobot : subtitleColorFrog;
+        yield return StartCoroutine(PlayDialogue(color));
         DisplayChoices();
     }
 
     private void DisplayChoices()
     {
-        var player = currentStory.currentChoices[0].text.ToLower().Contains("robot:");
+        var player = currentStory.currentChoices[0].text.ToLower().Contains("onwell:");
         if (player)
         {
             robotIsMakingChoice = true;
@@ -73,17 +108,47 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private bool GetNextChoice()
+
+    private IEnumerator PlayDialogue(Color color)
     {
+
+        //if (currentStory.currentChoices.Count > 0 && currentStory.canContinue)
+        //{
+        //    var text = currentStory.Continue();
+        //    Debug.LogWarning("Can continue");
+        //    Debug.Log(text);
+        //}
+        var currentText = currentStory.currentText;
+        //if (!string.IsNullOrEmpty(currentText))
+        //{
+        //    Debug.LogWarning(currentText);
+
+        //}
+
         while (currentStory.currentChoices.Count == 0)
         {
             if (!currentStory.canContinue)
             {
-                return false;
+                hasMoreDialogue = false;
+                yield return new WaitForSeconds(delayBetweenSpeechBubbles);
+                yield break;
             }
-            var text = currentStory.Continue();
+            // TODO: Play audio from text
+
+            // TODO: Display speaking speech bubble
+            currentText = currentStory.Continue();
+            var subtitle = Instantiate(subtitlePrefab);
+            subtitle.SetActive(true);
+
+            subtitle.GetComponent<SubtitleController>().CreateSubtitle(currentText, color, 5.0f, subtitleContainer);
+            Debug.Log(currentText);
+            // TODO: Parse for audio and delayAmount
+            yield return new WaitForSeconds(defaultAudioDelay);
+            yield return new WaitForSeconds(delayBetweenSpeechBubbles);
         }
-        return true;
+
+        hasMoreDialogue = true;
+        yield return null;
     }
 
     private void ActivateSpeechBubbles(GameObject[] speechBubbles)
@@ -91,9 +156,8 @@ public class DialogueManager : MonoBehaviour
         var index = 0;
         foreach (var choice in currentStory.currentChoices)
         {
-            Debug.Log(choice.text);
             speechBubbles[index].SetActive(true);                                               // TODO: Don't do this
-            speechBubbles[index].GetComponentInChildren<TextMeshProUGUI>().text = choice.text.Replace("robot:", "").Replace("frog:", "");
+            speechBubbles[index].GetComponentInChildren<TextMeshProUGUI>().text = choice.text.Replace("Onwell: ", "").Replace("Rani: ", "");
             index++;
         }
     }
@@ -112,15 +176,26 @@ public class DialogueManager : MonoBehaviour
             speechBubble.SetActive(false);
     }
 
-    public void SelectChoice(int index)
+    public IEnumerator SelectChoice(int index)
     {
         if (currentStory.currentChoices.Count <= index)
-            return;
-
+            yield return null;
+        var selectedChoice = currentStory.currentChoices[index].text;
         currentStory.ChooseChoiceIndex(index);
-        var moreChoices = GetNextChoice();
-        if (moreChoices)
+        // TODO: Play Effect audio?
+        // If no audio is found, wait the default amount
+        HideAllSpeechBubbles();
+        var color = robotIsMakingChoice ? subtitleColorRobot : subtitleColorFrog;
+        robotIsMakingChoice = false;
+        frogIsMakingChoice = false;
+
+
+        yield return StartCoroutine(PlayDialogue(color));
+
+        if (hasMoreDialogue)
+        {
             DisplayChoices();
+        }
         else
         {
             HideAllSpeechBubbles();
