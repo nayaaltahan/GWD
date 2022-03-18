@@ -139,8 +139,14 @@ public class DialogueManager : MonoBehaviour
             currentText = currentStory.Continue();
             var subtitle = Instantiate(subtitlePrefab);
             subtitle.SetActive(true);
+            color = ChooseSubtitleColor(currentText);
 
-            subtitle.GetComponent<SubtitleController>().CreateSubtitle(currentText, color, 5.0f, subtitleContainer);
+            // Skip narrations
+            var lower = currentText.ToLower();
+            if (!lower.Contains("onwell:") && !lower.Contains("rani:"))
+                continue;
+            else
+                subtitle.GetComponent<SubtitleController>().CreateSubtitle(currentText, color, 5.0f, subtitleContainer);
             Debug.Log(currentText);
             // TODO: Parse for audio and delayAmount
             yield return new WaitForSeconds(defaultAudioDelay);
@@ -149,6 +155,16 @@ public class DialogueManager : MonoBehaviour
 
         hasMoreDialogue = true;
         yield return null;
+    }
+
+    private Color ChooseSubtitleColor(string currentText)
+    {
+        if (currentText.StartsWith("Onwell:"))
+            return subtitleColorRobot;
+        else if (currentText.StartsWith("Rani:"))
+            return subtitleColorFrog;
+        else
+            return Color.white;
     }
 
     private void ActivateSpeechBubbles(GameObject[] speechBubbles)

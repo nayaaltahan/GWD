@@ -5,9 +5,9 @@ Dust settles around the robot, as Rani puts down her tools and walks over.
 *[Rani: Are you okay?]
     Rani: Great sprout! Are you alive, sir?
     **Onwell: WHAT IS ALIVE?
-        Ha! A philosopher I take it? Let's get you up, then!
+        Rani: Ha! A philosopher I take it? Let's get you up, then!
     **Onwell: WHERE AM I?
-        In my cabbages, I'm afraid. Perhaps you could be persuaded to move?
+        Rani: In my cabbages, I'm afraid. Perhaps you could be persuaded to move?
 *[Rani: My cabbages!!!]
     Rani: My cabbages! You imbecile. You call that a landing?
     **[Onwell: I fall where I must.]

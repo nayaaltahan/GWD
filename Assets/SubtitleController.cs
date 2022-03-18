@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,18 +6,18 @@ using UnityEngine;
 
 public class SubtitleController : MonoBehaviour
 {
+    [SerializeField]
+    private float timeToFade = 1.0f;
 
     private float duration, timeAlive;
     private TextMeshProUGUI subtitle;
+    private bool isFading = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     private void OnEnable()
     {
+        isFading = false;
+        timeAlive = 0.0f;
         subtitle = GetComponent<TextMeshProUGUI>();
     }
 
@@ -24,8 +25,18 @@ public class SubtitleController : MonoBehaviour
     void Update()
     {
         timeAlive += Time.deltaTime;
-        if (timeAlive >= duration)
-            gameObject.SetActive(false);
+        if (timeAlive >= duration && !isFading)
+            StartCoroutine(DisableSubtitle());
+    }
+
+    private IEnumerator DisableSubtitle()
+    {
+        isFading = true;
+        var color = subtitle.faceColor;
+        subtitle.DOColor(new Color(color.r, color.g, color.b, 0.0f), timeToFade);
+        yield return new WaitForSeconds(timeToFade);
+        gameObject.SetActive(false);
+
     }
 
     private void OnDisable()
