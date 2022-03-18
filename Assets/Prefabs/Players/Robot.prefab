@@ -963,8 +963,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd5544ada83947f0ba576adda162680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: -0.86, z: 0}
-  halfExtents: {x: 0.46, y: 0.23, z: 0.55}
+  offset: {x: -0.07, y: -0.86, z: 0}
+  halfExtents: {x: 0.13, y: 0.23, z: 0.55}
   collidedLayers:
     serializedVersion: 2
     m_Bits: 55
@@ -1003,6 +1003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   childrenToActivate:
   - {fileID: 7534233248558824786}
+  playerSpawn: {fileID: 0}
   playerNumber: 0
 --- !u!114 &2086471165371487224
 MonoBehaviour:

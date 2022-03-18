@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject[] childrenToActivate;
 
+    [SerializeField]
+    private Transform playerSpawn;
+
     private static int amountPlayers;
     public int playerNumber;
 
@@ -31,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayGame();
         //TODO: Set this as spawn point
-        GetComponent<Rigidbody>().position = Vector3.zero;
+        GetComponent<Rigidbody>().position = playerSpawn.position;
         //Add differences here for players
     }
 }
