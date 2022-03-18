@@ -32,6 +32,10 @@ public class PlayerStateController : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    [Header("Model Settings")]
+    [SerializeField]
+    private Transform modelTransform;
+
 
     public PlayerInputController InputController { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
@@ -59,12 +63,12 @@ public class PlayerStateController : MonoBehaviour
     {
         if (InputController.MoveDirection.x > 0 && !isFacingRight)
         {
-            transform.eulerAngles = new Vector3(0, 0, 0);
+            modelTransform.eulerAngles = new Vector3(0, 90, 0);
             isFacingRight = true;
         }
         else if (InputController.MoveDirection.x < 0 && isFacingRight)
         {
-            transform.eulerAngles = new Vector3(0, 180, 0);
+            modelTransform.eulerAngles = new Vector3(0, -90, 0);
             isFacingRight = false;
         }
         currentState.FixedUpdate(this);
