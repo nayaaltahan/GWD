@@ -42,6 +42,19 @@ public class JumpState : PlayerState
                 player.SetCurrentState(new WalkState());
             }
         }
+        
+        //forgiveness mechanics
+        // maybe rework the jump? 
+        // Climbing
+        // Sliding 
+        // jumping would be the opposite way
+        // grabbing
+        // pushing works physics
+        // two lanes
+        // moving platforms? moving platforms should move players
+        // shaky platform should not shake players
+        // weighted platforms - consider spring in unity 
+        
         // TODO do we need this? can we add breakpoints and see when we reach this condition?
         else if (player.Rigidbody.velocity.y >= 0) // released jump but still jumping
         {

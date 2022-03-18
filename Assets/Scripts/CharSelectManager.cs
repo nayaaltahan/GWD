@@ -31,9 +31,7 @@ public class CharSelectManager : MonoBehaviour
     private bool isP2Left;
 
     [SerializeField] private PlayerInputManager playerInputManager;
-    [Header("Debug")]
-    // TODO: Spawn only 1 player when this is true
-    [SerializeField] private bool allowSinglePlayer = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -114,7 +112,7 @@ public class CharSelectManager : MonoBehaviour
     //Check if game is Ready to play, start PlayState and setup players
     public void Ready()
     {
-        if (!allowSinglePlayer && (isP1Ready == false || isP2Ready == false))
+        if (isP1Ready == false || isP2Ready == false)
             return;
 
         GameManager.instance.SwitchState(GameStates.PLAYGAME);
