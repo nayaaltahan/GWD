@@ -45,9 +45,10 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    public void StartStory(TextAsset inkJson)
+    public void StartStory(string story, string knotName)
     {
-        currentStory = new Story(inkJson.text);
+        currentStory = new Story(story);
+        currentStory.ChoosePathString(knotName);
         // Skip to first choice
         GetNextChoice();
         DisplayChoices();
@@ -55,8 +56,8 @@ public class DialogueManager : MonoBehaviour
 
     private void DisplayChoices()
     {
-        var player = currentStory.variablesState["player"].ToString();
-        if (player.Equals("Robot"))
+        var player = currentStory.currentChoices[0].text.ToLower().Contains("robot:");
+        if (player)
         {
             robotIsMakingChoice = true;
             frogIsMakingChoice = false;
@@ -81,7 +82,6 @@ public class DialogueManager : MonoBehaviour
                 return false;
             }
             var text = currentStory.Continue();
-            Debug.Log(text);
         }
         return true;
     }
@@ -92,8 +92,8 @@ public class DialogueManager : MonoBehaviour
         foreach (var choice in currentStory.currentChoices)
         {
             Debug.Log(choice.text);
-            speechBubbles[index].SetActive(true);
-            speechBubbles[index].GetComponentInChildren<TextMeshProUGUI>().text = choice.text;
+            speechBubbles[index].SetActive(true);                                               // TODO: Don't do this
+            speechBubbles[index].GetComponentInChildren<TextMeshProUGUI>().text = choice.text.Replace("robot:", "").Replace("frog:", "");
             index++;
         }
     }

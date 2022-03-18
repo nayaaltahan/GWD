@@ -1,3 +1,4 @@
+using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class DialogueTrigger : MonoBehaviour
 
     [SerializeField]
     private TextAsset inkyStory;
+
+    [SerializeField]
+    private string knotName;
 
     private bool activated;
     // Start is called before the first frame update
@@ -27,7 +31,7 @@ public class DialogueTrigger : MonoBehaviour
         {
             Debug.Log("player triggered me!");
             activated = true;
-            DialogueManager.instance.StartStory(inkyStory);
+            DialogueManager.instance.StartStory(inkyStory.text, knotName);
         }
     }
 }
