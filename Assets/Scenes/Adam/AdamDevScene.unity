@@ -6465,14 +6465,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 593648584, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
-      propertyPath: offset.x
-      value: -0.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 593648584, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
-      propertyPath: halfExtents.x
-      value: 0.13
-      objectReference: {fileID: 0}
     - target: {fileID: 629245319, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: m_Camera
       value: 
@@ -6536,10 +6528,6 @@ PrefabInstance:
     - target: {fileID: 5507386223301689629, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: m_Name
       value: PlayerOne
-      objectReference: {fileID: 0}
-    - target: {fileID: 7534233248558824786, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
@@ -38785,20 +38773,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1637853820}
     - target: {fileID: 8868738726889057812, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
-      propertyPath: offset.x
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 8868738726889057812, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
       propertyPath: offset.y
-      value: -0.84
-      objectReference: {fileID: 0}
-    - target: {fileID: 8868738726889057812, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
-      propertyPath: halfExtents.x
-      value: 0.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8868738726889057812, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
-      propertyPath: halfExtents.y
-      value: 0.1
+      value: -0.88
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
