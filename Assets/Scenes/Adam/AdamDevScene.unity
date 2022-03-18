@@ -1816,6 +1816,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueTrigger (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1486544456334474457, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1486544456334474470, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
       propertyPath: knotName
       value: RobotGetsUp
@@ -2865,6 +2869,10 @@ PrefabInstance:
     - target: {fileID: 1486544456334474457, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
       propertyPath: m_Name
       value: DialogueTrigger (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486544456334474457, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1486544456334474470, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
       propertyPath: knotName
@@ -21578,6 +21586,8 @@ MonoBehaviour:
   canvas: {fileID: 5788553121441116599}
   playerOne: {fileID: 1545909163}
   playerTwo: {fileID: 5507386222759466398}
+  allowSinglePlayer: 0
+  playerType: 1
 --- !u!43 &1023179595
 Mesh:
   m_ObjectHideFlags: 0
@@ -36712,7 +36722,6 @@ MonoBehaviour:
   p1Root: {fileID: 381317128}
   p2Root: {fileID: 162249241}
   playerInputManager: {fileID: 1712561970}
-  allowSinglePlayer: 0
 --- !u!1 &2090950606
 GameObject:
   m_ObjectHideFlags: 0
@@ -38268,6 +38277,10 @@ PrefabInstance:
     - target: {fileID: 1486544456334474457, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
       propertyPath: m_Name
       value: DialogueTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486544456334474457, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1486544456334474470, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
       propertyPath: knotName
