@@ -983,7 +983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpHoldTimer: 0.3
   initialVelocity: 10
-  upVelocity: 0.6
+  upVelocity: 1
   downVelocity: -0.3
   maxDownVelocity: -100
   speed: 6
@@ -1111,7 +1111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35b8fdfe24a4f3d469e2dd4d8b17d852, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.997
+      value: -1.114
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35b8fdfe24a4f3d469e2dd4d8b17d852, type: 3}
       propertyPath: m_LocalPosition.z
