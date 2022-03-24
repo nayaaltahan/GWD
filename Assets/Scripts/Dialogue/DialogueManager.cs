@@ -1,6 +1,8 @@
 using Ink.Runtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -23,7 +25,6 @@ public class DialogueManager : MonoBehaviour
     private PlayerInputController frogInputController;
 
     [Header("Audio Settings")]
-
     [SerializeField]
     [Tooltip("How long is the default value between speech bubbles if no audio is found")]
     private float defaultAudioDelay = 2.0f;
@@ -109,7 +110,7 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-    private IEnumerator PlayDialogue(Color color)
+    private IEnumerator PlayDialogue(Color subtitleColor)
     {
 
         //if (currentStory.currentChoices.Count > 0 && currentStory.canContinue)
@@ -139,18 +140,49 @@ public class DialogueManager : MonoBehaviour
             currentText = currentStory.Continue();
             var subtitle = Instantiate(subtitlePrefab);
             subtitle.SetActive(true);
-            color = ChooseSubtitleColor(currentText);
+            subtitleColor = ChooseSubtitleColor(currentText);
 
             // Skip narrations
             var lower = currentText.ToLower();
             if (!lower.Contains("onwell:") && !lower.Contains("rani:"))
                 continue;
             else
-                subtitle.GetComponent<SubtitleController>().CreateSubtitle(currentText, color, 5.0f, subtitleContainer);
+                subtitle.GetComponent<SubtitleController>().CreateSubtitle(currentText, subtitleColor, 5.0f, subtitleContainer);
             Debug.Log(currentText);
             // TODO: Parse for audio and delayAmount
-            yield return new WaitForSeconds(defaultAudioDelay);
-            yield return new WaitForSeconds(delayBetweenSpeechBubbles);
+            var audioInfo = currentStory.currentTags.FirstOrDefault()?.Split(' ');
+            if (audioInfo != null)
+            {
+                // Get audio path and length
+                // string is structured like so:  "event:/Voice/Rani/Hello 4.5"
+                // First element is path to file in fmod
+                // Second element is the length the audio takes to play, or the time we wait for the next diaogue choice
+                var audioPath = audioInfo[0];
+                var audioLength = float.Parse(audioInfo[1]);
+                Debug.Log($"Playing audio: {audioPath} for {audioLength} seconds.");
+                // TODO: Delete Try catch when audio is in
+                // TODO: Do this better
+                var pos = subtitleColorFrog == subtitleColor ? frogInputController.transform.position : robotInputController.transform.position;
+                AudioManager.instance.Play3DOneShot(audioPath, pos);
+                yield return new WaitForSeconds(audioLength);
+
+                Debug.Log($"Finished playing audio, waiting for {delayBetweenSpeechBubbles} seconds.");
+                yield return new WaitForSeconds(delayBetweenSpeechBubbles);
+            }
+            else
+            {
+                Debug.Log("Audio Info Null: ");
+                foreach (var tag in currentStory.currentTags)
+                {
+
+                    Debug.Log(tag);
+                }
+                Debug.Log(audioInfo);
+                Debug.Log(currentText);
+
+                yield return new WaitForSeconds(defaultAudioDelay);
+                yield return new WaitForSeconds(delayBetweenSpeechBubbles);
+            }
         }
 
         hasMoreDialogue = true;
