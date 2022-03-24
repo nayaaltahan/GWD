@@ -35,7 +35,9 @@ public class SubtitleController : MonoBehaviour
         var color = subtitle.faceColor;
         subtitle.DOColor(new Color(color.r, color.g, color.b, 0.0f), timeToFade);
         yield return new WaitForSeconds(timeToFade);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        // TODO: Use object pooler
+        //gameObject.SetActive(false);
 
     }
 
