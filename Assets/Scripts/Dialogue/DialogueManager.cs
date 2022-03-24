@@ -158,13 +158,20 @@ public class DialogueManager : MonoBehaviour
                 // First element is path to file in fmod
                 // Second element is the length the audio takes to play, or the time we wait for the next diaogue choice
                 var audioPath = audioInfo[0];
-                var audioLength = float.Parse(audioInfo[1]);
+                var audioLength = audioInfo.ElementAtOrDefault(1);
                 Debug.Log($"Playing audio: {audioPath} for {audioLength} seconds.");
                 // TODO: Delete Try catch when audio is in
                 // TODO: Do this better
                 var pos = subtitleColorFrog == subtitleColor ? frogInputController.transform.position : robotInputController.transform.position;
                 AudioManager.instance.Play3DOneShot(audioPath, pos);
-                yield return new WaitForSeconds(audioLength);
+                if (audioLength == null)
+                {
+                    FMODUnity.RuntimeManager.GetEventDescription(audioPath).getLength(out var length);
+                    Debug.Log(length);
+
+                }
+                else
+                    yield return new WaitForSeconds(float.Parse(audioInfo[1]));
 
                 Debug.Log($"Finished playing audio, waiting for {delayBetweenSpeechBubbles} seconds.");
                 yield return new WaitForSeconds(delayBetweenSpeechBubbles);
