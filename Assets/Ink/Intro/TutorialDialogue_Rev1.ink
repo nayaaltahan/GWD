@@ -55,7 +55,7 @@ Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe
 -> DONE
 
 ===Convo3===
-*Rani: So... you are living metal? #event:/Voice/Rani/ 
+*Rani: So... you are living metal? #event:/Voice/Rani/Convo3_SoYouAreLivingMetal
     Rani: Your build is a titanium-alloy, is it not? #event:/Voice/Rani/Convo3_YourBuildIsTitanium
     **[Onwell: Confirm.]
         ONWELL: INDEED. TITANIUM-PALLADIUM.   #event:/Voice/Onwell/Convo3_IndeedTitatniumPalladium
@@ -77,9 +77,9 @@ The two start moving through Rani's swamp garden, which is filled with scrap met
     Rani: You are a very rude fellow! Barging in unannounced, then lecturing me. #event:/Voice/Rani/Convo4_YouAreAVeryRude
     Rani: I will have you know that mess is conducive to the creative process! #event:/Voice/Rani/Convo4_IWillHaveYouKnow
 *[Onwell: What is all this?]
-    Onwell: EXPLAIN THE PURPOSE OF THESE BEINGS. #event:/Voice/Onwell/ 
+    Onwell: EXPLAIN THE PURPOSE OF THESE BEINGS. #event:/Voice/Onwell/Convo4_ExplainThePurpose
     **[Rani: Beings?]
-        Rani: These are not beings, sir! These are my machines. #event:/Voice/Rani/ 
+        Rani: These are not beings, sir! These are my machines. #event:/Voice/Rani/Convo4_TheseAreNotBeings 
     **[Rani: My inventions!]
         Rani: These are my inventions, each an ingenious design. #event:/Voice/Rani/Convo4_TheseAreMyInventions
         Rani: They are all revolutionary. #event:/Voice/Rani/Convo4_TheyAreAllRevolutionary
@@ -98,7 +98,7 @@ There's a great piece of scrap metal in the way.
 ===Convo6===
 Rani stops in front of her homespun metal-compactor.
 
-Rani: Ah. This may pose a problem for you.  #event:/Voice/Rani/ 
+Rani: Ah. This may pose a problem for you.  #event:/Voice/Rani/Convo6_AhThisMayPoseAProblem
 Onwell: AN INCONVENIENCE. #event:/Voice/Onwell/Convo6_AnInconvenience
 *[Onwell: Let's shut it down.]
     Onwell: TAKE IT'S POWER #event:/Voice/Onwell/Convo6_TakeItsPower
@@ -112,10 +112,10 @@ Onwell: AN INCONVENIENCE. #event:/Voice/Onwell/Convo6_AnInconvenience
 The two travelers reach the top of a hill. Suddenly, three robots flying in formation tear across the sky in front of them.
 -
 * [Rani: Your friends?]
-    Rani: Ah, your compatriots, surely?  #event:/Voice/Rani/ 
+    Rani: Ah, your compatriots, surely?  #event:/Voice/Rani/Convo7_AhYourCompatriots
     Rani: Noisy folk.  #event:/Voice/Rani/Convo7_NoisyFolk
 * [Rani: Wow!]
-    Rani: This flight technology your kind has is highly impressive!  #event:/Voice/Rani/ 
+    Rani: This flight technology your kind has is highly impressive!  #event:/Voice/Rani/Convo7_ThisFlightTechnology
     Rani: Present company excluded, of course! #event:/Voice/Rani/Convo7_PresentCompanyExcluded
     
 The two continue making their way out of the swamp, towards Great Willow.
