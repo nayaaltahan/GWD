@@ -9,10 +9,10 @@ Dust settles around the robot, as Rani puts down her tools and walks over.
     Rani: Great sprout! Are you alive, sir? #event:/Voice/Rani/Convo1_GreatSprout
     **[Onwell: WHAT IS ALIVE?]
         Onwell: WHAT IS ALIVE? #event:/Voice/Onwell/Convo1_WhatIsAlive
-        Ha! A philosopher I take it? Let's get you up, then! #event:/Voice/Rani/Convo1_HaAPhilosopher
+        Rani: Ha! A philosopher I take it? Let's get you up, then! #event:/Voice/Rani/Convo1_HaAPhilosopher
     **[Onwell: WHERE AM I?]
         Onwell: WHERE AM I? #event:/Voice/Onwell/Convo1_WhereAmI
-        In my cabbages, I'm afraid. Perhaps you could be persuaded to move? #event:/Voice/Rani/Convo1_InMyCabbages
+        Rani: In my cabbages, I'm afraid. Perhaps you could be persuaded to move? #event:/Voice/Rani/Convo1_InMyCabbages
 *[Rani: My cabbages!!!]
     Rani: My cabbages! You imbecile. You call that a landing?  #event:/Voice/Rani/Convo1_MyCabbages
     **[Onwell: I fall where I must.]
