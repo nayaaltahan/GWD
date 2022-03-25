@@ -12,7 +12,8 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField]
     private string knotName;
 
-    private bool activated;
+    protected bool activated;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,5 +34,10 @@ public class DialogueTrigger : MonoBehaviour
             activated = true;
             DialogueManager.instance.StartStory(inkyStory.text, knotName);
         }
+    }
+
+    protected virtual void StartStory(string knotName)
+    {
+        DialogueManager.instance.StartStory(inkyStory.text, knotName);
     }
 }

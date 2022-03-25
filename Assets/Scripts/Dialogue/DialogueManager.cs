@@ -55,14 +55,14 @@ public class DialogueManager : MonoBehaviour
 
 
 
-
     private bool frogIsMakingChoice = false;
     private bool robotIsMakingChoice = false;
     private bool frogIsSpeaking = false;
     private bool robotIsSpeaking = false;
     // used to see when we should stop the conversation while making choices
     private bool hasMoreDialogue = false;
-
+    // Current spoken dialogue text
+    private string currentText;
     void Start()
     {
         if (instance == null)
@@ -121,20 +121,6 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator PlayDialogue(Color subtitleColor)
     {
-
-        //if (currentStory.currentChoices.Count > 0 && currentStory.canContinue)
-        //{
-        //    var text = currentStory.Continue();
-        //    Debug.LogWarning("Can continue");
-        //    Debug.Log(text);
-        //}
-        var currentText = currentStory.currentText;
-        //if (!string.IsNullOrEmpty(currentText))
-        //{
-        //    Debug.LogWarning(currentText);
-
-        //}
-
         while (currentStory.currentChoices.Count == 0)
         {
             if (!currentStory.canContinue)
@@ -143,82 +129,75 @@ public class DialogueManager : MonoBehaviour
                 yield return new WaitForSeconds(delayBetweenSpeechBubbles);
                 yield break;
             }
-            // TODO: Play audio from text
 
-            // TODO: Display speaking speech bubble
             currentText = currentStory.Continue();
-            var subtitle = Instantiate(subtitlePrefab);
-            subtitle.SetActive(true);
-            subtitleColor = ChooseSubtitleColor(currentText);
 
-            // Skip narrations
-            var lower = currentText.ToLower();
-            if (!lower.Contains("onwell:") && !lower.Contains("rani:"))
+            bool shouldSkip = DisplaySubtitles(currentText);
+            if (shouldSkip)
                 continue;
-            else
-                subtitle.GetComponent<SubtitleController>().CreateSubtitle(currentText, subtitleColor, 5.0f, subtitleContainer);
-            Debug.Log(currentText);
-            // TODO: Parse for audio and delayAmount
-            var audioInfo = currentStory.currentTags.FirstOrDefault()?.Split(' ');
-            if (audioInfo != null)
-            {
-                // Get audio path and length
-                // string is structured like so:  "event:/Voice/Rani/Hello 4.5"
-                // First element is path to file in fmod
-                // Second element is the length the audio takes to play, or the time we wait for the next diaogue choice
-                var audioPath = audioInfo[0];
-                var audioLength = audioInfo.ElementAtOrDefault(1);
-                Debug.Log($"Playing audio: {audioPath} for {audioLength} seconds.");
-                // TODO: Delete Try catch when audio is in
-                // TODO: Do this better
-                var pos = subtitleColorFrog == subtitleColor ? frogInputController.transform.position : robotInputController.transform.position;
-                AudioManager.instance.Play3DOneShot(audioPath, pos);
-                if (audioLength == null)
-                {
-                    FMODUnity.RuntimeManager.GetEventDescription(audioPath).getLength(out var audioLengthMillis);
-                    if (robotIsSpeaking)
-                    {
-                        robotSpeechIndicator.SetActive(true);
-                    }
-                    else
-                    {
-                        frogSpeechIndicator.SetActive(true);
-                    }
-                    yield return new WaitForSeconds(audioLengthMillis / 1000);
 
-                    Debug.Log(audioLengthMillis);
-
-                }
-                else
-                    yield return new WaitForSeconds(float.Parse(audioInfo[1]));
-
-                Debug.Log($"Finished playing audio, waiting for {delayBetweenSpeechBubbles} seconds.");
-                if (robotIsSpeaking)
-                    robotSpeechIndicator.SetActive(false);
-                else
-                    frogSpeechIndicator.SetActive(false);
-                yield return new WaitForSeconds(delayBetweenSpeechBubbles);
-            }
-            else
-            {
-                Debug.Log("Audio Info Null: ");
-                foreach (var tag in currentStory.currentTags)
-                {
-
-                    Debug.Log(tag);
-                }
-                Debug.Log(audioInfo);
-                Debug.Log(currentText);
-
-                yield return new WaitForSeconds(defaultAudioDelay);
-                yield return new WaitForSeconds(delayBetweenSpeechBubbles);
-                frogIsSpeaking = false;
-                robotIsSpeaking = false;
-            }
+            yield return StartCoroutine(PlayAudio());
         }
 
         hasMoreDialogue = true;
         yield return null;
+    }
+
+    private IEnumerator PlayAudio()
+    {
+        var audioInfo = currentStory.currentTags.FirstOrDefault()?.Split(' ');
+        if (audioInfo != null)
+        {
+            // Get audio path and length
+            // string is structured like so:  "event:/Voice/Rani/Hello slowdown"
+            // First element is path to file in fmod
+            // Second element tells us if the player needs to be slowed down, or if we are showing a cutscene
+            var audioPath = audioInfo[0];
+            var dialogueType = audioInfo.ElementAtOrDefault(1);
+
+            // TODO: Do this better
+            var pos = frogIsSpeaking ? frogInputController.transform.position : robotInputController.transform.position;
+            AudioManager.instance.Play3DOneShot(audioPath, pos);
+            FMODUnity.RuntimeManager.GetEventDescription(audioPath).getLength(out var audioLengthMillis);
+            if (robotIsSpeaking)
+                robotSpeechIndicator.SetActive(true);
+            else
+                frogSpeechIndicator.SetActive(true);
+
+            yield return new WaitForSeconds(audioLengthMillis / 1000);
+
+            if (robotIsSpeaking)
+                robotSpeechIndicator.SetActive(false);
+            else
+                frogSpeechIndicator.SetActive(false);
+            yield return new WaitForSeconds(delayBetweenSpeechBubbles);
+        }
+        else
+        {
+
+            yield return new WaitForSeconds(defaultAudioDelay);
+            yield return new WaitForSeconds(delayBetweenSpeechBubbles);
+            frogIsSpeaking = false;
+            robotIsSpeaking = false;
+        }
+    }
+
+    private bool DisplaySubtitles(string currentText)
+    {
+        var subtitle = Instantiate(subtitlePrefab);
+        subtitle.SetActive(true);
+        var subtitleColor = ChooseSubtitleColor(currentText);
+
+        // Skip narrations
+        var lower = currentText.ToLower();
+        if (!lower.Contains("onwell:") && !lower.Contains("rani:"))
+            return true;
+        else
+        {
+            subtitle.GetComponent<SubtitleController>().CreateSubtitle(currentText, subtitleColor, 5.0f, subtitleContainer);
+            return false;
+
+        }
     }
 
     private Color ChooseSubtitleColor(string currentText)
