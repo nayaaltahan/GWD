@@ -223,6 +223,8 @@ public class DialogueManager : MonoBehaviour
 
     private Color ChooseSubtitleColor(string currentText)
     {
+        frogIsSpeaking = false;
+        robotIsSpeaking = false;
         if (currentText.StartsWith("Onwell:"))
         {
 
