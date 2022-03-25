@@ -9,8 +9,9 @@ public abstract class PlayerState
     public abstract void EnterState(PlayerStateController player);
     public virtual void FixedUpdate(PlayerStateController player)
     {
-        player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(player.Rigidbody.velocity.y + player.downVelocity) * horizontalMoveMultiplier;
-        player.Animations.SetFloat("Blend", Math.Abs(player.Rigidbody.velocity.x));
+        //player.transform.Translate(player.velocity);
+        //player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(player.Rigidbody.velocity.y + player.downVelocity) * horizontalMoveMultiplier;
+        //player.Animations.SetFloat("Blend", Math.Abs(player.Rigidbody.velocity.x));
     }
     public abstract void OnCollisionEnter(PlayerStateController player, Collision collision);
 

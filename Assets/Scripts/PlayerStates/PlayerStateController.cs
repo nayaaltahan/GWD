@@ -26,7 +26,9 @@ public class PlayerStateController : MonoBehaviour
 
     [Header("Walk Settings")]
     [Tooltip("Walking speed of the player.")]
-    public float speed = 10f;
+    public float moveSpeed = 6;
+    public float gravity = -20;
+    public Vector3 velocity = new Vector3(3,0,0);
 
     [Header("Components")]
     [SerializeField]
@@ -38,21 +40,14 @@ public class PlayerStateController : MonoBehaviour
 
 
     public PlayerInputController InputController { get; private set; }
-    public Rigidbody Rigidbody { get; private set; }
-    private GroundedChecker GroundedChecker { get; set; }
+    private MovementController MovementController { get; set; }
     public Animator Animations => animator;
-
-    public bool IsGrounded => GroundedChecker.IsGrounded;
-
-    private bool isFacingRight;
-
 
 
     // Start is called before the first frame update
     void Start()
     {
-        Rigidbody = GetComponent<Rigidbody>();
-        GroundedChecker = GetComponent<GroundedChecker>();
+        MovementController = GetComponent<MovementController>();
         InputController = GetComponent<PlayerInputController>();
         SetCurrentState(IdleState);
         Debug.Log(currentState.GetType());
@@ -61,16 +56,15 @@ public class PlayerStateController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (InputController.MoveDirection.x > 0 && !isFacingRight)
-        {
-            modelTransform.eulerAngles = new Vector3(0, 90, 0);
-            isFacingRight = true;
+        if (MovementController.collisions.above || MovementController.collisions.below) {
+            velocity.y = 0;
         }
-        else if (InputController.MoveDirection.x < 0 && isFacingRight)
-        {
-            modelTransform.eulerAngles = new Vector3(0, -90, 0);
-            isFacingRight = false;
-        }
+
+        var input = InputController.MoveDirection;
+
+        velocity.x = input.x * moveSpeed * Time.fixedDeltaTime;
+        velocity.y += gravity * Time.fixedDeltaTime;
+        MovementController.Move (velocity);
         currentState.FixedUpdate(this);
     }
 

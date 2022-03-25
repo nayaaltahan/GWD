@@ -14,7 +14,7 @@ public class WalkState : PlayerState
     {
         base.FixedUpdate(player);
 
-        if (player.InputController.IsJumping && player.IsGrounded)
+        if (player.InputController.IsJumping )// todo add isgrounded
         {
             player.SetCurrentState(new JumpState());
         }
@@ -24,7 +24,8 @@ public class WalkState : PlayerState
             player.SetCurrentState(new IdleState());
         }
 
-        else if (player.Rigidbody.velocity.y < 0)
+        // Add fall state
+        else if (false)
         {
             player.SetCurrentState(new FallState());
         }

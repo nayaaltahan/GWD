@@ -21,7 +21,8 @@ public class IdleState : PlayerState
             player.SetCurrentState(player.WalkState);
         }
 
-        else if (player.Rigidbody.velocity.y < 0)
+        // Add fall statement
+        else if (false)
         {
             player.SetCurrentState(player.FallState);
         }

@@ -4,34 +4,29 @@ using UnityEngine;
 
 public class JumpState : PlayerState
 {
-    private float jumpTimer;
 
     public override void EnterState(PlayerStateController player)
     {
-        // Initial velocity on enter jump
-        // TODO add property for velocity
+        // TODO Initial velocity on enter jump
         player.Animations.SetTrigger("Jumping");
-        player.Rigidbody.velocity = player.Rigidbody.velocity.WithY(player.Rigidbody.velocity.y + player.initialVelocity);
-        jumpTimer = 0;
     }
 
     public override void FixedUpdate(PlayerStateController player)
     {
         base.FixedUpdate(player);
 
-        if (player.InputController.IsJumping && jumpTimer < player.jumpHoldTimer) // jumped and is holding
+        if (player.InputController.IsJumping) // jumped and is holding
         {
-            jumpTimer += Time.deltaTime;
-            float temp = player.Rigidbody.velocity.x;
-            player.Rigidbody.velocity = (player.InputController.MoveDirection * player.speed).WithY(player.Rigidbody.velocity.y + player.upVelocity + player.downVelocity);
+            // TODO add up velocity            
 
         }
-        else if ((player.Rigidbody.velocity.y < 0) || (player.InputController.IsJumping && jumpTimer < player.jumpHoldTimer)) // falling
+        // if falling
+        else if (false) // falling
         {
             // enter falling state
             player.SetCurrentState(new FallState());
         }
-        else if (player.IsGrounded) // landed
+        else if (true) // landed // todo add isgrounded
         {
             if (player.InputController.MoveDirection == Vector3.zero)
             {
@@ -55,12 +50,6 @@ public class JumpState : PlayerState
         // shaky platform should not shake players
         // weighted platforms - consider spring in unity 
         
-        // TODO do we need this? can we add breakpoints and see when we reach this condition?
-        else if (player.Rigidbody.velocity.y >= 0) // released jump but still jumping
-        {
-            jumpTimer = 1;
-            //player.Rigidbody.velocity = (player.InputController.MoveDirection * (player.speed * 0.5f)).WithY(player.Rigidbody.velocity.y * 0.8f);
-        }
 
     }
 
