@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager instance;
 
     private Story currentStory;
+    [Header("Chat bubble settings")]
 
     [SerializeField]
     private GameObject[] robotSpeechBubbles;
@@ -23,6 +24,12 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField]
     private PlayerInputController frogInputController;
+
+    [SerializeField]
+    private GameObject frogSpeechIndicator;
+
+    [SerializeField]
+    private GameObject robotSpeechIndicator;
 
     [Header("Audio Settings")]
     [SerializeField]
@@ -51,6 +58,8 @@ public class DialogueManager : MonoBehaviour
 
     private bool frogIsMakingChoice = false;
     private bool robotIsMakingChoice = false;
+    private bool frogIsSpeaking = false;
+    private bool robotIsSpeaking = false;
     // used to see when we should stop the conversation while making choices
     private bool hasMoreDialogue = false;
 
@@ -166,14 +175,28 @@ public class DialogueManager : MonoBehaviour
                 AudioManager.instance.Play3DOneShot(audioPath, pos);
                 if (audioLength == null)
                 {
-                    FMODUnity.RuntimeManager.GetEventDescription(audioPath).getLength(out var length);
-                    Debug.Log(length);
+                    FMODUnity.RuntimeManager.GetEventDescription(audioPath).getLength(out var audioLengthMillis);
+                    if (robotIsSpeaking)
+                    {
+                        robotSpeechIndicator.SetActive(true);
+                    }
+                    else
+                    {
+                        frogSpeechIndicator.SetActive(true);
+                    }
+                    yield return new WaitForSeconds(audioLengthMillis / 1000);
+
+                    Debug.Log(audioLengthMillis);
 
                 }
                 else
                     yield return new WaitForSeconds(float.Parse(audioInfo[1]));
 
                 Debug.Log($"Finished playing audio, waiting for {delayBetweenSpeechBubbles} seconds.");
+                if (robotIsSpeaking)
+                    robotSpeechIndicator.SetActive(false);
+                else
+                    frogSpeechIndicator.SetActive(false);
                 yield return new WaitForSeconds(delayBetweenSpeechBubbles);
             }
             else
@@ -189,6 +212,8 @@ public class DialogueManager : MonoBehaviour
 
                 yield return new WaitForSeconds(defaultAudioDelay);
                 yield return new WaitForSeconds(delayBetweenSpeechBubbles);
+                frogIsSpeaking = false;
+                robotIsSpeaking = false;
             }
         }
 
@@ -199,9 +224,16 @@ public class DialogueManager : MonoBehaviour
     private Color ChooseSubtitleColor(string currentText)
     {
         if (currentText.StartsWith("Onwell:"))
+        {
+
+            robotIsSpeaking = true;
             return subtitleColorRobot;
+        }
         else if (currentText.StartsWith("Rani:"))
+        {
+            frogIsSpeaking = true;
             return subtitleColorFrog;
+        }
         else
             return Color.white;
     }
