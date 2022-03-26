@@ -22,19 +22,27 @@ public class DialogueTriggerOptional : DialogueTrigger
 
     [SerializeField]
     private PlayerInputController frogInputController;
+    [SerializeField]
+    new protected StoryKnots knotName;
 
     [SerializeField]
+    [Dropdown("GetStoryKnots")]
     [ShowIf(EConditionOperator.Or, "showBoth", "showFrog")]
-    private string frogKnot;
+    private StoryKnots frogKnot;
 
     [SerializeField]
+    [Dropdown("GetStoryKnots")]
     [ShowIf(EConditionOperator.Or, "showBoth", "showRobot")]
-    private string robotKnot;
+    private StoryKnots robotKnot;
+
 
     # region editorSettings
     private bool showBoth => interactableBy == InteractableBy.Both;
     private bool showFrog => interactableBy == InteractableBy.Frog;
     private bool showRobot => interactableBy == InteractableBy.Robot;
+    protected override bool showKnotName => false;
+
+
     #endregion
 
     // Start is called before the first frame update
@@ -50,16 +58,25 @@ public class DialogueTriggerOptional : DialogueTrigger
         {                                                   // TODO: Specific input?
             if (interactableBy == InteractableBy.Frog && frogInputController.HasMadeChoice)
             {
-                StartStory(frogKnot);
+                StartStory(frogKnot.ToString());
             }
             else if (interactableBy == InteractableBy.Robot && robotInputController.HasMadeChoice)
             {
-                StartStory(robotKnot);
+                StartStory(robotKnot.ToString());
             }
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        // TODO: Show dialogue indicator
 
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // TODO: Hide dialogue indicator
+    }
 
     protected override void StartStory(string knotName)
     {

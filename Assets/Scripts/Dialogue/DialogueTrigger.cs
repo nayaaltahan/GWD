@@ -1,4 +1,6 @@
 using Ink.Runtime;
+using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +12,19 @@ public class DialogueTrigger : MonoBehaviour
     private TextAsset inkyStory;
 
     [SerializeField]
-    private string knotName;
+    [Dropdown("GetStoryKnots")]
+    [ShowIf("showKnotName")]
+    protected StoryKnots knotName;
 
     protected bool activated;
+
+    // we need this to hide the variable in inherited classes
+    protected virtual bool showKnotName => true;
+
+    protected StoryKnots[] GetStoryKnots()
+    {
+        return (StoryKnots[])Enum.GetValues(typeof(StoryKnots));
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +44,7 @@ public class DialogueTrigger : MonoBehaviour
         {
             Debug.Log("player triggered me!");
             activated = true;
-            DialogueManager.instance.StartStory(inkyStory.text, knotName);
+            DialogueManager.instance.StartStory(inkyStory.text, knotName.ToString());
         }
     }
 
