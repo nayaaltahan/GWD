@@ -11,6 +11,7 @@ public class PlayerInputController : MonoBehaviour
     public bool HasMadeChoice => pressedButton1 || pressedButton2 || pressedButton3;
 
     public int SelectedChoice { get; private set; } = -1;
+    public bool PressedButton1 => pressedButton1;
 
     private bool pressedButton1, pressedButton2, pressedButton3;
 

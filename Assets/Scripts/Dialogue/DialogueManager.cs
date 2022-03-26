@@ -53,6 +53,12 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private Color subtitleColorRobot = Color.white;
 
+    [SerializeField]
+    private GameObject frogOptionalChatIndicator;
+
+    [SerializeField]
+    private GameObject robotOptionalChatIndicator;
+
 
 
     private bool frogIsMakingChoice = false;
@@ -271,4 +277,28 @@ public class DialogueManager : MonoBehaviour
             frogIsMakingChoice = false;
         }
     }
+
+    public void ActivateOptionalDialogueIndicator(string name)
+    {
+        if (name.Equals("frog"))
+        {
+            frogOptionalChatIndicator.SetActive(true);
+        }
+        else if (name.Equals("robot"))
+            robotOptionalChatIndicator.SetActive(true);
+        else
+            Debug.LogWarning("no optional dialogue indicators were set active");
+    }
+    public void DisableOptionalDialogueIndicator(string name)
+    {
+        if (name.Equals("frog"))
+        {
+            frogOptionalChatIndicator.SetActive(false);
+        }
+        else if (name.Equals("robot"))
+            robotOptionalChatIndicator.SetActive(false);
+        else
+            Debug.LogWarning("no optional dialogue indicators were set inactive");
+    }
+
 }

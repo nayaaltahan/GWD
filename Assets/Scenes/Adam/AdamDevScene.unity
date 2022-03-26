@@ -3809,6 +3809,8 @@ MonoBehaviour:
   subtitlePrefab: {fileID: 4889731280673067098, guid: 749e8244cc18d8a49a0f55142997ba5f, type: 3}
   subtitleColorFrog: {r: 0, g: 1, b: 0.027071953, a: 1}
   subtitleColorRobot: {r: 1, g: 0.6361375, b: 0.023584902, a: 1}
+  frogOptionalChatIndicator: {fileID: 8868738726892200288}
+  robotOptionalChatIndicator: {fileID: 676040762}
 --- !u!1 &531635194
 GameObject:
   m_ObjectHideFlags: 0
@@ -5445,7 +5447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0072700107}
+  m_AnchoredPosition: {x: 0, y: -0.005467456}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &590596095
@@ -6875,6 +6877,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5358783503842859071, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5507386223301689629, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: m_Name
       value: PlayerOne
@@ -6921,6 +6927,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+--- !u!1 &676040762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5358783503842859071, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+  m_PrefabInstance: {fileID: 676040761}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &677828876
 GameObject:
   m_ObjectHideFlags: 3
@@ -22095,7 +22106,7 @@ MonoBehaviour:
   canvas: {fileID: 5788553121441116599}
   playerOne: {fileID: 1545909163}
   playerTwo: {fileID: 5507386222759466398}
-  allowSinglePlayer: 0
+  allowSinglePlayer: 1
   playerType: 1
 --- !u!1 &1000499133 stripped
 GameObject:
@@ -26139,7 +26150,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151353095}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c154bea2a1b61fc49a5ceff41a3ba3a5, type: 3}
   m_Name: 
@@ -26149,8 +26160,8 @@ MonoBehaviour:
   interactableBy: 0
   robotInputController: {fileID: 1545909169}
   frogInputController: {fileID: 5507386222759466404}
-  frogKnot: 
-  robotKnot: 
+  frogKnot: 2
+  robotKnot: 0
 --- !u!43 &1155375180
 Mesh:
   m_ObjectHideFlags: 0
@@ -39345,10 +39356,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1486544456334474457, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1486544456334474470, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
       propertyPath: inkyStory
       value: 
       objectReference: {fileID: 4900000, guid: d52d325bf399a1843b2e3cfd16dbc7d1, type: 3}
+    - target: {fileID: 1486544456334474470, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1486544456334474471, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -39393,7 +39412,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1486544456334474470, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 41cc5381b91d48944a5d0ec0588e6fe6, type: 3}
 --- !u!1 &3853756744446712736 stripped
 GameObject:
@@ -39751,6 +39771,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.527421
       objectReference: {fileID: 0}
+    - target: {fileID: 1602866587700213616, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3164587888639746317, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
       propertyPath: m_Color.b
       value: 0.28627452
@@ -39873,3 +39897,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+--- !u!1 &8868738726892200288 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1602866587700213616, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+  m_PrefabInstance: {fileID: 8868738726892200287}
+  m_PrefabAsset: {fileID: 0}

@@ -22,8 +22,7 @@ public class DialogueTriggerOptional : DialogueTrigger
 
     [SerializeField]
     private PlayerInputController frogInputController;
-    [SerializeField]
-    new protected StoryKnots knotName;
+
 
     [SerializeField]
     [Dropdown("GetStoryKnots")]
@@ -34,6 +33,7 @@ public class DialogueTriggerOptional : DialogueTrigger
     [Dropdown("GetStoryKnots")]
     [ShowIf(EConditionOperator.Or, "showBoth", "showRobot")]
     private StoryKnots robotKnot;
+
 
 
     # region editorSettings
@@ -56,26 +56,51 @@ public class DialogueTriggerOptional : DialogueTrigger
     {
         if (!activated)
         {                                                   // TODO: Specific input?
-            if (interactableBy == InteractableBy.Frog && frogInputController.HasMadeChoice)
+            if ((interactableBy == InteractableBy.Frog || interactableBy == InteractableBy.Both) && frogInputController.PressedButton1)
             {
                 StartStory(frogKnot.ToString());
+                DialogueManager.instance.DisableOptionalDialogueIndicator("frog");
+                DialogueManager.instance.DisableOptionalDialogueIndicator("robot");
+
             }
-            else if (interactableBy == InteractableBy.Robot && robotInputController.HasMadeChoice)
+            else if ((interactableBy == InteractableBy.Robot || interactableBy == InteractableBy.Both) && robotInputController.PressedButton1)
             {
                 StartStory(robotKnot.ToString());
+                DialogueManager.instance.DisableOptionalDialogueIndicator("frog");
+                DialogueManager.instance.DisableOptionalDialogueIndicator("robot");
+
             }
         }
     }
-
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
+        if (activated)
+            return;
         // TODO: Show dialogue indicator
+        if (other.transform.root.name.Equals("PlayerOne"))
+        {
+            DialogueManager.instance.ActivateOptionalDialogueIndicator("robot");
+        }
+        else if (other.transform.root.name.Equals("PlayerTwo"))
+        {
+            DialogueManager.instance.ActivateOptionalDialogueIndicator("frog");
+        }
 
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // TODO: Hide dialogue indicator
+        if (activated)
+            return;
+        // TODO: Change names
+        if (other.transform.root.name == "PlayerOne")
+        {
+            DialogueManager.instance.DisableOptionalDialogueIndicator("robot");
+        }
+        else if (other.transform.root.name == "PlayerTwo")
+        {
+            DialogueManager.instance.DisableOptionalDialogueIndicator("frog");
+        }
     }
 
     protected override void StartStory(string knotName)

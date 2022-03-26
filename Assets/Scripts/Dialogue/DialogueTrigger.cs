@@ -38,11 +38,11 @@ public class DialogueTrigger : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (!activated && other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("player triggered me!");
+            Debug.Log("player triggered me!", gameObject);
             activated = true;
             DialogueManager.instance.StartStory(inkyStory.text, knotName.ToString());
         }
