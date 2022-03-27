@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FMOD.Studio;
 using TMPro;
 using UnityEngine;
 
@@ -66,14 +67,19 @@ public class DialogueManager : MonoBehaviour
 
 
 
+    /// Used to know when the player is making a choice so we can select the story knot
     private bool frogIsMakingChoice = false;
+    /// Used to know when the player is making a choice so we can select the story knot
     private bool robotIsMakingChoice = false;
     private bool frogIsSpeaking = false;
     private bool robotIsSpeaking = false;
-    // used to see when we should stop the conversation while making choices
+    /// used to see when we should stop the conversation while making choices
     private bool hasMoreDialogue = false;
-    // Current spoken dialogue text
+    /// Current spoken dialogue text
     private string currentText;
+
+    /// Current playing audio clip
+    private FMOD.Studio.EventInstance currentAudioClip;
 
     private PlayerStateController frogPlayerController;
     private PlayerStateController robotPlayerController;
@@ -103,9 +109,13 @@ public class DialogueManager : MonoBehaviour
 
     public void StartStory(string story, string knotName)
     {
+        // Stop coroutines in case any dialogues are still playing
+        StopAllCoroutines();
+        
         currentStory = new Story(story);
         if (!string.IsNullOrEmpty(knotName))
             currentStory.ChoosePathString(knotName);
+        
         // Skip to first choice
         StartCoroutine(StartStoryCoroutine());
     }
@@ -212,9 +222,13 @@ public class DialogueManager : MonoBehaviour
 
     private int PlayAudio(string audioPath)
     {
-        var pos = frogIsSpeaking ? frogInputController.transform.position : robotInputController.transform.position;
-        AudioManager.instance.Play3DOneShot(audioPath, pos);
-        FMODUnity.RuntimeManager.GetEventDescription(audioPath).getLength(out var audioLengthMillis);
+        var speakerGameObject = frogIsSpeaking ? frogInputController.gameObject : robotInputController.gameObject;
+        if(currentAudioClip.isValid())
+            currentAudioClip.stop(STOP_MODE.ALLOWFADEOUT);
+        currentAudioClip = AudioManager.instance.Create3DEventInstance(audioPath, speakerGameObject);
+        currentAudioClip.start();
+        currentAudioClip.getDescription(out var description);
+        description.getLength(out var audioLengthMillis);
         return audioLengthMillis;
     }
 
@@ -314,7 +328,6 @@ public class DialogueManager : MonoBehaviour
         var selectedChoice = currentStory.currentChoices[index].text;
         currentStory.ChooseChoiceIndex(index);
         // TODO: Play Effect audio?
-        // If no audio is found, wait the default amount
         HideAllSpeechBubbles();
         var color = robotIsMakingChoice ? subtitleColorRobot : subtitleColorFrog;
         robotIsMakingChoice = false;
