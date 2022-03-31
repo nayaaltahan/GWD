@@ -32,14 +32,12 @@ public class PlayerStateController : MonoBehaviour
 
     public float speed => isSlowed ? slowSpeed : fastSpeed;
 
-    [Header("Components")]
-    [SerializeField]
-    private Animator animator;
 
     [Header("Model Settings")]
     [SerializeField]
     private Transform modelTransform;
 
+    private Animator animator;
 
     public PlayerInputController InputController { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
@@ -59,6 +57,7 @@ public class PlayerStateController : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody>();
         GroundedChecker = GetComponent<GroundedChecker>();
+        animator = modelTransform.GetComponent<Animator>();
         InputController = GetComponent<PlayerInputController>();
         SetCurrentState(IdleState);
         Debug.Log(currentState.GetType());
