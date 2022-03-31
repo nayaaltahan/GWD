@@ -55,13 +55,13 @@ Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe
 -> DONE
 
 ===Convo3===
-*Rani: So... you are living metal? #event:/Voice/Rani/Convo3_SoYouAreLivingMetal cutscene
-    Rani: Your build is a titanium-alloy, is it not? #event:/Voice/Rani/Convo3_YourBuildIsTitanium cutscene
+*Rani: So... you are living metal? #event:/Voice/Rani/Convo3_SoYouAreLivingMetal
+    Rani: Your build is a titanium-alloy, is it not? #event:/Voice/Rani/Convo3_YourBuildIsTitanium
     **[Onwell: Confirm.]
-        ONWELL: INDEED. TITANIUM-PALLADIUM.   #event:/Voice/Onwell/Convo3_IndeedTitatniumPalladium cutscene
+        ONWELL: INDEED. TITANIUM-PALLADIUM.   #event:/Voice/Onwell/Convo3_IndeedTitatniumPalladium
     **[Onwell: It's personal]
-        Onwell: WE DO NOT DISCUSS SUCH THINGS. #event:/Voice/Onwell/Convo3_WeDoNotDiscuss cutscene
-        Onwell: KNOWING IS POWER. #event:/Voice/Onwell/Convo3_KnowingIsPower cutscene
+        Onwell: WE DO NOT DISCUSS SUCH THINGS. #event:/Voice/Onwell/Convo3_WeDoNotDiscuss
+        Onwell: KNOWING IS POWER. #event:/Voice/Onwell/Convo3_KnowingIsPower
 -
 
 ->DONE
