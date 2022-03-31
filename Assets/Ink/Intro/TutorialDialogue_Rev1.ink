@@ -57,7 +57,7 @@ Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe
 Rani: Ordinarily, I use this cabbage system to get to town. #event:/Voice/Rani/Convo2_OrdinarilyIUseMyCabbageSystem
 Rani: But I believe you are a bit too chunky for the pipes. #event:/Voice/Rani/Convo2_ButIThinkYoure
 Onwell: THE PIPES ARE TOO SMALL. #event:/Voice/Onwell/Convo2_ThePipesAreTooSmall
-Rani: Hah! Well, we'll find another way, surely. #event:/Voice/Rani/Convo2_HaWellWellFind 
+Rani: Hah! Well, we'll find another way, surely. #event:/Voice/Rani/Convo2_HaWellWellFind
 
 -> DONE
 
@@ -71,7 +71,7 @@ Onwell: I AM STRENGTH. #event:/Voice/Onwell/Convo3_IAmStrength
 ===Convo4===
 Onwell: I HAVE SPOTTED SOMETHING STRANGE. #event:/Voice/Onwell/Convo4_IHaveSpottedSomethingStrange
 Rani: Ah, yes! You've spotted some of my finest work. #event:/Voice/Rani/Convo4_AhYesYouveSpotted
-Rani: Try it out, it's perfectly safe.  #event:/Voi ce/Rani/Convo4_TryItOut
+Rani: Try it out, it's perfectly safe.  #event:/Voice/Rani/Convo4_TryItOut
 Rani: Though it is calibrated for cabbages... #event:/Voice/Rani/Convo4_ThoughItIsCalibrated
 -
 
