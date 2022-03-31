@@ -16,6 +16,6 @@ public class Trampolin : MonoBehaviour
     private void ApplyForce(Rigidbody rb)
     {
         Debug.Log("Mushroom Force");
-        rb.AddForce(rb.gameObject.transform.up * force, ForceMode.Impulse);
+        rb.AddForce(transform.up * force, ForceMode.Impulse);
     }
 }
