@@ -3083,69 +3083,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &522616130
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 522616131}
-  - component: {fileID: 522616132}
-  m_Layer: 0
-  m_Name: DialogueManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &522616131
+--- !u!4 &522616131 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4996483780890822931, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+  m_PrefabInstance: {fileID: 4996483780703810640}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522616130}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1742141645}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &522616132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522616130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e24e27999f36e948a3351367d0c9552, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  robotInputController: {fileID: 1545909169}
-  frogInputController: {fileID: 123160248}
-  robotSpeechBubbles:
-  - {fileID: 1130103675}
-  - {fileID: 1518969584}
-  - {fileID: 1972341572}
-  frogSpeechBubbles:
-  - {fileID: 404577708}
-  - {fileID: 404577707}
-  - {fileID: 404577706}
-  frogSpeechIndicator: {fileID: 404577705}
-  robotSpeechIndicator: {fileID: 1300126869}
-  frogOptionalChatIndicator: {fileID: 404577704}
-  robotOptionalChatIndicator: {fileID: 676040762}
-  defaultAudioDelay: 1
-  delayBetweenSpeechBubbles: 0.7
-  subtitleContainer: {fileID: 271223061}
-  subtitlePrefab: {fileID: 4889731280673067098, guid: 749e8244cc18d8a49a0f55142997ba5f, type: 3}
-  subtitleColorFrog: {r: 0, g: 1, b: 0.027071953, a: 1}
-  subtitleColorRobot: {r: 1, g: 0.6361375, b: 0.023584902, a: 1}
 --- !u!1 &531635194
 GameObject:
   m_ObjectHideFlags: 0
@@ -39318,6 +39260,115 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 816bd3904c27430418ca19feffee4abe, type: 3}
+--- !u!1001 &4996483780703810640
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1742141645}
+    m_Modifications:
+    - target: {fileID: 4996483780890822930, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: m_Name
+      value: DialogueManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822931, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822931, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822931, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822931, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822931, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822931, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822931, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822931, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822931, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822931, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822931, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: subtitleContainer
+      value: 
+      objectReference: {fileID: 271223061}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: frogInputController
+      value: 
+      objectReference: {fileID: 123160248}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: frogSpeechIndicator
+      value: 
+      objectReference: {fileID: 404577705}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: robotInputController
+      value: 
+      objectReference: {fileID: 1545909169}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: robotSpeechIndicator
+      value: 
+      objectReference: {fileID: 1300126869}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: frogOptionalChatIndicator
+      value: 
+      objectReference: {fileID: 404577704}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: robotOptionalChatIndicator
+      value: 
+      objectReference: {fileID: 676040762}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: frogSpeechBubbles.Array.data[0]
+      value: 
+      objectReference: {fileID: 404577708}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: frogSpeechBubbles.Array.data[1]
+      value: 
+      objectReference: {fileID: 404577707}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: frogSpeechBubbles.Array.data[2]
+      value: 
+      objectReference: {fileID: 404577706}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: robotSpeechBubbles.Array.data[0]
+      value: 
+      objectReference: {fileID: 1130103675}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: robotSpeechBubbles.Array.data[1]
+      value: 
+      objectReference: {fileID: 1518969584}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: robotSpeechBubbles.Array.data[2]
+      value: 
+      objectReference: {fileID: 1972341572}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
 --- !u!1001 &5230223736324873644
 PrefabInstance:
   m_ObjectHideFlags: 0
