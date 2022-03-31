@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FMOD.Studio;
 using TMPro;
 using UnityEngine;
 
@@ -11,6 +12,14 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager instance;
 
     private Story currentStory;
+
+
+    [SerializeField]
+    private PlayerInputController robotInputController;
+
+    [SerializeField]
+    private PlayerInputController frogInputController;
+
     [Header("Chat bubble settings")]
 
     [SerializeField]
@@ -19,17 +28,19 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private GameObject[] frogSpeechBubbles;
 
-    [SerializeField]
-    private PlayerInputController robotInputController;
-
-    [SerializeField]
-    private PlayerInputController frogInputController;
 
     [SerializeField]
     private GameObject frogSpeechIndicator;
 
     [SerializeField]
     private GameObject robotSpeechIndicator;
+
+
+    [SerializeField]
+    private GameObject frogOptionalChatIndicator;
+
+    [SerializeField]
+    private GameObject robotOptionalChatIndicator;
 
     [Header("Audio Settings")]
     [SerializeField]
@@ -55,18 +66,31 @@ public class DialogueManager : MonoBehaviour
 
 
 
+
+    /// Used to know when the player is making a choice so we can select the story knot
     private bool frogIsMakingChoice = false;
+    /// Used to know when the player is making a choice so we can select the story knot
     private bool robotIsMakingChoice = false;
     private bool frogIsSpeaking = false;
     private bool robotIsSpeaking = false;
-    // used to see when we should stop the conversation while making choices
+    /// used to see when we should stop the conversation while making choices
     private bool hasMoreDialogue = false;
-    // Current spoken dialogue text
+    /// Current spoken dialogue text
     private string currentText;
+
+    /// Current playing audio clip
+    private FMOD.Studio.EventInstance currentAudioClip;
+
+    private PlayerStateController frogPlayerController;
+    private PlayerStateController robotPlayerController;
     void Start()
     {
         if (instance == null)
+        {
             instance = this;
+            frogPlayerController = frogInputController.GetComponent<PlayerStateController>();
+            robotPlayerController = robotInputController.GetComponent<PlayerStateController>();
+        }
         else
             Debug.LogError("More than one Dialogue Manager in the scene");
     }
@@ -85,9 +109,13 @@ public class DialogueManager : MonoBehaviour
 
     public void StartStory(string story, string knotName)
     {
+        // Stop coroutines in case any dialogues are still playing
+        StopAllCoroutines();
+        
         currentStory = new Story(story);
         if (!string.IsNullOrEmpty(knotName))
             currentStory.ChoosePathString(knotName);
+        
         // Skip to first choice
         StartCoroutine(StartStoryCoroutine());
     }
@@ -127,6 +155,8 @@ public class DialogueManager : MonoBehaviour
             {
                 hasMoreDialogue = false;
                 yield return new WaitForSeconds(delayBetweenSpeechBubbles);
+                SlowPlayers(false);
+                FreezePlayers(false);
                 yield break;
             }
 
@@ -136,14 +166,26 @@ public class DialogueManager : MonoBehaviour
             if (shouldSkip)
                 continue;
 
-            yield return StartCoroutine(PlayAudio());
+            yield return StartCoroutine(ParseAudio());
         }
 
         hasMoreDialogue = true;
         yield return null;
     }
 
-    private IEnumerator PlayAudio()
+    private void FreezePlayers(bool shouldFreeze)
+    {
+        robotPlayerController.SetCanMove(!shouldFreeze);
+        frogPlayerController.SetCanMove(!shouldFreeze);
+    }
+
+    private void SlowPlayers(bool shouldSlowDown)
+    {
+        robotPlayerController.SetIsWalkingSlow(shouldSlowDown);
+        frogPlayerController.SetIsWalkingSlow(shouldSlowDown);
+    }
+
+    private IEnumerator ParseAudio()
     {
         var audioInfo = currentStory.currentTags.FirstOrDefault()?.Split(' ');
         if (audioInfo != null)
@@ -156,14 +198,10 @@ public class DialogueManager : MonoBehaviour
             var dialogueType = audioInfo.ElementAtOrDefault(1);
 
             // TODO: Do this better
-            var pos = frogIsSpeaking ? frogInputController.transform.position : robotInputController.transform.position;
-            AudioManager.instance.Play3DOneShot(audioPath, pos);
-            FMODUnity.RuntimeManager.GetEventDescription(audioPath).getLength(out var audioLengthMillis);
-            if (robotIsSpeaking)
-                robotSpeechIndicator.SetActive(true);
-            else
-                frogSpeechIndicator.SetActive(true);
+            int audioLengthMillis = PlayAudio(audioPath);
 
+            ActivateSpeechIndicator();
+            ParseDialogueType(dialogueType);
             yield return new WaitForSeconds(audioLengthMillis / 1000);
 
             if (robotIsSpeaking)
@@ -182,14 +220,53 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    private int PlayAudio(string audioPath)
+    {
+        var speakerGameObject = frogIsSpeaking ? frogInputController.gameObject : robotInputController.gameObject;
+        if(currentAudioClip.isValid())
+            currentAudioClip.stop(STOP_MODE.ALLOWFADEOUT);
+        currentAudioClip = AudioManager.instance.Create3DEventInstance(audioPath, speakerGameObject);
+        currentAudioClip.start();
+        currentAudioClip.getDescription(out var description);
+        description.getLength(out var audioLengthMillis);
+        return audioLengthMillis;
+    }
+
+    private void ActivateSpeechIndicator()
+    {
+        if (robotIsSpeaking)
+            robotSpeechIndicator.SetActive(true);
+        else
+            frogSpeechIndicator.SetActive(true);
+    }
+
+    private void ParseDialogueType(string dialogueType)
+    {
+        if (dialogueType == null)
+        {
+            // Do nothing
+            SlowPlayers(false);
+            FreezePlayers(false);
+        }
+        else if (dialogueType.Equals("slowdown"))
+        {
+            SlowPlayers(true);
+        }
+        else if (dialogueType.Equals("cutscene"))
+        {
+            FreezePlayers(true);
+        }
+    }
+
     private bool DisplaySubtitles(string currentText)
     {
+        var lower = currentText.ToLower();
+
         var subtitle = Instantiate(subtitlePrefab);
         subtitle.SetActive(true);
-        var subtitleColor = ChooseSubtitleColor(currentText);
+        var subtitleColor = ChooseSubtitleColor(lower);
 
         // Skip narrations
-        var lower = currentText.ToLower();
         if (!lower.Contains("onwell:") && !lower.Contains("rani:"))
             return true;
         else
@@ -204,13 +281,13 @@ public class DialogueManager : MonoBehaviour
     {
         frogIsSpeaking = false;
         robotIsSpeaking = false;
-        if (currentText.StartsWith("Onwell:"))
+        if (currentText.StartsWith("onwell:"))
         {
 
             robotIsSpeaking = true;
             return subtitleColorRobot;
         }
-        else if (currentText.StartsWith("Rani:"))
+        else if (currentText.StartsWith("rani:"))
         {
             frogIsSpeaking = true;
             return subtitleColorFrog;
@@ -251,7 +328,6 @@ public class DialogueManager : MonoBehaviour
         var selectedChoice = currentStory.currentChoices[index].text;
         currentStory.ChooseChoiceIndex(index);
         // TODO: Play Effect audio?
-        // If no audio is found, wait the default amount
         HideAllSpeechBubbles();
         var color = robotIsMakingChoice ? subtitleColorRobot : subtitleColorFrog;
         robotIsMakingChoice = false;
@@ -271,4 +347,28 @@ public class DialogueManager : MonoBehaviour
             frogIsMakingChoice = false;
         }
     }
+
+    public void ActivateOptionalDialogueIndicator(string name)
+    {
+        if (name.Equals("frog"))
+        {
+            frogOptionalChatIndicator.SetActive(true);
+        }
+        else if (name.Equals("robot"))
+            robotOptionalChatIndicator.SetActive(true);
+        else
+            Debug.LogWarning("no optional dialogue indicators were set active");
+    }
+    public void DisableOptionalDialogueIndicator(string name)
+    {
+        if (name.Equals("frog"))
+        {
+            frogOptionalChatIndicator.SetActive(false);
+        }
+        else if (name.Equals("robot"))
+            robotOptionalChatIndicator.SetActive(false);
+        else
+            Debug.LogWarning("no optional dialogue indicators were set inactive");
+    }
+
 }
