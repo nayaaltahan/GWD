@@ -6,7 +6,7 @@ Dust settles around the robot, as Rani puts down her tools and walks over.
 
 ===Convo1===
 *[Rani: Are you okay?]
-    Rani: Great sprout! Are you alive, sir? #event:/Voice/Rani/Convo1_GreatSprout
+    Rani: Great sprout! Are you alive, sir? #event:/Voice/Rani/Convo1_GreatSprout #cutscene
     **[Onwell: WHAT IS ALIVE?]
         Onwell: WHAT IS ALIVE? #event:/Voice/Onwell/Convo1_WhatIsAlive
         Rani: Ha! A philosopher I take it? Let's get you up, then! #event:/Voice/Rani/Convo1_HaAPhilosopher
@@ -25,11 +25,9 @@ Dust settles around the robot, as Rani puts down her tools and walks over.
     **...
     
     --Rani: In any case, get out of my patch. Please!  #event:/Voice/Rani/Convo1_InAnyCase
--
--> DONE
 
-===Convo2=== 
-*[Onwell: I need help]
+-
+Onwell gets up.
     Onwell: I NEED ASSISTANCE, FROG-PERSON. #event:/Voice/Onwell/Convo2_INeedAssistance
     Onwell: MY KIN DEMANDS IT. #event:/Voice/Onwell/Convo2_MyKinDemands
     Onwell: I SEEK THE GREAT WILLOW. #event:/Voice/Onwell/Convo2_ISeekThe
@@ -54,18 +52,31 @@ Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe
 -
 -> DONE
 
+===Convo2===
+
+Rani: Ordinarily, I use this cabbage system to get to town. #event:/Voice/Rani/Convo2_OrdinarilyIUseMyCabbageSystem
+Rani: But I believe you are a bit too chunky for the pipes. #event:/Voice/Rani/Convo2_ButIThinkYoure
+Onwell: THE PIPES ARE TOO SMALL. #event:/Voice/Onwell/Convo2_ThePipesAreTooSmall
+Rani: Hah! Well, we'll find another way, surely. #event:/Voice/Rani/Convo2_HaWellWellFind 
+
+-> DONE
+
 ===Convo3===
-*Rani: So... you are living metal? #event:/Voice/Rani/Convo3_SoYouAreLivingMetal cutscene
-    Rani: Your build is a titanium-alloy, is it not? #event:/Voice/Rani/Convo3_YourBuildIsTitanium cutscene
-    **[Onwell: Confirm.]
-        ONWELL: INDEED. TITANIUM-PALLADIUM.   #event:/Voice/Onwell/Convo3_IndeedTitatniumPalladium cutscene
-    **[Onwell: It's personal]
-        Onwell: WE DO NOT DISCUSS SUCH THINGS. #event:/Voice/Onwell/Convo3_WeDoNotDiscuss cutscene
-        Onwell: KNOWING IS POWER. #event:/Voice/Onwell/Convo3_KnowingIsPower cutscene
+Rani: Just a few jumps here. #event:/Voice/Rani/Convo3_JustAFewJumps
+Rani: I trust you have the strength for it? #event:/Voice/Rani/Convo3_ITrustYouHave
+Onwell: I AM STRENGTH. #event:/Voice/Onwell/Convo3_IAmStrength
+
+-> DONE
+
+===Convo4===
+Onwell: I HAVE SPOTTED SOMETHING STRANGE. #event:/Voice/Onwell/Convo4_IHaveSpottedSomethingStrange
+Rani: Ah, yes! You've spotted some of my finest work. #event:/Voice/Rani/Convo4_AhYesYouveSpotted
+Rani: Try it out, it's perfectly safe.  #event:/Voi ce/Rani/Convo4_TryItOut
+Rani: Though it is calibrated for cabbages... #event:/Voice/Rani/Convo4_ThoughItIsCalibrated
 -
 
 ->DONE
-===Convo4===
+===Convo5===
 
 The two start moving through Rani's swamp garden, which is filled with scrap metal and half-baked prototypes.
 
@@ -86,7 +97,7 @@ The two start moving through Rani's swamp garden, which is filled with scrap met
         Rani: Some of them even work! #event:/Voice/Rani/Convo4_SomeOfThemEvenWork
 -
 ->DONE
-===Convo5===
+===Convo6===
 There's a great piece of scrap metal in the way.
 
 * [Rani: Help!]
@@ -95,7 +106,7 @@ There's a great piece of scrap metal in the way.
 -
 ->DONE
 
-===Convo6===
+===Convo7===
 Rani stops in front of her homespun metal-compactor.
 
 Rani: Ah. This may pose a problem for you.  #event:/Voice/Rani/Convo6_AhThisMayPoseAProblem
@@ -108,7 +119,7 @@ Onwell: AN INCONVENIENCE. #event:/Voice/Onwell/Convo6_AnInconvenience
 -
 ->DONE
     
-===Convo7===
+===Convo8===
 The two travelers reach the top of a hill. Suddenly, three robots flying in formation tear across the sky in front of them.
 -
 * [Rani: Your friends?]
