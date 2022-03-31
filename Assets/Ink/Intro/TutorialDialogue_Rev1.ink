@@ -5,8 +5,10 @@ Dust settles around the robot, as Rani puts down her tools and walks over.
 -> Convo1
 
 ===Convo1===
-*[Rani: Are you okay?]
-    Rani: Great sprout! Are you alive, sir? #event:/Voice/Rani/Convo1_GreatSprout #cutscene
+This is the first cutscene #cutscene
+
+*[Rani: Are you okay?] #cutscene
+    Rani: Great sprout! Are you alive, sir? #event:/Voice/Rani/Convo1_GreatSprout 
     **[Onwell: WHAT IS ALIVE?]
         Onwell: WHAT IS ALIVE? #event:/Voice/Onwell/Convo1_WhatIsAlive
         Rani: Ha! A philosopher I take it? Let's get you up, then! #event:/Voice/Rani/Convo1_HaAPhilosopher

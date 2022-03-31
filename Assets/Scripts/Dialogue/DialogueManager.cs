@@ -130,6 +130,7 @@ public class DialogueManager : MonoBehaviour
     private void DisplayChoices()
     {
         var player = currentStory.currentChoices[0].text.ToLower().Contains("onwell:");
+
         if (player)
         {
             robotIsMakingChoice = true;
@@ -162,6 +163,11 @@ public class DialogueManager : MonoBehaviour
 
             currentText = currentStory.Continue();
 
+            ParseDialogueType();
+
+            if (currentStory.currentTags.Count > 0)
+                Debug.Log(currentStory.currentTags[0]);
+
             bool shouldSkip = DisplaySubtitles(currentText);
             if (shouldSkip)
                 continue;
@@ -187,6 +193,7 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator ParseAudio()
     {
+
         var audioInfo = currentStory.currentTags.FirstOrDefault()?.Split(' ');
         if (audioInfo != null)
         {
@@ -195,13 +202,11 @@ public class DialogueManager : MonoBehaviour
             // First element is path to file in fmod
             // Second element tells us if the player needs to be slowed down, or if we are showing a cutscene
             var audioPath = audioInfo[0];
-            var dialogueType = audioInfo.ElementAtOrDefault(1);
 
             // TODO: Do this better
             int audioLengthMillis = PlayAudio(audioPath);
 
             ActivateSpeechIndicator();
-            ParseDialogueType(dialogueType);
             yield return new WaitForSeconds(audioLengthMillis / 1000);
 
             if (robotIsSpeaking)
@@ -240,21 +245,21 @@ public class DialogueManager : MonoBehaviour
             frogSpeechIndicator.SetActive(true);
     }
 
-    private void ParseDialogueType(string dialogueType)
+    private void ParseDialogueType()
     {
-        if (dialogueType == null)
+        if (currentStory.currentTags.Contains("slowdown"))
+        {
+            SlowPlayers(true);
+        }
+        else if (currentStory.currentTags.Contains("cutscene"))
+        {
+            FreezePlayers(true);
+        }
+        else
         {
             // Do nothing
             SlowPlayers(false);
             FreezePlayers(false);
-        }
-        else if (dialogueType.Equals("slowdown"))
-        {
-            SlowPlayers(true);
-        }
-        else if (dialogueType.Equals("cutscene"))
-        {
-            FreezePlayers(true);
         }
     }
 
