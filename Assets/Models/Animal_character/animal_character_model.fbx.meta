@@ -39,6 +39,12 @@ ModelImporter:
   - first:
       74: -7675270891520791035
     second: Armature|idle (1)
+  - first:
+      74: 1229584163444893091
+    second: Armature|walking (1)
+  - first:
+      74: -5985409113910445029
+    second: Armature|running (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -213,18 +219,18 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|pushing
-      takeName: Armature|pushing
+      name: Armature|running (1)
+      takeName: Armature|running
       internalID: 0
       firstFrame: 0
-      lastFrame: 80
+      lastFrame: 21
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -340,7 +346,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
