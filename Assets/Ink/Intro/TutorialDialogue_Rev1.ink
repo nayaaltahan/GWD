@@ -8,48 +8,48 @@ Dust settles around the robot, as Rani puts down her tools and walks over.
 This is the first cutscene #cutscene
 
 *[Rani: Are you okay?] #cutscene
-    Rani: Great sprout! Are you alive, sir? #event:/Voice/Rani/Convo1_GreatSprout 
-    **[Onwell: WHAT IS ALIVE?]
-        Onwell: WHAT IS ALIVE? #event:/Voice/Onwell/Convo1_WhatIsAlive
-        Rani: Ha! A philosopher I take it? Let's get you up, then! #event:/Voice/Rani/Convo1_HaAPhilosopher
-    **[Onwell: WHERE AM I?]
-        Onwell: WHERE AM I? #event:/Voice/Onwell/Convo1_WhereAmI
-        Rani: In my cabbages, I'm afraid. Perhaps you could be persuaded to move? #event:/Voice/Rani/Convo1_InMyCabbages
-*[Rani: My cabbages!!!]
-    Rani: My cabbages! You imbecile. You call that a landing?  #event:/Voice/Rani/Convo1_MyCabbages
-    **[Onwell: I fall where I must.]
-        Onwell: I FALL WHERE I MUST. CABBAGES ARE IRRELEVANT. #event:/Voice/Onwell/Convo1_IFallWhere
-        Rani: Perhaps to you, you brute! #event:/Voice/Rani/Convo1_PerhapsToYou
+    Rani: Great sprout! Are you alive, sir? #event:/Voice/Rani/Convo1_GreatSprout #cutscene
+    **[Onwell: WHAT IS ALIVE?] #cutscene
+        Onwell: WHAT IS ALIVE? #event:/Voice/Onwell/Convo1_WhatIsAlive #cutscene
+        Rani: Ha! A philosopher I take it? Let's get you up, then! #event:/Voice/Rani/Convo1_HaAPhilosopher #cutscene
+    **[Onwell: WHERE AM I?] #cutscene
+        Onwell: WHERE AM I? #event:/Voice/Onwell/Convo1_WhereAmI #cutscene
+        Rani: In my cabbages, I'm afraid. Perhaps you could be persuaded to move? #event:/Voice/Rani/Convo1_InMyCabbages #cutscene
+*[Rani: My cabbages!!!] #cutscene
+    Rani: My cabbages! You imbecile. You call that a landing?  #event:/Voice/Rani/Convo1_MyCabbages #cutscene
+    **[Onwell: I fall where I must.] #cutscene
+        Onwell: I FALL WHERE I MUST. CABBAGES ARE IRRELEVANT. #event:/Voice/Onwell/Convo1_IFallWhere #cutscene
+        Rani: Perhaps to you, you brute! #event:/Voice/Rani/Convo1_PerhapsToYou #cutscene
 
-    **[Onwell: Apologies.]
-        Onwell: APOLOGIES. I HAVE NO QUARREL WITH THE CABBAGES. #event:/Voice/Onwell/Convo1_Apologies
-        Rani: We'll it sure seems that way! #event:/Voice/Rani/Convo1_WellItSureSeems
+    **[Onwell: Apologies.] #cutscene
+        Onwell: APOLOGIES. I HAVE NO QUARREL WITH THE CABBAGES. #event:/Voice/Onwell/Convo1_Apologies #cutscene
+        Rani: We'll it sure seems that way! #event:/Voice/Rani/Convo1_WellItSureSeems #cutscene
     **...
     
-    --Rani: In any case, get out of my patch. Please!  #event:/Voice/Rani/Convo1_InAnyCase
+    --Rani: In any case, get out of my patch. Please!  #event:/Voice/Rani/Convo1_InAnyCase #cutscene
 
 -
 Onwell gets up.
-    Onwell: I NEED ASSISTANCE, FROG-PERSON. #event:/Voice/Onwell/Convo2_INeedAssistance
-    Onwell: MY KIN DEMANDS IT. #event:/Voice/Onwell/Convo2_MyKinDemands
-    Onwell: I SEEK THE GREAT WILLOW. #event:/Voice/Onwell/Convo2_ISeekThe
+    Onwell: I NEED ASSISTANCE, FROG-PERSON. #event:/Voice/Onwell/Convo2_INeedAssistance #cutscene
+    Onwell: MY KIN DEMANDS IT. #event:/Voice/Onwell/Convo2_MyKinDemands #cutscene
+    Onwell: I SEEK THE GREAT WILLOW. #event:/Voice/Onwell/Convo2_ISeekThe #cutscene
 -
-*[Rani: Your kin?]
-Rani: More characters like you around, then? Interesting. #event:/Voice/Rani/Convo2_MoreCharactersLike
-Rani: Does your kind grow from seeds, or are you born? #event:/Voice/Rani/Convo2_DoesYourKind
-Onwell: BUILT, I AM TOLD. IN AGES PAST. #event:/Voice/Onwell/Convo2_BuiltIAmTold
-**[Rani: Bullshit! You can't build a person!] 
-    Rani: Preposterous! A thing like yourself cannot be built.  #event:/Voice/Rani/Convo2_Preposterous
-    Rani: I would know! #event:/Voice/Rani/Convo2_IWouldKnow
-**[Rani: Cool!]
-    Rani: Intriguing... #event:/Voice/Rani/Convo2_Intriguing
+*[Rani: Your kin?] #cutscene
+Rani: More characters like you around, then? Interesting. #event:/Voice/Rani/Convo2_MoreCharactersLike cutscene
+Rani: Does your kind grow from seeds, or are you born? #event:/Voice/Rani/Convo2_DoesYourKind cutscene
+Onwell: BUILT, I AM TOLD. IN AGES PAST. #event:/Voice/Onwell/Convo2_BuiltIAmTold cutscene
+**[Rani: Bullshit! You can't build a person!]  #cutscene
+    Rani: Preposterous! A thing like yourself cannot be built.  #event:/Voice/Rani/Convo2_Preposterous cutscene
+    Rani: I would know! #event:/Voice/Rani/Convo2_IWouldKnow cutscene
+**[Rani: Cool!] #cutscene
+    Rani: Intriguing... #event:/Voice/Rani/Convo2_Intriguing cutscene
 --
-Rani:  Well, I'm headed there myself for some restocking. #event:/Voice/Rani/Convo2_WellImHeaded
-Rani: Follow me!  #event:/Voice/Rani/Convo2_FollowMe
-*[Rani: That dump?]
-Rani: Oh, that dreary old place? #event:/Voice/Rani/Convo2_OhThatDreary
-Rani: Well, I'm headed there myself for some restocking. #event:/Voice/Rani/Convo2_WellImHeaded
-Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe
+Rani:  Well, I'm headed there myself for some restocking. #event:/Voice/Rani/Convo2_WellImHeaded cutscene
+Rani: Follow me!  #event:/Voice/Rani/Convo2_FollowMe cutscene
+*[Rani: That dump?] #cutscene
+Rani: Oh, that dreary old place? #event:/Voice/Rani/Convo2_OhThatDreary cutscene
+Rani: Well, I'm headed there myself for some restocking. #event:/Voice/Rani/Convo2_WellImHeaded cutscene
+Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe cutscene
 
 -
 -> DONE
@@ -59,7 +59,6 @@ Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe
 Rani: Ordinarily, I use this cabbage system to get to town. #event:/Voice/Rani/Convo2_OrdinarilyIUseMyCabbageSystem
 Rani: But I believe you are a bit too chunky for the pipes. #event:/Voice/Rani/Convo2_ButIThinkYoure
 Onwell: THE PIPES ARE TOO SMALL. #event:/Voice/Onwell/Convo2_ThePipesAreTooSmall
-Rani: Hah! Well, we'll find another way, surely. #event:/Voice/Rani/Convo2_HaWellWellFind
 
 -> DONE
 
