@@ -17,10 +17,8 @@ public class DialogueTriggerOptional : DialogueTrigger
     [SerializeField]
     private InteractableBy interactableBy = InteractableBy.Frog;
 
-    [SerializeField]
     private PlayerInputController robotInputController;
 
-    [SerializeField]
     private PlayerInputController frogInputController;
 
 
@@ -49,11 +47,19 @@ public class DialogueTriggerOptional : DialogueTrigger
     void Start()
     {
         Debug.Log("Interactable by: " + interactableBy.ToString());
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        // TODO: Fix player spawning
+        if(robotInputController == null || frogInputController == null)
+        {
+            robotInputController = GameManager.instance.playerOne.GetComponent<PlayerInputController>();
+            frogInputController = GameManager.instance.playerTwo.GetComponent<PlayerInputController>();
+        }
         if (!activated)
         {                                                   // TODO: Specific input?
             if ((interactableBy == InteractableBy.Frog || interactableBy == InteractableBy.Both) && frogInputController.PressedButton1)
@@ -81,7 +87,7 @@ public class DialogueTriggerOptional : DialogueTrigger
         {
             DialogueManager.instance.ActivateOptionalDialogueIndicator("robot");
         }
-        else if (other.transform.root.name.Equals("PlayerTwo"))
+        else if (other.transform.root.name.Equals("Frog"))
         {
             DialogueManager.instance.ActivateOptionalDialogueIndicator("frog");
         }

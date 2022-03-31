@@ -254,8 +254,8 @@ MonoBehaviour:
   upVelocity: 0.6
   downVelocity: -0.3
   maxDownVelocity: -100
-  speed: 6
-  animator: {fileID: 1523643312}
+  fastSpeed: 6
+  slowSpeed: 3
   modelTransform: {fileID: 3126378304687326180}
 --- !u!114 &1565090068082970225
 MonoBehaviour:
@@ -459,6 +459,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1534068173897769885}
     m_Modifications:
+    - target: {fileID: 642164325189659434, guid: 5c18d0710d1d19e4c983216062c61121, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694997539381756592, guid: 5c18d0710d1d19e4c983216062c61121, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -24.55
+      objectReference: {fileID: 0}
     - target: {fileID: 7922219292430131496, guid: 5c18d0710d1d19e4c983216062c61121, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -568,6 +576,10 @@ PrefabInstance:
       value: 0.8862745
       objectReference: {fileID: 0}
     - target: {fileID: 7922219294339838805, guid: 5c18d0710d1d19e4c983216062c61121, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8921603178350008542, guid: 5c18d0710d1d19e4c983216062c61121, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
