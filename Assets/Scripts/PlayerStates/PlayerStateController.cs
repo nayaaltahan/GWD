@@ -26,16 +26,18 @@ public class PlayerStateController : MonoBehaviour
 
     [Header("Walk Settings")]
     [Tooltip("Walking speed of the player.")]
-    public float speed = 10f;
+    public float fastSpeed = 6.0f;
 
-    [Header("Components")]
-    [SerializeField]
-    private Animator animator;
+    public float slowSpeed = 3.0f;
+
+    public float speed => isSlowed ? slowSpeed : fastSpeed;
+
 
     [Header("Model Settings")]
     [SerializeField]
     private Transform modelTransform;
 
+    private Animator animator;
 
     public PlayerInputController InputController { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
@@ -45,6 +47,8 @@ public class PlayerStateController : MonoBehaviour
     public bool IsGrounded => GroundedChecker.IsGrounded;
 
     private bool isFacingRight;
+    private bool isSlowed = false;
+    private bool canMove = true;
 
 
 
@@ -53,6 +57,7 @@ public class PlayerStateController : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody>();
         GroundedChecker = GetComponent<GroundedChecker>();
+        animator = modelTransform.GetComponent<Animator>();
         InputController = GetComponent<PlayerInputController>();
         SetCurrentState(IdleState);
         Debug.Log(currentState.GetType());
@@ -61,6 +66,9 @@ public class PlayerStateController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!canMove)
+            return;
+
         if (InputController.MoveDirection.x > 0 && !isFacingRight)
         {
             modelTransform.eulerAngles = new Vector3(0, 90, 0);
@@ -83,5 +91,21 @@ public class PlayerStateController : MonoBehaviour
     {
         currentState = state;
         currentState.EnterState(this);
+    }
+
+    public void SetIsWalkingSlow(bool val)
+    {
+        isSlowed = val;
+    }
+
+    public void SetCanMove(bool val)
+    {
+        canMove = val;
+        if (!canMove)
+        {
+            SetCurrentState(IdleState);
+            Rigidbody.velocity = Vector3.zero;
+            Animations.SetFloat("Blend", Math.Abs(Rigidbody.velocity.x));
+        }
     }
 }
