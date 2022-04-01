@@ -20,11 +20,6 @@ public class PlayerStateController : MonoBehaviour
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
 
-    [Header("Fall Settings")]
-    public float downVelocity = -0.2f;
-
-    public float maxDownVelocity = -100.0f;
-
     [Header("Walk Settings")]
     [Tooltip("Walking speed of the player.")]
     public float moveSpeed = 6;
