@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayGame();
         //TODO: Set this as spawn point
-        GetComponent<Rigidbody>().position = playerSpawn.position;
+        transform.position = playerSpawn.position;
         //Add differences here for players
     }
 }

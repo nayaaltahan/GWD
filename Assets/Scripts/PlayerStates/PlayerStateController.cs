@@ -22,7 +22,11 @@ public class PlayerStateController : MonoBehaviour
 
     [Header("Walk Settings")]
     [Tooltip("Walking speed of the player.")]
-    public float moveSpeed = 6;
+    public float fastSpeed = 6.0f;
+
+    public float slowSpeed = 3.0f;
+
+    public float moveSpeed => isSlowed ? slowSpeed : fastSpeed;
 
     [Header("Components")]
     [SerializeField]
@@ -31,8 +35,7 @@ public class PlayerStateController : MonoBehaviour
     [Header("Model Settings")]
     [SerializeField]
     private Transform modelTransform;
-
-
+    
     public PlayerInputController InputController { get; private set; }
     private MovementController MovementController { get; set; }
     public Animator Animations => animator;
@@ -41,12 +44,15 @@ public class PlayerStateController : MonoBehaviour
     float jumpVelocity;
     Vector3 velocity;
     float velocityXSmoothing;
-
+    
+    private bool isSlowed = false;
+    private bool canMove = true;
 
     // Start is called before the first frame update
     void Start()
     {
         MovementController = GetComponent<MovementController>();
+        animator = modelTransform.GetComponent<Animator>();
         InputController = GetComponent<PlayerInputController>();
         SetCurrentState(IdleState);
         
@@ -58,9 +64,13 @@ public class PlayerStateController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (MovementController.collisions.above || MovementController.collisions.below) {
+        if (MovementController.collisions.above || MovementController.collisions.below)
+        {
             velocity.y = 0;
         }
+
+        if (!canMove)
+            return;
 
         if (InputController.IsJumping && MovementController.collisions.below)
         {
@@ -85,5 +95,19 @@ public class PlayerStateController : MonoBehaviour
     {
         currentState = state;
         currentState.EnterState(this);
+    }
+
+    public void SetIsWalkingSlow(bool val)
+    {
+        isSlowed = val;
+    }
+
+    public void SetCanMove(bool val)
+    {
+        canMove = val;
+        if (!canMove)
+        {
+            SetCurrentState(IdleState);
+        }
     }
 }
