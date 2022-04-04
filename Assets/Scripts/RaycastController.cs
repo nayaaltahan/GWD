@@ -26,11 +26,11 @@ public class RaycastController : MonoBehaviour {
     public void UpdateRaycastOrigins() {
         Bounds bounds = collider.bounds;
         bounds.Expand (skinWidth * -2);
-		
-        raycastOrigins.bottomLeft = new Vector3 (bounds.min.x, bounds.min.y);
-        raycastOrigins.bottomRight = new Vector3 (bounds.max.x, bounds.min.y);
-        raycastOrigins.topLeft = new Vector3 (bounds.min.x, bounds.max.y);
-        raycastOrigins.topRight = new Vector3 (bounds.max.x, bounds.max.y);
+        var z = transform.position.z;
+        raycastOrigins.bottomLeft = new Vector3 (bounds.min.x, bounds.min.y, z);
+        raycastOrigins.bottomRight = new Vector3 (bounds.max.x, bounds.min.y, z);
+        raycastOrigins.topLeft = new Vector3 (bounds.min.x, bounds.max.y, z);
+        raycastOrigins.topRight = new Vector3 (bounds.max.x, bounds.max.y, z);
     }
 	
     public void CalculateRaySpacing() {

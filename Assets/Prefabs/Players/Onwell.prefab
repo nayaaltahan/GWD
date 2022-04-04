@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 593648582}
   - component: {fileID: 593648584}
   - component: {fileID: 1981721185}
-  - component: {fileID: 1565090068082970225}
   - component: {fileID: 2086471165371487224}
   - component: {fileID: 849133307440111437}
   - component: {fileID: 7125733667485703702}
+  - component: {fileID: 1715844511}
   m_Layer: 6
   m_Name: Onwell
   m_TagString: Player
@@ -240,21 +240,6 @@ MonoBehaviour:
   slowSpeed: 3
   animator: {fileID: 0}
   modelTransform: {fileID: 3126378304687326180}
---- !u!114 &1565090068082970225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5507386223301689629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c52c8fca7eb3cb47b78e8ca622312ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  childrenToActivate: []
-  playerSpawn: {fileID: 0}
-  playerNumber: 0
 --- !u!114 &2086471165371487224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +298,26 @@ CapsuleCollider:
   m_Height: 1.5653745
   m_Direction: 1
   m_Center: {x: 0, y: -0.28268725, z: 0}
+--- !u!114 &1715844511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507386223301689629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd5544ada83947f0ba576adda162680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 256
+  horizontalRayCount: 4
+  verticalRayCount: 4
+  horizontalRaySpacing: 0
+  verticalRaySpacing: 0
+  collider: {fileID: 0}
 --- !u!1001 &1545904204308613494
 PrefabInstance:
   m_ObjectHideFlags: 0

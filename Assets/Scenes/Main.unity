@@ -489,6 +489,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 593648584, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+      propertyPath: collisionMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715844511, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+      propertyPath: collisionMask.m_Bits
+      value: 257
+      objectReference: {fileID: 0}
+    - target: {fileID: 1981721185, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 676040763}
     - target: {fileID: 1534068173897769885, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -549,11 +561,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Onwell
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 593648584, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
 --- !u!1 &676040762 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5358783503842859071, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+  m_PrefabInstance: {fileID: 676040761}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &676040763 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1523643312, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
   m_PrefabInstance: {fileID: 676040761}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &819364576
@@ -964,7 +982,7 @@ MonoBehaviour:
   playerOne: {fileID: 1545909163}
   playerTwo: {fileID: 123160242}
   allowSinglePlayer: 1
-  playerType: 0
+  playerType: 1
 --- !u!43 &993659828
 Mesh:
   m_ObjectHideFlags: 0
@@ -1308,6 +1326,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5507386223301689629, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
   m_PrefabInstance: {fileID: 676040761}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1545909164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545909163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c52c8fca7eb3cb47b78e8ca622312ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childrenToActivate: []
+  playerSpawn: {fileID: 590596096}
+  playerNumber: 0
 --- !u!114 &1545909169 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 593648582, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
@@ -1453,7 +1486,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
+  m_UpdateMethod: 0
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
@@ -2219,5 +2252,9 @@ PrefabInstance:
       propertyPath: playerSpawn
       value: 
       objectReference: {fileID: 1637853820}
+    - target: {fileID: 8868738726889057812, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+      propertyPath: collisionMask.m_Bits
+      value: 257
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
