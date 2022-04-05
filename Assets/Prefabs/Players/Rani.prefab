@@ -520,21 +520,37 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -24.353027
       objectReference: {fileID: 0}
+    - target: {fileID: 3611556935339170145, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3611556935339170145, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3611556935712866470, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 438
+      objectReference: {fileID: 0}
+    - target: {fileID: 3611556935712866470, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 451.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3611556935712866470, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: 3611556935712866470, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -38.71997
+      value: -35.765
       objectReference: {fileID: 0}
     - target: {fileID: 3611556935712866470, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -24.353027
+      value: -25.346
       objectReference: {fileID: 0}
     - target: {fileID: 3611556935712866471, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3611556935932044140, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
       propertyPath: m_Pivot.x
@@ -624,9 +640,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chatbubbles
       objectReference: {fileID: 0}
+    - target: {fileID: 3611556935932044142, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6270944249315030485, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7737189511203978921, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 109
       objectReference: {fileID: 0}
     - target: {fileID: 7764656533171342566, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
       propertyPath: m_LocalPosition.z
