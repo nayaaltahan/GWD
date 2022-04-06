@@ -872,7 +872,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24226
+  m_Name: pb_Mesh133904
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1627,10 +1627,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8868738726889057812, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+      propertyPath: collisionMask.m_Bits
+      value: 257
+      objectReference: {fileID: 0}
     - target: {fileID: 8868738728139694013, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 1794748017}
+    - target: {fileID: 8868738728139694013, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+      propertyPath: timeToJumpApex
+      value: 0.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
 --- !u!1 &1794748016 stripped
@@ -1958,6 +1966,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1981721185, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+      propertyPath: timeToJumpApex
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 420665609994255158, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: m_IsActive
       value: 0

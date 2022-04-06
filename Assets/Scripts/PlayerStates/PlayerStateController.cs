@@ -55,14 +55,14 @@ public class PlayerStateController : MonoBehaviour
         animator = modelTransform.GetComponent<Animator>();
         InputController = GetComponent<PlayerInputController>();
         SetCurrentState(IdleState);
-        
-        gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
-        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        
+        gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
+        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         if (MovementController.collisions.above || MovementController.collisions.below)
         {
             velocity.y = 0;
