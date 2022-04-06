@@ -6,6 +6,7 @@ using System.Linq;
 using FMOD.Studio;
 using TMPro;
 using UnityEngine;
+using Random = System.Random;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -21,20 +22,17 @@ public class DialogueManager : MonoBehaviour
     private PlayerInputController frogInputController;
 
     [Header("Chat bubble settings")]
-
     [SerializeField]
     private GameObject[] robotSpeechBubbles;
 
     [SerializeField]
     private GameObject[] frogSpeechBubbles;
 
-
     [SerializeField]
     private GameObject frogSpeechIndicator;
 
     [SerializeField]
     private GameObject robotSpeechIndicator;
-
 
     [SerializeField]
     private GameObject frogOptionalChatIndicator;
@@ -64,19 +62,24 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private Color subtitleColorRobot = Color.white;
 
+    [SerializeField] 
+    private float playerChoiceTimeLimit = 6.0f;
 
-
+    
 
     /// Used to know when the player is making a choice so we can select the story knot
     private bool frogIsMakingChoice = false;
     /// Used to know when the player is making a choice so we can select the story knot
     private bool robotIsMakingChoice = false;
+    
     private bool frogIsSpeaking = false;
     private bool robotIsSpeaking = false;
     /// used to see when we should stop the conversation while making choices
     private bool hasMoreDialogue = false;
     /// Current spoken dialogue text
     private string currentText;
+
+    private float timeSpentMakingChoice = 0.0f;
 
     /// Current playing audio clip
     private FMOD.Studio.EventInstance currentAudioClip;
@@ -99,6 +102,18 @@ public class DialogueManager : MonoBehaviour
     {
         if (!robotIsMakingChoice && !frogIsMakingChoice)
             return;
+
+        timeSpentMakingChoice += Time.deltaTime;
+        
+        // Select third choice if timer runs out
+        if (timeSpentMakingChoice >= playerChoiceTimeLimit)
+        {
+            // TODO: Telemetry play didn't select a choice
+            // Random choice from current story current choices
+            var randomChoice = new Random().Next(0, currentStory.currentChoices.Count);
+            StartCoroutine(SelectChoice(randomChoice));
+        }
+
 
         if (robotIsMakingChoice && robotInputController.HasMadeChoice)
             StartCoroutine(SelectChoice(robotInputController.SelectedChoice));
@@ -330,6 +345,9 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentStory.currentChoices.Count <= index)
             yield return null;
+        // Reset timer
+        timeSpentMakingChoice = 0.0f;
+        
         var selectedChoice = currentStory.currentChoices[index].text;
         currentStory.ChooseChoiceIndex(index);
         // TODO: Play Effect audio?
@@ -376,4 +394,15 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("no optional dialogue indicators were set inactive");
     }
 
+    private void OnGUI()
+    {
+        if(Debug.isDebugBuild)
+            GUI.Box (new Rect (Screen.width - 100,20,100,50), timeSpentMakingChoice.ToString("F2"));
+    }
+
+    public void SetChoiceTimeLimit(float newLimit)
+    {
+        playerChoiceTimeLimit = newLimit;
+    }
+    
 }
