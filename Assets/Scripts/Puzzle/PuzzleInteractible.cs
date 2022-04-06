@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PuzzleInteractible : MonoBehaviour
 {
-    [SerializeField] private PuzzleObject puzzleObject;
-    [SerializeField] float yStart;
+    bool pressed = false;
+    bool released = false;
+    bool interacted = false;
     [SerializeField] float yEnd;
-    [SerializeField] float speed;
-    bool pressed;
-    bool interacted;
+    [SerializeField] float yStart;
+    [SerializeField] float moveSpeed;
+    [SerializeField] private PuzzleObject puzzleObject;
 
     public bool Pressed { get => pressed; set => pressed = value; }
     public bool Interacted { get => interacted; set => interacted = value; }
@@ -28,12 +29,20 @@ public class PuzzleInteractible : MonoBehaviour
     {
         if (pressed)
         {
+            if (released) 
+                released = false;
             if (transform.localPosition.y > yStart)
-                transform.localPosition -= Vector3.up * speed * Time.deltaTime;
+                transform.localPosition -= Vector3.up * moveSpeed * Time.deltaTime;
         }
         else
+        {
+            if (!released)
+            {
+                released = true;
+                puzzleObject.OnPlateRelease();
+            }
             if (transform.localPosition.y < yEnd)
-            transform.localPosition += Vector3.up * speed * Time.deltaTime;
-
+                transform.localPosition += Vector3.up * moveSpeed * Time.deltaTime;
+        }
     }
 }

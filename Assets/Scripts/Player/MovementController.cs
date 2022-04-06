@@ -100,7 +100,7 @@ public class MovementController : RaycastController
 			
 			if (Physics.Raycast(rayOrigin, Vector3.up * directionY, out var hit, rayLength, collisionMask)) {
 				Debug.DrawLine(transform.position, hit.point, Color.magenta, 5);
-				Debug.Log(hit.point);
+				//Debug.Log(hit.point);
 				velocity.y = (hit.distance - skinWidth) * directionY;
 				rayLength = hit.distance;
 

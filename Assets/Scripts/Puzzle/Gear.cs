@@ -11,4 +11,6 @@ public class Gear : PuzzleObject
     {
         transform.Rotate(axis, rotateSpeed * Time.deltaTime);
     }
+
+    public override void OnPlateRelease() { }
 }
