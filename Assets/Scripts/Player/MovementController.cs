@@ -91,7 +91,7 @@ public class MovementController : RaycastController
 	void VerticalCollisions(ref Vector3 velocity) {
 		float directionY = Mathf.Sign (velocity.y);
 		float rayLength = Mathf.Abs (velocity.y) + skinWidth;
-
+		Vector3 springVelocity = Vector3.zero;
 		for (int i = 0; i < verticalRayCount; i ++) {
 			Vector3 rayOrigin = (directionY == -1)?raycastOrigins.bottomLeft:raycastOrigins.topLeft;
 			rayOrigin += Vector3.right * (verticalRaySpacing * i + velocity.x);
@@ -130,8 +130,18 @@ public class MovementController : RaycastController
 						puzzleInteractible = null;
 					}
                 }
+
+				if(hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
+				{
+					springVelocity = hit.collider.GetComponent<Springboard>().GetVelocity();
+				}
 			}
 		}
+
+		if (springVelocity != Vector3.zero)
+        {
+			GetComponent<PlayerStateController>().SpringVelocity = springVelocity;
+        }
 
 		if (collisions.climbingSlope) {
 			float directionX = Mathf.Sign(velocity.x);
