@@ -396,8 +396,8 @@ public class DialogueManager : MonoBehaviour
 
     private void OnGUI()
     {
-        if(Debug.isDebugBuild)
-            GUI.Box (new Rect (Screen.width - 100,20,100,50), timeSpentMakingChoice.ToString("F2"));
+        // if(Debug.isDebugBuild)
+        //     GUI.Box (new Rect (Screen.width - 100,20,100,50), timeSpentMakingChoice.ToString("F2"));
     }
 
     public void SetChoiceTimeLimit(float newLimit)
