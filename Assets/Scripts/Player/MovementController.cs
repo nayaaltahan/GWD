@@ -81,15 +81,17 @@ public class MovementController : RaycastController
 
 					collisions.left = directionX == -1;
 					collisions.right = directionX == 1;
+
 				}
 			}
 		}
 	}
-	
+
+	PuzzleInteractible puzzleInteractible = null;
 	void VerticalCollisions(ref Vector3 velocity) {
 		float directionY = Mathf.Sign (velocity.y);
 		float rayLength = Mathf.Abs (velocity.y) + skinWidth;
-
+		Vector3 springVelocity = Vector3.zero;
 		for (int i = 0; i < verticalRayCount; i ++) {
 			Vector3 rayOrigin = (directionY == -1)?raycastOrigins.bottomLeft:raycastOrigins.topLeft;
 			rayOrigin += Vector3.right * (verticalRaySpacing * i + velocity.x);
@@ -107,8 +109,38 @@ public class MovementController : RaycastController
 
 				collisions.below = directionY == -1;
 				collisions.above = directionY == 1;
+
+				if (hit.collider.gameObject.GetComponent<PuzzleInteractible>())
+				{
+					if (!puzzleInteractible)
+					{
+						puzzleInteractible = hit.collider.gameObject.GetComponent<PuzzleInteractible>();
+						puzzleInteractible.Pressed = true;
+					}
+
+					if (puzzleInteractible == hit.collider.gameObject.GetComponent<PuzzleInteractible>())
+						puzzleInteractible.Interact();
+				}
+				else
+                {
+					if (puzzleInteractible)
+					{
+						puzzleInteractible.Pressed = false;
+						puzzleInteractible = null;
+					}
+                }
+
+				if(hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
+				{
+					springVelocity = hit.collider.GetComponent<Springboard>().GetVelocity();
+				}
 			}
 		}
+
+		if (springVelocity != Vector3.zero)
+        {
+			GetComponent<PlayerStateController>().SpringVelocity = springVelocity;
+        }
 
 		if (collisions.climbingSlope) {
 			float directionX = Mathf.Sign(velocity.x);
