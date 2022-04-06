@@ -13,7 +13,8 @@ public class PlayerStateController : MonoBehaviour
     public readonly FallState FallState = new FallState();
 
     [Header("Jump Settings")]
-    public float jumpHeight = 4;
+    public float maxJumpHeight = 5;
+    public float minJumpHeight = 3;
     public float timeToJumpApex = .4f;
     
     [Header("Turn Around Settings")]
@@ -50,7 +51,8 @@ public class PlayerStateController : MonoBehaviour
     public Animator Animations => animator;
     
     float gravity;
-    float jumpVelocity;
+    float maxJumpVelocity;
+    float minJumpVelocity;
     Vector3 velocity;
     float velocityXSmoothing;
     
@@ -65,8 +67,9 @@ public class PlayerStateController : MonoBehaviour
         InputController = GetComponent<PlayerInputController>();
         SetCurrentState(IdleState);
         
-        gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
-        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
+        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        minJumpHeight = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
     }
 
     // Update is called once per frame
@@ -129,7 +132,15 @@ public class PlayerStateController : MonoBehaviour
                 }
             }
             if (MovementController.collisions.below) {
-                velocity.y = jumpVelocity;
+                velocity.y = maxJumpVelocity;
+            }
+        }
+
+        if (InputController.ReleasedJump)
+        {
+            if (velocity.y > minJumpVelocity)
+            {
+                velocity.y = minJumpVelocity;
             }
         }
         
