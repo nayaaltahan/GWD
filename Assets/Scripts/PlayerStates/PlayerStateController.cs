@@ -19,6 +19,15 @@ public class PlayerStateController : MonoBehaviour
     [Header("Turn Around Settings")]
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
+    
+    [Header("Wall Jump")]
+    public Vector2 wallJumpClimb;
+    public Vector2 wallJumpOff;
+    public Vector2 wallLeap;
+
+    public float wallSlideSpeedMax = 3;
+    public float wallStickTime = .25f;
+    float timeToWallUnstick;
 
     [Header("Walk Settings")]
     [Tooltip("Walking speed of the player.")]
@@ -63,23 +72,67 @@ public class PlayerStateController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!canMove)
+            return;
+        
+        var input = InputController.MoveDirection;
+        int wallDirX = (MovementController.collisions.left) ? -1 : 1;
+
+        float targetVelocityX = input.x * moveSpeed;
+        velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, 
+            (MovementController.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
+
+        bool wallSliding = false;
+        if ((MovementController.collisions.left || MovementController.collisions.right) && !MovementController.collisions.below && velocity.y < 0) {
+            wallSliding = true;
+
+            if (velocity.y < -wallSlideSpeedMax) {
+                velocity.y = -wallSlideSpeedMax;
+            }
+
+            if (timeToWallUnstick > 0) {
+                velocityXSmoothing = 0;
+                velocity.x = 0;
+
+                if (input.x != wallDirX && input.x != 0) {
+                    timeToWallUnstick -= Time.deltaTime;
+                }
+                else {
+                    timeToWallUnstick = wallStickTime;
+                }
+            }
+            else {
+                timeToWallUnstick = wallStickTime;
+            }
+
+        }
+
         if (MovementController.collisions.above || MovementController.collisions.below)
         {
             velocity.y = 0;
         }
 
-        if (!canMove)
-            return;
-
-        if (InputController.IsJumping && MovementController.collisions.below)
+        if (InputController.IsJumping)
         {
-            velocity.y = jumpVelocity;
+            if (wallSliding) {
+                if (wallDirX == input.x) {
+                    velocity.x = -wallDirX * wallJumpClimb.x;
+                    velocity.y = wallJumpClimb.y;
+                }
+                else if (input.x == 0) {
+                    velocity.x = -wallDirX * wallJumpOff.x;
+                    velocity.y = wallJumpOff.y;
+                }
+                else {
+                    velocity.x = -wallDirX * wallLeap.x;
+                    velocity.y = wallLeap.y;
+                }
+            }
+            if (MovementController.collisions.below) {
+                velocity.y = jumpVelocity;
+            }
         }
         
-        var input = InputController.MoveDirection;
-        float targetVelocityX = input.x * moveSpeed;
-        velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, 
-            (MovementController.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
         velocity.y += gravity * Time.fixedDeltaTime;
         MovementController.Move (velocity * Time.fixedDeltaTime);
         currentState.FixedUpdate(this);

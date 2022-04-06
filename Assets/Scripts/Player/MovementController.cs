@@ -14,13 +14,17 @@ public class MovementController : RaycastController
 
 	public override void Start() {
 		base.Start ();
-
+		collisions.faceDir = 1;
 	}
 
 	public void Move(Vector3 velocity, bool standingOnPlatform = false) {
 		UpdateRaycastOrigins ();
 		collisions.Reset ();
 		collisions.velocityOld = velocity;
+		
+		if (velocity.x != 0) {
+			collisions.faceDir = (int)Mathf.Sign(velocity.x);
+		}
 
 		if (velocity.y < 0) {
 			DescendSlope(ref velocity);
@@ -40,8 +44,12 @@ public class MovementController : RaycastController
 	}
 
 	void HorizontalCollisions(ref Vector3 velocity) {
-		float directionX = Mathf.Sign (velocity.x);
+		float directionX = collisions.faceDir;
 		float rayLength = Mathf.Abs (velocity.x) + skinWidth;
+		
+		if (Mathf.Abs(velocity.x) < skinWidth) {
+			rayLength = 2*skinWidth;
+		}
 		
 		for (int i = 0; i < horizontalRayCount; i ++) {
 			Vector3 rayOrigin = (directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight;
@@ -50,6 +58,7 @@ public class MovementController : RaycastController
 			Debug.DrawRay(rayOrigin, Vector3.right * directionX * rayLength,Color.red);
 
 			if (Physics.Raycast(rayOrigin, Vector3.right * directionX, out var hit, rayLength, collisionMask)) {
+				Debug.DrawLine(transform.position, hit.point, Color.cyan, 5);
 
 				if (hit.distance == 0) {
 					continue;
@@ -141,9 +150,8 @@ public class MovementController : RaycastController
 	void DescendSlope(ref Vector3 velocity) {
 		float directionX = Mathf.Sign (velocity.x);
 		Vector3 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
-		RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector3.up, Mathf.Infinity, collisionMask);
 
-		if (hit) {
+		if (Physics.Raycast (rayOrigin, -Vector3.up, out var hit, Mathf.Infinity, collisionMask)) {
 			float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
 			if (slopeAngle != 0 && slopeAngle <= maxDescendAngle) {
 				if (Mathf.Sign(hit.normal.x) == directionX) {
@@ -172,6 +180,7 @@ public class MovementController : RaycastController
 		public bool descendingSlope;
 		public float slopeAngle, slopeAngleOld;
 		public Vector3 velocityOld;
+		public int faceDir;
 
 		public void Reset() {
 			above = below = false;
