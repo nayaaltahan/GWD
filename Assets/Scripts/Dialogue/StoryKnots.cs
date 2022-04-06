@@ -9,4 +9,5 @@ public enum StoryKnots
     Convo5,
     Convo6,
     Convo7,
+    Convo8,
 }
