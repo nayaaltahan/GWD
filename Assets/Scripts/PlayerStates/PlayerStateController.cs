@@ -56,7 +56,8 @@ public class PlayerStateController : MonoBehaviour
     float gravity;
     float maxJumpVelocity;
     float minJumpVelocity;
-    Vector3 velocity;
+    [HideInInspector]
+    public Vector3 velocity;
     float velocityXSmoothing;
     
     private bool isSlowed = false;
@@ -162,6 +163,23 @@ public class PlayerStateController : MonoBehaviour
         }
         velocity.y += gravity * Time.fixedDeltaTime;
         MovementController.Move (velocity * Time.fixedDeltaTime);
+        
+        if (velocity.x != 0 && (MovementController.collisions.above || MovementController.collisions.below))
+        {
+            SetCurrentState(WalkState);
+        }
+        else if (velocity.y < 0)
+        {
+            SetCurrentState(FallState);
+        }
+        else if (velocity.y > 0)
+        {
+            SetCurrentState(JumpState);
+        }
+        else if (velocity.y == 0 && velocity.x == 0)
+        {
+            SetCurrentState(IdleState);
+        }
         currentState.FixedUpdate(this);
     }
 
