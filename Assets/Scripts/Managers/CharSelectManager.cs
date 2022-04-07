@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.XR;
+using InputDevice = UnityEngine.XR.InputDevice;
 
 //TODO: This shouldn't be a singleton
 public class CharSelectManager : MonoBehaviour
@@ -46,6 +49,7 @@ public class CharSelectManager : MonoBehaviour
 
         p1multiplayerES = GameManager.instance.playerOne.GetComponent<MultiplayerEventSystem>();
         p2multiplayerES = GameManager.instance.playerTwo.GetComponent<MultiplayerEventSystem>();
+        
     }
 
     private void Update()
@@ -152,4 +156,38 @@ public class CharSelectManager : MonoBehaviour
             p2Buttons[i].transform.GetChild(0).gameObject.SetActive(temp);
         }
     }
+
+    private void OnGUI()
+    {
+        if (GameManager.instance.state == GameStates.CHARACTERSELECT)
+        {
+            var startX = Screen.width / 2;
+            var startY = Screen.height - 250;
+            var gamepads = Gamepad.all;
+
+            var playerInput1 = p1multiplayerES.GetComponent<PlayerInput>();
+            var playerInput2 = p2multiplayerES.GetComponent<PlayerInput>();
+            if (GUI.Button(new Rect(startX - 50, startY, 100, 50), "Use controllers"))
+            {
+                playerInput1.SwitchCurrentControlScheme("Gamepad", gamepads[0]);
+                playerInput2.SwitchCurrentControlScheme("Gamepad", gamepads[1]);
+            }
+
+            if (!playerInput1.currentControlScheme.Equals("Gamepad") ||
+                !playerInput2.currentControlScheme.Equals("Gamepad"))
+            {
+                var style = new GUIStyle();
+                style.fontSize = 30;
+                style.fontStyle = FontStyle.Bold;
+                style.normal.textColor = Color.red;
+                GUI.Label(new Rect(startX - 270, startY + 80, 200, 50), "MOUSE&KEYBOARD DETECTED", style);
+            }
+            else
+            {
+                GUI.Box(new Rect(startX - 100, startY + 80, 200, 50), "Connected controllers: " + gamepads.Count);
+
+            }
+        }
+    }
+
 }
