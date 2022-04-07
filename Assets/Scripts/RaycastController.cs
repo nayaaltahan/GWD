@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof (Collider))]
 public class RaycastController : MonoBehaviour {
 
     public LayerMask collisionMask;
 	
-    public const float skinWidth = .015f;
+    public const float skinWidth = .02f;
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
 

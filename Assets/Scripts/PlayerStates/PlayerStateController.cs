@@ -13,7 +13,8 @@ public class PlayerStateController : MonoBehaviour
     public readonly FallState FallState = new FallState();
 
     [Header("Jump Settings")]
-    public float jumpHeight = 4;
+    public float maxJumpHeight = 5;
+    public float minJumpHeight = 3;
     public float timeToJumpApex = .4f;
     public float coyoteTime = 0.3f;
     float coyoteTimer = 0f;
@@ -21,6 +22,15 @@ public class PlayerStateController : MonoBehaviour
     [Header("Turn Around Settings")]
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
+    
+    [Header("Wall Jump")]
+    public Vector2 wallJumpClimb;
+    public Vector2 wallJumpOff;
+    public Vector2 wallLeap;
+
+    public float wallSlideSpeedMax = 3;
+    public float wallStickTime = .25f;
+    float timeToWallUnstick;
 
     [Header("Walk Settings")]
     [Tooltip("Walking speed of the player.")]
@@ -41,14 +51,19 @@ public class PlayerStateController : MonoBehaviour
     public PlayerInputController InputController { get; private set; }
     private MovementController MovementController { get; set; }
     public Animator Animations => animator;
+
+    public Vector3 SpringVelocity { get => springVelocity; set => springVelocity = value; }
+
     
     float gravity;
-    float jumpVelocity;
+    float maxJumpVelocity;
+    float minJumpVelocity;
     Vector3 velocity;
     float velocityXSmoothing;
     
     private bool isSlowed = false;
     private bool canMove = true;
+    private Vector3 springVelocity = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -58,20 +73,75 @@ public class PlayerStateController : MonoBehaviour
         InputController = GetComponent<PlayerInputController>();
         SetCurrentState(IdleState);
         
-        gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
-        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
+        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!canMove)
+            return;
+        
+        var input = InputController.MoveDirection;
+        int wallDirX = (MovementController.collisions.left) ? -1 : 1;
+
+        float targetVelocityX = input.x * moveSpeed;
+        velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, 
+            (MovementController.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
+
+        bool wallSliding = false;
+        if ((MovementController.collisions.left || MovementController.collisions.right) && !MovementController.collisions.below && velocity.y < 0) {
+            wallSliding = true;
+
+            if (velocity.y < -wallSlideSpeedMax) {
+                velocity.y = -wallSlideSpeedMax;
+            }
+
+            if (timeToWallUnstick > 0) {
+                velocityXSmoothing = 0;
+                velocity.x = 0;
+
+                if (input.x != wallDirX && input.x != 0) {
+                    timeToWallUnstick -= Time.deltaTime;
+                }
+                else {
+                    timeToWallUnstick = wallStickTime;
+                }
+            }
+            else {
+                timeToWallUnstick = wallStickTime;
+            }
+
+        }
+        
         if (MovementController.collisions.above || MovementController.collisions.below)
         {
             velocity.y = 0;
         }
 
-        if (!canMove)
-            return;
+        if (InputController.IsJumping)
+        {
+            if (wallSliding) {
+                if (wallDirX == input.x) {
+                    velocity.x = -wallDirX * wallJumpClimb.x;
+                    velocity.y = wallJumpClimb.y;
+                }
+                else if (input.x == 0) {
+                    velocity.x = -wallDirX * wallJumpOff.x;
+                    velocity.y = wallJumpOff.y;
+                }
+                else {
+                    velocity.x = -wallDirX * wallLeap.x;
+                    velocity.y = wallLeap.y;
+                }
+            }
+            if (MovementController.collisions.below) {
+                velocity.y = maxJumpVelocity;
+            }
+        }
 
         if (coyoteTimer > 0f)
         coyoteTimer -= Time.fixedDeltaTime;
@@ -85,17 +155,25 @@ public class PlayerStateController : MonoBehaviour
         {
             velocity.y = jumpVelocity;
             coyoteTimer = -1f;
+        if (InputController.ReleasedJump)
+        {
+            if (velocity.y > minJumpVelocity)
+            {
+                velocity.y = minJumpVelocity;
+            }
+        }
+
+        if(springVelocity != Vector3.zero)
+        {
+            velocity = springVelocity;
+            springVelocity = Vector3.zero;
         }
         
-        var input = InputController.MoveDirection;
         if (input.x * transform.localScale.x < 0)
         {
             transform.localScale = transform.localScale.WithX(-1*transform.localScale.x);
             
         }
-        float targetVelocityX = input.x * moveSpeed;
-        velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, 
-            (MovementController.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
         velocity.y += gravity * Time.fixedDeltaTime;
         MovementController.Move (velocity * Time.fixedDeltaTime);
         currentState.FixedUpdate(this);

@@ -235,7 +235,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 4
-  timeToJumpApex: 0.4
+  timeToJumpApex: 0.6
+  wallJumpClimb: {x: 5, y: 10}
+  wallJumpOff: {x: 20, y: 20}
+  wallLeap: {x: 20, y: 20}
+  wallSlideSpeedMax: 2
+  wallStickTime: 0.8
   fastSpeed: 6
   slowSpeed: 3
   animator: {fileID: 1523643312}
@@ -320,6 +325,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1534068173897769885}
     m_Modifications:
+    - target: {fileID: 1198703563920323136, guid: 209a1f185aedca2489cb2ea4c8cefc71, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7170906349988004276, guid: 209a1f185aedca2489cb2ea4c8cefc71, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483281955716311615, guid: 209a1f185aedca2489cb2ea4c8cefc71, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8483281956733691128, guid: 209a1f185aedca2489cb2ea4c8cefc71, type: 3}
       propertyPath: m_Name
       value: RobotChatbubbles
@@ -411,6 +428,14 @@ PrefabInstance:
     - target: {fileID: 8483281956733691131, guid: 209a1f185aedca2489cb2ea4c8cefc71, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483281957051418418, guid: 209a1f185aedca2489cb2ea4c8cefc71, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483281957565233218, guid: 209a1f185aedca2489cb2ea4c8cefc71, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 209a1f185aedca2489cb2ea4c8cefc71, type: 3}
