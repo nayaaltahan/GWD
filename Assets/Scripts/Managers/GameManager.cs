@@ -49,10 +49,12 @@ public class GameManager : MonoBehaviour
                 playerOne.SetActive(false);
             }
             SwitchState(GameStates.SINGLEPLAYGAME);
+            
         }
         else
         {
-            state = GameStates.CHARACTERSELECT;
+            SwitchState(GameStates.CHARACTERSELECT);
+
         }
     }
 
@@ -64,21 +66,27 @@ public class GameManager : MonoBehaviour
 
     public void SwitchState(GameStates state)
     {
+        Debug.Log(state.ToString());
         switch (state)
         {
             case GameStates.MAINMENU:
+                this.state = GameStates.MAINMENU;
                 break;
             case GameStates.CHARACTERSELECT:
+                this.state = GameStates.CHARACTERSELECT;
                 break;
             case GameStates.PAUSEMENU:
+                this.state = GameStates.PAUSEMENU;
                 break;
             case GameStates.PLAYGAME:
+                this.state = GameStates.PLAYGAME;
                 UIManager.instance.TurnCharSelectUIOn(false);
                 CameraManager.instance.AddPlayerToTargetGroup(playerOne);
                 CameraManager.instance.AddPlayerToTargetGroup(playerTwo);
                 //Turn off any U.I. or objects that don't belong to PlayGame State
                 break;
             case GameStates.SINGLEPLAYGAME:
+                this.state = GameStates.SINGLEPLAYGAME;
                 UIManager.instance.TurnCharSelectUIOn(false);
                 //Turn off any U.I. or objects that don't belong to PlayGame State
                 break;

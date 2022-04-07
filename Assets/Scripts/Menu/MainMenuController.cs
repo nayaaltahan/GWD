@@ -16,6 +16,7 @@ public class MainMenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.instance.SwitchState(GameStates.MAINMENU);
 
     }
 
@@ -50,11 +51,13 @@ public class MainMenuController : MonoBehaviour
         {
             if(GUI.Button(new Rect(Screen.width / 2.0f, Screen.height / 2 - 100, 200, 100), "Play A"))
             {
+                GameManager.instance.SwitchState(GameStates.CHARACTERSELECT);
                 LoadLevelWithTimeLimit();
                 showMainMenu = false;
             }
             else if (GUI.Button(new Rect(Screen.width / 2.0f, Screen.height / 2 + 200, 200, 100), "Play B"))
             {
+                GameManager.instance.SwitchState(GameStates.CHARACTERSELECT);
                 LoadLevelWithoutTimeLimit();
                 showMainMenu = false;
             }
