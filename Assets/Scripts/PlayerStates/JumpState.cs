@@ -15,29 +15,6 @@ public class JumpState : PlayerState
     {
         base.FixedUpdate(player);
 
-        if (player.InputController.IsJumping) // jumped and is holding
-        {
-            // TODO add up velocity            
-
-        }
-        // if falling
-        else if (false) // falling
-        {
-            // enter falling state
-            player.SetCurrentState(new FallState());
-        }
-        else if (true) // landed // todo add isgrounded
-        {
-            if (player.InputController.MoveDirection == Vector3.zero)
-            {
-                player.SetCurrentState(new IdleState());
-            }
-            else
-            {
-                player.SetCurrentState(new WalkState());
-            }
-        }
-        
         //forgiveness mechanics
         // maybe rework the jump? 
         // Climbing
