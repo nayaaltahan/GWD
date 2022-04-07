@@ -39,14 +39,17 @@ public class PlayerStateController : MonoBehaviour
     public PlayerInputController InputController { get; private set; }
     private MovementController MovementController { get; set; }
     public Animator Animations => animator;
-    
+
+    public Vector3 SpringVelocity { get => springVelocity; set => springVelocity = value; }
+
     float gravity;
     float jumpVelocity;
-    Vector3 velocity;
+    private Vector3 velocity;
     float velocityXSmoothing;
     
     private bool isSlowed = false;
     private bool canMove = true;
+    private Vector3 springVelocity = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -55,14 +58,14 @@ public class PlayerStateController : MonoBehaviour
         animator = modelTransform.GetComponent<Animator>();
         InputController = GetComponent<PlayerInputController>();
         SetCurrentState(IdleState);
-        
-        gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
-        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        
+        gravity = -(2 * jumpHeight) / Mathf.Pow (timeToJumpApex, 2);
+        jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         if (MovementController.collisions.above || MovementController.collisions.below)
         {
             velocity.y = 0;
@@ -74,6 +77,12 @@ public class PlayerStateController : MonoBehaviour
         if (InputController.IsJumping && MovementController.collisions.below)
         {
             velocity.y = jumpVelocity;
+        }
+
+        if(springVelocity != Vector3.zero)
+        {
+            velocity = springVelocity;
+            springVelocity = Vector3.zero;
         }
         
         var input = InputController.MoveDirection;
