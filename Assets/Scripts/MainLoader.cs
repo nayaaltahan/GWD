@@ -8,7 +8,7 @@ public class MainLoader : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (!SceneManager.GetSceneByName("Main").isLoaded)
+        if (!SceneManager.GetSceneByName("Main").isLoaded && !SceneManager.GetSceneByName("MainABTest").isLoaded)
             SceneManager.LoadScene("Main", LoadSceneMode.Additive);
     }
 

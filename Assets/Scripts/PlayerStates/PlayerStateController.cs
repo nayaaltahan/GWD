@@ -49,6 +49,9 @@ public class PlayerStateController : MonoBehaviour
     public PlayerInputController InputController { get; private set; }
     private MovementController MovementController { get; set; }
     public Animator Animations => animator;
+
+    public Vector3 SpringVelocity { get => springVelocity; set => springVelocity = value; }
+
     
     float gravity;
     float maxJumpVelocity;
@@ -58,6 +61,7 @@ public class PlayerStateController : MonoBehaviour
     
     private bool isSlowed = false;
     private bool canMove = true;
+    private Vector3 springVelocity = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +73,8 @@ public class PlayerStateController : MonoBehaviour
         
         gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-        minJumpHeight = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+        
     }
 
     // Update is called once per frame
@@ -109,7 +114,7 @@ public class PlayerStateController : MonoBehaviour
             }
 
         }
-
+        
         if (MovementController.collisions.above || MovementController.collisions.below)
         {
             velocity.y = 0;
@@ -143,10 +148,31 @@ public class PlayerStateController : MonoBehaviour
                 velocity.y = minJumpVelocity;
             }
         }
+
+        if(springVelocity != Vector3.zero)
+        {
+            velocity = springVelocity;
+            springVelocity = Vector3.zero;
+        }
         
+        if (input.x * transform.localScale.x < 0)
+        {
+            transform.localScale = transform.localScale.WithX(-1*transform.localScale.x);
+            
+        }
         velocity.y += gravity * Time.fixedDeltaTime;
         MovementController.Move (velocity * Time.fixedDeltaTime);
         currentState.FixedUpdate(this);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.transform.CompareTag("Pushable"))
+        {
+            var force = InputController.MoveDirection * 1000;
+            Debug.Log($"Pushing object {other.gameObject.name} with force {force}");
+            other.GetComponentInParent<Rigidbody>()?.AddForce(force);
+        }
     }
 
     private void OnCollisionEnter(Collision other)
