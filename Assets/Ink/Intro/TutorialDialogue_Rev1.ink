@@ -60,6 +60,29 @@ Rani: Even so.
 
 -> DONE
 
+===TalkingAboutTheSwamp===
+*[Onwell: This is "nature", right?]
+    Onwell: FROG-PERSON. IS IT TRUE THAT ALL THIS GROWS?
+    Onwell: THIS EARTH STRETCHING TOWARDS SKY.
+        **[Rani: Yes!]
+            Rani: Indeed! 
+        **[Rani: How dumb are you?]
+            Rani: Surely you cannot know so little, sir?
+            Rani: You can fly, yet you have never seen a tree?
+            Onwell: I KNOW ONLY WHAT I HAVE SEEN.
+            Onweel: BEFORE TODAY, TREES WERE ONLY POETRY.
+    
+*[Onwell: You look weak.]
+    Onwell: HOW DO YOU SURVIVE HERE, FROG-PERSON?
+    Onwell: YOUR FRAME IS SOFT AND FRAIL.
+    Onwell: WHY DOES THE WORLD NOT BREAK YOU?
+*[Onwell: Are we there yet?]
+    Onwell: FROG-PERSON. IS THIS THE GREAT WILLOW?
+    Rani: Oh, no. This is just a regular Cypress I believe. A big one though.
+    
+-
+-> DONE
+
 ===OnwellBuildInfo===
 Rani: Does your kind grow from seeds, or are you born? #event:/Voice/Rani/Convo2_DoesYourKind cutscene
 Onwell: BUILT, I AM TOLD. IN AGES PAST. #event:/Voice/Onwell/Convo2_BuiltIAmTold cutscene
