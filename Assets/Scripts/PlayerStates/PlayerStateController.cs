@@ -85,6 +85,16 @@ public class PlayerStateController : MonoBehaviour
         currentState.FixedUpdate(this);
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.transform.CompareTag("Pushable"))
+        {
+            var force = InputController.MoveDirection * 1000;
+            Debug.Log($"Pushing object {other.gameObject.name} with force {force}");
+            other.GetComponentInParent<Rigidbody>().AddForce(force);
+        }
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         currentState.OnCollisionEnter(this, other);

@@ -49,7 +49,7 @@ public class MovementController : RaycastController
 
 			Debug.DrawRay(rayOrigin, Vector3.right * directionX * rayLength,Color.red);
 
-			if (Physics.Raycast(rayOrigin, Vector3.right * directionX, out var hit, rayLength, collisionMask)) {
+			if (Physics.Raycast(rayOrigin, Vector3.right * directionX, out var hit, rayLength, collisionMask, QueryTriggerInteraction.Ignore)) {
 
 				if (hit.distance == 0) {
 					continue;
@@ -96,7 +96,7 @@ public class MovementController : RaycastController
 
 			Debug.DrawRay(rayOrigin, Vector3.up * directionY * rayLength,Color.red);
 			
-			if (Physics.Raycast(rayOrigin, Vector3.up * directionY, out var hit, rayLength, collisionMask)) {
+			if (Physics.Raycast(rayOrigin, Vector3.up * directionY, out var hit, rayLength, collisionMask, QueryTriggerInteraction.Ignore)) {
 				Debug.DrawLine(transform.position, hit.point, Color.magenta, 5);
 				velocity.y = (hit.distance - skinWidth) * directionY;
 				rayLength = hit.distance;
@@ -115,7 +115,7 @@ public class MovementController : RaycastController
 			rayLength = Mathf.Abs(velocity.x) + skinWidth;
 			Vector3 rayOrigin = ((directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight) + Vector3.up * velocity.y;
 
-			if (Physics.Raycast(rayOrigin,Vector3.right * directionX, out var hit, rayLength,collisionMask)) {
+			if (Physics.Raycast(rayOrigin,Vector3.right * directionX, out var hit, rayLength,collisionMask, QueryTriggerInteraction.Ignore)) {
 				float slopeAngle = Vector3.Angle(hit.normal,Vector3.up);
 				if (slopeAngle != collisions.slopeAngle) {
 					velocity.x = (hit.distance - skinWidth) * directionX;
