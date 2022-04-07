@@ -16,6 +16,8 @@ public class PlayerStateController : MonoBehaviour
     public float maxJumpHeight = 5;
     public float minJumpHeight = 3;
     public float timeToJumpApex = .4f;
+    public float coyoteTime = 0.3f;
+    float coyoteTimer = 0f;
     
     [Header("Turn Around Settings")]
     float accelerationTimeAirborne = .2f;
@@ -121,6 +123,14 @@ public class PlayerStateController : MonoBehaviour
             velocity.y = 0;
         }
 
+        if (coyoteTimer > 0f)
+            coyoteTimer -= Time.fixedDeltaTime;
+
+        if (MovementController.collisions.below)
+        {
+            coyoteTimer = 0.3f;
+        }
+
         if (InputController.IsJumping)
         {
             if (wallSliding) {
@@ -137,8 +147,10 @@ public class PlayerStateController : MonoBehaviour
                     velocity.y = wallLeap.y;
                 }
             }
-            if (MovementController.collisions.below) {
+            if (coyoteTimer > 0) {
                 velocity.y = maxJumpVelocity;
+                coyoteTimer = -1f;
+
             }
         }
 
