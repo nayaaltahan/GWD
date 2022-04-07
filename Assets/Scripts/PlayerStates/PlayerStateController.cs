@@ -15,6 +15,8 @@ public class PlayerStateController : MonoBehaviour
     [Header("Jump Settings")]
     public float jumpHeight = 4;
     public float timeToJumpApex = .4f;
+    public float coyoteTime = 0.3f;
+    float coyoteTimer = 0f;
     
     [Header("Turn Around Settings")]
     float accelerationTimeAirborne = .2f;
@@ -71,9 +73,18 @@ public class PlayerStateController : MonoBehaviour
         if (!canMove)
             return;
 
-        if (InputController.IsJumping && MovementController.collisions.below)
+        if (coyoteTimer > 0f)
+        coyoteTimer -= Time.fixedDeltaTime;
+
+        if (MovementController.collisions.below)
+        {
+            coyoteTimer = 0.3f;
+        }
+
+        if (InputController.IsJumping && coyoteTimer > 0)
         {
             velocity.y = jumpVelocity;
+            coyoteTimer = -1f;
         }
         
         var input = InputController.MoveDirection;

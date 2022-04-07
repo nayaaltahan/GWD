@@ -36,40 +36,45 @@ Onwell gets up.
 -
 *[Rani: Your kin?] #cutscene
 Rani: More characters like you around, then? Interesting. #event:/Voice/Rani/Convo2_MoreCharactersLike cutscene
-Rani: Does your kind grow from seeds, or are you born? #event:/Voice/Rani/Convo2_DoesYourKind cutscene
-Onwell: BUILT, I AM TOLD. IN AGES PAST. #event:/Voice/Onwell/Convo2_BuiltIAmTold cutscene
-**[Rani: Bullshit! You can't build a person!]  #cutscene
-    Rani: Preposterous! A thing like yourself cannot be built.  #event:/Voice/Rani/Convo2_Preposterous cutscene
-    Rani: I would know! #event:/Voice/Rani/Convo2_IWouldKnow cutscene
-**[Rani: Cool!] #cutscene
-    Rani: Intriguing... #event:/Voice/Rani/Convo2_Intriguing cutscene
---
-Rani:  Well, I'm headed there myself for some restocking. #event:/Voice/Rani/Convo2_WellImHeaded cutscene
-Rani: Follow me!  #event:/Voice/Rani/Convo2_FollowMe cutscene
 *[Rani: That dump?] #cutscene
 Rani: Oh, that dreary old place? #event:/Voice/Rani/Convo2_OhThatDreary cutscene
+-
 Rani: Well, I'm headed there myself for some restocking. #event:/Voice/Rani/Convo2_WellImHeaded cutscene
 Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe cutscene
 
 -
 -> DONE
 
-===Convo2===
+===CabbageSystem===
 
 Rani: Ordinarily, I use this cabbage system to get to town. #event:/Voice/Rani/Convo2_OrdinarilyIUseMyCabbageSystem
 Rani: But I believe you are a bit too chunky for the pipes. #event:/Voice/Rani/Convo2_ButIThinkYoure
 Onwell: THE PIPES ARE TOO SMALL. #event:/Voice/Onwell/Convo2_ThePipesAreTooSmall
+-> DONE
+
+===Water===
+Rani: Watch out for the water here.
+Rani: It looks cleaner than it is.
+Onwell: IT LOOKS DISGUSTING.
+Rani: Even so. 
 
 -> DONE
 
-===Convo3===
+===OnwellBuildInfo===
+Rani: Does your kind grow from seeds, or are you born? #event:/Voice/Rani/Convo2_DoesYourKind cutscene
+Onwell: BUILT, I AM TOLD. IN AGES PAST. #event:/Voice/Onwell/Convo2_BuiltIAmTold cutscene
+Rani: Preposterous! A thing like yourself cannot be built.  #event:/Voice/Rani/Convo2_Preposterous cutscene
+Rani: I would know! #event:/Voice/Rani/Convo2_IWouldKnow cutscene
+    -
+->DONE
+
+===FirstJump===
 Rani: Just a few jumps here. #event:/Voice/Rani/Convo3_JustAFewJumps
 Rani: I trust you have the strength for it? #event:/Voice/Rani/Convo3_ITrustYouHave
 Onwell: I AM STRENGTH. #event:/Voice/Onwell/Convo3_IAmStrength
-
 -> DONE
 
-===Convo4===
+===FirstSpringboard===
 Onwell: I HAVE SPOTTED SOMETHING STRANGE. #event:/Voice/Onwell/Convo4_IHaveSpottedSomethingStrange
 Rani: Ah, yes! You've spotted some of my finest work. #event:/Voice/Rani/Convo4_AhYesYouveSpotted
 Rani: Try it out, it's perfectly safe.  #event:/Voice/Rani/Convo4_TryItOut
@@ -77,7 +82,7 @@ Rani: Though it is calibrated for cabbages... #event:/Voice/Rani/Convo4_ThoughIt
 -
 
 ->DONE
-===Convo5===
+===Junkyard===
 
 The two start moving through Rani's swamp garden, which is filled with scrap metal and half-baked prototypes.
 
@@ -98,7 +103,7 @@ The two start moving through Rani's swamp garden, which is filled with scrap met
         Rani: Some of them even work! #event:/Voice/Rani/Convo4_SomeOfThemEvenWork
 -
 ->DONE
-===Convo6===
+===FirstPush===
 There's a great piece of scrap metal in the way.
 
 * [Rani: Help!]
@@ -107,7 +112,7 @@ There's a great piece of scrap metal in the way.
 -
 ->DONE
 
-===Convo7===
+===Machine===
 Rani stops in front of her homespun metal-compactor.
 
 Rani: Ah. This may pose a problem for you.  #event:/Voice/Rani/Convo6_AhThisMayPoseAProblem
@@ -120,7 +125,7 @@ Onwell: AN INCONVENIENCE. #event:/Voice/Onwell/Convo6_AnInconvenience
 -
 ->DONE
     
-===Convo8===
+===SeeOtherRobots===
 The two travelers reach the top of a hill. Suddenly, three robots flying in formation tear across the sky in front of them.
 -
 * [Rani: Your friends?]
