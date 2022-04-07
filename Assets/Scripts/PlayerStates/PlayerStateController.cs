@@ -77,6 +77,11 @@ public class PlayerStateController : MonoBehaviour
         }
         
         var input = InputController.MoveDirection;
+        if (input.x * transform.localScale.x < 0)
+        {
+            transform.localScale = transform.localScale.WithX(-1*transform.localScale.x);
+            
+        }
         float targetVelocityX = input.x * moveSpeed;
         velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, 
             (MovementController.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
