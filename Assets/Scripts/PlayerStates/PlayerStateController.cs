@@ -122,6 +122,14 @@ public class PlayerStateController : MonoBehaviour
             velocity.y = 0;
         }
 
+        if (coyoteTimer > 0f)
+            coyoteTimer -= Time.fixedDeltaTime;
+
+        if (MovementController.collisions.below)
+        {
+            coyoteTimer = 0.3f;
+        }
+
         if (InputController.IsJumping)
         {
             if (wallSliding) {
@@ -138,23 +146,13 @@ public class PlayerStateController : MonoBehaviour
                     velocity.y = wallLeap.y;
                 }
             }
-            if (MovementController.collisions.below) {
+            if (coyoteTimer > 0) {
                 velocity.y = maxJumpVelocity;
+                coyoteTimer = -1f;
+
             }
         }
 
-        if (coyoteTimer > 0f)
-        coyoteTimer -= Time.fixedDeltaTime;
-
-        if (MovementController.collisions.below)
-        {
-            coyoteTimer = 0.3f;
-        }
-
-        if (InputController.IsJumping && coyoteTimer > 0)
-        {
-            velocity.y = jumpVelocity;
-            coyoteTimer = -1f;
         if (InputController.ReleasedJump)
         {
             if (velocity.y > minJumpVelocity)
