@@ -91,7 +91,7 @@ public class PlayerStateController : MonoBehaviour
         {
             var force = InputController.MoveDirection * 1000;
             Debug.Log($"Pushing object {other.gameObject.name} with force {force}");
-            other.GetComponentInParent<Rigidbody>().AddForce(force);
+            other.GetComponentInParent<Rigidbody>()?.AddForce(force);
         }
     }
 
