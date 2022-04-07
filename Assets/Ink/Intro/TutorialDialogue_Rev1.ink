@@ -65,20 +65,38 @@ Rani: Even so.
     Onwell: FROG-PERSON. IS IT TRUE THAT ALL THIS GROWS?
     Onwell: THIS EARTH STRETCHING TOWARDS SKY.
         **[Rani: Yes!]
-            Rani: Indeed! 
+            Rani: Indeed! These trees have grown for hundreds of years.
+            Rani: This big one here, maybe a thousand.
+            Onwell: SOME OF MY KIN ARE AS OLD.
+            Onwell: THOUGH THEY REMEMBER LITTLE OF THAT TIME NOW.
         **[Rani: How dumb are you?]
             Rani: Surely you cannot know so little, sir?
-            Rani: You can fly, yet you have never seen a tree?
-            Onwell: I KNOW ONLY WHAT I HAVE SEEN.
+            Rani: You can fly, yet you are oblivious to the concept of trees?
+            Onwell: I KNOW JUST WHAT I HAVE SEEN.
             Onweel: BEFORE TODAY, TREES WERE ONLY POETRY.
     
 *[Onwell: You look weak.]
-    Onwell: HOW DO YOU SURVIVE HERE, FROG-PERSON?
+    Onwell: HOW DO YOU SURVIVE, FROG-PERSON?
     Onwell: YOUR FRAME IS SOFT AND FRAIL.
     Onwell: WHY DOES THE WORLD NOT BREAK YOU?
+        **[Rani: I'm too smart to die]
+            Rani: There's more to it than strength.
+            Rani: You can avoid most dangers if you have a good head on your shoulders
+            Rani: And I have possibly the best head. 
+        **[Rani: I'm squishy!]
+            Rani: We'll, I'm a frog, sir. I'm quite elastic. 
+            Rani: I can take quite a fall with a build like this.
+        **[Rani: I have guns]
+            Rani: Well, I have mechanical means of protection you know.
+            Rani: Rather like yourself, actually.
 *[Onwell: Are we there yet?]
     Onwell: FROG-PERSON. IS THIS THE GREAT WILLOW?
     Rani: Oh, no. This is just a regular Cypress I believe. A big one though.
+    Rani: The Great Willow is a good way off still.
+        **[Rani: What's the rush, anyway?]
+        
+        **[Rani: The Great Willow sucks]
+
     
 -
 -> DONE
