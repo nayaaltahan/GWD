@@ -347,9 +347,9 @@ public class DialogueManager : MonoBehaviour
         foreach (var speechBubble in speechBubbles)
         {
             if(idx == index && index != -1)
-                StartCoroutine(speechBubble.GetComponent<ChatBubbleController>().DisableSpeechBubble(1.0f, 1f));
+                StartCoroutine(speechBubble.GetComponent<ChatBubbleController>().DisableSpeechBubble(1.0f, 1.0f));
             else
-                StartCoroutine(speechBubble.GetComponent<ChatBubbleController>().DisableSpeechBubble(1.0f));
+                StartCoroutine(speechBubble.GetComponent<ChatBubbleController>().DisableSpeechBubble(1.2f));
             idx++;
 
         }
