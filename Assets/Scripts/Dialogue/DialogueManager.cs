@@ -21,7 +21,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private PlayerInputController frogInputController;
 
-    [Header("Chat bubble settings")]
+    [Header("Chat bubble settings")] [SerializeField]
+    private float timeBetweenChatbubbles = 0.3f;
+    
     [SerializeField]
     private GameObject[] robotSpeechBubbles;
 
@@ -39,6 +41,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField]
     private GameObject robotOptionalChatIndicator;
+    
 
     [Header("Audio Settings")]
     [SerializeField]
@@ -142,7 +145,7 @@ public class DialogueManager : MonoBehaviour
         DisplayChoices();
     }
 
-    private void DisplayChoices()
+    private void DisplayChoices(int index = -1)
     {
         var player = currentStory.currentChoices[0].text.ToLower().Contains("onwell:");
 
@@ -150,15 +153,15 @@ public class DialogueManager : MonoBehaviour
         {
             robotIsMakingChoice = true;
             frogIsMakingChoice = false;
-            HideSpeechBubbles(frogSpeechBubbles);
-            ActivateSpeechBubbles(robotSpeechBubbles);
+            // HideSpeechBubbles(frogSpeechBubbles, index);
+            StartCoroutine(ActivateSpeechBubbles(robotSpeechBubbles));
         }
         else
         {
             robotIsMakingChoice = false;
             frogIsMakingChoice = true;
-            HideSpeechBubbles(robotSpeechBubbles);
-            ActivateSpeechBubbles(frogSpeechBubbles);
+            // HideSpeechBubbles(robotSpeechBubbles, index);
+            StartCoroutine(ActivateSpeechBubbles(frogSpeechBubbles));
         }
     }
 
@@ -255,9 +258,15 @@ public class DialogueManager : MonoBehaviour
     private void ActivateSpeechIndicator()
     {
         if (robotIsSpeaking)
+        {
             robotSpeechIndicator.SetActive(true);
+            StartCoroutine(robotSpeechIndicator.GetComponent<ChatBubbleController>().ActivateSpeechBubble(0.5f));
+        }
         else
+        {
             frogSpeechIndicator.SetActive(true);
+            StartCoroutine(frogSpeechIndicator.GetComponent<ChatBubbleController>().ActivateSpeechBubble(0.5f));
+        }
     }
 
     private void ParseDialogueType()
@@ -316,21 +325,34 @@ public class DialogueManager : MonoBehaviour
             return Color.white;
     }
 
-    private void ActivateSpeechBubbles(GameObject[] speechBubbles)
+    private IEnumerator ActivateSpeechBubbles(GameObject[] speechBubbles)
     {
         var index = 0;
         foreach (var choice in currentStory.currentChoices)
         {
-            speechBubbles[index].SetActive(true);                                               // TODO: Don't do this
-            speechBubbles[index].GetComponentInChildren<TextMeshProUGUI>().text = choice.text.Replace("Onwell: ", "").Replace("Rani: ", "");
+            var current = speechBubbles[index];
+            current.SetActive(true);                                               // TODO: Don't do this
+            current.GetComponentInChildren<TextMeshProUGUI>().text = choice.text.Replace("Onwell: ", "").Replace("Rani: ", "");
+            StartCoroutine(current.GetComponent<ChatBubbleController>().ActivateSpeechBubble(1.0f));
+
             index++;
+            yield return new WaitForSeconds(timeBetweenChatbubbles);
         }
     }
 
-    private void HideSpeechBubbles(GameObject[] speechBubbles)
+    private void HideSpeechBubbles(GameObject[] speechBubbles, int index = -1)
     {
+        var idx = 0;
+        Debug.Log("Index: " + index);
         foreach (var speechBubble in speechBubbles)
-            speechBubble.SetActive(false);
+        {
+            if(idx == index && index != -1)
+                StartCoroutine(speechBubble.GetComponent<ChatBubbleController>().DisableSpeechBubble(1.0f, 1.0f));
+            else
+                StartCoroutine(speechBubble.GetComponent<ChatBubbleController>().DisableSpeechBubble(1.2f));
+            idx++;
+
+        }
     }
 
     private void HideAllSpeechBubbles()
@@ -345,13 +367,20 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentStory.currentChoices.Count <= index)
             yield return null;
+        
+
         // Reset timer
         timeSpentMakingChoice = 0.0f;
         
         var selectedChoice = currentStory.currentChoices[index].text;
         currentStory.ChooseChoiceIndex(index);
+
+        if(frogIsMakingChoice)
+            HideSpeechBubbles(frogSpeechBubbles, index);
+        else if (robotIsMakingChoice)
+            HideSpeechBubbles(robotSpeechBubbles, index);
         // TODO: Play Effect audio?
-        HideAllSpeechBubbles();
+        // HideAllSpeechBubbles();
         var color = robotIsMakingChoice ? subtitleColorRobot : subtitleColorFrog;
         robotIsMakingChoice = false;
         frogIsMakingChoice = false;
@@ -361,7 +390,7 @@ public class DialogueManager : MonoBehaviour
 
         if (hasMoreDialogue)
         {
-            DisplayChoices();
+            DisplayChoices(index);
         }
         else
         {

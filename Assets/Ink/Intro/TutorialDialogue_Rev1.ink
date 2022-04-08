@@ -4,7 +4,7 @@ Dust settles around the robot, as Rani puts down her tools and walks over.
 
 -> TalkingUnderTheTree
 
-===Convo1===
+===Intro===
 This is the first cutscene #cutscene
 
 *[Rani: Are you okay?] #cutscene
@@ -103,7 +103,7 @@ Rani: Even so.
             Rani: No understanding of big ideas.
             Rani: So I moved here to work.
             Onwell: BECAUSE THIS SWAMP UNDERSTANDS IDEAS.
-            Rani: Well yes. Or, it doesn't NOT understand them.
+            Rani: Well yes. Or, rather, it does not fail to understand them.
                         
     
 -
@@ -160,6 +160,20 @@ There's a great piece of scrap metal in the way.
     Rani: A good push should do it. #event:/Voice/Rani/Convo5_AGoodPushShouldDoIt
 -
 ->DONE
+
+
+===CabbagePile===
+
+Rani: So this is where...
+Rani: Great sprout! 
+Onwell: A MALFUNCTION.
+Rani: Two weeks production - ruined!
+Rani:  We have to get this sorted, I can't leave it like this.
+Onwell: MAYBE TURN IT OFF AND ON AGAIN?
+Rani: Worth a shot.
+Rani: We'll have to get to the main relay. 
+
+-> DONE
 
 ===Machine===
 Rani stops in front of her homespun metal-compactor.
