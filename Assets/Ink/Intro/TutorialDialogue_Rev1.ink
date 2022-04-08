@@ -2,9 +2,9 @@ It would have been a lovely day in the swamp, save for the fact that a robot has
 
 Dust settles around the robot, as Rani puts down her tools and walks over.
 
--> Convo1
+-> TalkingUnderTheTree
 
-===Convo1===
+===Intro===
 This is the first cutscene #cutscene
 
 *[Rani: Are you okay?] #cutscene
@@ -36,40 +36,94 @@ Onwell gets up.
 -
 *[Rani: Your kin?] #cutscene
 Rani: More characters like you around, then? Interesting. #event:/Voice/Rani/Convo2_MoreCharactersLike cutscene
-Rani: Does your kind grow from seeds, or are you born? #event:/Voice/Rani/Convo2_DoesYourKind cutscene
-Onwell: BUILT, I AM TOLD. IN AGES PAST. #event:/Voice/Onwell/Convo2_BuiltIAmTold cutscene
-**[Rani: Bullshit! You can't build a person!]  #cutscene
-    Rani: Preposterous! A thing like yourself cannot be built.  #event:/Voice/Rani/Convo2_Preposterous cutscene
-    Rani: I would know! #event:/Voice/Rani/Convo2_IWouldKnow cutscene
-**[Rani: Cool!] #cutscene
-    Rani: Intriguing... #event:/Voice/Rani/Convo2_Intriguing cutscene
---
-Rani:  Well, I'm headed there myself for some restocking. #event:/Voice/Rani/Convo2_WellImHeaded cutscene
-Rani: Follow me!  #event:/Voice/Rani/Convo2_FollowMe cutscene
 *[Rani: That dump?] #cutscene
 Rani: Oh, that dreary old place? #event:/Voice/Rani/Convo2_OhThatDreary cutscene
+-
 Rani: Well, I'm headed there myself for some restocking. #event:/Voice/Rani/Convo2_WellImHeaded cutscene
 Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe cutscene
 
 -
 -> DONE
 
-===Convo2===
+===CabbageSystem===
 
 Rani: Ordinarily, I use this cabbage system to get to town. #event:/Voice/Rani/Convo2_OrdinarilyIUseMyCabbageSystem
 Rani: But I believe you are a bit too chunky for the pipes. #event:/Voice/Rani/Convo2_ButIThinkYoure
 Onwell: THE PIPES ARE TOO SMALL. #event:/Voice/Onwell/Convo2_ThePipesAreTooSmall
+-> DONE
+
+===Water===
+Rani: Watch out for the water here.
+Rani: It looks cleaner than it is.
+Onwell: IT LOOKS DISGUSTING.
+Rani: Even so. 
 
 -> DONE
 
-===Convo3===
+===TalkingUnderTheTree===
+*[Onwell: This is "nature", right?]
+    Onwell: FROG-PERSON. IS IT TRUE THAT ALL THIS GROWS?
+    Onwell: THIS EARTH STRETCHING TOWARDS SKY.
+        **[Rani: Yes!]
+            Rani: Indeed! These trees have grown for hundreds of years.
+            Rani: This big one here, maybe a thousand.
+            Onwell: SOME OF MY KIN ARE AS OLD.
+            Onwell: THOUGH THEIR MEMORY HAS FADED.
+        **[Rani: How dumb are you?]
+            Rani: Surely you cannot know so little, sir?
+            Rani: You can fly, yet you are oblivious to the concept of trees?
+            Onwell: I KNOW JUST WHAT I HAVE SEEN.
+            Onweel: BEFORE TODAY, TREES WERE ONLY POETRY.
+    
+*[Onwell: You look weak.]
+    Onwell: HOW DO YOU SURVIVE, FROG-PERSON?
+    Onwell: YOUR FRAME IS SOFT AND FRAIL.
+    Onwell: WHY DOES THE WORLD NOT BREAK YOU?
+        **[Rani: I'm too smart to die]
+            Rani: There's more to it than strength.
+            Rani: You can avoid most dangers if you have a good head on your shoulders
+            Rani: And I have possibly the best head. 
+        **[Rani: I'm squishy!]
+            Rani: We'll, I'm a frog, sir. I'm quite elastic. 
+            Rani: I can take quite a fall with a build like this.
+        **[Rani: I have guns]
+            Rani: Well, I have mechanical means of protection you know.
+            Rani: Rather like yourself, actually.
+*[Onwell: Are we there yet?]
+    Onwell: FROG-PERSON. IS THIS THE GREAT WILLOW?
+    Rani: Oh, no. This is just a regular Cypress I believe. A big one though.
+    Rani: The Great Willow is a good way off still.
+        **[Rani: What's the rush?]
+            Rani: You're not in a hurry, surely?
+            Onwell: I HAVE WASTED TIME FALLING.
+            Onwell: BUT TIME WILL PASS. SO BE IT.
+        **[Rani: I lived there once]
+            Rani: I used to have a home in the Willow.
+            Rani: But they are small-minded there.
+            Rani: No understanding of big ideas.
+            Rani: So I moved here to work.
+            Onwell: BECAUSE THIS SWAMP UNDERSTANDS IDEAS.
+            Rani: Well yes. Or, rather, it does not fail to understand them.
+                        
+    
+-
+-> DONE
+
+===OnwellBuildInfo===
+Rani: Does your kind grow from seeds, or are you born? #event:/Voice/Rani/Convo2_DoesYourKind cutscene
+Onwell: BUILT, I AM TOLD. IN AGES PAST. #event:/Voice/Onwell/Convo2_BuiltIAmTold cutscene
+Rani: Preposterous! A thing like yourself cannot be built.  #event:/Voice/Rani/Convo2_Preposterous cutscene
+Rani: I would know! #event:/Voice/Rani/Convo2_IWouldKnow cutscene
+    -
+->DONE
+
+===FirstJump===
 Rani: Just a few jumps here. #event:/Voice/Rani/Convo3_JustAFewJumps
 Rani: I trust you have the strength for it? #event:/Voice/Rani/Convo3_ITrustYouHave
 Onwell: I AM STRENGTH. #event:/Voice/Onwell/Convo3_IAmStrength
-
 -> DONE
 
-===Convo4===
+===FirstSpringboard===
 Onwell: I HAVE SPOTTED SOMETHING STRANGE. #event:/Voice/Onwell/Convo4_IHaveSpottedSomethingStrange
 Rani: Ah, yes! You've spotted some of my finest work. #event:/Voice/Rani/Convo4_AhYesYouveSpotted
 Rani: Try it out, it's perfectly safe.  #event:/Voice/Rani/Convo4_TryItOut
@@ -77,7 +131,7 @@ Rani: Though it is calibrated for cabbages... #event:/Voice/Rani/Convo4_ThoughIt
 -
 
 ->DONE
-===Convo5===
+===Junkyard===
 
 The two start moving through Rani's swamp garden, which is filled with scrap metal and half-baked prototypes.
 
@@ -98,7 +152,7 @@ The two start moving through Rani's swamp garden, which is filled with scrap met
         Rani: Some of them even work! #event:/Voice/Rani/Convo4_SomeOfThemEvenWork
 -
 ->DONE
-===Convo6===
+===FirstPush===
 There's a great piece of scrap metal in the way.
 
 * [Rani: Help!]
@@ -107,7 +161,21 @@ There's a great piece of scrap metal in the way.
 -
 ->DONE
 
-===Convo7===
+
+===CabbagePile===
+
+Rani: So this is where...
+Rani: Great sprout! 
+Onwell: A MALFUNCTION.
+Rani: Two weeks production - ruined!
+Rani:  We have to get this sorted, I can't leave it like this.
+Onwell: MAYBE TURN IT OFF AND ON AGAIN?
+Rani: Worth a shot.
+Rani: We'll have to get to the main relay. 
+
+-> DONE
+
+===Machine===
 Rani stops in front of her homespun metal-compactor.
 
 Rani: Ah. This may pose a problem for you.  #event:/Voice/Rani/Convo6_AhThisMayPoseAProblem
@@ -120,7 +188,7 @@ Onwell: AN INCONVENIENCE. #event:/Voice/Onwell/Convo6_AnInconvenience
 -
 ->DONE
     
-===Convo8===
+===SeeOtherRobots===
 The two travelers reach the top of a hill. Suddenly, three robots flying in formation tear across the sky in front of them.
 -
 * [Rani: Your friends?]
