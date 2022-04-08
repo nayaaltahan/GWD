@@ -66,6 +66,8 @@ public class PlayerStateController : MonoBehaviour
     private bool canMove = true;
     private Vector3 springVelocity = Vector3.zero;
 
+    private bool isFacingRight = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -168,11 +170,17 @@ public class PlayerStateController : MonoBehaviour
             springVelocity = Vector3.zero;
         }
         
-        if (input.x * transform.localScale.x < 0)
+        if (InputController.MoveDirection.x > 0 && !isFacingRight)
         {
-            transform.localScale = transform.localScale.WithX(-1*transform.localScale.x);
-            
+            modelTransform.eulerAngles = new Vector3(0, 90, 0);
+            isFacingRight = true;
         }
+        else if (InputController.MoveDirection.x < 0 && isFacingRight)
+        {
+            modelTransform.eulerAngles = new Vector3(0, -90, 0);
+            isFacingRight = false;
+        }
+        
         velocity.y += gravity * Time.fixedDeltaTime;
         MovementController.Move (velocity * Time.fixedDeltaTime);
         
