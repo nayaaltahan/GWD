@@ -37,6 +37,7 @@ public class PlayerStateController : MonoBehaviour
     public float fastSpeed = 6.0f;
 
     public float slowSpeed = 3.0f;
+    private bool isForceAdded = false;
 
     public float moveSpeed => isSlowed ? slowSpeed : fastSpeed;
 
@@ -87,11 +88,18 @@ public class PlayerStateController : MonoBehaviour
     {
         if (!canMove)
             return;
-        
+
         var input = InputController.MoveDirection;
+
         int wallDirX = (MovementController.collisions.left) ? -1 : 1;
 
-        float targetVelocityX = input.x * moveSpeed;
+        float targetVelocityX = 0.0f;
+
+        if (!isForceAdded)
+            targetVelocityX = input.x * moveSpeed;
+        else
+            targetVelocityX = springVelocity.x + (input.x * moveSpeed);
+        
         velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, 
             (MovementController.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
 
@@ -131,6 +139,7 @@ public class PlayerStateController : MonoBehaviour
         if (MovementController.collisions.below)
         {
             coyoteTimer = 0.3f;
+            isForceAdded = false;
         }
 
         if (InputController.IsJumping)
@@ -156,7 +165,7 @@ public class PlayerStateController : MonoBehaviour
             }
         }
 
-        if (InputController.ReleasedJump)
+        if (InputController.ReleasedJump && !isForceAdded)
         {
             if (velocity.y > minJumpVelocity)
             {
@@ -164,10 +173,11 @@ public class PlayerStateController : MonoBehaviour
             }
         }
 
-        if(springVelocity != Vector3.zero)
+        if (isForceAdded = false)
         {
+            Debug.Log("WEIRDOO");
             velocity = springVelocity;
-            springVelocity = Vector3.zero;
+            isForceAdded = true;
         }
         
         if (InputController.MoveDirection.x > 0 && !isFacingRight)
