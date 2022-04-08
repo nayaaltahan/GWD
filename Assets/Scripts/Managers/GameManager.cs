@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Services.Core;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public enum GameStates { MAINMENU, CHARACTERSELECT, PAUSEMENU, PLAYGAME, SINGLEPLAYGAME }
 internal enum PlayerType
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviour
             Debug.LogError("More than one Game Manager in the scene");
         
         await UnityServices.InitializeAsync();
+        
+        DialogueTracking.SendTrackingEvent(DialogueTrackingEvent.SessionStarted);
 
         if (allowSinglePlayer)
         {
