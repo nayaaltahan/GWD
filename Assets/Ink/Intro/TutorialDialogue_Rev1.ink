@@ -161,6 +161,20 @@ There's a great piece of scrap metal in the way.
 -
 ->DONE
 
+
+===CabbagePile===
+
+Rani: So this is where...
+Rani: Great sprout! 
+Onwell: A MALFUNCTION.
+Rani: Two weeks production - ruined!
+Rani:  We have to get this sorted, I can't leave it like this.
+Onwell: MAYBE TURN IT OFF AND ON AGAIN?
+Rani: Worth a shot.
+Rani: We'll have to get to the main relay. 
+
+-> DONE
+
 ===Machine===
 Rani stops in front of her homespun metal-compactor.
 
