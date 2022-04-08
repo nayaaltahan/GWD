@@ -2,7 +2,7 @@ It would have been a lovely day in the swamp, save for the fact that a robot has
 
 Dust settles around the robot, as Rani puts down her tools and walks over.
 
--> Convo1
+-> TalkingUnderTheTree
 
 ===Convo1===
 This is the first cutscene #cutscene
@@ -60,7 +60,7 @@ Rani: Even so.
 
 -> DONE
 
-===TalkingAboutTheSwamp===
+===TalkingUnderTheTree===
 *[Onwell: This is "nature", right?]
     Onwell: FROG-PERSON. IS IT TRUE THAT ALL THIS GROWS?
     Onwell: THIS EARTH STRETCHING TOWARDS SKY.
@@ -68,7 +68,7 @@ Rani: Even so.
             Rani: Indeed! These trees have grown for hundreds of years.
             Rani: This big one here, maybe a thousand.
             Onwell: SOME OF MY KIN ARE AS OLD.
-            Onwell: THOUGH THEY REMEMBER LITTLE OF THAT TIME NOW.
+            Onwell: THOUGH THEIR MEMORY HAS FADED.
         **[Rani: How dumb are you?]
             Rani: Surely you cannot know so little, sir?
             Rani: You can fly, yet you are oblivious to the concept of trees?
@@ -93,10 +93,18 @@ Rani: Even so.
     Onwell: FROG-PERSON. IS THIS THE GREAT WILLOW?
     Rani: Oh, no. This is just a regular Cypress I believe. A big one though.
     Rani: The Great Willow is a good way off still.
-        **[Rani: What's the rush, anyway?]
-        
-        **[Rani: The Great Willow sucks]
-
+        **[Rani: What's the rush?]
+            Rani: You're not in a hurry, surely?
+            Onwell: I HAVE WASTED TIME FALLING.
+            Onwell: BUT TIME WILL PASS. SO BE IT.
+        **[Rani: I lived there once]
+            Rani: I used to have a home in the Willow.
+            Rani: But they are small-minded there.
+            Rani: No understanding of big ideas.
+            Rani: So I moved here to work.
+            Onwell: BECAUSE THIS SWAMP UNDERSTANDS IDEAS.
+            Rani: Well yes. Or, it doesn't NOT understand them.
+                        
     
 -
 -> DONE
