@@ -54,6 +54,7 @@ public class ChatBubbleController : MonoBehaviour
     {
         // image.color = fadedColor;
         canvasGroup.alpha = 0;
+        image.rectTransform.localScale = Vector3.zero;
 
     }
 }
