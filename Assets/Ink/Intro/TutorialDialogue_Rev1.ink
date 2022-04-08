@@ -4,7 +4,7 @@ Dust settles around the robot, as Rani puts down her tools and walks over.
 
 -> TalkingUnderTheTree
 
-===Convo1===
+===Intro===
 This is the first cutscene #cutscene
 
 *[Rani: Are you okay?] #cutscene
@@ -103,7 +103,7 @@ Rani: Even so.
             Rani: No understanding of big ideas.
             Rani: So I moved here to work.
             Onwell: BECAUSE THIS SWAMP UNDERSTANDS IDEAS.
-            Rani: Well yes. Or, it doesn't NOT understand them.
+            Rani: Well yes. Or, rather, it does not fail to understand them.
                         
     
 -
