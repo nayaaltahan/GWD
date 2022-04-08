@@ -121,7 +121,7 @@ public class MovementController : RaycastController
 
 				if (hit.collider.gameObject.GetComponent<PuzzleInteractible>())
 				{
-					if (!puzzleInteractible)
+					if (puzzleInteractible != hit.collider.gameObject.GetComponent<PuzzleInteractible>())
 					{
 						puzzleInteractible = hit.collider.gameObject.GetComponent<PuzzleInteractible>();
 						puzzleInteractible.Pressed = true;
@@ -141,6 +141,7 @@ public class MovementController : RaycastController
 
 				if(hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
 				{
+					Debug.Log("SPRINGBOARD" + hit.collider.GetComponent<Springboard>().GetVelocity());
 					springVelocity = hit.collider.GetComponent<Springboard>().GetVelocity();
 				}
 			}
