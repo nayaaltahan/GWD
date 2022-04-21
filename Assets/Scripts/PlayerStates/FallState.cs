@@ -6,9 +6,7 @@ public class FallState : PlayerState
 {
     public override void EnterState(PlayerStateController player)
     {
-        player.Animations.SetBool(Constants.FALLING, true);
-        player.Animations.SetBool(Constants.JUMPING, false);
-        Debug.Log("FALL STATE");
+
     }
 
     public override void FixedUpdate(PlayerStateController player)

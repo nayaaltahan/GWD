@@ -225,7 +225,7 @@ public class PlayerStateController : MonoBehaviour
         
         if (MovementController.collisions.below)
         {
-            Debug.Log("Collisions below, finish falling/jumping animations");
+            //Debug.Log("Collisions below, finish falling/jumping animations");
             //Animations.SetLayerWeight(1,1);
             Animations.SetBool(Constants.FALLING, false);
             Animations.SetBool(Constants.JUMPING, false);
@@ -235,34 +235,34 @@ public class PlayerStateController : MonoBehaviour
         currentState.FixedUpdate(this);
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.transform.CompareTag(Constants.PUSHABLE))
-        {
-            if (InputController.MoveDirection.x != 0)
-            {
-                Animations.SetBool(Constants.PUSHING, true);
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.transform.CompareTag(Constants.PUSHABLE))
+    //    {
+    //        if (InputController.MoveDirection.x != 0)
+    //        {
+    //            Animations.SetBool(Constants.PUSHING, true);
 
-            }
-            else
-            {
-                Animations.SetBool(Constants.PUSHING, false);
+    //        }
+    //        else
+    //        {
+    //            Animations.SetBool(Constants.PUSHING, false);
 
-            }
-            var force = InputController.MoveDirection * 1000;
-            Debug.Log($"Pushing object {other.gameObject.name} with force {force}");
-            other.GetComponentInParent<Rigidbody>()?.AddForce(force);
+    //        }
+    //        var force = InputController.MoveDirection * 1000;
+    //        Debug.Log($"Pushing object {other.gameObject.name} with force {force}");
+    //        other.GetComponentInParent<Rigidbody>()?.AddForce(force);
             
-        }
-    }
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.CompareTag(Constants.PUSHABLE))
-        {
-            Animations.SetBool(Constants.PUSHING, false);
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.transform.CompareTag(Constants.PUSHABLE))
+    //    {
+    //        Animations.SetBool(Constants.PUSHING, false);
+    //    }
+    //}
 
     private void OnCollisionEnter(Collision other)
     {
