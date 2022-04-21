@@ -6,7 +6,10 @@ public class IdleState : PlayerState
 {
     public override void EnterState(PlayerStateController player)
     {
-        
+        player.Animations.SetBool(Constants.FALLING, false);
+        player.Animations.SetBool(Constants.JUMPING, false);
+        Debug.Log("IDLE STATE");
+
     }
 
     public override void FixedUpdate(PlayerStateController player)

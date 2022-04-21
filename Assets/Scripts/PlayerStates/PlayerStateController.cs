@@ -80,15 +80,17 @@ public class PlayerStateController : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         SetCurrentState(IdleState);
         
-        gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
-        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+
         
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+
         if (!canMove)
             return;
 
@@ -208,6 +210,7 @@ public class PlayerStateController : MonoBehaviour
         else if (velocity.y > 0)
         {
             SetCurrentState(JumpState);
+
         }
         else if (velocity.y == 0 && velocity.x == 0)
         {
@@ -217,15 +220,15 @@ public class PlayerStateController : MonoBehaviour
         // animations
         if (!MovementController.collisions.below)
         {
-            Animations.SetBool("Falling", true);
+            Animations.SetBool(Constants.FALLING, true);
         }
         
         if (MovementController.collisions.below)
         {
             Debug.Log("Collisions below, finish falling/jumping animations");
             //Animations.SetLayerWeight(1,1);
-            Animations.SetBool("Falling", false);
-            Animations.SetBool("Jumping", false);
+            Animations.SetBool(Constants.FALLING, false);
+            Animations.SetBool(Constants.JUMPING, false);
             //Animations.SetLayerWeight(1,0);
 
         }
@@ -234,16 +237,16 @@ public class PlayerStateController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.CompareTag("Pushable"))
+        if (other.transform.CompareTag(Constants.PUSHABLE))
         {
             if (InputController.MoveDirection.x != 0)
             {
-                Animations.SetBool("Pushing", true);
+                Animations.SetBool(Constants.PUSHING, true);
 
             }
             else
             {
-                Animations.SetBool("Pushing", false);
+                Animations.SetBool(Constants.PUSHING, false);
 
             }
             var force = InputController.MoveDirection * 1000;
@@ -255,9 +258,9 @@ public class PlayerStateController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.CompareTag("Pushable"))
+        if (other.transform.CompareTag(Constants.PUSHABLE))
         {
-            Animations.SetBool("Pushing", false);
+            Animations.SetBool(Constants.PUSHING, false);
         }
     }
 
