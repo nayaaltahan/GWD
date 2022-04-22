@@ -601,8 +601,8 @@ Transform:
   - {fileID: 3705120494965224238}
   - {fileID: 3705120495532698001}
   - {fileID: 3705120495569403943}
-  - {fileID: 1985551273370908016}
   - {fileID: 9113356665983154465}
+  - {fileID: 1985551273370908016}
   - {fileID: 4222839064108623510}
   - {fileID: 1746237791952922156}
   - {fileID: 8579318394098875867}
@@ -6957,7 +6957,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2529467538141542004, guid: 3eaba68a1fccae54da31bf4ce157f3d9, type: 3}
       propertyPath: m_Name
-      value: PressurePlateFrame (1)
+      value: R1PressurePlateFrame
       objectReference: {fileID: 0}
     - target: {fileID: 2529467538141542006, guid: 3eaba68a1fccae54da31bf4ce157f3d9, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6965,7 +6965,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 67f8579ab5f91af43b30ab7f84786440, type: 2}
     - target: {fileID: 2529467538141542008, guid: 3eaba68a1fccae54da31bf4ce157f3d9, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2529467538141542008, guid: 3eaba68a1fccae54da31bf4ce157f3d9, type: 3}
       propertyPath: m_LocalScale.z
@@ -7043,7 +7043,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2529467538141542004, guid: 3eaba68a1fccae54da31bf4ce157f3d9, type: 3}
       propertyPath: m_Name
-      value: PressurePlateFrame (2)
+      value: 'L1PressurePlateFrame '
       objectReference: {fileID: 0}
     - target: {fileID: 2529467538141542006, guid: 3eaba68a1fccae54da31bf4ce157f3d9, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -7051,7 +7051,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 67f8579ab5f91af43b30ab7f84786440, type: 2}
     - target: {fileID: 2529467538141542008, guid: 3eaba68a1fccae54da31bf4ce157f3d9, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 2529467538141542008, guid: 3eaba68a1fccae54da31bf4ce157f3d9, type: 3}
       propertyPath: m_LocalScale.z
