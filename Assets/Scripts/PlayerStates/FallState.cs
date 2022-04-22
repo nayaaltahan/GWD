@@ -12,11 +12,11 @@ public class FallState : PlayerState
     public override void FixedUpdate(PlayerStateController player)
     {
         base.FixedUpdate(player);
-        if (!player.IsGrounded) // falling
+        if (true) // falling //todo add grounded
         {
             ClampFallSpeed(player);
         }
-        else if (player.IsGrounded) // landed
+        else if (true) // landed // todo add isgrounded
         {
             if (player.InputController.MoveDirection == Vector3.zero)
             {
@@ -31,8 +31,8 @@ public class FallState : PlayerState
 
     private static void ClampFallSpeed(PlayerStateController player)
     {
-        var clamped = Mathf.Clamp(player.Rigidbody.velocity.y + player.downVelocity, player.maxDownVelocity, 100);
-        player.Rigidbody.velocity = (player.InputController.MoveDirection * (player.speed)).WithY(clamped);
+        //var clamped = Mathf.Clamp(player.Rigidbody.velocity.y + player.downVelocity, player.maxDownVelocity, 100);
+        //player.Rigidbody.velocity = (player.InputController.MoveDirection * (player.speed)).WithY(clamped);
     }
 
     public override void OnCollisionEnter(PlayerStateController player, Collision collision)

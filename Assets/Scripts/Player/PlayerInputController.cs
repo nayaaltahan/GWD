@@ -14,11 +14,13 @@ public class PlayerInputController : MonoBehaviour
     public bool PressedButton1 => pressedButton1;
 
     private bool pressedButton1, pressedButton2, pressedButton3;
+    public bool ReleasedJump { get; private set; } = false;
 
 
     public void Jump(InputAction.CallbackContext value)
     {
         IsJumping = value.ReadValueAsButton();
+        ReleasedJump = value.canceled;
     }
 
     public void SetMove(InputAction.CallbackContext value)
