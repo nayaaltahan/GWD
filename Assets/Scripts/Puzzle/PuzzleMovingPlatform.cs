@@ -23,14 +23,6 @@ public class PuzzleMovingPlatform : PuzzleObject
         startPosition = transform.position;
     }
 
-    //private void Update()
-    //{
-    //    if(moving)
-    //    {
-    //        transform.position += direction * pressedDuration; 
-    //    }    
-    //}
-
     public override void Interact()
     {
         moving = true;
@@ -44,21 +36,23 @@ public class PuzzleMovingPlatform : PuzzleObject
         moving = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.tag != Constants.PLAYER)
-            return;
-
-        collision.gameObject.transform.parent = transform;
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag != Constants.PLAYER)
+        if (other.gameObject.tag != Constants.PLAYER)
             return;
 
         Debug.Log("Exit");
-        collision.gameObject.transform.parent = null;
+
+        other.gameObject.transform.parent = null;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag != Constants.PLAYER)
+            return;
+
+        Debug.Log("ENTER");
+        other.gameObject.transform.parent = transform;
     }
 
     IEnumerator MovePlatform(Vector3 _target, float velocity)
