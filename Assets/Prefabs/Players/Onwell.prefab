@@ -340,6 +340,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8483281956733691012, guid: 209a1f185aedca2489cb2ea4c8cefc71, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8483281956733691128, guid: 209a1f185aedca2489cb2ea4c8cefc71, type: 3}
       propertyPath: m_Name
       value: RobotChatbubbles

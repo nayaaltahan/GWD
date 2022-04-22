@@ -68,7 +68,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] 
     private float playerChoiceTimeLimit = 6.0f;
 
-    
+    public float PlayerChoiceTimeLimit => playerChoiceTimeLimit;
 
     /// Used to know when the player is making a choice so we can select the story knot
     private bool frogIsMakingChoice = false;
@@ -223,14 +223,15 @@ public class DialogueManager : MonoBehaviour
 
             // TODO: Do this better
             int audioLengthMillis = PlayAudio(audioPath);
+            float audioLengthSeconds = audioLengthMillis / 1000.0f;
 
             ActivateSpeechIndicator();
-            yield return new WaitForSeconds(audioLengthMillis / 1000);
+            yield return new WaitForSeconds(audioLengthSeconds);
 
             if (robotIsSpeaking)
-                robotSpeechIndicator.SetActive(false);
+                StartCoroutine(robotSpeechIndicator.GetComponent<ChatBubbleController>().DisableSpeechBubble(0.2f, shouldShrink: true));
             else
-                frogSpeechIndicator.SetActive(false);
+                StartCoroutine(frogSpeechIndicator.GetComponent<ChatBubbleController>().DisableSpeechBubble(0.2f, shouldShrink: true));
             yield return new WaitForSeconds(delayBetweenSpeechBubbles);
         }
         else
@@ -333,7 +334,7 @@ public class DialogueManager : MonoBehaviour
             var current = speechBubbles[index];
             current.SetActive(true);                                               // TODO: Don't do this
             current.GetComponentInChildren<TextMeshProUGUI>().text = choice.text.Replace("Onwell: ", "").Replace("Rani: ", "");
-            StartCoroutine(current.GetComponent<ChatBubbleController>().ActivateSpeechBubble(1.0f));
+            StartCoroutine(current.GetComponent<ChatBubbleController>().OnEnableCoroutine());
 
             index++;
             yield return new WaitForSeconds(timeBetweenChatbubbles);
