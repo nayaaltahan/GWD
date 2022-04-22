@@ -40,7 +40,7 @@ public class DialogueTrigger : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (!activated && other.gameObject.CompareTag("Player"))
+        if (!activated && other.gameObject.CompareTag("Player") && !GameManager.instance.allowSinglePlayer)
         {
             Debug.Log("player triggered me!", gameObject);
             activated = true;

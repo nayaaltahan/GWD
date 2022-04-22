@@ -11,6 +11,9 @@ public class MovementController : RaycastController
 	
 	public CollisionInfo collisions;
 
+	public LayerMask wallCollisionMask;
+
+
 
 	public override void Start() {
 		base.Start ();
@@ -31,6 +34,7 @@ public class MovementController : RaycastController
 		}
 		if (velocity.x != 0) {
 			HorizontalCollisions (ref velocity);
+			WallCollisions(ref velocity);
 		}
 		if (velocity.y != 0) {
 			VerticalCollisions (ref velocity);
@@ -90,7 +94,37 @@ public class MovementController : RaycastController
 
 					collisions.left = directionX == -1;
 					collisions.right = directionX == 1;
+				}
+			}
+		}
+	}
+	
+	void WallCollisions(ref Vector3 velocity) {
+		float directionX = collisions.faceDir;
+		float rayLength = Mathf.Abs (velocity.x) + skinWidth;
+		
+		if (Mathf.Abs(velocity.x) < skinWidth) {
+			rayLength = 2*skinWidth;
+		}
+		
+		for (int i = 0; i < horizontalRayCount; i ++) {
+			Vector3 rayOrigin = (directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight;
+			rayOrigin += Vector3.up * (horizontalRaySpacing * i);
 
+			Debug.DrawRay(rayOrigin, Vector3.right * directionX * rayLength,Color.red);
+
+			if (Physics.Raycast(rayOrigin, Vector3.right * directionX, out var hit, rayLength, wallCollisionMask, QueryTriggerInteraction.Ignore)) {
+				Debug.DrawLine(transform.position, hit.point, Color.blue, 5);
+
+				if (hit.distance == 0) {
+					continue;
+				}
+				
+				float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+
+				if (!collisions.climbingSlope || slopeAngle > maxClimbAngle) {
+					collisions.leftWall = directionX == -1;
+					collisions.rightWall = directionX == 1;
 				}
 			}
 		}
@@ -208,6 +242,7 @@ public class MovementController : RaycastController
 	public struct CollisionInfo {
 		public bool above, below;
 		public bool left, right;
+		public bool leftWall, rightWall;
 
 		public bool climbingSlope;
 		public bool descendingSlope;
