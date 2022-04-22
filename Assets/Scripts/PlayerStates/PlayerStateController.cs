@@ -22,8 +22,8 @@ public class PlayerStateController : MonoBehaviour
     [Header("Turn Around Settings")]
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
-    
-    [Header("Wall Jump")]
+
+    [Header("Wall Jump")] 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
@@ -149,7 +149,7 @@ public class PlayerStateController : MonoBehaviour
 
         if (InputController.IsJumping)
         {
-            if (wallSliding) {
+            if ((MovementController.collisions.leftWall || MovementController.collisions.rightWall) && !MovementController.collisions.below && velocity.y < 0) {
                 if (wallDirX == input.x) {
                     velocity.x = -wallDirX * wallJumpClimb.x;
                     velocity.y = wallJumpClimb.y;
@@ -178,13 +178,6 @@ public class PlayerStateController : MonoBehaviour
             }
         }
 
-        if (isForceAdded = false)
-        {
-            Debug.Log("WEIRDOO");
-            velocity = springVelocity;
-            isForceAdded = true;
-        }
-        
         if (InputController.MoveDirection.x > 0 && !isFacingRight)
         {
             modelTransform.eulerAngles = new Vector3(0, 90, 0);
