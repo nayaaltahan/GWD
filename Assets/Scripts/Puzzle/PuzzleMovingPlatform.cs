@@ -32,7 +32,7 @@ public class PuzzleMovingPlatform : PuzzleObject
     public override void OnPlateRelease() 
     {
         StopAllCoroutines();
-        StartCoroutine(MovePlatform(startPosition, pressedDuration));
+        StartCoroutine(MovePlatform(startPosition, returningDuration));
         moving = false;
     }
 

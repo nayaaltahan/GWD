@@ -10,8 +10,8 @@ public class Pushable : MonoBehaviour
         if (!other.CompareTag(Constants.PLAYER))
             return;
 
-        if (other.GetComponent<PlayerStateController>().InputController.MoveDirection.x != 0)
-            return;
+        //if (other.GetComponent<PlayerStateController>().InputController.MoveDirection.x == 0)
+        //    return;
         Debug.Log("PUSHING");
 
         if (other.GetComponent<PlayerStateController>().InputController.MoveDirection.x != 0)

@@ -42,8 +42,10 @@ public class PuzzleInteractible : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("TEST");
         if (other.tag != "Player")
             return;
+        Debug.Log("PLAYER");
 
         interactedCount++;
         interacted = true;
