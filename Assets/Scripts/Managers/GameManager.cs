@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Debug")]
     // TODO: Spawn only 1 player when this is true
-    [SerializeField] private bool allowSinglePlayer = false;
+    [SerializeField] public bool allowSinglePlayer = false;
     [SerializeField] private PlayerType playerType = PlayerType.frog;
 
     // Start is called before the first frame update
@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviour
                 playerOne.SetActive(false);
             }
             SwitchState(GameStates.SINGLEPLAYGAME);
-            
         }
         else
         {
