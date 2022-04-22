@@ -96,7 +96,6 @@ public class MovementController : RaycastController
 		}
 	}
 
-	PuzzleInteractible puzzleInteractible = null;
 	void VerticalCollisions(ref Vector3 velocity) {
 		float directionY = Mathf.Sign (velocity.y);
 		float rayLength = Mathf.Abs (velocity.y) + skinWidth;
@@ -118,26 +117,6 @@ public class MovementController : RaycastController
 
 				collisions.below = directionY == -1;
 				collisions.above = directionY == 1;
-
-				if (hit.collider.gameObject.GetComponent<PuzzleInteractible>())
-				{
-					if (puzzleInteractible != hit.collider.gameObject.GetComponent<PuzzleInteractible>())
-					{
-						puzzleInteractible = hit.collider.gameObject.GetComponent<PuzzleInteractible>();
-						puzzleInteractible.Pressed = true;
-					}
-
-					if (puzzleInteractible == hit.collider.gameObject.GetComponent<PuzzleInteractible>())
-						puzzleInteractible.Interact();
-				}
-				else
-                {
-					if (puzzleInteractible)
-					{
-						puzzleInteractible.Pressed = false;
-						puzzleInteractible = null;
-					}
-                }
 
 				if(hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
 				{
