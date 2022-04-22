@@ -41,6 +41,13 @@ public class MovementController : RaycastController
 		if (standingOnPlatform) {
 			collisions.below = true;
 		}
+
+		Debug.DrawRay(transform.position, Vector3.down * 0.5f, Color.blue);
+		if (Physics.Raycast(transform.position, Vector3.down, out var hit, 0.5f, collisionMask, QueryTriggerInteraction.Ignore))
+			transform.parent = null;
+		else
+			transform.parent = null;
+
 	}
 
 	void HorizontalCollisions(ref Vector3 velocity) {
@@ -105,20 +112,22 @@ public class MovementController : RaycastController
 			rayOrigin += Vector3.right * (verticalRaySpacing * i + velocity.x);
 
 			Debug.DrawRay(rayOrigin, Vector3.up * directionY * rayLength,Color.red);
-			
-			if (Physics.Raycast(rayOrigin, Vector3.up * directionY, out var hit, rayLength, collisionMask, QueryTriggerInteraction.Ignore)) {
+
+			if (Physics.Raycast(rayOrigin, Vector3.up * directionY, out var hit, rayLength, collisionMask, QueryTriggerInteraction.Ignore))
+			{
 				Debug.DrawLine(transform.position, hit.point, Color.magenta, 5);
 				velocity.y = (hit.distance - skinWidth) * directionY;
 				rayLength = hit.distance;
 
-				if (collisions.climbingSlope) {
+				if (collisions.climbingSlope)
+				{
 					velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);
 				}
 
 				collisions.below = directionY == -1;
 				collisions.above = directionY == 1;
 
-				if(hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
+				if (hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
 				{
 					Debug.Log("SPRINGBOARD" + hit.collider.GetComponent<Springboard>().GetVelocity());
 					springVelocity = hit.collider.GetComponent<Springboard>().GetVelocity();

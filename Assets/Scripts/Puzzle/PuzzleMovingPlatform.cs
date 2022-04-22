@@ -41,18 +41,16 @@ public class PuzzleMovingPlatform : PuzzleObject
         if (other.gameObject.tag != Constants.PLAYER)
             return;
 
-        Debug.Log("Exit");
-
         other.gameObject.transform.parent = null;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("ENTER");
         if (other.gameObject.tag != Constants.PLAYER)
             return;
 
-        Debug.Log("ENTER");
-        other.gameObject.transform.parent = transform;
+       other.gameObject.transform.parent = transform;
     }
 
     IEnumerator MovePlatform(Vector3 _target, float velocity)
