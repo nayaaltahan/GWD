@@ -10,8 +10,8 @@ public class MovementController : RaycastController
 	float maxDescendAngle = 80;
 	
 	public CollisionInfo collisions;
-	
-	public LayerMask wallCollisionMask = LayerMask.NameToLayer("Wall");
+
+	public LayerMask wallCollisionMask;
 
 
 
