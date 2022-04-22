@@ -216,12 +216,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 769
   horizontalRayCount: 4
   verticalRayCount: 4
   horizontalRaySpacing: 0
   verticalRaySpacing: 0
   collider: {fileID: 0}
+  wallCollisionMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &8868738728139694013
 MonoBehaviour:
   m_ObjectHideFlags: 0

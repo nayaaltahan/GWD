@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class parallax : MonoBehaviour
 {
-    public Transform camera;
+    private Transform camera;
     public float speedCoefficient;
     Vector3 lastPos;
 
     void Start()
     {
+        camera = Camera.main.transform;
         lastPos = camera.position;
     }
 

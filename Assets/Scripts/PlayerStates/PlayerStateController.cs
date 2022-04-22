@@ -22,8 +22,8 @@ public class PlayerStateController : MonoBehaviour
     [Header("Turn Around Settings")]
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
-    
-    [Header("Wall Jump")]
+
+    [Header("Wall Jump")] 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
@@ -80,15 +80,17 @@ public class PlayerStateController : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         SetCurrentState(IdleState);
         
-        gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
-        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+
         
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
+        maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+        minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+
         if (!canMove)
             return;
 
@@ -147,7 +149,7 @@ public class PlayerStateController : MonoBehaviour
 
         if (InputController.IsJumping)
         {
-            if (wallSliding) {
+            if ((MovementController.collisions.leftWall || MovementController.collisions.rightWall) && !MovementController.collisions.below && velocity.y < 0) {
                 if (wallDirX == input.x) {
                     velocity.x = -wallDirX * wallJumpClimb.x;
                     velocity.y = wallJumpClimb.y;
@@ -176,13 +178,6 @@ public class PlayerStateController : MonoBehaviour
             }
         }
 
-        if (isForceAdded = false)
-        {
-            Debug.Log("WEIRDOO");
-            velocity = springVelocity;
-            isForceAdded = true;
-        }
-        
         if (InputController.MoveDirection.x > 0 && !isFacingRight)
         {
             modelTransform.eulerAngles = new Vector3(0, 90, 0);
@@ -208,6 +203,7 @@ public class PlayerStateController : MonoBehaviour
         else if (velocity.y > 0)
         {
             SetCurrentState(JumpState);
+
         }
         else if (velocity.y == 0 && velocity.x == 0)
         {
@@ -217,49 +213,49 @@ public class PlayerStateController : MonoBehaviour
         // animations
         if (!MovementController.collisions.below)
         {
-            Animations.SetBool("Falling", true);
+            Animations.SetBool(Constants.FALLING, true);
         }
         
         if (MovementController.collisions.below)
         {
-            Debug.Log("Collisions below, finish falling/jumping animations");
+            //Debug.Log("Collisions below, finish falling/jumping animations");
             //Animations.SetLayerWeight(1,1);
-            Animations.SetBool("Falling", false);
-            Animations.SetBool("Jumping", false);
+            Animations.SetBool(Constants.FALLING, false);
+            Animations.SetBool(Constants.JUMPING, false);
             //Animations.SetLayerWeight(1,0);
 
         }
         currentState.FixedUpdate(this);
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.transform.CompareTag("Pushable"))
-        {
-            if (InputController.MoveDirection.x != 0)
-            {
-                Animations.SetBool("Pushing", true);
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.transform.CompareTag(Constants.PUSHABLE))
+    //    {
+    //        if (InputController.MoveDirection.x != 0)
+    //        {
+    //            Animations.SetBool(Constants.PUSHING, true);
 
-            }
-            else
-            {
-                Animations.SetBool("Pushing", false);
+    //        }
+    //        else
+    //        {
+    //            Animations.SetBool(Constants.PUSHING, false);
 
-            }
-            var force = InputController.MoveDirection * 1000;
-            Debug.Log($"Pushing object {other.gameObject.name} with force {force}");
-            other.GetComponentInParent<Rigidbody>()?.AddForce(force);
+    //        }
+    //        var force = InputController.MoveDirection * 1000;
+    //        Debug.Log($"Pushing object {other.gameObject.name} with force {force}");
+    //        other.GetComponentInParent<Rigidbody>()?.AddForce(force);
             
-        }
-    }
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.CompareTag("Pushable"))
-        {
-            Animations.SetBool("Pushing", false);
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.transform.CompareTag(Constants.PUSHABLE))
+    //    {
+    //        Animations.SetBool(Constants.PUSHING, false);
+    //    }
+    //}
 
     private void OnCollisionEnter(Collision other)
     {
