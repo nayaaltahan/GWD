@@ -343,7 +343,7 @@ public class DialogueManager : MonoBehaviour
     private void HideSpeechBubbles(GameObject[] speechBubbles, int index = -1)
     {
         var idx = 0;
-        Debug.Log("Index: " + index);
+        //Debug.Log("Index: " + index);
         foreach (var speechBubble in speechBubbles)
         {
             if(idx == index && index != -1)
