@@ -79,9 +79,6 @@ public class PlayerStateController : MonoBehaviour
         InputController = GetComponent<PlayerInputController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         SetCurrentState(IdleState);
-        
-
-        
     }
 
     // Update is called once per frame
@@ -91,11 +88,8 @@ public class PlayerStateController : MonoBehaviour
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
 
-        if (!canMove)
-            return;
-
-        var input = InputController.MoveDirection;
-
+        var input = canMove ? InputController.MoveDirection : Vector3.zero;
+        
         int wallDirX = (MovementController.collisions.left) ? -1 : 1;
 
         float targetVelocityX = 0.0f;
@@ -147,7 +141,7 @@ public class PlayerStateController : MonoBehaviour
             isForceAdded = false;
         }
 
-        if (InputController.IsJumping)
+        if (InputController.IsJumping && canMove)
         {
             if ((MovementController.collisions.leftWall || MovementController.collisions.rightWall) && !MovementController.collisions.below && velocity.y < 0) {
                 if (wallDirX == input.x) {
@@ -178,19 +172,19 @@ public class PlayerStateController : MonoBehaviour
             }
         }
 
-        if (InputController.MoveDirection.x > 0 && !isFacingRight)
+        if (InputController.MoveDirection.x > 0 && !isFacingRight && canMove)
         {
             modelTransform.eulerAngles = new Vector3(0, 90, 0);
             isFacingRight = true;
         }
-        else if (InputController.MoveDirection.x < 0 && isFacingRight)
+        else if (InputController.MoveDirection.x < 0 && isFacingRight && canMove)
         {
             modelTransform.eulerAngles = new Vector3(0, -90, 0);
             isFacingRight = false;
         }
         
         velocity.y += gravity * Time.fixedDeltaTime;
-        MovementController.Move (velocity * Time.fixedDeltaTime);
+        MovementController.Move(velocity * Time.fixedDeltaTime);
         
         if (velocity.x != 0 && (MovementController.collisions.above || MovementController.collisions.below))
         {
