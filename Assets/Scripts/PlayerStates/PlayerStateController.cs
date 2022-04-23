@@ -22,8 +22,8 @@ public class PlayerStateController : MonoBehaviour
     [Header("Turn Around Settings")]
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
-    
-    [Header("Wall Jump")]
+
+    [Header("Wall Jump")] 
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
@@ -37,7 +37,7 @@ public class PlayerStateController : MonoBehaviour
     public float fastSpeed = 6.0f;
 
     public float slowSpeed = 3.0f;
-    private bool isForceAdded = false;
+    public bool isForceAdded = false;
 
     public float moveSpeed => isSlowed ? slowSpeed : fastSpeed;
 
@@ -79,9 +79,6 @@ public class PlayerStateController : MonoBehaviour
         InputController = GetComponent<PlayerInputController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         SetCurrentState(IdleState);
-        
-
-        
     }
 
     // Update is called once per frame
@@ -91,24 +88,51 @@ public class PlayerStateController : MonoBehaviour
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
 
-        if (!canMove)
-            return;
-
-        var input = InputController.MoveDirection;
-
+        var input = canMove ? InputController.MoveDirection : Vector3.zero;
+        
         int wallDirX = (MovementController.collisions.left) ? -1 : 1;
 
         float targetVelocityX = 0.0f;
 
         if (!isForceAdded)
+        {
             targetVelocityX = input.x * moveSpeed;
+
+        }
         else
-            targetVelocityX = springVelocity.x + (input.x * moveSpeed);
-        
-        velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, 
-            (MovementController.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
+        {
+            targetVelocityX = (velocity.x*0.95f) + (input.x * moveSpeed);
+
+            Debug.Log("Target:" + targetVelocityX);
+
+         
+                if (Mathf.Sign(springVelocity.x) > 0f)
+                {
+
+                    if (targetVelocityX > springVelocity.x + moveSpeed)
+                        targetVelocityX = springVelocity.x + moveSpeed;
+                    else if (targetVelocityX < -moveSpeed)
+                            targetVelocityX = -moveSpeed;
+                }
+                else if (Mathf.Sign(springVelocity.x) < 0f)
+                {
+                if (targetVelocityX < springVelocity.x - moveSpeed)
+                    targetVelocityX = springVelocity.x - moveSpeed;
+                else if (targetVelocityX > moveSpeed)
+                        targetVelocityX = moveSpeed;
+                }
+
+
+            
+
+            Debug.Log("Actual:" + targetVelocityX);
+
+        }
+
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (MovementController.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 
         bool wallSliding = false;
+
         if ((MovementController.collisions.left || MovementController.collisions.right) && !MovementController.collisions.below && velocity.y < 0) {
             wallSliding = true;
 
@@ -133,7 +157,7 @@ public class PlayerStateController : MonoBehaviour
 
         }
         
-        if (MovementController.collisions.above || MovementController.collisions.below)
+        if (MovementController.collisions.above || (MovementController.collisions.below && !isForceAdded))
         {
             velocity.y = 0;
         }
@@ -144,12 +168,16 @@ public class PlayerStateController : MonoBehaviour
         if (MovementController.collisions.below)
         {
             coyoteTimer = 0.3f;
-            isForceAdded = false;
+
+            if (velocity.y < 0f)
+            {
+                isForceAdded = false;
+            }
         }
 
-        if (InputController.IsJumping)
+        if (InputController.IsJumping && canMove)
         {
-            if (wallSliding) {
+            if ((MovementController.collisions.leftWall || MovementController.collisions.rightWall) && !MovementController.collisions.below && velocity.y < 0) {
                 if (wallDirX == input.x) {
                     velocity.x = -wallDirX * wallJumpClimb.x;
                     velocity.y = wallJumpClimb.y;
@@ -163,7 +191,7 @@ public class PlayerStateController : MonoBehaviour
                     velocity.y = wallLeap.y;
                 }
             }
-            if (coyoteTimer > 0) {
+            if (coyoteTimer > 0 && !isForceAdded) {
                 velocity.y = maxJumpVelocity;
                 coyoteTimer = -1f;
 
@@ -178,26 +206,19 @@ public class PlayerStateController : MonoBehaviour
             }
         }
 
-        if (isForceAdded = false)
-        {
-            Debug.Log("WEIRDOO");
-            velocity = springVelocity;
-            isForceAdded = true;
-        }
-        
-        if (InputController.MoveDirection.x > 0 && !isFacingRight)
+        if (InputController.MoveDirection.x > 0 && !isFacingRight && canMove)
         {
             modelTransform.eulerAngles = new Vector3(0, 90, 0);
             isFacingRight = true;
         }
-        else if (InputController.MoveDirection.x < 0 && isFacingRight)
+        else if (InputController.MoveDirection.x < 0 && isFacingRight && canMove)
         {
             modelTransform.eulerAngles = new Vector3(0, -90, 0);
             isFacingRight = false;
         }
         
         velocity.y += gravity * Time.fixedDeltaTime;
-        MovementController.Move (velocity * Time.fixedDeltaTime);
+        MovementController.Move(velocity * Time.fixedDeltaTime);
         
         if (velocity.x != 0 && (MovementController.collisions.above || MovementController.collisions.below))
         {
@@ -233,6 +254,15 @@ public class PlayerStateController : MonoBehaviour
 
         }
         currentState.FixedUpdate(this);
+    }
+
+    public void Springboard(Vector3 springVelocity)
+    {
+        velocity = springVelocity;
+        isForceAdded = true;
+        SetCurrentState(JumpState);
+        coyoteTimer = -1f;
+        SpringVelocity = springVelocity;
     }
 
     //private void OnTriggerStay(Collider other)

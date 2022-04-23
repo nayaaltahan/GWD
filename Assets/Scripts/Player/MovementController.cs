@@ -11,6 +11,11 @@ public class MovementController : RaycastController
 	
 	public CollisionInfo collisions;
 
+	public LayerMask wallCollisionMask;
+
+	float springboardMinSpeed = 0.5f;
+
+
 
 	public override void Start() {
 		base.Start ();
@@ -31,6 +36,7 @@ public class MovementController : RaycastController
 		}
 		if (velocity.x != 0) {
 			HorizontalCollisions (ref velocity);
+			WallCollisions(ref velocity);
 		}
 		if (velocity.y != 0) {
 			VerticalCollisions (ref velocity);
@@ -41,6 +47,13 @@ public class MovementController : RaycastController
 		if (standingOnPlatform) {
 			collisions.below = true;
 		}
+
+		Debug.DrawRay(transform.position, Vector3.down * 0.5f, Color.blue);
+		if (Physics.Raycast(transform.position, Vector3.down, out var hit, 0.5f, collisionMask, QueryTriggerInteraction.Ignore))
+			transform.parent = null;
+		else
+			transform.parent = null;
+
 	}
 
 	void HorizontalCollisions(ref Vector3 velocity) {
@@ -90,13 +103,42 @@ public class MovementController : RaycastController
 
 					collisions.left = directionX == -1;
 					collisions.right = directionX == 1;
+				}
+			}
+		}
+	}
+	
+	void WallCollisions(ref Vector3 velocity) {
+		float directionX = collisions.faceDir;
+		float rayLength = Mathf.Abs (velocity.x) + skinWidth;
+		
+		if (Mathf.Abs(velocity.x) < skinWidth) {
+			rayLength = 2*skinWidth;
+		}
+		
+		for (int i = 0; i < horizontalRayCount; i ++) {
+			Vector3 rayOrigin = (directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight;
+			rayOrigin += Vector3.up * (horizontalRaySpacing * i);
 
+			Debug.DrawRay(rayOrigin, Vector3.right * directionX * rayLength,Color.red);
+
+			if (Physics.Raycast(rayOrigin, Vector3.right * directionX, out var hit, rayLength, wallCollisionMask, QueryTriggerInteraction.Ignore)) {
+				Debug.DrawLine(transform.position, hit.point, Color.blue, 5);
+
+				if (hit.distance == 0) {
+					continue;
+				}
+				
+				float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+
+				if (!collisions.climbingSlope || slopeAngle > maxClimbAngle) {
+					collisions.leftWall = directionX == -1;
+					collisions.rightWall = directionX == 1;
 				}
 			}
 		}
 	}
 
-	PuzzleInteractible puzzleInteractible = null;
 	void VerticalCollisions(ref Vector3 velocity) {
 		float directionY = Mathf.Sign (velocity.y);
 		float rayLength = Mathf.Abs (velocity.y) + skinWidth;
@@ -106,13 +148,15 @@ public class MovementController : RaycastController
 			rayOrigin += Vector3.right * (verticalRaySpacing * i + velocity.x);
 
 			Debug.DrawRay(rayOrigin, Vector3.up * directionY * rayLength,Color.red);
-			
-			if (Physics.Raycast(rayOrigin, Vector3.up * directionY, out var hit, rayLength, collisionMask, QueryTriggerInteraction.Ignore)) {
+
+			if (Physics.Raycast(rayOrigin, Vector3.up * directionY, out var hit, rayLength, collisionMask, QueryTriggerInteraction.Ignore))
+			{
 				Debug.DrawLine(transform.position, hit.point, Color.magenta, 5);
 				velocity.y = (hit.distance - skinWidth) * directionY;
 				rayLength = hit.distance;
 
-				if (collisions.climbingSlope) {
+				if (collisions.climbingSlope)
+				{
 					velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);
 				}
 
@@ -139,18 +183,19 @@ public class MovementController : RaycastController
 					}
                 }
 
-				if(hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
+				if (hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
 				{
 					Debug.Log("SPRINGBOARD" + hit.collider.GetComponent<Springboard>().GetVelocity());
 					springVelocity = hit.collider.GetComponent<Springboard>().GetVelocity();
+					PlayerStateController playerState = GetComponent<PlayerStateController>();
+
+					if (playerState.velocity.y < -springboardMinSpeed)
+						playerState.Springboard(springVelocity);
+
+					return;
 				}
 			}
 		}
-
-		if (springVelocity != Vector3.zero)
-        {
-			GetComponent<PlayerStateController>().SpringVelocity = springVelocity;
-        }
 
 		if (collisions.climbingSlope) {
 			float directionX = Mathf.Sign(velocity.x);
@@ -208,6 +253,7 @@ public class MovementController : RaycastController
 	public struct CollisionInfo {
 		public bool above, below;
 		public bool left, right;
+		public bool leftWall, rightWall;
 
 		public bool climbingSlope;
 		public bool descendingSlope;

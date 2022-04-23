@@ -216,12 +216,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 769
   horizontalRayCount: 4
   verticalRayCount: 4
   horizontalRaySpacing: 0
   verticalRaySpacing: 0
   collider: {fileID: 0}
+  wallCollisionMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &8868738728139694013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,6 +712,10 @@ PrefabInstance:
     - target: {fileID: 4642390390349017131, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 1.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642390390349017174, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4642390390633190368, guid: f8484f1f7900cdd43b0a280d3ef32c96, type: 3}
       propertyPath: m_IsActive
