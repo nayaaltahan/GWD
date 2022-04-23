@@ -13,6 +13,8 @@ public class MovementController : RaycastController
 
 	public LayerMask wallCollisionMask;
 
+	float springboardMinSpeed = 0.5f;
+
 
 
 	public override void Start() {
@@ -173,18 +175,19 @@ public class MovementController : RaycastController
 					}
                 }
 
-				if(hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
+				if (hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
 				{
 					Debug.Log("SPRINGBOARD" + hit.collider.GetComponent<Springboard>().GetVelocity());
 					springVelocity = hit.collider.GetComponent<Springboard>().GetVelocity();
+					PlayerStateController playerState = GetComponent<PlayerStateController>();
+
+					if (playerState.velocity.y < -springboardMinSpeed)
+						playerState.Springboard(springVelocity);
+
+					return;
 				}
 			}
 		}
-
-		if (springVelocity != Vector3.zero)
-        {
-			GetComponent<PlayerStateController>().SpringVelocity = springVelocity;
-        }
 
 		if (collisions.climbingSlope) {
 			float directionX = Mathf.Sign(velocity.x);
