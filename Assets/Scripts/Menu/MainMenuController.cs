@@ -29,7 +29,7 @@ public class MainMenuController : MonoBehaviour
     public void LoadLevelWithTimeLimit()
     {
         Debug.Log("WIth time limit");
-        dialogueManager.SetChoiceTimeLimit(2.0f);
+        dialogueManager.SetChoiceTimeLimit(10.0f);
 
         CharacterSelectUI.SetActive(true);
         if (!SceneManager.GetSceneByName("Swamp").isLoaded)
