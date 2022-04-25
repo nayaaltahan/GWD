@@ -10,13 +10,17 @@ public class PuzzleMovingPlatform : PuzzleObject
     [SerializeField] private Transform target;
     [SerializeField] private float pressedDuration;
     [SerializeField] private float returningDuration;
+    public List<PuzzleInteractible> puzzleInteractables;
 
     Vector3 direction;
     Vector3 velocity = new Vector3(0.0f, 3.0f, 0.0f);
     private bool moving = false;
+    private Coroutine coroutine;
 
 	Dictionary<Transform, bool> passengers = new Dictionary<Transform, bool>();
-    
+
+    public bool Moving { get => moving; set => moving = value; }
+
     private void Start()
     {
         direction = target.position - transform.position;
@@ -25,15 +29,19 @@ public class PuzzleMovingPlatform : PuzzleObject
 
     public override void Interact()
     {
-        moving = true;
-        StartCoroutine(MovePlatform(target.position, pressedDuration));
+        //StopAllCoroutines();
+        if(coroutine != null)
+            StopCoroutine(coroutine);
+
+        Moving = true;
+        coroutine = StartCoroutine(MovePlatform(target.position, pressedDuration));
     }
 
     public override void OnPlateRelease() 
     {
         StopAllCoroutines();
-        StartCoroutine(MovePlatform(startPosition, returningDuration));
-        moving = false;
+        coroutine = StartCoroutine(MovePlatform(startPosition, returningDuration));
+        Moving = false;
     }
 
     private void OnTriggerExit(Collider other)
