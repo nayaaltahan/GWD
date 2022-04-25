@@ -21,11 +21,17 @@ public class PuzzleMovingPlatform : PuzzleObject
 
     public bool Moving { get => moving; set => moving = value; }
 
-    private void Start()
+    private void Awake()
     {
         direction = target.position - transform.position;
         startPosition = transform.position;
+
+        for (int i = 0; i < puzzleInteractables.Count; i++)
+        {
+            puzzleInteractables[i].PuzzleObject = this;
+        }
     }
+
 
     public override void Interact()
     {

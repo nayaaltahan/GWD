@@ -9,10 +9,11 @@ public class PuzzleInteractible : MonoBehaviour
     [SerializeField] float yEnd;
     [SerializeField] float yStart;
     [SerializeField] float moveSpeed;
-    [SerializeField] private PuzzleMovingPlatform puzzleObject;
+    private PuzzleMovingPlatform puzzleObject;
     private PuzzleInteractible otherPuzzleConnection;
 
     public bool Pressed { get => pressed; set => pressed = value; }
+    public PuzzleMovingPlatform PuzzleObject { get => puzzleObject; set => puzzleObject = value; }
 
     private void Start()
     {
