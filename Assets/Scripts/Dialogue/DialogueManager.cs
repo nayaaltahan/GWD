@@ -236,8 +236,12 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-
+            ActivateSpeechIndicator();
             yield return new WaitForSeconds(defaultAudioDelay);
+            if (robotIsSpeaking)
+                StartCoroutine(robotSpeechIndicator.GetComponent<ChatBubbleController>().DisableSpeechBubble(0.2f, shouldShrink: true));
+            else
+                StartCoroutine(frogSpeechIndicator.GetComponent<ChatBubbleController>().DisableSpeechBubble(0.2f, shouldShrink: true));
             yield return new WaitForSeconds(delayBetweenSpeechBubbles);
             frogIsSpeaking = false;
             robotIsSpeaking = false;
