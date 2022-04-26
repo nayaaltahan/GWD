@@ -6,13 +6,14 @@ using System.Linq;
 using FMOD.Studio;
 using TMPro;
 using UnityEngine;
+using Object = System.Object;
 using Random = System.Random;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance;
 
-    private Story currentStory;
+    public static Story currentStory;
 
 
     [SerializeField]
@@ -89,6 +90,8 @@ public class DialogueManager : MonoBehaviour
 
     private PlayerStateController frogPlayerController;
     private PlayerStateController robotPlayerController;
+    public static string CurrentKnotName;
+
     void Start()
     {
         if (instance == null)
@@ -111,10 +114,14 @@ public class DialogueManager : MonoBehaviour
         // Select third choice if timer runs out
         if (timeSpentMakingChoice >= playerChoiceTimeLimit)
         {
-            // TODO: Telemetry play didn't select a choice
             // Random choice from current story current choices
             var randomChoice = new Random().Next(0, currentStory.currentChoices.Count);
             StartCoroutine(SelectChoice(randomChoice));
+            var trackingData = new Dictionary<string, object>()
+            {
+                {"Random Choice", randomChoice}
+            };
+            DialogueTracking.SendTrackingEvent(DialogueTrackingEvent.DialogueDidNotChoose, trackingData);
         }
 
 
@@ -131,9 +138,10 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
         
         currentStory = new Story(story);
-        if (!string.IsNullOrEmpty(knotName))
-            currentStory.ChoosePathString(knotName);
-        
+        CurrentKnotName = knotName;
+        if (!string.IsNullOrEmpty(CurrentKnotName))
+            currentStory.ChoosePathString(CurrentKnotName);
+
         // Skip to first choice
         StartCoroutine(StartStoryCoroutine());
     }
