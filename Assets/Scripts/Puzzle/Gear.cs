@@ -10,15 +10,10 @@ public class Gear : PuzzleObject
 
     public override void Interact()
     {
-        if(!rotate)
-            transform.Rotate(axis, rotateSpeed * Time.deltaTime);
+         transform.Rotate(axis, rotateSpeed * Time.deltaTime);
     }
 
     public override void OnPlateRelease() { }
 
-    private void Update()
-    {
-        if(rotate)
-            transform.Rotate(axis, rotateSpeed * Time.deltaTime);
-    }
+
 }

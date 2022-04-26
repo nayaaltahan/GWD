@@ -5,15 +5,14 @@ using UnityEngine;
 public class PuzzleInteractible : MonoBehaviour
 {
     bool pressed = false;
-    bool released = false;
-    bool interacted = false;
+    bool interacted = true;
+    int interactedCount = 0;
     [SerializeField] float yEnd;
     [SerializeField] float yStart;
     [SerializeField] float moveSpeed;
     [SerializeField] private PuzzleObject puzzleObject;
 
     public bool Pressed { get => pressed; set => pressed = value; }
-    public bool Interacted { get => interacted; set => interacted = value; }
 
     public void Interact()
     {
@@ -29,20 +28,42 @@ public class PuzzleInteractible : MonoBehaviour
     {
         if (pressed)
         {
-            if (released) 
-                released = false;
             if (transform.localPosition.y > yStart)
                 transform.localPosition -= Vector3.up * moveSpeed * Time.deltaTime;
+
+            Interact();
         }
         else
         {
-            if (!released)
-            {
-                released = true;
-                puzzleObject.OnPlateRelease();
-            }
             if (transform.localPosition.y < yEnd)
                 transform.localPosition += Vector3.up * moveSpeed * Time.deltaTime;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("TEST");
+        if (other.tag != "Player")
+            return;
+        Debug.Log("PLAYER");
+
+        interactedCount++;
+        interacted = true;
+        pressed = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag != "Player")
+            return;
+
+        interactedCount--;
+
+        if (interactedCount == 0)
+        {
+            interacted = false;
+            pressed = false;
+            puzzleObject.OnPlateRelease();
         }
     }
 }

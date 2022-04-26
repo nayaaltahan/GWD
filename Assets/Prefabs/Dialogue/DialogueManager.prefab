@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   robotInputController: {fileID: 0}
   frogInputController: {fileID: 0}
+  timeBetweenChatbubbles: 0.4
   robotSpeechBubbles:
   - {fileID: 0}
   - {fileID: 0}
@@ -61,6 +62,6 @@ MonoBehaviour:
   delayBetweenSpeechBubbles: 0.7
   subtitleContainer: {fileID: 0}
   subtitlePrefab: {fileID: 4889731280673067098, guid: 749e8244cc18d8a49a0f55142997ba5f, type: 3}
-  subtitleColorFrog: {r: 0, g: 1, b: 0.027071953, a: 1}
-  subtitleColorRobot: {r: 1, g: 0.6361375, b: 0.023584902, a: 1}
+  subtitleColorFrog: {r: 1, g: 0.6207221, b: 0, a: 1}
+  subtitleColorRobot: {r: 0, g: 0.5622227, b: 1, a: 1}
   playerChoiceTimeLimit: 100000

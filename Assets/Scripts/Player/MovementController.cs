@@ -45,6 +45,13 @@ public class MovementController : RaycastController
 		if (standingOnPlatform) {
 			collisions.below = true;
 		}
+
+		Debug.DrawRay(transform.position, Vector3.down * 0.5f, Color.blue);
+		if (Physics.Raycast(transform.position, Vector3.down, out var hit, 0.5f, collisionMask, QueryTriggerInteraction.Ignore))
+			transform.parent = null;
+		else
+			transform.parent = null;
+
 	}
 
 	void HorizontalCollisions(ref Vector3 velocity) {
@@ -130,7 +137,6 @@ public class MovementController : RaycastController
 		}
 	}
 
-	PuzzleInteractible puzzleInteractible = null;
 	void VerticalCollisions(ref Vector3 velocity) {
 		float directionY = Mathf.Sign (velocity.y);
 		float rayLength = Mathf.Abs (velocity.y) + skinWidth;
@@ -140,40 +146,22 @@ public class MovementController : RaycastController
 			rayOrigin += Vector3.right * (verticalRaySpacing * i + velocity.x);
 
 			Debug.DrawRay(rayOrigin, Vector3.up * directionY * rayLength,Color.red);
-			
-			if (Physics.Raycast(rayOrigin, Vector3.up * directionY, out var hit, rayLength, collisionMask, QueryTriggerInteraction.Ignore)) {
+
+			if (Physics.Raycast(rayOrigin, Vector3.up * directionY, out var hit, rayLength, collisionMask, QueryTriggerInteraction.Ignore))
+			{
 				Debug.DrawLine(transform.position, hit.point, Color.magenta, 5);
 				velocity.y = (hit.distance - skinWidth) * directionY;
 				rayLength = hit.distance;
 
-				if (collisions.climbingSlope) {
+				if (collisions.climbingSlope)
+				{
 					velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);
 				}
 
 				collisions.below = directionY == -1;
 				collisions.above = directionY == 1;
 
-				if (hit.collider.gameObject.GetComponent<PuzzleInteractible>())
-				{
-					if (puzzleInteractible != hit.collider.gameObject.GetComponent<PuzzleInteractible>())
-					{
-						puzzleInteractible = hit.collider.gameObject.GetComponent<PuzzleInteractible>();
-						puzzleInteractible.Pressed = true;
-					}
-
-					if (puzzleInteractible == hit.collider.gameObject.GetComponent<PuzzleInteractible>())
-						puzzleInteractible.Interact();
-				}
-				else
-                {
-					if (puzzleInteractible)
-					{
-						puzzleInteractible.Pressed = false;
-						puzzleInteractible = null;
-					}
-                }
-
-				if(hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
+				if (hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
 				{
 					Debug.Log("SPRINGBOARD" + hit.collider.GetComponent<Springboard>().GetVelocity());
 					springVelocity = hit.collider.GetComponent<Springboard>().GetVelocity();
