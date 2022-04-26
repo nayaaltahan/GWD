@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1804302507073234790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1804302507073234791}
+  - component: {fileID: 1804302507073234784}
+  m_Layer: 0
+  m_Name: CabbageSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1804302507073234791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804302507073234790}
+  m_LocalRotation: {x: 0.00000014901158, y: -0.6989992, z: -0.7151225, w: 0.0000020265575}
+  m_LocalPosition: {x: 0.00012999633, y: 0.000039997754, z: 0.0040900023}
+  m_LocalScale: {x: 0.0013522598, y: 0.0013522604, z: 0.0013522599}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -88.694, y: -0.008, z: -179.992}
+--- !u!114 &1804302507073234784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804302507073234790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c626751c785e564389bfdf367d6287e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cabbagePrefab: {fileID: 0}
+  speed: 28
+  interval: 0.7
+  intervalRandomness: 0.4
+  velocityRandomness: 5
+  angularRandomness: 0
+  emitOnEnable: 1
