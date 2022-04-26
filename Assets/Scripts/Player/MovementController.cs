@@ -15,7 +15,7 @@ public class MovementController : RaycastController
 
 	float springboardMinSpeed = 0.5f;
 
-
+	PuzzleInteractible puzzleInteractible;
 
 	public override void Start() {
 		base.Start ();
