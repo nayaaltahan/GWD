@@ -32,7 +32,7 @@ This is the first cutscene #cutscene
 Onwell gets up.
     Onwell: I NEED ASSISTANCE, FROG-PERSON. #event:/Voice/Onwell/Convo2_INeedAssistance #cutscene
     Onwell: MY KIN DEMANDS IT. #event:/Voice/Onwell/Convo2_MyKinDemands #cutscene
-    Onwell: I SEEK THE GREAT WILLOW. #event:/Voice/Onwell/Convo2_ISeekThe #cutscene
+    Onwell: I SEEK THE GREAT OAKS. #event:/Voice/Onwell/Convo2_ISeekThe #cutscene
 -
 *[Rani: Your kin?] #cutscene
 Rani: More characters like you around, then? Interesting. #event:/Voice/Rani/Convo2_MoreCharactersLike cutscene
@@ -131,6 +131,32 @@ Rani: Though it is calibrated for cabbages... #event:/Voice/Rani/Convo4_ThoughIt
 -
 
 ->DONE
+
+===SymbolRock===
+Rani: What in the rotting apple? What is happening?
+[Onwell: The rock speaks to me]
+    Onwell: THE ROCK SPEAKS TO ME.
+    Onwell: IT WELCOMES ME BACK.
+    Onwell: GREETS ME AFTER ITS SLUMBER.
+        [Rani: You're crazy]
+            Rani: Did you hit your head, sir? Rocks don't greet people.
+        [Rani: This is crazy]
+            Rani: I have never seen anything like it.
+            Rani: It somehow frightens me.
+[Onwell: You will not understand]
+    Onwell: I WOULD EXPLAIN THIS, FROG-PERSON.
+    Onwell: BUT IT CANNOT BE EXPLAINED WITH YOUR WORDS.
+        [Rani: Try me]
+            Rani: Come on, at least attempt it.
+            Onwell: IT IS SOMETHING LIKE A GREETING.
+            Onwell: AND SOMETHING LIKE A MEMORY.
+            Rani: ...
+            Rani: Well, you gave it your best shot!
+        [Rani: Sure.]
+            Rani: If you say so.
+
+->DONE
+
 ===Junkyard===
 
 The two start moving through Rani's swamp garden, which is filled with scrap metal and half-baked prototypes.
@@ -168,13 +194,24 @@ Rani: So this is where...
 Rani: Great sprout! 
 Onwell: A MALFUNCTION.
 Rani: Two weeks production - ruined!
-Rani:  We have to get this sorted, I can't leave it like this.
-Onwell: MAYBE TURN IT OFF AND ON AGAIN?
-Rani: Worth a shot.
-Rani: We'll have to get to the main relay. 
+Rani: Grof! Mr. Grof what the hell is this?
+Rani: Mr. Grof?
 
 -> DONE
 
+===EmptyHouse===
+[Onwell: Who is Grof?]
+    Onwell: WHO IS GROF?
+    Rani: My associate. And a friend, of sorts.
+    Rani: He's in charge of packaging.
+    Rani: He's supposed to be here.
+[Onwell: Noone's home]
+    Onwell: THE HOUSE IS EMPTY.
+    Rani: Apparently.
+    Rani: Seems he left in a hurry.
+    Rani: He forgot his hat.
+-> DONE
+    
 ===Machine===
 Rani stops in front of her homespun metal-compactor.
 
@@ -197,8 +234,15 @@ The two travelers reach the top of a hill. Suddenly, three robots flying in form
 * [Rani: Wow!]
     Rani: This flight technology your kind has is highly impressive!  #event:/Voice/Rani/Convo7_ThisFlightTechnology
     Rani: Present company excluded, of course! #event:/Voice/Rani/Convo7_PresentCompanyExcluded
-    
-The two continue making their way out of the swamp, towards Great Willow.
+-
+Rani: I should ask you. What brings you here?
+Rani: Why are you here, sir?
+Onwell: THE MISSION. 
+Rani: Which entails what, exactly?
+Rani: Sir?
+Onwell: POWER.
+
+
 -
 ->DONE
     

@@ -37,7 +37,7 @@ public class PlayerStateController : MonoBehaviour
     public float fastSpeed = 6.0f;
 
     public float slowSpeed = 3.0f;
-    private bool isForceAdded = false;
+    public bool isForceAdded = false;
 
     public float moveSpeed => isSlowed ? slowSpeed : fastSpeed;
 
@@ -95,14 +95,44 @@ public class PlayerStateController : MonoBehaviour
         float targetVelocityX = 0.0f;
 
         if (!isForceAdded)
+        {
             targetVelocityX = input.x * moveSpeed;
+
+        }
         else
-            targetVelocityX = springVelocity.x + (input.x * moveSpeed);
-        
-        velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, 
-            (MovementController.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
+        {
+            targetVelocityX = (velocity.x*0.95f) + (input.x * moveSpeed);
+
+            Debug.Log("Target:" + targetVelocityX);
+
+         
+                if (Mathf.Sign(springVelocity.x) > 0f)
+                {
+
+                    if (targetVelocityX > springVelocity.x + moveSpeed)
+                        targetVelocityX = springVelocity.x + moveSpeed;
+                    else if (targetVelocityX < -moveSpeed)
+                            targetVelocityX = -moveSpeed;
+                }
+                else if (Mathf.Sign(springVelocity.x) < 0f)
+                {
+                if (targetVelocityX < springVelocity.x - moveSpeed)
+                    targetVelocityX = springVelocity.x - moveSpeed;
+                else if (targetVelocityX > moveSpeed)
+                        targetVelocityX = moveSpeed;
+                }
+
+
+            
+
+            Debug.Log("Actual:" + targetVelocityX);
+
+        }
+
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (MovementController.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 
         bool wallSliding = false;
+
         if ((MovementController.collisions.left || MovementController.collisions.right) && !MovementController.collisions.below && velocity.y < 0) {
             wallSliding = true;
 
@@ -127,7 +157,7 @@ public class PlayerStateController : MonoBehaviour
 
         }
         
-        if (MovementController.collisions.above || MovementController.collisions.below)
+        if (MovementController.collisions.above || (MovementController.collisions.below && !isForceAdded))
         {
             velocity.y = 0;
         }
@@ -138,7 +168,11 @@ public class PlayerStateController : MonoBehaviour
         if (MovementController.collisions.below)
         {
             coyoteTimer = 0.3f;
-            isForceAdded = false;
+
+            if (velocity.y < 0f)
+            {
+                isForceAdded = false;
+            }
         }
 
         if (InputController.IsJumping && canMove)
@@ -157,7 +191,7 @@ public class PlayerStateController : MonoBehaviour
                     velocity.y = wallLeap.y;
                 }
             }
-            if (coyoteTimer > 0) {
+            if (coyoteTimer > 0 && !isForceAdded) {
                 velocity.y = maxJumpVelocity;
                 coyoteTimer = -1f;
 
@@ -220,6 +254,15 @@ public class PlayerStateController : MonoBehaviour
 
         }
         currentState.FixedUpdate(this);
+    }
+
+    public void Springboard(Vector3 springVelocity)
+    {
+        velocity = springVelocity;
+        isForceAdded = true;
+        SetCurrentState(JumpState);
+        coyoteTimer = -1f;
+        SpringVelocity = springVelocity;
     }
 
     //private void OnTriggerStay(Collider other)

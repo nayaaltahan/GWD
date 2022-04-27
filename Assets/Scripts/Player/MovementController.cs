@@ -13,7 +13,9 @@ public class MovementController : RaycastController
 
 	public LayerMask wallCollisionMask;
 
+	float springboardMinSpeed = 0.5f;
 
+	PuzzleInteractible puzzleInteractible;
 
 	public override void Start() {
 		base.Start ();
@@ -161,18 +163,39 @@ public class MovementController : RaycastController
 				collisions.below = directionY == -1;
 				collisions.above = directionY == 1;
 
+				if (hit.collider.gameObject.GetComponent<PuzzleInteractible>())
+				{
+					if (puzzleInteractible != hit.collider.gameObject.GetComponent<PuzzleInteractible>())
+					{
+						puzzleInteractible = hit.collider.gameObject.GetComponent<PuzzleInteractible>();
+						puzzleInteractible.Pressed = true;
+					}
+
+					if (puzzleInteractible == hit.collider.gameObject.GetComponent<PuzzleInteractible>())
+						puzzleInteractible.Interact();
+				}
+				else
+                {
+					if (puzzleInteractible)
+					{
+						puzzleInteractible.Pressed = false;
+						puzzleInteractible = null;
+					}
+                }
+
 				if (hit.collider.gameObject.CompareTag(Constants.SPRINGBOARD))
 				{
 					Debug.Log("SPRINGBOARD" + hit.collider.GetComponent<Springboard>().GetVelocity());
 					springVelocity = hit.collider.GetComponent<Springboard>().GetVelocity();
+					PlayerStateController playerState = GetComponent<PlayerStateController>();
+
+					if (playerState.velocity.y < -springboardMinSpeed)
+						playerState.Springboard(springVelocity);
+
+					return;
 				}
 			}
 		}
-
-		if (springVelocity != Vector3.zero)
-        {
-			GetComponent<PlayerStateController>().SpringVelocity = springVelocity;
-        }
 
 		if (collisions.climbingSlope) {
 			float directionX = Mathf.Sign(velocity.x);
