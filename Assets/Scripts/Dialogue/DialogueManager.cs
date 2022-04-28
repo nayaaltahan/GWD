@@ -139,14 +139,11 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
         
         currentStory = new Story(story);
+        CurrentKnotName = knotName;
         if (!string.IsNullOrEmpty(knotName))
             currentStory.ChoosePathString(knotName);
 
         dialogueSnapshotInstance.start();
-        
-        CurrentKnotName = knotName;
-        if (!string.IsNullOrEmpty(CurrentKnotName))
-            currentStory.ChoosePathString(CurrentKnotName);
 
         // Skip to first choice
         StartCoroutine(StartStoryCoroutine());
