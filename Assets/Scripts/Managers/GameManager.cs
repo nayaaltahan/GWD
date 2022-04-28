@@ -40,13 +40,13 @@ public class GameManager : MonoBehaviour
             {
                 playerOne.GetComponent<PlayerController>().SetUpPlayer(true);
                 CameraManager.instance.AddPlayerToTargetGroup(playerOne);
-                playerTwo.SetActive(false);
+                playerTwo.GetComponent<PlayerController>().enabled = false;
             }
             else if(playerType == PlayerType.frog)
             {
                 playerTwo.GetComponent<PlayerController>().SetUpPlayer(true);
                 CameraManager.instance.AddPlayerToTargetGroup(playerTwo);
-                playerOne.SetActive(false);
+                playerOne.GetComponent<PlayerController>().enabled = false;
             }
             SwitchState(GameStates.SINGLEPLAYGAME);
         }
