@@ -9,7 +9,7 @@ public enum DialogueTrackingEvent
     SessionStarted,
     DialogueOptionChosen,
     DialogueDidNotChoose,
-    SessionID
+    PlayTestSession
 }
 
 public class DialogueTracking
@@ -21,7 +21,7 @@ public class DialogueTracking
             DialogueTrackingEvent.SessionStarted => "sessionStarted",
             DialogueTrackingEvent.DialogueOptionChosen => "optionChosen",
             DialogueTrackingEvent.DialogueDidNotChoose => "noChoice",
-            DialogueTrackingEvent.SessionID => "savedSessionID",
+            DialogueTrackingEvent.PlayTestSession => "playTestSession",
             _ => throw new ArgumentOutOfRangeException(nameof(eventType), eventType, null)
         };
         
