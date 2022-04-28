@@ -8,13 +8,12 @@ public enum DialogueTrackingEvent
 {
     SessionStarted,
     DialogueOptionChosen,
-    DialogueDidNotChoose
+    DialogueDidNotChoose,
+    SessionID
 }
 
 public class DialogueTracking
 {
-    private static string sessionID = Guid.NewGuid().ToString();
-
     public static void SendTrackingEvent(DialogueTrackingEvent eventType, IDictionary<string, object> data = null)
     {
         string contentString = eventType switch
@@ -22,6 +21,7 @@ public class DialogueTracking
             DialogueTrackingEvent.SessionStarted => "sessionStarted",
             DialogueTrackingEvent.DialogueOptionChosen => "optionChosen",
             DialogueTrackingEvent.DialogueDidNotChoose => "noChoice",
+            DialogueTrackingEvent.SessionID => "savedSessionID",
             _ => throw new ArgumentOutOfRangeException(nameof(eventType), eventType, null)
         };
         
@@ -42,23 +42,5 @@ public class DialogueTracking
         }
 
         return data;
-    }
-
-    private static string DomainName
-    {
-        get
-        {
-            string domainName;
-            if (Debug.isDebugBuild)
-            {
-                domainName = "debug_dialogue";
-            }
-            else
-            {
-                domainName = "live_dialogue";
-            }
-
-            return domainName;
-        }
     }
 }

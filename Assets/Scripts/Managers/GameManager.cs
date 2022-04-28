@@ -36,10 +36,10 @@ public class GameManager : MonoBehaviour
             Debug.LogError("More than one Game Manager in the scene");
         
         var options = new InitializationOptions();
-        options.SetEnvironmentName(Debug.isDebugBuild ? "development" : "production");
-
-        await UnityServices.InitializeAsync(options);
+        options.SetEnvironmentName(Debug.isDebugBuild ? "dev" : "live");
         
+        await UnityServices.InitializeAsync(options);
+
         DialogueTracking.SendTrackingEvent(DialogueTrackingEvent.SessionStarted);
         
         await Events.CheckForRequiredConsents();
