@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Analytics;
 using Unity.Services.Core;
+using Unity.Services.Core.Environments;
 using UnityEngine;
 using UnityEngine.Analytics;
 
@@ -33,9 +35,14 @@ public class GameManager : MonoBehaviour
         else
             Debug.LogError("More than one Game Manager in the scene");
         
-        await UnityServices.InitializeAsync();
+        var options = new InitializationOptions();
+        options.SetEnvironmentName(Debug.isDebugBuild ? "development" : "production");
+
+        await UnityServices.InitializeAsync(options);
         
         DialogueTracking.SendTrackingEvent(DialogueTrackingEvent.SessionStarted);
+        
+        await Events.CheckForRequiredConsents();
 
         if (allowSinglePlayer)
         {

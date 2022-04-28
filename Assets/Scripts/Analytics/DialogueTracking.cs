@@ -8,7 +8,6 @@ public enum DialogueTrackingEvent
 {
     SessionStarted,
     DialogueOptionChosen,
-    DialogueTriggered,
     DialogueDidNotChoose
 }
 
@@ -20,16 +19,19 @@ public class DialogueTracking
     {
         string contentString = eventType switch
         {
-            DialogueTrackingEvent.SessionStarted => "SessionStarted",
-            DialogueTrackingEvent.DialogueOptionChosen => "DialogueOptionChosen",
-            DialogueTrackingEvent.DialogueTriggered => "DialogueTriggered",
-            DialogueTrackingEvent.DialogueDidNotChoose => "DialogueDidNotChoose",
+            DialogueTrackingEvent.SessionStarted => "sessionStarted",
+            DialogueTrackingEvent.DialogueOptionChosen => "optionChosen",
+            DialogueTrackingEvent.DialogueDidNotChoose => "noChoice",
             _ => throw new ArgumentOutOfRangeException(nameof(eventType), eventType, null)
         };
         
         data = SetupDataDictionary(data);
 
-        Events.CustomData($"{DomainName}.{contentString}", data);
+        foreach (KeyValuePair<string, object> kvp in data)
+            Debug.Log ($"dialog_{contentString}: " + $"{kvp.Key}: {kvp.Value}");
+        
+        Events.CustomData($"dialog_{contentString}", data);
+        Events.Flush();
     }
 
     private static IDictionary<string, object> SetupDataDictionary(IDictionary<string, object> data)
@@ -39,10 +41,6 @@ public class DialogueTracking
             data = new Dictionary<string, object>();
         }
 
-        data["SessionID"] = sessionID;
-        data["Timestamp"] = DateTime.Now;
-        data["KnotName"] = DialogueManager.CurrentKnotName?? "No KnotName";;
-        
         return data;
     }
 
@@ -53,11 +51,11 @@ public class DialogueTracking
             string domainName;
             if (Debug.isDebugBuild)
             {
-                domainName = "debug.dialogue";
+                domainName = "debug_dialogue";
             }
             else
             {
-                domainName = "live.dialogue";
+                domainName = "live_dialogue";
             }
 
             return domainName;

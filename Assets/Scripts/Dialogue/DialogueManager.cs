@@ -116,12 +116,8 @@ public class DialogueManager : MonoBehaviour
         {
             // Random choice from current story current choices
             var randomChoice = new Random().Next(0, currentStory.currentChoices.Count);
-            StartCoroutine(SelectChoice(randomChoice));
-            var trackingData = new Dictionary<string, object>()
-            {
-                {"Random Choice", randomChoice}
-            };
-            DialogueTracking.SendTrackingEvent(DialogueTrackingEvent.DialogueDidNotChoose, trackingData);
+            StartCoroutine(SelectChoice(randomChoice, true));
+            var currentChoiceMaker = robotIsMakingChoice ? "Onwell" : "Rani";
         }
 
 
@@ -372,16 +368,32 @@ public class DialogueManager : MonoBehaviour
             speechBubble.SetActive(false);
     }
 
-    public IEnumerator SelectChoice(int index)
+    public IEnumerator SelectChoice(int index, bool random = false)
     {
         if (currentStory.currentChoices.Count <= index)
             yield return null;
         
+        var selectedChoice = currentStory.currentChoices[index].text;
+        
+        // Send Analytics
+        
+        var currentChoiceMaker = robotIsMakingChoice ? "Onwell" : "Rani";
+
+        var trackingData = new Dictionary<string, object>()
+        {
+            { "randomChoice", random},
+            { "selectedChoice", selectedChoice },
+            { "selectedChoiceIndex", index },
+            { "timeSpentMakingChoice", timeSpentMakingChoice},
+            { "timeLimit", playerChoiceTimeLimit},
+            { "player", currentChoiceMaker},
+            { "knotName", CurrentKnotName?? "No KnotName"}
+        };
+
+        DialogueTracking.SendTrackingEvent(random ? DialogueTrackingEvent.DialogueDidNotChoose: DialogueTrackingEvent.DialogueOptionChosen, trackingData);
 
         // Reset timer
         timeSpentMakingChoice = 0.0f;
-        
-        var selectedChoice = currentStory.currentChoices[index].text;
         currentStory.ChooseChoiceIndex(index);
 
         if(frogIsMakingChoice)
