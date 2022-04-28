@@ -16,6 +16,7 @@ public class PlayerInputController : MonoBehaviour
     private bool pressedButton1, pressedButton2, pressedButton3;
     public bool ReleasedJump { get; private set; } = false;
 
+    public PlayerAudio audio;
 
     public void Jump(InputAction.CallbackContext value)
     {

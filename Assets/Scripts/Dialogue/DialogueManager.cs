@@ -15,6 +15,8 @@ public class DialogueManager : MonoBehaviour
 
     public static Story currentStory;
 
+    public FMODUnity.EventReference dialogueSnapshot;
+    FMOD.Studio.EventInstance dialogueSnapshotInstance;
 
     [SerializeField]
     private PlayerInputController robotInputController;
@@ -101,6 +103,7 @@ public class DialogueManager : MonoBehaviour
             instance = this;
             frogPlayerController = frogInputController.GetComponent<PlayerStateController>();
             robotPlayerController = robotInputController.GetComponent<PlayerStateController>();
+            dialogueSnapshotInstance = FMODUnity.RuntimeManager.CreateInstance(dialogueSnapshot.Guid);
         }
         else
             Debug.LogError("More than one Dialogue Manager in the scene");
@@ -136,6 +139,11 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
         
         currentStory = new Story(story);
+        if (!string.IsNullOrEmpty(knotName))
+            currentStory.ChoosePathString(knotName);
+
+        dialogueSnapshotInstance.start();
+        
         CurrentKnotName = knotName;
         if (!string.IsNullOrEmpty(CurrentKnotName))
             currentStory.ChoosePathString(CurrentKnotName);
@@ -434,6 +442,8 @@ public class DialogueManager : MonoBehaviour
             HideAllSpeechBubbles();
             robotIsMakingChoice = false;
             frogIsMakingChoice = false;
+            dialogueSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
         }
     }
 
