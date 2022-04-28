@@ -5,18 +5,31 @@ using UnityEngine;
 public class PuzzleInteractible : MonoBehaviour
 {
     bool pressed = false;
-    bool interacted = true;
     int interactedCount = 0;
     [SerializeField] float yEnd;
     [SerializeField] float yStart;
     [SerializeField] float moveSpeed;
-    [SerializeField] private PuzzleObject puzzleObject;
+    private PuzzleMovingPlatform puzzleObject;
+    private PuzzleInteractible otherPuzzleConnection;
 
     public bool Pressed { get => pressed; set => pressed = value; }
+    public PuzzleMovingPlatform PuzzleObject { get => puzzleObject; set => puzzleObject = value; }
+
+    private void Start()
+    {
+        for (int i = 0; i < puzzleObject.puzzleInteractables.Count; i++)
+        {
+            if(puzzleObject.puzzleInteractables[i] != this)
+            {
+                otherPuzzleConnection = puzzleObject.puzzleInteractables[i];
+            }
+        }
+    }
 
     public void Interact()
     {
-        puzzleObject.Interact();
+        if(!otherPuzzleConnection.Pressed && puzzleObject.Moving == false)
+            puzzleObject.Interact();
     }
 
     private void Update()
@@ -40,15 +53,17 @@ public class PuzzleInteractible : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+ 
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("TEST");
-        if (other.tag != "Player")
+        if (other.tag != "Player" )
             return;
-        Debug.Log("PLAYER");
 
         interactedCount++;
-        interacted = true;
         pressed = true;
     }
 
@@ -61,9 +76,11 @@ public class PuzzleInteractible : MonoBehaviour
 
         if (interactedCount == 0)
         {
-            interacted = false;
             pressed = false;
-            puzzleObject.OnPlateRelease();
+            if(!otherPuzzleConnection.pressed)
+            {
+                puzzleObject.OnPlateRelease();
+            }
         }
     }
 }
