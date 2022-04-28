@@ -1,7 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Analytics;
 using Unity.Services.Core;
+using Unity.Services.Core.Environments;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public enum GameStates { MAINMENU, CHARACTERSELECT, PAUSEMENU, PLAYGAME, SINGLEPLAYGAME }
 internal enum PlayerType
@@ -34,7 +39,19 @@ public class GameManager : MonoBehaviour
         else
             Debug.LogError("More than one Game Manager in the scene");
         
-        await UnityServices.InitializeAsync();
+        var options = new InitializationOptions();
+        options.SetEnvironmentName(Debug.isDebugBuild ? "dev" : "live");
+        
+        await UnityServices.InitializeAsync(options);
+
+        DialogueTracking.SendTrackingEvent(DialogueTrackingEvent.SessionStarted);
+        
+        await Events.CheckForRequiredConsents();
+
+        if (SceneManager.GetActiveScene().name.Equals("MainABTest"))
+        {
+            DialogueTracking.SendTrackingEvent(DialogueTrackingEvent.PlayTestSession);
+        }
 
         if (allowSinglePlayer)
         {

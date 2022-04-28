@@ -6,13 +6,14 @@ using System.Linq;
 using FMOD.Studio;
 using TMPro;
 using UnityEngine;
+using Object = System.Object;
 using Random = System.Random;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance;
 
-    private Story currentStory;
+    public static Story currentStory;
 
 
     [SerializeField]
@@ -91,6 +92,8 @@ public class DialogueManager : MonoBehaviour
 
     private PlayerStateController frogPlayerController;
     private PlayerStateController robotPlayerController;
+    public static string CurrentKnotName;
+
     void Start()
     {
         if (instance == null)
@@ -113,10 +116,10 @@ public class DialogueManager : MonoBehaviour
         // Select third choice if timer runs out
         if (timeSpentMakingChoice >= playerChoiceTimeLimit)
         {
-            // TODO: Telemetry play didn't select a choice
             // Random choice from current story current choices
             var randomChoice = new Random().Next(0, currentStory.currentChoices.Count);
-            StartCoroutine(SelectChoice(randomChoice));
+            StartCoroutine(SelectChoice(randomChoice, true));
+            var currentChoiceMaker = robotIsMakingChoice ? "Onwell" : "Rani";
         }
 
 
@@ -133,9 +136,10 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
         
         currentStory = new Story(story);
-        if (!string.IsNullOrEmpty(knotName))
-            currentStory.ChoosePathString(knotName);
-        
+        CurrentKnotName = knotName;
+        if (!string.IsNullOrEmpty(CurrentKnotName))
+            currentStory.ChoosePathString(CurrentKnotName);
+
         // Skip to first choice
         StartCoroutine(StartStoryCoroutine());
     }
@@ -380,16 +384,32 @@ public class DialogueManager : MonoBehaviour
             speechBubble.SetActive(false);
     }
 
-    public IEnumerator SelectChoice(int index)
+    public IEnumerator SelectChoice(int index, bool random = false)
     {
         if (currentStory.currentChoices.Count <= index)
             yield return null;
         
+        var selectedChoice = currentStory.currentChoices[index].text;
+        
+        // Send Analytics
+        
+        var currentChoiceMaker = robotIsMakingChoice ? "Onwell" : "Rani";
+
+        var trackingData = new Dictionary<string, object>()
+        {
+            { "randomChoice", random},
+            { "selectedChoice", selectedChoice },
+            { "selectedChoiceIndex", index },
+            { "timeSpentMakingChoice", timeSpentMakingChoice},
+            { "timeLimit", playerChoiceTimeLimit},
+            { "player", currentChoiceMaker},
+            { "knotName", CurrentKnotName?? "No KnotName"}
+        };
+
+        DialogueTracking.SendTrackingEvent(random ? DialogueTrackingEvent.DialogueDidNotChoose: DialogueTrackingEvent.DialogueOptionChosen, trackingData);
 
         // Reset timer
         timeSpentMakingChoice = 0.0f;
-        
-        var selectedChoice = currentStory.currentChoices[index].text;
         currentStory.ChooseChoiceIndex(index);
 
         if(frogIsMakingChoice)
