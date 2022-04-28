@@ -43,6 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e24e27999f36e948a3351367d0c9552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueSnapshot:
+    Guid:
+      Data1: 995521028
+      Data2: 1253630114
+      Data3: 217802115
+      Data4: 1854358205
+    Path: event:/DialogueSnapshot
   robotInputController: {fileID: 0}
   frogInputController: {fileID: 0}
   timeBetweenChatbubbles: 0.4

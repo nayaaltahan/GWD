@@ -31,6 +31,9 @@
 		<relationship name="timeline">
 			<destination>{4f6ed6f9-9703-4025-9eee-68d4b3b5d0b3}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{fdc7859e-637d-4f70-984e-87ff6054602f}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{6ba33071-d546-43d3-bd52-f8c1c4af0d11}">
 		<relationship name="masterBus">
@@ -50,7 +53,7 @@
 			<destination>{72fcc3d5-a2d7-4a95-bad4-b7fe52e87f33}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{62bffa2b-7e62-4904-a74d-8869c6b72dce}</destination>
+			<destination>{5c772a2c-6980-476f-83c4-4ed129458fdf}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{df9dc9f3-fcac-4b3a-94ef-515fc848d41a}" />
@@ -89,6 +92,12 @@
 		<property name="length">
 			<value>0.5</value>
 		</property>
+		<property name="volume">
+			<value>-7.5</value>
+		</property>
+		<property name="pitch">
+			<value>0.5</value>
+		</property>
 		<relationship name="sounds">
 			<destination>{4c81aed3-cd49-4acf-a330-fe18c612d788}</destination>
 			<destination>{c1b82790-8b64-4aab-bf53-fb55aae90242}</destination>
@@ -96,6 +105,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{1b61d300-4e2b-4c20-a6ca-5aab183cd1e7}">
+		<property name="volume">
+			<value>-8.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -135,10 +147,16 @@
 	<object class="MixerBusEffectChain" id="{ff881142-48c6-4f04-b865-8df51d9ae8d5}">
 		<relationship name="effects">
 			<destination>{395716ee-4f75-4aec-a6bf-423a2b5e79dd}</destination>
+			<destination>{9c2f44db-b951-417a-83a8-3fd4344fe10a}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{5fbfc565-09ae-4f5d-97d1-05773940ce44}" />
 	<object class="MixerBusFader" id="{fbd93dea-3461-4846-acbd-c43aa21e278d}" />
 	<object class="SpatialiserEffect" id="{4547d07a-cdf9-49b7-a581-ef20e7e1e85c}" />
 	<object class="MixerBusFader" id="{395716ee-4f75-4aec-a6bf-423a2b5e79dd}" />
+	<object class="ThreeEQEffect" id="{9c2f44db-b951-417a-83a8-3fd4344fe10a}">
+		<property name="lowGain">
+			<value>-7.5</value>
+		</property>
+	</object>
 </objects>

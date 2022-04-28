@@ -5667,7 +5667,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &729591774
 Transform:
   m_ObjectHideFlags: 0
@@ -11397,7 +11397,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099337285}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 75.807304, y: 14.847521, z: 168}
+  m_LocalPosition: {x: 75.806465, y: 14.847521, z: 168}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2101651238}
@@ -11733,6 +11733,7 @@ GameObject:
   - component: {fileID: 1614624602}
   - component: {fileID: 1614624605}
   - component: {fileID: 1614624606}
+  - component: {fileID: 1614624607}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -11799,7 +11800,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614624601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 75.807304, y: 14.847521, z: 168}
+  m_LocalPosition: {x: 75.806465, y: 14.847521, z: 168}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11872,6 +11873,20 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1614624607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614624601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!1 &1637853819
 GameObject:
   m_ObjectHideFlags: 0
@@ -17233,6 +17248,10 @@ PrefabInstance:
       propertyPath: collisionMask.m_Bits
       value: 257
       objectReference: {fileID: 0}
+    - target: {fileID: 8868738726889057818, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+      propertyPath: audio
+      value: 
+      objectReference: {fileID: 1794748024}
     - target: {fileID: 8868738726944416130, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
       propertyPath: m_DefaultControlScheme
       value: 
@@ -17296,6 +17315,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7401736fce464b2eb9f3c1c4cca7067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1794748023 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 79521992356444996, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+  m_PrefabInstance: {fileID: 1794748015}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1794748024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794748023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75408dbb520005a4d981442d6d2d97ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepEvent:
+    Guid:
+      Data1: 152303289
+      Data2: 1281153621
+      Data3: -864581210
+      Data4: 1940607874
+    Path: event:/SFX/Rani/Rani_Step
 --- !u!114 &1882030599 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1735257857160317584, guid: 816bd3904c27430418ca19feffee4abe, type: 3}
