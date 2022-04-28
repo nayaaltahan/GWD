@@ -55,6 +55,9 @@ public class GameManager : MonoBehaviour
             SwitchState(GameStates.CHARACTERSELECT);
 
         }
+
+
+        PuzzleInteractible[] temp = FindObjectsOfType<PuzzleInteractible>();
     }
 
     // Update is called once per frame
