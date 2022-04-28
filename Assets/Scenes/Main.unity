@@ -11116,8 +11116,8 @@ MonoBehaviour:
   canvas: {fileID: 5788553121441116599}
   playerOne: {fileID: 5507386222626771236}
   playerTwo: {fileID: 1335777642}
-  allowSinglePlayer: 0
-  playerType: 1
+  allowSinglePlayer: 1
+  playerType: 0
 --- !u!43 &993659828
 Mesh:
   m_ObjectHideFlags: 0
@@ -11677,6 +11677,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781f9b6206dd82f4a8265c9408dc7ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1399164643 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5160539113669242277, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+  m_PrefabInstance: {fileID: 2184401118622004514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1399164646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399164643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75408dbb520005a4d981442d6d2d97ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepEvent:
+    Guid:
+      Data1: -2085831431
+      Data2: 1288386424
+      Data3: -34368074
+      Data4: 217743387
+    Path: event:/SFX/Onwell/Onwell_Step
 --- !u!1 &1574471402
 GameObject:
   m_ObjectHideFlags: 3
@@ -27450,6 +27474,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 593648582, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+      propertyPath: audio
+      value: 
+      objectReference: {fileID: 1399164646}
     - target: {fileID: 1981721185, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: maxJumpHeight
       value: 4

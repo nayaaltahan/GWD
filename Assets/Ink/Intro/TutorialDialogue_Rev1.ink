@@ -32,7 +32,7 @@ This is the first cutscene #cutscene
 Onwell gets up.
     Onwell: I NEED ASSISTANCE, FROG-PERSON. #event:/Voice/Onwell/Convo2_INeedAssistance #cutscene
     Onwell: MY KIN DEMANDS IT. #event:/Voice/Onwell/Convo2_MyKinDemands #cutscene
-    Onwell: I SEEK THE GREAT OAKS. #event:/Voice/Onwell/Convo2_ISeekThe #cutscene
+    Onwell: I SEEK THE GREAT OAKS. #event:/Voice/Onwell/ISeekTheGreat #cutscene
 -
 *[Rani: Your kin?] #cutscene
 Rani: More characters like you around, then? Interesting. #event:/Voice/Rani/Convo2_MoreCharactersLike cutscene
@@ -53,57 +53,56 @@ Onwell: THE PIPES ARE TOO SMALL. #event:/Voice/Onwell/Convo2_ThePipesAreTooSmall
 -> DONE
 
 ===Water===
-Rani: Watch out for the water here.
-Rani: It looks cleaner than it is.
-Onwell: IT LOOKS DISGUSTING.
-Rani: Even so. 
+Rani: Watch out for the water here. #event:/Voice/Rani/WatchOutForTheWater
+Rani: It looks cleaner than it is. #event:/Voice/Rani/ItLooksCleaner
+Onwell: IT LOOKS DISGUSTING. #event:/Voice/Onwell/ItLooksDisgusting
+Rani: Even so. #event:/Voice/Rani/EvenSo
 
 -> DONE
 
 ===TalkingUnderTheTree===
 *[Onwell: This is "nature", right?]
-    Onwell: FROG-PERSON. IS IT TRUE THAT ALL THIS GROWS?
-    Onwell: THIS EARTH STRETCHING TOWARDS SKY.
+    Onwell: FROG-PERSON. DOES ALL THIS TRULY GROW? #event:/Voice/Onwell/DoesAllThisTrulyGrow
+    Onwell: THIS EARTH STRETCHING TOWARDS SKY.  #event:/Voice/Onwell/ThisEarthStretching
         **[Rani: Yes!]
-            Rani: Indeed! These trees have grown for hundreds of years.
-            Rani: This big one here, maybe a thousand.
-            Onwell: SOME OF MY KIN ARE AS OLD.
-            Onwell: THOUGH THEIR MEMORY HAS FADED.
+            Rani: Indeed! These trees have grown for hundreds of years. #event:/Voice/Rani/IndeedTheseTrees
+            Rani: This big one here, maybe a thousand. #event:/Voice/Rani/ThisBigOne
+            Onwell: SOME OF MY KIN ARE AS OLD. #event:/Voice/Onwell/SomeOfMyKin
+            Onwell: THOUGH THEIR MEMORY HAS FADED. #event:/Voice/Onwell/ThoughTheirMemoryHasFaded
         **[Rani: How dumb are you?]
-            Rani: Surely you cannot know so little, sir?
-            Rani: You can fly, yet you are oblivious to the concept of trees?
-            Onwell: I KNOW JUST WHAT I HAVE SEEN.
-            Onweel: BEFORE TODAY, TREES WERE ONLY POETRY.
+            Rani: Surely you cannot know so little, sir? #event:/Voice/Rani/SurelyYouCannot
+            Rani: You can fly, yet you are oblivious to the concept of trees? #event:/Voice/Rani/YouCanFlyYet
+            Onwell: I KNOW JUST WHAT I HAVE SEEN.  #event:/Voice/Onwell/IKnowJustWhatIHaveSeen
+            Onweel: BEFORE TODAY, TREES WERE ONLY POETRY. #event:/Voice/Onwell/BeforeTodayTreesWereOnlyPoetry 
     
 *[Onwell: You look weak.]
-    Onwell: HOW DO YOU SURVIVE, FROG-PERSON?
-    Onwell: YOUR FRAME IS SOFT AND FRAIL.
-    Onwell: WHY DOES THE WORLD NOT BREAK YOU?
+    Onwell: HOW DO YOU SURVIVE, FROG-PERSON? #event:/Voice/Onwell/HowDoYouSurvive
+    Onwell: YOUR FRAME IS SOFT AND FRAIL. #event:/Voice/Onwell/YourFrameIsSoft
+    Onwell: WHY DOES THE WORLD NOT BREAK YOU? #event:/Voice/Onwell/WhyDoesTheWorldNotBreakYou
         **[Rani: I'm too smart to die]
-            Rani: There's more to it than strength.
-            Rani: You can avoid most dangers if you have a good head on your shoulders
-            Rani: And I have possibly the best head. 
-        **[Rani: I'm squishy!]
-            Rani: We'll, I'm a frog, sir. I'm quite elastic. 
-            Rani: I can take quite a fall with a build like this.
+            Rani: There's more to it than strength.  #event:/Voice/Rani/TheresMoreToIt
+            Rani: You can avoid most dangers if you have a good head on your shoulders #event:/Voice/Rani/YouCanAvoidMost
+            Rani: And I have possibly the best head.  #event:/Voice/Rani/AndIHavePossiblyTheBest
+        **[Rani: I'm squishy!] 
+            Rani: We'll, I'm a frog, sir. I'm quite elastic. #event:/Voice/Rani/WellImAFrog
+            Rani: I can take fall, no problem #event:/Voice/Rani/ICanTakeAFall
         **[Rani: I have guns]
-            Rani: Well, I have mechanical means of protection you know.
-            Rani: Rather like yourself, actually.
-*[Onwell: Are we there yet?]
-    Onwell: FROG-PERSON. IS THIS THE GREAT WILLOW?
-    Rani: Oh, no. This is just a regular Cypress I believe. A big one though.
-    Rani: The Great Willow is a good way off still.
+            Rani: Well, I have mechanical means of protection you know. #event:/Voice/Rani/WellIHaveMechanicalMeans
+            Rani: Rather like yourself, actually. #event:/Voice/Rani/RatherLikeYourself
+*[Onwell: Are we there yet?] 
+    Onwell: FROG-PERSON. ARE THESE THE GREAT OAKS? #event:/Voice/Onwell/AreTheseTheGreatOaks
+    Rani: Oh, no. This is just a regular Cypress I believe. A big one though. #event:/Voice/Rani/ThisIsJustARegularCypress
+    Rani:  Great Oaks is a good way off still.  #event:/Voice/Rani/GreatOaksIsStillAGoodWayOff
         **[Rani: What's the rush?]
-            Rani: You're not in a hurry, surely?
-            Onwell: I HAVE WASTED TIME FALLING.
-            Onwell: BUT TIME WILL PASS. SO BE IT.
+            Rani: You're not in a hurry, surely?  #event:/Voice/Rani/YoureNotInAHurrySurely
+            Onwell: I HAVE WASTED TIME FALLING. #event:/Voice/Onwell/IHaveWastedTimeFalling
+            Onwell: BUT TIME WILL PASS. SO BE IT. #event:/Voice/Onwell/ButTimeWillPass
         **[Rani: I lived there once]
-            Rani: I used to have a home in the Willow.
-            Rani: But they are small-minded there.
-            Rani: No understanding of big ideas.
-            Rani: So I moved here to work.
-            Onwell: BECAUSE THIS SWAMP UNDERSTANDS IDEAS.
-            Rani: Well yes. Or, rather, it does not fail to understand them.
+            Rani: I used to have a home in the Oaks.  #event:/Voice/Rani/IUsedToHaveAHome
+            Rani: But they are small-minded there.  No understanding of big ideas.  #event:/Voice/Rani/ButTheyAreSmallMinded
+            Rani: So I moved here to work.  #event:/Voice/Rani/SoIMovedHere
+            Onwell: BECAUSE THIS SWAMP UNDERSTANDS IDEAS. #event:/Voice/Onwell/BecauseThisSwampUnderstands
+            Rani: Well yes. Or, rather, it does not fail to understand them.  #event:/Voice/Rani/WellYesOrRather
                         
     
 -
@@ -133,27 +132,27 @@ Rani: Though it is calibrated for cabbages... #event:/Voice/Rani/Convo4_ThoughIt
 ->DONE
 
 ===SymbolRock===
-Rani: What in the rotting apple? What is happening?
+Rani: What in the rotting apple? What is happening? #event:/Voice/Rani/WhatInTheRotting
 [Onwell: The rock speaks to me]
-    Onwell: THE ROCK SPEAKS TO ME.
-    Onwell: IT WELCOMES ME BACK.
-    Onwell: GREETS ME AFTER ITS SLUMBER.
+    Onwell: THE ROCK SPEAKS TO ME. #event:/Voice/Onwell/TheRockSpeaksToMe
+    Onwell: IT WELCOMES ME BACK.   #event:/Voice/Onwell/ItWelcomesMeBack
+    Onwell: GREETS ME AFTER ITS SLUMBER.  #event:/Voice/Onwell/GreetsMeAfterItsSlumber
         [Rani: You're crazy]
-            Rani: Did you hit your head, sir? Rocks don't greet people.
-        [Rani: This is crazy]
-            Rani: I have never seen anything like it.
-            Rani: It somehow frightens me.
+            Rani: Did you hit your head, sir? Rocks don't greet people. #event:/Voice/Rani/DidYouHitYourHead
+        [Rani: It is unnerving]
+            Rani: I have never seen anything like it. #event:/Voice/Rani/IveNeverSeenAnythingLikeIt
+            Rani: It somehow frightens me. #event:/Voice/Rani/ItSomehowFrightensMe
 [Onwell: You will not understand]
-    Onwell: I WOULD EXPLAIN THIS, FROG-PERSON.
-    Onwell: BUT IT CANNOT BE EXPLAINED WITH YOUR WORDS.
+    Onwell: I WOULD EXPLAIN THIS, FROG-PERSON.  #event:/Voice/Onwell/IWouldExplainThis
+    Onwell: BUT IT CANNOT BE EXPLAINED WITH YOUR WORDS. #event:/Voice/Onwell/ButItCannotBeExplained
         [Rani: Try me]
-            Rani: Come on, at least attempt it.
-            Onwell: IT IS SOMETHING LIKE A GREETING.
-            Onwell: AND SOMETHING LIKE A MEMORY.
-            Rani: ...
-            Rani: Well, you gave it your best shot!
+            Rani: Come on, at least attempt it. #event:/Voice/Rani/ComeOnAtLeastAttemptIt
+            Onwell: IT IS SOMETHING LIKE A GREETING. #event:/Voice/Onwell/ItIsSomethingLikeAGreeting
+            Onwell: AND SOMETHING LIKE A MEMORY. #event:/Voice/Onwell/AndSomethingLikeAMemory
+            Rani: ...all right, that does sound like nonsense. #event:/Voice/Rani/ThatDoesSoundLikeNonsense
+            Rani: Well, you gave it your best shot! #event:/Voice/Rani/WellYouGaveItYourBestShot
         [Rani: Sure.]
-            Rani: If you say so.
+            Rani: If you say so. #event:/Voice/Rani/IfYouSaySo
 
 ->DONE
 
@@ -190,28 +189,28 @@ There's a great piece of scrap metal in the way.
 
 ===CabbagePile===
 
-Rani: So this is where...
-Rani: Great sprout! 
-Onwell: A MALFUNCTION.
-Rani: Two weeks production - ruined!
-Rani: Grof! Mr. Grof what the hell is this?
-Rani: Mr. Grof?
-
+Rani: So this is where... Great sprout! #event:/Voice/Rani/SoThisIsWhere
+Onwell: A MALFUNCTION. #event:/Voice/Onwell/AMalfunction
+Rani: Two weeks production - ruined! #event:/Voice/Rani/TwoWeeksProduction
+Rani: Grof! Mr. Grof what the hell is this? #event:/Voice/Rani/MrGrofWhatTheHell
+Rani: Mr. Grof? #event:/Voice/Rani/MrGrof
+ 
+[Onwell: Who is Grof?]
+    Onwell: WHO IS GROF? #event:/Voice/Onwell/WhoIsGrof
+    Rani: My associate. And a friend, of sorts. #event:/Voice/Rani/MyAssociateAndAFriend
+    Rani:  He's supposed to be here. He's in charge of packaging. #event:/Voice/Rani/HesSupposedToBeHere
+[Onwell: Noone's home]
+    Onwell: THE HOUSE IS EMPTY. #event:/Voice/Onwell/TheHouseIsEmpty
+    Rani: Apparently. #event:/Voice/Rani/Apparently
+    Rani: Seems he left in an awful hurry. #event:/Voice/Rani/SeemsHeLeftInAnAwfulHurry
+    
 -> DONE
 
 ===EmptyHouse===
-[Onwell: Who is Grof?]
-    Onwell: WHO IS GROF?
-    Rani: My associate. And a friend, of sorts.
-    Rani: He's in charge of packaging.
-    Rani: He's supposed to be here.
-[Onwell: Noone's home]
-    Onwell: THE HOUSE IS EMPTY.
-    Rani: Apparently.
-    Rani: Seems he left in a hurry.
-    Rani: He forgot his hat.
--> DONE
-    
+
+Rani: His gate is broken. #event:/Voice/Rani/HisGateIsBroken
+
+->DONE    
 ===Machine===
 Rani stops in front of her homespun metal-compactor.
 
@@ -235,14 +234,17 @@ The two travelers reach the top of a hill. Suddenly, three robots flying in form
     Rani: This flight technology your kind has is highly impressive!  #event:/Voice/Rani/Convo7_ThisFlightTechnology
     Rani: Present company excluded, of course! #event:/Voice/Rani/Convo7_PresentCompanyExcluded
 -
-Rani: I should ask you. What brings you here?
-Rani: Why are you here, sir?
-Onwell: THE MISSION. 
-Rani: Which entails what, exactly?
-Rani: Sir?
-Onwell: POWER.
+Rani: Now that we're on the subject. Why are you people here for?  #event:/Voice/Rani/WhyAreYouPeopleHere
+Rani: sir?  #event:/Voice/Rani/Sir
+Rani: Why are you here, sir?  #event:/Voice/Rani/WhyAreYouHereSir
 
-
+Onwell: THE MISSION.  #event:/Voice/Onwell/TheMission
+Rani: Which entails what, exactly?  #event:/Voice/Rani/WhichEntailsWhatExactly
+Rani: Sir?  #event:/Voice/Rani/Sir2
+Rani: Sir?  #event:/Voice/Rani/Sir3
 -
 ->DONE
-    
+ 
+===Ending===
+Rani: No. #event:/Voice/Rani/No
+->DONE
