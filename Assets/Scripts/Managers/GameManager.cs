@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     // TODO: Spawn only 1 player when this is true
     [SerializeField] public bool allowSinglePlayer = false;
     [SerializeField] private PlayerType playerType = PlayerType.frog;
+    [SerializeField] private GameObject CineMachineCamera;
+    [SerializeField] private GameObject CutsceneObj;
 
     // Start is called before the first frame update
     async void Start()
@@ -85,11 +87,15 @@ public class GameManager : MonoBehaviour
                 UIManager.instance.TurnCharSelectUIOn(false);
                 CameraManager.instance.AddPlayerToTargetGroup(playerOne);
                 CameraManager.instance.AddPlayerToTargetGroup(playerTwo);
+                CutsceneObj.SetActive(true);
+                CineMachineCamera.SetActive(true);
                 //Turn off any U.I. or objects that don't belong to PlayGame State
                 break;
             case GameStates.SINGLEPLAYGAME:
                 this.state = GameStates.SINGLEPLAYGAME;
                 UIManager.instance.TurnCharSelectUIOn(false);
+                CutsceneObj.SetActive(true);
+                CineMachineCamera.SetActive(true);
                 //Turn off any U.I. or objects that don't belong to PlayGame State
                 break;
             default:

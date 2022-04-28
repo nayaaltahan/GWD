@@ -68,6 +68,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] 
     private float playerChoiceTimeLimit = 6.0f;
 
+    [SerializeField] private GameObject cinematicRobot, playerRobot;
+    
     public float PlayerChoiceTimeLimit => playerChoiceTimeLimit;
 
     /// Used to know when the player is making a choice so we can select the story knot
@@ -138,8 +140,18 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(StartStoryCoroutine());
     }
 
+    private bool playedCutscene = false;
     private IEnumerator StartStoryCoroutine()
     {
+        if (!playedCutscene)
+        {
+            // TODO: Not hardcode
+            yield return new WaitForSeconds(18);
+            cinematicRobot?.SetActive(false);
+            playerRobot?.SetActive(true);
+            playedCutscene = true;
+        }
+
         var color = robotIsMakingChoice ? subtitleColorRobot : subtitleColorFrog;
         yield return StartCoroutine(PlayDialogue(color));
         DisplayChoices();
