@@ -73,7 +73,7 @@ Rani: Even so. #event:/Voice/Rani/EvenSo
             Rani: Surely you cannot know so little, sir? #event:/Voice/Rani/SurelyYouCannot
             Rani: You can fly, yet you are oblivious to the concept of trees? #event:/Voice/Rani/YouCanFlyYet
             Onwell: I KNOW JUST WHAT I HAVE SEEN.  #event:/Voice/Onwell/IKnowJustWhatIHaveSeen
-            Onweel: BEFORE TODAY, TREES WERE ONLY POETRY. #event:/Voice/Onwell/BeforeTodayTreesWereOnlyPoetry 
+            Onwell: BEFORE TODAY, TREES WERE ONLY POETRY. #event:/Voice/Onwell/BeforeTodayTreesWereOnlyPoetry 
     
 *[Onwell: You look weak.]
     Onwell: HOW DO YOU SURVIVE, FROG-PERSON? #event:/Voice/Onwell/HowDoYouSurvive
@@ -133,27 +133,27 @@ Rani: Though it is calibrated for cabbages... #event:/Voice/Rani/Convo4_ThoughIt
 
 ===SymbolRock===
 Rani: What in the rotting apple? What is happening? #event:/Voice/Rani/WhatInTheRotting
-[Onwell: The rock speaks to me]
+*[Onwell: The rock speaks to me]
     Onwell: THE ROCK SPEAKS TO ME. #event:/Voice/Onwell/TheRockSpeaksToMe
     Onwell: IT WELCOMES ME BACK.   #event:/Voice/Onwell/ItWelcomesMeBack
     Onwell: GREETS ME AFTER ITS SLUMBER.  #event:/Voice/Onwell/GreetsMeAfterItsSlumber
-        [Rani: You're crazy]
+        **[Rani: You're crazy]
             Rani: Did you hit your head, sir? Rocks don't greet people. #event:/Voice/Rani/DidYouHitYourHead
-        [Rani: It is unnerving]
+        **[Rani: It is unnerving]
             Rani: I have never seen anything like it. #event:/Voice/Rani/IveNeverSeenAnythingLikeIt
             Rani: It somehow frightens me. #event:/Voice/Rani/ItSomehowFrightensMe
-[Onwell: You will not understand]
+*[Onwell: You will not understand]
     Onwell: I WOULD EXPLAIN THIS, FROG-PERSON.  #event:/Voice/Onwell/IWouldExplainThis
     Onwell: BUT IT CANNOT BE EXPLAINED WITH YOUR WORDS. #event:/Voice/Onwell/ButItCannotBeExplained
-        [Rani: Try me]
+        **[Rani: Try me]
             Rani: Come on, at least attempt it. #event:/Voice/Rani/ComeOnAtLeastAttemptIt
             Onwell: IT IS SOMETHING LIKE A GREETING. #event:/Voice/Onwell/ItIsSomethingLikeAGreeting
             Onwell: AND SOMETHING LIKE A MEMORY. #event:/Voice/Onwell/AndSomethingLikeAMemory
             Rani: ...all right, that does sound like nonsense. #event:/Voice/Rani/ThatDoesSoundLikeNonsense
             Rani: Well, you gave it your best shot! #event:/Voice/Rani/WellYouGaveItYourBestShot
-        [Rani: Sure.]
+        **[Rani: Sure.]
             Rani: If you say so. #event:/Voice/Rani/IfYouSaySo
-
+-
 ->DONE
 
 ===Junkyard===
@@ -195,15 +195,15 @@ Rani: Two weeks production - ruined! #event:/Voice/Rani/TwoWeeksProduction
 Rani: Grof! Mr. Grof what the hell is this? #event:/Voice/Rani/MrGrofWhatTheHell
 Rani: Mr. Grof? #event:/Voice/Rani/MrGrof
  
-[Onwell: Who is Grof?]
+*[Onwell: Who is Grof?]
     Onwell: WHO IS GROF? #event:/Voice/Onwell/WhoIsGrof
     Rani: My associate. And a friend, of sorts. #event:/Voice/Rani/MyAssociateAndAFriend
     Rani:  He's supposed to be here. He's in charge of packaging. #event:/Voice/Rani/HesSupposedToBeHere
-[Onwell: Noone's home]
+*[Onwell: Noone's home]
     Onwell: THE HOUSE IS EMPTY. #event:/Voice/Onwell/TheHouseIsEmpty
     Rani: Apparently. #event:/Voice/Rani/Apparently
     Rani: Seems he left in an awful hurry. #event:/Voice/Rani/SeemsHeLeftInAnAwfulHurry
-    
+-
 -> DONE
 
 ===EmptyHouse===
