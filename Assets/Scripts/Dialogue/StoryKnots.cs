@@ -9,8 +9,12 @@ public enum StoryKnots
     OnwellBuildInfo,
     FirstJump,
     FirstSpringboard,
+    SymbolRock,
+    CabbagePile,
+    EmptyHouse,
     Junkyard,
     FirstPush,
     Machine,
-    SeeOtherRobots
+    SeeOtherRobots,
+    Ending
 }
