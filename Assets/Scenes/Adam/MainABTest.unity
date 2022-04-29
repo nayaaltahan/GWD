@@ -27355,9 +27355,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 112235382301344917, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3997574093365687489, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
       propertyPath: m_Name
       value: Rani
+      objectReference: {fileID: 0}
+    - target: {fileID: 7248174198987283690, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7248174199791792615, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7248174200334945943, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7485181155961644580, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
       propertyPath: m_PlayerRoot
@@ -27415,6 +27431,10 @@ PrefabInstance:
       propertyPath: playerSpawn
       value: 
       objectReference: {fileID: 1637853820}
+    - target: {fileID: 8261913590514759521, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8868738728139694013, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
       propertyPath: animator
       value: 

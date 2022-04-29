@@ -155,7 +155,7 @@ public class DialogueManager : MonoBehaviour
         if (!playedCutscene)
         {
             // TODO: Not hardcode
-            yield return new WaitForSeconds(18);
+            yield return new WaitForSeconds(19);
             cinematicRobot?.SetActive(false);
             playerRobot?.SetActive(true);
             playedCutscene = true;

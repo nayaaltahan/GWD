@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
 using Unity.Services.Core.Environments;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
 public enum GameStates { MAINMENU, CHARACTERSELECT, PAUSEMENU, PLAYGAME, SINGLEPLAYGAME }
