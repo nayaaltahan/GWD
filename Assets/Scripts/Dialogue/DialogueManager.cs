@@ -311,6 +311,16 @@ public class DialogueManager : MonoBehaviour
             SlowPlayers(false);
             FreezePlayers(false);
         }
+
+        if (currentStory.currentTags.Contains("OnwellPoint"))
+        {
+            robotPlayerController.MoveToPoint(currentStory.currentTags[currentStory.currentTags.IndexOf("OnwellPoint") + 1]);
+        }
+
+        if (currentStory.currentTags.Contains("RaniPoint"))
+        {
+            frogPlayerController.MoveToPoint(currentStory.currentTags[currentStory.currentTags.IndexOf("RaniPoint") + 1]);
+        }
     }
 
     private bool DisplaySubtitles(string currentText)

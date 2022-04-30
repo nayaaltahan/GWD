@@ -41,6 +41,10 @@ public class PlayerStateController : MonoBehaviour
 
     public float moveSpeed => isSlowed ? slowSpeed : fastSpeed;
 
+    public bool movingToPoint = false;
+    GameObject[] movementTargets;
+    Vector3 movementTarget = Vector3.zero;
+
     [Header("Components")]
     [SerializeField]
     private Animator animator;
@@ -79,6 +83,8 @@ public class PlayerStateController : MonoBehaviour
         InputController = GetComponent<PlayerInputController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         SetCurrentState(IdleState);
+
+        movementTargets = GameObject.FindGameObjectsWithTag("MovementTarget");
     }
 
     // Update is called once per frame
@@ -216,9 +222,27 @@ public class PlayerStateController : MonoBehaviour
             modelTransform.eulerAngles = new Vector3(0, -90, 0);
             isFacingRight = false;
         }
-        
+
+        if (movingToPoint)
+        {
+            if (Mathf.Abs(movementTarget.x - transform.position.x) < 0.1)
+            {
+                movingToPoint = false;
+            }
+            else
+            {
+                velocity.x = moveSpeed * Mathf.Sign(movementTarget.x - transform.position.x);
+                MovementController.Move(velocity * Time.fixedDeltaTime);
+
+            }
+
+        }
+        else
+        {
+            MovementController.Move(velocity * Time.fixedDeltaTime);
+        }
+
         velocity.y += gravity * Time.fixedDeltaTime;
-        MovementController.Move(velocity * Time.fixedDeltaTime);
         
         if (velocity.x != 0 && (MovementController.collisions.above || MovementController.collisions.below))
         {
@@ -255,6 +279,30 @@ public class PlayerStateController : MonoBehaviour
         }
         currentState.FixedUpdate(this);
     }
+
+    public void MoveToPoint(Vector3 point)
+    {
+        movingToPoint = true;
+        movementTarget = point;
+    }
+
+    public void MoveToPoint(String point)
+    {
+
+        foreach (GameObject target in movementTargets)
+        {
+            if (target.name == point)
+            {
+                movementTarget = target.transform.position;
+                movingToPoint = true;
+
+                return;
+            }
+        }
+
+        Debug.LogError("Failed to move point - point was not found");
+    }
+
 
     public void Springboard(Vector3 springVelocity)
     {
