@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4996483780890822930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4996483780890822931}
+  - component: {fileID: 4996483780890822932}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4996483780890822931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4996483780890822930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4996483780890822932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4996483780890822930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e24e27999f36e948a3351367d0c9552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSnapshot:
+    Guid:
+      Data1: 995521028
+      Data2: 1253630114
+      Data3: 217802115
+      Data4: 1854358205
+    Path: event:/DialogueSnapshot
+  robotInputController: {fileID: 0}
+  frogInputController: {fileID: 0}
+  timeBetweenChatbubbles: 0.4
+  robotSpeechBubbles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  frogSpeechBubbles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  frogSpeechIndicator: {fileID: 0}
+  robotSpeechIndicator: {fileID: 0}
+  frogOptionalChatIndicator: {fileID: 0}
+  robotOptionalChatIndicator: {fileID: 0}
+  defaultAudioDelay: 1
+  delayBetweenSpeechBubbles: 0.7
+  subtitleContainer: {fileID: 0}
+  subtitlePrefab: {fileID: 4889731280673067098, guid: 749e8244cc18d8a49a0f55142997ba5f, type: 3}
+  subtitleColorFrog: {r: 1, g: 0.6207221, b: 0, a: 1}
+  subtitleColorRobot: {r: 0, g: 0.5622227, b: 1, a: 1}
+  playerChoiceTimeLimit: 100000
+  cinematicRobot: {fileID: 0}
+  playerRobot: {fileID: 0}
