@@ -18,12 +18,12 @@ public class PlayerStateController : MonoBehaviour
     public float timeToJumpApex = .4f;
     public float coyoteTime = 0.3f;
     float coyoteTimer = 0f;
-    
+
     [Header("Turn Around Settings")]
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
 
-    [Header("Wall Jump")] 
+    [Header("Wall Jump")]
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
@@ -48,7 +48,7 @@ public class PlayerStateController : MonoBehaviour
     [Header("Model Settings")]
     [SerializeField]
     private Transform modelTransform;
-    
+
     public PlayerInputController InputController { get; private set; }
     private MovementController MovementController { get; set; }
     public Animator Animations => animator;
@@ -57,17 +57,26 @@ public class PlayerStateController : MonoBehaviour
 
     public Vector3 SpringVelocity { get => springVelocity; set => springVelocity = value; }
 
-    
+
     float gravity;
     float maxJumpVelocity;
     float minJumpVelocity;
     [HideInInspector]
     public Vector3 velocity;
     float velocityXSmoothing;
-    
+
     private bool isSlowed = false;
     private bool canMove = true;
     private Vector3 springVelocity = Vector3.zero;
+
+
+
+    public bool movingToPoint = false;
+    GameObject[] movementTargets;
+    Vector3 movementTarget = Vector3.zero;
+    bool faceRightAfterMovement = false;
+
+
 
     private bool isFacingRight = true;
 
@@ -79,6 +88,7 @@ public class PlayerStateController : MonoBehaviour
         InputController = GetComponent<PlayerInputController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         SetCurrentState(IdleState);
+        movementTargets = GameObject.FindGameObjectsWithTag("MovementTarget");
     }
 
     // Update is called once per frame
@@ -89,7 +99,7 @@ public class PlayerStateController : MonoBehaviour
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
 
         var input = canMove ? InputController.MoveDirection : Vector3.zero;
-        
+
         int wallDirX = (MovementController.collisions.left) ? -1 : 1;
 
         float targetVelocityX = 0.0f;
@@ -101,29 +111,29 @@ public class PlayerStateController : MonoBehaviour
         }
         else
         {
-            targetVelocityX = (velocity.x*0.95f) + (input.x * moveSpeed);
+            targetVelocityX = (velocity.x * 0.95f) + (input.x * moveSpeed);
 
             Debug.Log("Target:" + targetVelocityX);
 
-         
-                if (Mathf.Sign(springVelocity.x) > 0f)
-                {
 
-                    if (targetVelocityX > springVelocity.x + moveSpeed)
-                        targetVelocityX = springVelocity.x + moveSpeed;
-                    else if (targetVelocityX < -moveSpeed)
-                            targetVelocityX = -moveSpeed;
-                }
-                else if (Mathf.Sign(springVelocity.x) < 0f)
-                {
+            if (Mathf.Sign(springVelocity.x) > 0f)
+            {
+
+                if (targetVelocityX > springVelocity.x + moveSpeed)
+                    targetVelocityX = springVelocity.x + moveSpeed;
+                else if (targetVelocityX < -moveSpeed)
+                    targetVelocityX = -moveSpeed;
+            }
+            else if (Mathf.Sign(springVelocity.x) < 0f)
+            {
                 if (targetVelocityX < springVelocity.x - moveSpeed)
                     targetVelocityX = springVelocity.x - moveSpeed;
                 else if (targetVelocityX > moveSpeed)
-                        targetVelocityX = moveSpeed;
-                }
+                    targetVelocityX = moveSpeed;
+            }
 
 
-            
+
 
             Debug.Log("Actual:" + targetVelocityX);
 
@@ -133,30 +143,36 @@ public class PlayerStateController : MonoBehaviour
 
         bool wallSliding = false;
 
-        if ((MovementController.collisions.left || MovementController.collisions.right) && !MovementController.collisions.below && velocity.y < 0) {
+        if ((MovementController.collisions.left || MovementController.collisions.right) && !MovementController.collisions.below && velocity.y < 0)
+        {
             wallSliding = true;
 
-            if (velocity.y < -wallSlideSpeedMax) {
+            if (velocity.y < -wallSlideSpeedMax)
+            {
                 velocity.y = -wallSlideSpeedMax;
             }
 
-            if (timeToWallUnstick > 0) {
+            if (timeToWallUnstick > 0)
+            {
                 velocityXSmoothing = 0;
                 velocity.x = 0;
 
-                if (input.x != wallDirX && input.x != 0) {
+                if (input.x != wallDirX && input.x != 0)
+                {
                     timeToWallUnstick -= Time.deltaTime;
                 }
-                else {
+                else
+                {
                     timeToWallUnstick = wallStickTime;
                 }
             }
-            else {
+            else
+            {
                 timeToWallUnstick = wallStickTime;
             }
 
         }
-        
+
         if (MovementController.collisions.above || (MovementController.collisions.below && !isForceAdded))
         {
             velocity.y = 0;
@@ -177,21 +193,26 @@ public class PlayerStateController : MonoBehaviour
 
         if (InputController.IsJumping && canMove)
         {
-            if ((MovementController.collisions.leftWall || MovementController.collisions.rightWall) && !MovementController.collisions.below && velocity.y < 0) {
-                if (wallDirX == input.x) {
+            if ((MovementController.collisions.leftWall || MovementController.collisions.rightWall) && !MovementController.collisions.below && velocity.y < 0)
+            {
+                if (wallDirX == input.x)
+                {
                     velocity.x = -wallDirX * wallJumpClimb.x;
                     velocity.y = wallJumpClimb.y;
                 }
-                else if (input.x == 0) {
+                else if (input.x == 0)
+                {
                     velocity.x = -wallDirX * wallJumpOff.x;
                     velocity.y = wallJumpOff.y;
                 }
-                else {
+                else
+                {
                     velocity.x = -wallDirX * wallLeap.x;
                     velocity.y = wallLeap.y;
                 }
             }
-            if (coyoteTimer > 0 && !isForceAdded) {
+            if (coyoteTimer > 0 && !isForceAdded)
+            {
                 velocity.y = maxJumpVelocity;
                 coyoteTimer = -1f;
 
@@ -216,10 +237,10 @@ public class PlayerStateController : MonoBehaviour
             modelTransform.eulerAngles = new Vector3(0, -90, 0);
             isFacingRight = false;
         }
-        
+
         velocity.y += gravity * Time.fixedDeltaTime;
         MovementController.Move(velocity * Time.fixedDeltaTime);
-        
+
         if (velocity.x != 0 && (MovementController.collisions.above || MovementController.collisions.below))
         {
             SetCurrentState(WalkState);
@@ -237,13 +258,13 @@ public class PlayerStateController : MonoBehaviour
         {
             SetCurrentState(IdleState);
         }
-        
+
         // animations
         if (!MovementController.collisions.below)
         {
             Animations.SetBool(Constants.FALLING, true);
         }
-        
+
         if (MovementController.collisions.below)
         {
             //Debug.Log("Collisions below, finish falling/jumping animations");
@@ -253,6 +274,56 @@ public class PlayerStateController : MonoBehaviour
             //Animations.SetLayerWeight(1,0);
 
         }
+
+
+
+        if (movingToPoint)
+        {
+            float difference = movementTarget.x - transform.position.x;
+
+            if (Mathf.Abs(difference) < 0.1)
+            {
+                movingToPoint = false;
+                modelTransform.eulerAngles = faceRightAfterMovement ? new Vector3(0, 90, 0) : new Vector3(0, -90, 0);
+                isFacingRight = faceRightAfterMovement;
+            }
+            else
+            {
+                if (Mathf.Abs(difference) > moveSpeed * Time.fixedDeltaTime)
+                {
+                    velocity.x = moveSpeed * Mathf.Sign(movementTarget.x - transform.position.x);
+                    MovementController.Move(velocity * Time.fixedDeltaTime);
+                }
+                else
+                {
+                    velocity.x = difference;
+                    MovementController.Move(velocity * Time.fixedDeltaTime);
+
+                }
+
+
+                if (movementTarget.x - transform.position.x < 0f)
+                {
+                    if (isFacingRight)
+                    {
+                        modelTransform.eulerAngles = new Vector3(0, -90, 0);
+                        isFacingRight = false;
+                    }
+                }
+                else
+                {
+                    if (!isFacingRight)
+                    {
+                        modelTransform.eulerAngles = new Vector3(0, 90, 0);
+                        isFacingRight = true;
+                    }
+                }
+
+
+            }
+
+        }
+
         currentState.FixedUpdate(this);
     }
 
@@ -264,6 +335,41 @@ public class PlayerStateController : MonoBehaviour
         coyoteTimer = -1f;
         SpringVelocity = springVelocity;
     }
+
+    public void MoveToPoint(Vector3 point, bool faceRightAfter)
+    {
+        movingToPoint = true;
+        movementTarget = point;
+        faceRightAfterMovement = faceRightAfter;
+    }
+
+    public void MoveToPoint(float relative, bool faceRightAfter)
+    {
+        movingToPoint = true;
+        movementTarget = new Vector3(transform.position.x + relative, transform.position.y, transform.position.z);
+        faceRightAfterMovement = faceRightAfter;
+
+    }
+
+    public void MoveToPoint(String point, bool faceRightAfter)
+    {
+
+        foreach (GameObject target in movementTargets)
+        {
+            if (target.name == point)
+            {
+                movementTarget = target.transform.position;
+                movingToPoint = true;
+                faceRightAfterMovement = faceRightAfter;
+
+
+                return;
+            }
+        }
+
+        Debug.LogError("Failed to move point - point was not found");
+    }
+
 
     //private void OnTriggerStay(Collider other)
     //{
@@ -282,7 +388,7 @@ public class PlayerStateController : MonoBehaviour
     //        var force = InputController.MoveDirection * 1000;
     //        Debug.Log($"Pushing object {other.gameObject.name} with force {force}");
     //        other.GetComponentInParent<Rigidbody>()?.AddForce(force);
-            
+
     //    }
     //}
 
