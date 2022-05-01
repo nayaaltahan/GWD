@@ -62,7 +62,6 @@ public class PuzzleMovingPlatform : PuzzleObject
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("ENTER");
         if (other.gameObject.tag != Constants.PLAYER)
             return;
 

@@ -12,7 +12,6 @@ public class PlayerAudio : MonoBehaviour
     public void Step()
     {
         FMODUnity.RuntimeManager.PlayOneShotAttached(stepEvent.Guid, gameObject);
-        Debug.Log("TookStep", gameObject);
     }
 
 }
