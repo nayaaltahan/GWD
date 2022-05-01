@@ -279,15 +279,28 @@ public class PlayerStateController : MonoBehaviour
 
         if (movingToPoint)
         {
-            if (Mathf.Abs(movementTarget.x - transform.position.x) < 0.1)
+            float difference = movementTarget.x - transform.position.x;
+
+            if (Mathf.Abs(difference) < 0.1)
             {
                 movingToPoint = false;
                 modelTransform.eulerAngles = faceRightAfterMovement ? new Vector3(0, 90, 0) : new Vector3(0, -90, 0);
+                isFacingRight = faceRightAfterMovement;
             }
             else
             {
-                velocity.x = moveSpeed * Mathf.Sign(movementTarget.x - transform.position.x);
-                MovementController.Move(velocity * Time.fixedDeltaTime);
+                if (Mathf.Abs(difference) > moveSpeed * Time.fixedDeltaTime)
+                {
+                    velocity.x = moveSpeed * Mathf.Sign(movementTarget.x - transform.position.x);
+                    MovementController.Move(velocity * Time.fixedDeltaTime);
+                }
+                else
+                {
+                    velocity.x = difference;
+                    MovementController.Move(velocity * Time.fixedDeltaTime);
+
+                }
+
 
                 if (movementTarget.x - transform.position.x < 0f)
                 {
