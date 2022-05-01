@@ -18,12 +18,12 @@ public class PlayerStateController : MonoBehaviour
     public float timeToJumpApex = .4f;
     public float coyoteTime = 0.3f;
     float coyoteTimer = 0f;
-    
+
     [Header("Turn Around Settings")]
     float accelerationTimeAirborne = .2f;
     float accelerationTimeGrounded = .1f;
 
-    [Header("Wall Jump")] 
+    [Header("Wall Jump")]
     public Vector2 wallJumpClimb;
     public Vector2 wallJumpOff;
     public Vector2 wallLeap;
@@ -41,11 +41,6 @@ public class PlayerStateController : MonoBehaviour
 
     public float moveSpeed => isSlowed ? slowSpeed : fastSpeed;
 
-    public bool movingToPoint = false;
-    GameObject[] movementTargets;
-    Vector3 movementTarget = Vector3.zero;
-    bool faceRightAfterMovement = false;
-
     [Header("Components")]
     [SerializeField]
     private Animator animator;
@@ -53,7 +48,7 @@ public class PlayerStateController : MonoBehaviour
     [Header("Model Settings")]
     [SerializeField]
     private Transform modelTransform;
-    
+
     public PlayerInputController InputController { get; private set; }
     private MovementController MovementController { get; set; }
     public Animator Animations => animator;
@@ -62,17 +57,26 @@ public class PlayerStateController : MonoBehaviour
 
     public Vector3 SpringVelocity { get => springVelocity; set => springVelocity = value; }
 
-    
+
     float gravity;
     float maxJumpVelocity;
     float minJumpVelocity;
     [HideInInspector]
     public Vector3 velocity;
     float velocityXSmoothing;
-    
+
     private bool isSlowed = false;
     private bool canMove = true;
     private Vector3 springVelocity = Vector3.zero;
+
+
+
+    public bool movingToPoint = false;
+    GameObject[] movementTargets;
+    Vector3 movementTarget = Vector3.zero;
+    bool faceRightAfterMovement = false;
+
+
 
     private bool isFacingRight = true;
 
@@ -84,7 +88,6 @@ public class PlayerStateController : MonoBehaviour
         InputController = GetComponent<PlayerInputController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         SetCurrentState(IdleState);
-
         movementTargets = GameObject.FindGameObjectsWithTag("MovementTarget");
     }
 
@@ -96,7 +99,7 @@ public class PlayerStateController : MonoBehaviour
         minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
 
         var input = canMove ? InputController.MoveDirection : Vector3.zero;
-        
+
         int wallDirX = (MovementController.collisions.left) ? -1 : 1;
 
         float targetVelocityX = 0.0f;
@@ -108,29 +111,29 @@ public class PlayerStateController : MonoBehaviour
         }
         else
         {
-            targetVelocityX = (velocity.x*0.95f) + (input.x * moveSpeed);
+            targetVelocityX = (velocity.x * 0.95f) + (input.x * moveSpeed);
 
             Debug.Log("Target:" + targetVelocityX);
 
-         
-                if (Mathf.Sign(springVelocity.x) > 0f)
-                {
 
-                    if (targetVelocityX > springVelocity.x + moveSpeed)
-                        targetVelocityX = springVelocity.x + moveSpeed;
-                    else if (targetVelocityX < -moveSpeed)
-                            targetVelocityX = -moveSpeed;
-                }
-                else if (Mathf.Sign(springVelocity.x) < 0f)
-                {
+            if (Mathf.Sign(springVelocity.x) > 0f)
+            {
+
+                if (targetVelocityX > springVelocity.x + moveSpeed)
+                    targetVelocityX = springVelocity.x + moveSpeed;
+                else if (targetVelocityX < -moveSpeed)
+                    targetVelocityX = -moveSpeed;
+            }
+            else if (Mathf.Sign(springVelocity.x) < 0f)
+            {
                 if (targetVelocityX < springVelocity.x - moveSpeed)
                     targetVelocityX = springVelocity.x - moveSpeed;
                 else if (targetVelocityX > moveSpeed)
-                        targetVelocityX = moveSpeed;
-                }
+                    targetVelocityX = moveSpeed;
+            }
 
 
-            
+
 
             Debug.Log("Actual:" + targetVelocityX);
 
@@ -140,30 +143,36 @@ public class PlayerStateController : MonoBehaviour
 
         bool wallSliding = false;
 
-        if ((MovementController.collisions.left || MovementController.collisions.right) && !MovementController.collisions.below && velocity.y < 0) {
+        if ((MovementController.collisions.left || MovementController.collisions.right) && !MovementController.collisions.below && velocity.y < 0)
+        {
             wallSliding = true;
 
-            if (velocity.y < -wallSlideSpeedMax) {
+            if (velocity.y < -wallSlideSpeedMax)
+            {
                 velocity.y = -wallSlideSpeedMax;
             }
 
-            if (timeToWallUnstick > 0) {
+            if (timeToWallUnstick > 0)
+            {
                 velocityXSmoothing = 0;
                 velocity.x = 0;
 
-                if (input.x != wallDirX && input.x != 0) {
+                if (input.x != wallDirX && input.x != 0)
+                {
                     timeToWallUnstick -= Time.deltaTime;
                 }
-                else {
+                else
+                {
                     timeToWallUnstick = wallStickTime;
                 }
             }
-            else {
+            else
+            {
                 timeToWallUnstick = wallStickTime;
             }
 
         }
-        
+
         if (MovementController.collisions.above || (MovementController.collisions.below && !isForceAdded))
         {
             velocity.y = 0;
@@ -184,21 +193,26 @@ public class PlayerStateController : MonoBehaviour
 
         if (InputController.IsJumping && canMove)
         {
-            if ((MovementController.collisions.leftWall || MovementController.collisions.rightWall) && !MovementController.collisions.below && velocity.y < 0) {
-                if (wallDirX == input.x) {
+            if ((MovementController.collisions.leftWall || MovementController.collisions.rightWall) && !MovementController.collisions.below && velocity.y < 0)
+            {
+                if (wallDirX == input.x)
+                {
                     velocity.x = -wallDirX * wallJumpClimb.x;
                     velocity.y = wallJumpClimb.y;
                 }
-                else if (input.x == 0) {
+                else if (input.x == 0)
+                {
                     velocity.x = -wallDirX * wallJumpOff.x;
                     velocity.y = wallJumpOff.y;
                 }
-                else {
+                else
+                {
                     velocity.x = -wallDirX * wallLeap.x;
                     velocity.y = wallLeap.y;
                 }
             }
-            if (coyoteTimer > 0 && !isForceAdded) {
+            if (coyoteTimer > 0 && !isForceAdded)
+            {
                 velocity.y = maxJumpVelocity;
                 coyoteTimer = -1f;
 
@@ -224,6 +238,45 @@ public class PlayerStateController : MonoBehaviour
             isFacingRight = false;
         }
 
+        velocity.y += gravity * Time.fixedDeltaTime;
+        MovementController.Move(velocity * Time.fixedDeltaTime);
+
+        if (velocity.x != 0 && (MovementController.collisions.above || MovementController.collisions.below))
+        {
+            SetCurrentState(WalkState);
+        }
+        else if (velocity.y < 0)
+        {
+            SetCurrentState(FallState);
+        }
+        else if (velocity.y > 0)
+        {
+            SetCurrentState(JumpState);
+
+        }
+        else if (velocity.y == 0 && velocity.x == 0)
+        {
+            SetCurrentState(IdleState);
+        }
+
+        // animations
+        if (!MovementController.collisions.below)
+        {
+            Animations.SetBool(Constants.FALLING, true);
+        }
+
+        if (MovementController.collisions.below)
+        {
+            //Debug.Log("Collisions below, finish falling/jumping animations");
+            //Animations.SetLayerWeight(1,1);
+            Animations.SetBool(Constants.FALLING, false);
+            Animations.SetBool(Constants.JUMPING, false);
+            //Animations.SetLayerWeight(1,0);
+
+        }
+
+
+
         if (movingToPoint)
         {
             if (Mathf.Abs(movementTarget.x - transform.position.x) < 0.1)
@@ -244,7 +297,7 @@ public class PlayerStateController : MonoBehaviour
                         isFacingRight = false;
                     }
                 }
-                else 
+                else
                 {
                     if (!isFacingRight)
                     {
@@ -257,51 +310,17 @@ public class PlayerStateController : MonoBehaviour
             }
 
         }
-        else
-        {
-            MovementController.Move(velocity * Time.fixedDeltaTime);
-        }
 
-        velocity.y += gravity * Time.fixedDeltaTime;
-        
-        if (velocity.x != 0 && (MovementController.collisions.above || MovementController.collisions.below))
-        {
-            SetCurrentState(WalkState);
-        }
-        else if (velocity.y < 0)
-        {
-            SetCurrentState(FallState);
-        }
-        else if (velocity.y > 0)
-        {
-            SetCurrentState(JumpState);
-
-        }
-        else if (velocity.y == 0 && velocity.x == 0)
-        {
-            SetCurrentState(IdleState);
-        }
-
-        Debug.Log(MovementController.collisions.below);
-
-        // animations
-        if (!MovementController.collisions.below && canMove)
-        {
-            Debug.Log("Falling");
-
-            Animations.SetBool(Constants.FALLING, true);
-        }
-        else if (MovementController.collisions.below)
-        {
-            //Debug.Log("Collisions below, finish falling/jumping animations");
-            //Animations.SetLayerWeight(1,1);
-            Debug.Log("StopFalling");
-            Animations.SetBool(Constants.FALLING, false);
-            Animations.SetBool(Constants.JUMPING, false);
-            //Animations.SetLayerWeight(1,0);
-
-        }
         currentState.FixedUpdate(this);
+    }
+
+    public void Springboard(Vector3 springVelocity)
+    {
+        velocity = springVelocity;
+        isForceAdded = true;
+        SetCurrentState(JumpState);
+        coyoteTimer = -1f;
+        SpringVelocity = springVelocity;
     }
 
     public void MoveToPoint(Vector3 point, bool faceRightAfter)
@@ -339,15 +358,6 @@ public class PlayerStateController : MonoBehaviour
     }
 
 
-    public void Springboard(Vector3 springVelocity)
-    {
-        velocity = springVelocity;
-        isForceAdded = true;
-        SetCurrentState(JumpState);
-        coyoteTimer = -1f;
-        SpringVelocity = springVelocity;
-    }
-
     //private void OnTriggerStay(Collider other)
     //{
     //    if (other.transform.CompareTag(Constants.PUSHABLE))
@@ -365,7 +375,7 @@ public class PlayerStateController : MonoBehaviour
     //        var force = InputController.MoveDirection * 1000;
     //        Debug.Log($"Pushing object {other.gameObject.name} with force {force}");
     //        other.GetComponentInParent<Rigidbody>()?.AddForce(force);
-            
+
     //    }
     //}
 
