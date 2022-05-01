@@ -44,6 +44,7 @@ public class PlayerStateController : MonoBehaviour
     public bool movingToPoint = false;
     GameObject[] movementTargets;
     Vector3 movementTarget = Vector3.zero;
+    bool faceRightAfterMovement = false;
 
     [Header("Components")]
     [SerializeField]
@@ -228,11 +229,30 @@ public class PlayerStateController : MonoBehaviour
             if (Mathf.Abs(movementTarget.x - transform.position.x) < 0.1)
             {
                 movingToPoint = false;
+                modelTransform.eulerAngles = faceRightAfterMovement ? new Vector3(0, 90, 0) : new Vector3(0, -90, 0);
             }
             else
             {
                 velocity.x = moveSpeed * Mathf.Sign(movementTarget.x - transform.position.x);
                 MovementController.Move(velocity * Time.fixedDeltaTime);
+
+                if (movementTarget.x - transform.position.x < 0f)
+                {
+                    if (isFacingRight)
+                    {
+                        modelTransform.eulerAngles = new Vector3(0, -90, 0);
+                        isFacingRight = false;
+                    }
+                }
+                else 
+                {
+                    if (!isFacingRight)
+                    {
+                        modelTransform.eulerAngles = new Vector3(0, 90, 0);
+                        isFacingRight = true;
+                    }
+                }
+
 
             }
 
@@ -261,17 +281,21 @@ public class PlayerStateController : MonoBehaviour
         {
             SetCurrentState(IdleState);
         }
-        
+
+        Debug.Log(MovementController.collisions.below);
+
         // animations
-        if (!MovementController.collisions.below)
+        if (!MovementController.collisions.below && canMove)
         {
+            Debug.Log("Falling");
+
             Animations.SetBool(Constants.FALLING, true);
         }
-        
-        if (MovementController.collisions.below)
+        else if (MovementController.collisions.below)
         {
             //Debug.Log("Collisions below, finish falling/jumping animations");
             //Animations.SetLayerWeight(1,1);
+            Debug.Log("StopFalling");
             Animations.SetBool(Constants.FALLING, false);
             Animations.SetBool(Constants.JUMPING, false);
             //Animations.SetLayerWeight(1,0);
@@ -280,13 +304,22 @@ public class PlayerStateController : MonoBehaviour
         currentState.FixedUpdate(this);
     }
 
-    public void MoveToPoint(Vector3 point)
+    public void MoveToPoint(Vector3 point, bool faceRightAfter)
     {
         movingToPoint = true;
         movementTarget = point;
+        faceRightAfterMovement = faceRightAfter;
     }
 
-    public void MoveToPoint(String point)
+    public void MoveToPoint(float relative, bool faceRightAfter)
+    {
+        movingToPoint = true;
+        movementTarget = new Vector3(transform.position.x + relative, transform.position.y, transform.position.z);
+        faceRightAfterMovement = faceRightAfter;
+
+    }
+
+    public void MoveToPoint(String point, bool faceRightAfter)
     {
 
         foreach (GameObject target in movementTargets)
@@ -295,6 +328,8 @@ public class PlayerStateController : MonoBehaviour
             {
                 movementTarget = target.transform.position;
                 movingToPoint = true;
+                faceRightAfterMovement = faceRightAfter;
+
 
                 return;
             }

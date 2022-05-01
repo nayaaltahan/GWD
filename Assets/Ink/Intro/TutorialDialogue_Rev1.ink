@@ -5,23 +5,23 @@ Dust settles around the robot, as Rani puts down her tools and walks over.
 -> TalkingUnderTheTree
 
 ===Intro===
-This is the first cutscene #cutscene #OnwellPoint #OnwellIntroPoint #RaniPoint #RaniIntroPoint
+This is the first cutscene #cutscene #OnwellPoint #OnwellIntroPoint #FaceRight #RaniPoint #RaniIntroPoint #FaceRight
 
-*[Rani: Are you okay?] #cutscene
-    Rani: Great sprout! Are you alive, sir? #event:/Voice/Rani/Convo1_GreatSprout #cutscene
-    **[Onwell: WHAT IS ALIVE?] #cutscene
+*[Rani: Are you okay?] #cutscene #OnwellPoint #-1 #FaceLeft
+    Rani: Great sprout! Are you alive, sir? #event:/Voice/Rani/Convo1_GreatSprout #cutscene 
+    **[Onwell: WHAT IS ALIVE?] #cutscene 
         Onwell: WHAT IS ALIVE? #event:/Voice/Onwell/Convo1_WhatIsAlive #cutscene
         Rani: Ha! A philosopher I take it? Let's get you up, then! #event:/Voice/Rani/Convo1_HaAPhilosopher #cutscene
     **[Onwell: WHERE AM I?] #cutscene
         Onwell: WHERE AM I? #event:/Voice/Onwell/Convo1_WhereAmI #cutscene
         Rani: In my cabbages, I'm afraid. Perhaps you could be persuaded to move? #event:/Voice/Rani/Convo1_InMyCabbages #cutscene
-*[Rani: My cabbages!!!] #cutscene
+*[Rani: My cabbages!!!] #cutscene #OnwellPoint #-1 #FaceLeft
     Rani: My cabbages! You imbecile. You call that a landing?  #event:/Voice/Rani/Convo1_MyCabbages #cutscene
-    **[Onwell: I fall where I must.] #cutscene
+    **[Onwell: I fall where I must.] #cutscene 
         Onwell: I FALL WHERE I MUST. CABBAGES ARE IRRELEVANT. #event:/Voice/Onwell/Convo1_IFallWhere #cutscene
         Rani: Perhaps to you, you brute! #event:/Voice/Rani/Convo1_PerhapsToYou #cutscene
 
-    **[Onwell: Apologies.] #cutscene
+    **[Onwell: Apologies.] #cutscene 
         Onwell: APOLOGIES. I HAVE NO QUARREL WITH THE CABBAGES. #event:/Voice/Onwell/Convo1_Apologies #cutscene
         Rani: We'll it sure seems that way! #event:/Voice/Rani/Convo1_WellItSureSeems #cutscene
     **...

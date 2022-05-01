@@ -312,14 +312,42 @@ public class DialogueManager : MonoBehaviour
             FreezePlayers(false);
         }
 
+
+
         if (currentStory.currentTags.Contains("OnwellPoint"))
         {
-            robotPlayerController.MoveToPoint(currentStory.currentTags[currentStory.currentTags.IndexOf("OnwellPoint") + 1]);
+
+            float n;
+            string tag = currentStory.currentTags[currentStory.currentTags.IndexOf("OnwellPoint") + 1];
+            bool faceRight = currentStory.currentTags[currentStory.currentTags.IndexOf("OnwellPoint") + 2] == "FaceRight";
+            Debug.Log("Onwell should face right is " + faceRight);
+
+
+            if (float.TryParse(tag, out n))
+            {
+                robotPlayerController.MoveToPoint(n, faceRight);
+            }
+            else
+            {
+                robotPlayerController.MoveToPoint(tag, faceRight);
+            }
         }
 
         if (currentStory.currentTags.Contains("RaniPoint"))
         {
-            frogPlayerController.MoveToPoint(currentStory.currentTags[currentStory.currentTags.IndexOf("RaniPoint") + 1]);
+            float n;
+            string tag = currentStory.currentTags[currentStory.currentTags.IndexOf("RaniPoint") + 1];
+            bool faceRight = currentStory.currentTags[currentStory.currentTags.IndexOf("RaniPoint") + 2] == "FaceRight";
+            Debug.Log("Rani should face right is " + faceRight);
+
+            if (float.TryParse(tag, out n))
+            {
+                frogPlayerController.MoveToPoint(n, faceRight);
+            }
+            else
+            {
+                frogPlayerController.MoveToPoint(tag, faceRight);
+            }
         }
     }
 

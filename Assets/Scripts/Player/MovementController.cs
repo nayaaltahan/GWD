@@ -38,9 +38,12 @@ public class MovementController : RaycastController
 			HorizontalCollisions (ref velocity);
 			WallCollisions(ref velocity);
 		}
-		if (velocity.y != 0) {
-			VerticalCollisions (ref velocity);
+
+		if (Mathf.Abs(velocity.y) > Mathf.Epsilon)
+		{
+			VerticalCollisions(ref velocity);
 		}
+		
 
 		transform.Translate (velocity);
 		
@@ -140,7 +143,8 @@ public class MovementController : RaycastController
 	}
 
 	void VerticalCollisions(ref Vector3 velocity) {
-		float directionY = Mathf.Sign (velocity.y);
+		float directionY = -1f;
+
 		float rayLength = Mathf.Abs (velocity.y) + skinWidth;
 		Vector3 springVelocity = Vector3.zero;
 		for (int i = 0; i < verticalRayCount; i ++) {
@@ -162,6 +166,8 @@ public class MovementController : RaycastController
 
 				collisions.below = directionY == -1;
 				collisions.above = directionY == 1;
+
+
 
 				if (hit.collider.gameObject.GetComponent<PuzzleInteractible>())
 				{
@@ -195,6 +201,7 @@ public class MovementController : RaycastController
 					return;
 				}
 			}
+
 		}
 
 		if (collisions.climbingSlope) {
