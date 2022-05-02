@@ -25,19 +25,19 @@ This is the first cutscene #cutscene #OnwellPoint #OnwellIntroPoint #FaceRight #
 
     **[Onwell: Apologies.] #cutscene 
         Onwell: APOLOGIES. I HAVE NO QUARREL WITH THE CABBAGES. #event:/Voice/Onwell/Convo1_Apologies #cutscene
-        Rani: We'll it sure seems that way! #event:/Voice/Rani/Convo1_WellItSureSeems #cutscene
+        Rani: Well it sure seems that way! #event:/Voice/Rani/Convo1_WellItSureSeems #cutscene
     **...
     
     --Rani: In any case, get out of my patch. Please!  #event:/Voice/Rani/Convo1_InAnyCase #cutscene
 
 -
-Onwell gets up.
+Onwell gets up. #ActivateOnwell
     Onwell: I NEED ASSISTANCE, FROG-PERSON. #event:/Voice/Onwell/Convo2_INeedAssistance #cutscene
     Onwell: MY KIN DEMANDS IT. #event:/Voice/Onwell/Convo2_MyKinDemands #cutscene
     Onwell: I SEEK THE GREAT OAKS. #event:/Voice/Onwell/ISeekTheGreat #cutscene
 -
 *[Rani: Your kin?] #cutscene
-Rani: More characters like you around, then? Interesting. #event:/Voice/Rani/Convo2_MoreCharactersLike #cutscene
+Rani: More characters like you around, then? Hm. #event:/Voice/Rani/Convo2_MoreCharactersLike #cutscene
 *[Rani: That dump?] #cutscene
 Rani: Oh, that dreary old place? #event:/Voice/Rani/Convo2_OhThatDreary cutscene
 -
@@ -174,6 +174,8 @@ The two start moving through Rani's swamp garden, which is filled with scrap met
     Onwell: EXPLAIN THE PURPOSE OF THESE BEINGS. #event:/Voice/Onwell/Convo4_ExplainThePurpose #cutscene
     **[Rani: Beings?] #cutscene
         Rani: These are not beings, sir! These are my machines. #event:/Voice/Rani/Convo4_TheseAreNotBeings #cutscene
+        Rani: They are all revolutionary. #event:/Voice/Rani/Convo4_TheyAreAllRevolutionary #cutscene
+        Rani: Some of them even work! #event:/Voice/Rani/Convo4_SomeOfThemEvenWork #cutscene
     **[Rani: My inventions!] #cutscene
         Rani: These are my inventions, each an ingenious design. #event:/Voice/Rani/Convo4_TheseAreMyInventions #cutscene
         Rani: They are all revolutionary. #event:/Voice/Rani/Convo4_TheyAreAllRevolutionary #cutscene
