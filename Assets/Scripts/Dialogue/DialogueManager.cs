@@ -44,7 +44,13 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField]
     private GameObject robotOptionalChatIndicator;
-    
+
+    [SerializeField]
+    private GameObject robotModel;
+
+    [SerializeField]
+    private GameObject cutsceneRobot;
+
 
     [Header("Audio Settings")]
     [SerializeField]
@@ -156,8 +162,7 @@ public class DialogueManager : MonoBehaviour
         {
             // TODO: Not hardcode
             yield return new WaitForSeconds(19);
-            cinematicRobot?.SetActive(false);
-            playerRobot?.SetActive(true);
+
             playedCutscene = true;
         }
 
@@ -348,6 +353,13 @@ public class DialogueManager : MonoBehaviour
             {
                 frogPlayerController.MoveToPoint(tag, faceRight);
             }
+        }
+
+        if (currentStory.currentTags.Contains("ActivateOnwell"))
+        {
+            robotModel.SetActive(true);
+            cutsceneRobot.SetActive(false);
+            Debug.Log("Activated Onwell");
         }
     }
 
