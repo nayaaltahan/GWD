@@ -23,7 +23,9 @@ public class PuzzleMovingPlatform : PuzzleObject
 
     private void Awake()
     {
+        if (target != null)
         direction = target.position - transform.position;
+
         startPosition = transform.position;
 
         for (int i = 0; i < puzzleInteractables.Count; i++)
@@ -60,7 +62,6 @@ public class PuzzleMovingPlatform : PuzzleObject
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("ENTER");
         if (other.gameObject.tag != Constants.PLAYER)
             return;
 

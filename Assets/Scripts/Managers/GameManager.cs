@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject playerOne;
     public GameObject playerTwo;
-    
+
+    public bool playCutscene;
+
     [Header("Debug")]
     // TODO: Spawn only 1 player when this is true
     [SerializeField] public bool allowSinglePlayer = false;
@@ -100,8 +102,12 @@ public class GameManager : MonoBehaviour
                 UIManager.instance.TurnCharSelectUIOn(false);
                 CameraManager.instance.AddPlayerToTargetGroup(playerOne);
                 CameraManager.instance.AddPlayerToTargetGroup(playerTwo);
-                CutsceneObj.SetActive(true);
-                CineMachineCamera.SetActive(true);
+
+                if (playCutscene)
+                {
+                    CutsceneObj.SetActive(true);
+                    CineMachineCamera.SetActive(true);
+                }
                 //Turn off any U.I. or objects that don't belong to PlayGame State
                 break;
             case GameStates.SINGLEPLAYGAME:

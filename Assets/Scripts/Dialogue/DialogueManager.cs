@@ -311,6 +311,44 @@ public class DialogueManager : MonoBehaviour
             SlowPlayers(false);
             FreezePlayers(false);
         }
+
+
+
+        if (currentStory.currentTags.Contains("OnwellPoint"))
+        {
+
+            float n;
+            string tag = currentStory.currentTags[currentStory.currentTags.IndexOf("OnwellPoint") + 1];
+            bool faceRight = currentStory.currentTags[currentStory.currentTags.IndexOf("OnwellPoint") + 2] == "FaceRight";
+            Debug.Log("Onwell should face right is " + faceRight);
+
+
+            if (float.TryParse(tag, out n))
+            {
+                robotPlayerController.MoveToPoint(n, faceRight);
+            }
+            else
+            {
+                robotPlayerController.MoveToPoint(tag, faceRight);
+            }
+        }
+
+        if (currentStory.currentTags.Contains("RaniPoint"))
+        {
+            float n;
+            string tag = currentStory.currentTags[currentStory.currentTags.IndexOf("RaniPoint") + 1];
+            bool faceRight = currentStory.currentTags[currentStory.currentTags.IndexOf("RaniPoint") + 2] == "FaceRight";
+            Debug.Log("Rani should face right is " + faceRight);
+
+            if (float.TryParse(tag, out n))
+            {
+                frogPlayerController.MoveToPoint(n, faceRight);
+            }
+            else
+            {
+                frogPlayerController.MoveToPoint(tag, faceRight);
+            }
+        }
     }
 
     private bool DisplaySubtitles(string currentText)
