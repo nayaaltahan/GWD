@@ -182,8 +182,6 @@ The two start moving through Rani's swamp garden, which is filled with scrap met
 ->DONE
 ===FirstPush===
 There's a great piece of scrap metal in the way.
-
-* [Rani: Help!]
     Rani: I must enlist your aid here, sir. #event:/Voice/Rani/Convo5_IMustEnlistYourAid
     Rani: A good push should do it. #event:/Voice/Rani/Convo5_AGoodPushShouldDoIt
 -
