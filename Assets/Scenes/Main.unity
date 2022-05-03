@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2846201, g: 0.37120858, b: 0.49880606, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12535,7 +12535,7 @@ MonoBehaviour:
   playerOne: {fileID: 5507386222626771236}
   playerTwo: {fileID: 1335777642}
   playCutscene: 1
-  allowSinglePlayer: 0
+  allowSinglePlayer: 1
   playerType: 0
   CineMachineCamera: {fileID: 1099337285}
   CutsceneObj: {fileID: 729591773}
