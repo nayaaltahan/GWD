@@ -36,6 +36,7 @@ public class ChatBubbleController : MonoBehaviour
     public IEnumerator OnEnableCoroutine()
     {
         yield return new WaitForSeconds(0.1f);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/UI/SpeechBubblePlop");
 
         canvasGroup.alpha = 1;
         image.rectTransform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBounce);
