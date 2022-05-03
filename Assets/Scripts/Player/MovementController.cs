@@ -16,6 +16,7 @@ public class MovementController : RaycastController
 	float springboardMinSpeed = 0.5f;
 
 	PuzzleInteractible puzzleInteractible;
+	private float currentY;
 
 	public override void Start()
 	{
@@ -23,7 +24,7 @@ public class MovementController : RaycastController
 		collisions.faceDir = 1;
 	}
 
-	public void Move(Vector3 velocity, bool standingOnPlatform = false)
+	public void Move(Vector3 velocity, bool standingOnPlatform = false, bool standingOnConveyor = false)
 	{
 		UpdateRaycastOrigins();
 		collisions.Reset();
@@ -48,8 +49,15 @@ public class MovementController : RaycastController
 			VerticalCollisions(ref velocity);
 		}
 
-		transform.Translate(velocity);
-
+		if (standingOnConveyor)
+		{
+			transform.position += velocity;
+		}
+		else
+		{
+			transform.Translate(velocity);
+		}
+		
 		if (standingOnPlatform)
 		{
 			collisions.below = true;
