@@ -75,6 +75,7 @@ public class PlayerStateController : MonoBehaviour
     GameObject[] movementTargets;
     Vector3 movementTarget = Vector3.zero;
     bool faceRightAfterMovement = false;
+    [HideInInspector] public bool standingOnConveyorBelt;
 
 
 
@@ -173,7 +174,7 @@ public class PlayerStateController : MonoBehaviour
 
         }
 
-        if (MovementController.collisions.above || (MovementController.collisions.below && !isForceAdded))
+        if (MovementController.collisions.above || (MovementController.collisions.below && !isForceAdded) || standingOnConveyorBelt)
         {
             velocity.y = 0;
         }
@@ -181,7 +182,7 @@ public class PlayerStateController : MonoBehaviour
         if (coyoteTimer > 0f)
             coyoteTimer -= Time.fixedDeltaTime;
 
-        if (MovementController.collisions.below)
+        if (MovementController.collisions.below || standingOnConveyorBelt)
         {
             coyoteTimer = 0.3f;
 
@@ -318,8 +319,6 @@ public class PlayerStateController : MonoBehaviour
                         isFacingRight = true;
                     }
                 }
-
-
             }
 
         }
