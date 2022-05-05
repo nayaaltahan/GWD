@@ -21992,7 +21992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &729591774
 Transform:
   m_ObjectHideFlags: 0
@@ -32334,7 +32334,7 @@ MonoBehaviour:
   canvas: {fileID: 5788553121441116599}
   playerOne: {fileID: 5507386222626771236}
   playerTwo: {fileID: 1335777642}
-  playCutscene: 0
+  playCutscene: 1
   robotsFlyingCutscene: {fileID: 312612918}
   allowSinglePlayer: 0
   playerType: 0
