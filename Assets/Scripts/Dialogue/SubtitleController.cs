@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using MonKey.Extensions;
 using TMPro;
 using UnityEngine;
 
@@ -33,7 +34,7 @@ public class SubtitleController : MonoBehaviour
     {
         isFading = true;
         var color = subtitle.faceColor;
-        subtitle.DOColor(new Color(color.r, color.g, color.b, 0.0f), timeToFade);
+        subtitle.DOColor(new Color(0, 0, 0, 0.0f), timeToFade);
         yield return new WaitForSeconds(timeToFade);
         Destroy(gameObject);
         // TODO: Use object pooler
@@ -49,8 +50,24 @@ public class SubtitleController : MonoBehaviour
     public void CreateSubtitle(string text, Color fontColor, float duration, Transform parent)
     {
         transform.SetParent(parent, false);
-        subtitle.text = text;
-        subtitle.faceColor = fontColor;
+        if(text.Contains("Onwell:") || text.Contains("Rani:"))
+        {
+            var tmp = text;
+            tmp = tmp.Replace("Rani:", "Rani:".Colored(fontColor));
+            tmp = tmp.Replace("Onwell:", "Onwell:".Colored(fontColor));
+            subtitle.text = tmp;
+        }
+        else 
+            subtitle.text = text;
+        //subtitle.faceColor = fontColor;
         this.duration = duration;
     }
+    
+}
+
+public static class ColorExtensions
+{
+    public static string ColorHexFromUnityColor(this Color unityColor) =>
+        $"#{ColorUtility.ToHtmlStringRGBA(unityColor)}";
+
 }

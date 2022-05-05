@@ -400,6 +400,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2494734569881021886, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347657663950491384, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1600
+      objectReference: {fileID: 0}
     - target: {fileID: 3541355680525730883, guid: 537681112763fdc4289502bb507acf2f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.000008738275
@@ -499,6 +507,54 @@ PrefabInstance:
     - target: {fileID: 3541355682090734106, guid: 537681112763fdc4289502bb507acf2f, type: 3}
       propertyPath: m_Name
       value: SubtitleContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541355682232965733, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541355682626318027, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541355682626318068, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_Spacing
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541355682626318069, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_VerticalFit
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182039629842800580, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182039629842800580, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182039629842800580, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081888235267848116, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081888235267848116, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081888235267848116, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081888235267848116, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081888235267848116, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 537681112763fdc4289502bb507acf2f, type: 3}
@@ -12788,6 +12844,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -5671910290767253545, guid: b71fb5bd139af461facc65cd90a8da22, type: 3}
   m_PrefabInstance: {fileID: 1675494908}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1215941907 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2494734569881021886, guid: 537681112763fdc4289502bb507acf2f, type: 3}
+  m_PrefabInstance: {fileID: 271223060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1215941911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215941907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e7303caeb0fbb54c8b5c0ec1546d599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1221451420 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1735257857825134091, guid: 816bd3904c27430418ca19feffee4abe, type: 3}
@@ -34272,6 +34345,10 @@ PrefabInstance:
       propertyPath: subtitleContainer
       value: 
       objectReference: {fileID: 271223061}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: subtitleBackground
+      value: 
+      objectReference: {fileID: 1215941911}
     - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
       propertyPath: frogInputController
       value: 

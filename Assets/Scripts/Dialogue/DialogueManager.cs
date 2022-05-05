@@ -78,6 +78,8 @@ public class DialogueManager : MonoBehaviour
     private float playerChoiceTimeLimit = 6.0f;
 
     [SerializeField] private GameObject cinematicRobot, playerRobot;
+
+    [SerializeField] private SubtitleBackgroundController subtitleBackground;
     
     public float PlayerChoiceTimeLimit => playerChoiceTimeLimit;
 
@@ -202,6 +204,11 @@ public class DialogueManager : MonoBehaviour
                 yield return new WaitForSeconds(delayBetweenSpeechBubbles);
                 SlowPlayers(false);
                 FreezePlayers(false);
+                
+                if (subtitleBackground.gameObject.activeInHierarchy)
+                {
+                    subtitleBackground.DisableImage();
+                }
                 yield break;
             }
 
@@ -212,9 +219,15 @@ public class DialogueManager : MonoBehaviour
             if (currentStory.currentTags.Count > 0)
                 Debug.Log(currentStory.currentTags[0]);
 
+            yield return new WaitForSeconds(0.2f);
             bool shouldSkip = DisplaySubtitles(currentText);
             if (shouldSkip)
                 continue;
+            if (!subtitleBackground.gameObject.activeInHierarchy)
+            {
+                subtitleBackground.gameObject.SetActive(true);
+                subtitleBackground.EnableImage();
+            }
 
             yield return StartCoroutine(ParseAudio());
         }
@@ -365,6 +378,7 @@ public class DialogueManager : MonoBehaviour
 
     private bool DisplaySubtitles(string currentText)
     {
+
         var lower = currentText.ToLower();
 
         var subtitle = Instantiate(subtitlePrefab);
@@ -374,12 +388,15 @@ public class DialogueManager : MonoBehaviour
         // Skip narrations
         if (!lower.Contains("onwell:") && !lower.Contains("rani:"))
             return true;
-        else
-        {
-            subtitle.GetComponent<SubtitleController>().CreateSubtitle(currentText, subtitleColor, 5.0f, subtitleContainer);
-            return false;
 
-        }
+        var duration = 5.0f;
+        subtitle.GetComponent<SubtitleController>().CreateSubtitle(currentText, subtitleColor, duration, subtitleContainer);
+        subtitleBackground.timeAlive = 0.0f;
+        if(subtitleBackground.gameObject.activeInHierarchy && subtitleBackground.Alpha < 1.0f)
+            subtitleBackground.EnableImage();
+        return false;
+
+        
     }
 
     private Color ChooseSubtitleColor(string currentText)
@@ -443,7 +460,13 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentStory.currentChoices.Count <= index)
             yield return null;
+
+        if (subtitleBackground.gameObject.activeInHierarchy && subtitleBackground.Alpha < 1.0f)
+        {
+            subtitleBackground.EnableImage();
+        }
         
+
         var selectedChoice = currentStory.currentChoices[index].text;
         
         // Send Analytics
@@ -489,6 +512,7 @@ public class DialogueManager : MonoBehaviour
             HideAllSpeechBubbles();
             robotIsMakingChoice = false;
             frogIsMakingChoice = false;
+ 
             dialogueSnapshotInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
         }
