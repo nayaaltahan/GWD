@@ -184,7 +184,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{af5796a3-2c43-47a9-b051-cc666e14cf4f}">
 		<property name="volume">
-			<value>-2.5</value>
+			<value>-5.5</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{a2b68253-b1e9-489a-bd36-95914da8abb3}</destination>
@@ -220,6 +220,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{9ffe34ea-2d78-4b35-bb84-94d863e87fe5}">
+		<property name="volume">
+			<value>3</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -308,7 +311,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{2e4dd140-8d12-4b35-a5a7-b85ee63a8bcb}">
 		<property name="volume">
-			<value>-42</value>
+			<value>-31</value>
 		</property>
 		<property name="name">
 			<value>Audio 2</value>
@@ -336,7 +339,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{b9569f7f-8c9c-4eb7-9123-aae4bf5ab486}">
 		<property name="volume">
-			<value>-15.5</value>
+			<value>-16</value>
 		</property>
 		<property name="name">
 			<value>Audio 3</value>
@@ -384,7 +387,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{cec96ec1-c754-4764-a6c0-445b10524542}">
 		<property name="volume">
-			<value>-15.5</value>
+			<value>-10.5</value>
 		</property>
 		<property name="name">
 			<value>Audio 4</value>
@@ -503,7 +506,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{a25546af-a907-4545-a549-530f1a6497de}">
 		<property name="volume">
-			<value>-17.5</value>
+			<value>-10.5</value>
 		</property>
 		<property name="name">
 			<value>Audio 7</value>
@@ -531,7 +534,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{68a4e7e4-7961-419d-9c99-aea8e9746056}">
 		<property name="volume">
-			<value>-23.5</value>
+			<value>-11.5</value>
 		</property>
 		<property name="name">
 			<value>Audio 8</value>
@@ -768,6 +771,9 @@
 	</object>
 	<object class="MixerBusFader" id="{77f61a56-23d7-4549-8b9f-609fbd9909f0}" />
 	<object class="SpatialiserEffect" id="{a6d5c936-5eab-455e-962c-7faecc9b7064}">
+		<property name="bypass">
+			<value>true</value>
+		</property>
 		<property name="distanceRolloffType">
 			<value>1</value>
 		</property>
@@ -779,6 +785,9 @@
 		</property>
 		<property name="soundSize">
 			<value>18</value>
+		</property>
+		<property name="minimumExtent">
+			<value>260</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{2bdf1816-e1aa-45d4-8a73-0e449560258a}">

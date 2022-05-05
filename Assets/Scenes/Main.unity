@@ -171,6 +171,10 @@ PlayableDirector:
     value: {fileID: 1294319144}
   - key: {fileID: 4441326273062611435, guid: ec8996e1557c72441b668e95eef73a2c, type: 2}
     value: {fileID: 1673185376}
+  - key: {fileID: 6095470469116596595, guid: ec8996e1557c72441b668e95eef73a2c, type: 2}
+    value: {fileID: 1919144543}
+  - key: {fileID: 1839119796100522629, guid: ec8996e1557c72441b668e95eef73a2c, type: 2}
+    value: {fileID: 877902991}
   m_ExposedReferences:
     m_References:
     - bf03230c48f75c8429d379bda3106e0a: {fileID: 1267230295}
@@ -12028,7 +12032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &877902992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17920,8 +17924,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614624601}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 65.73852, y: 12.90746, z: 174.08}
+  m_LocalRotation: {x: -0.0697227, y: -0.09043172, z: -0.053048935, w: 0.9920417}
+  m_LocalPosition: {x: 68.4373, y: 12.517521, z: 170.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
