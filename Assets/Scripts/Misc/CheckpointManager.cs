@@ -10,6 +10,10 @@ public class CheckpointManager : MonoBehaviour
     
     public static CheckpointManager instance { get; private set; }
 
+    public delegate void RespawnPlayersDelegate();
+    
+    public RespawnPlayersDelegate OnRespawnPlayers;
+
     private Vector3 currentCheckpoint;
 
     [SerializeField]
@@ -28,7 +32,7 @@ public class CheckpointManager : MonoBehaviour
     [SerializeField]
     private Color fadeOutColor;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (instance == null)
             instance = this;
@@ -41,6 +45,8 @@ public class CheckpointManager : MonoBehaviour
 
     public void RespawnPlayers()
     {
+        Debug.Log("Respawning players");
+        OnRespawnPlayers?.Invoke();
         StartCoroutine(RespawnPlayersCoroutine());
     }
 
