@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ce9fcdfb505039e4dbcbc45d60bb2658, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -208,7 +208,6 @@ MonoBehaviour:
   yEnd: 1
   yStart: 0.2
   moveSpeed: 0
-  puzzleObject: {fileID: 0}
 --- !u!54 &2669675684773724811
 Rigidbody:
   m_ObjectHideFlags: 0
