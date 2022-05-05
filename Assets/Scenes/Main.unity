@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.28462005, g: 0.37120837, b: 0.4988044, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -563,6 +563,36 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3541355682626318027, guid: 537681112763fdc4289502bb507acf2f, type: 3}
   m_PrefabInstance: {fileID: 271223060}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &297291062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 297291063}
+  m_Layer: 0
+  m_Name: FrogSpawn (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &297291063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297291062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1149.6, y: 162, z: 174.45}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 639863411}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &304387847
 GameObject:
   m_ObjectHideFlags: 0
@@ -7086,6 +7116,8 @@ Transform:
   - {fileID: 1637853820}
   - {fileID: 590596096}
   - {fileID: 985710328}
+  - {fileID: 297291063}
+  - {fileID: 1032823838}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12594,11 +12626,41 @@ MonoBehaviour:
   canvas: {fileID: 5788553121441116599}
   playerOne: {fileID: 5507386222626771236}
   playerTwo: {fileID: 1335777642}
-  playCutscene: 1
+  playCutscene: 0
   allowSinglePlayer: 0
   playerType: 0
   CineMachineCamera: {fileID: 1099337285}
   CutsceneObj: {fileID: 729591773}
+--- !u!1 &1032823837
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1032823838}
+  m_Layer: 0
+  m_Name: RobotSpawn (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1032823838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032823837}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1154.0801, y: 159.43802, z: 174.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 639863411}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1039188914
 GameObject:
   m_ObjectHideFlags: 0
@@ -17972,7 +18034,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 50.8
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -17997,8 +18059,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614624601}
-  m_LocalRotation: {x: -0.0697227, y: -0.09043172, z: -0.053048935, w: 0.9920417}
-  m_LocalPosition: {x: 68.4373, y: 12.517521, z: 170.45}
+  m_LocalRotation: {x: 0, y: -0.06381173, z: 0, w: 0.997962}
+  m_LocalPosition: {x: 1253.5137, y: 156.10132, z: 149.8898}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -23915,7 +23977,7 @@ PrefabInstance:
     - target: {fileID: 7974828195927653293, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
       propertyPath: playerSpawn
       value: 
-      objectReference: {fileID: 1637853820}
+      objectReference: {fileID: 297291063}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c23853eb76e5d4342b33a1030c26a188, type: 3}
 --- !u!1 &1794748016 stripped
@@ -34072,7 +34134,7 @@ PrefabInstance:
     - target: {fileID: 2184401117478815374, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: playerSpawn
       value: 
-      objectReference: {fileID: 590596096}
+      objectReference: {fileID: 1032823838}
     - target: {fileID: 4156922960732801791, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: m_SizeDelta.x
       value: 120
