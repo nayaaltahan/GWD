@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public bool playCutscene;
 
+    public GameObject robotsFlyingCutscene;
+
     [Header("Debug")]
     // TODO: Spawn only 1 player when this is true
     [SerializeField] public bool allowSinglePlayer = false;
@@ -83,7 +85,12 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void SwitchState(GameStates state)
+    public void StartRobotsCutscene()
+    {
+        robotsFlyingCutscene.SetActive(true);
+    }
+
+public void SwitchState(GameStates state)
     {
         Debug.Log(state.ToString());
         switch (state)
