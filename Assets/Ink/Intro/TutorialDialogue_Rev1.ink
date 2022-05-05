@@ -228,30 +228,25 @@ Onwell: AN INCONVENIENCE. #event:/Voice/Onwell/Convo6_AnInconvenience
 ->DONE
     
 ===SeeOtherRobots===
-The two travelers reach the top of a hill. Suddenly, three robots flying in formation tear across the sky in front of them. #cutscene
--
-* [Rani: Your friends?] #cutscene
-    Rani: Ah, your compatriots, surely?  #event:/Voice/Rani/Convo7_AhYourCompatriots #cutscene
-    Rani: Noisy folk.  #event:/Voice/Rani/Convo7_NoisyFolk #cutscene
-* [Rani: Wow!] #cutscene
-    Rani: This flight technology your kind has is highly impressive!  #event:/Voice/Rani/Convo7_ThisFlightTechnology #cutscene
-    Rani: Present company excluded, of course! #event:/Voice/Rani/Convo7_PresentCompanyExcluded #cutscene
--
-->DONE
-
-===WhyAreYouHere===
-
-Rani: Now that we're on the subject. Why are you people here for?  #event:/Voice/Rani/WhyAreYouPeopleHere
+Rani: Ah, your compatriots, surely?  #event:/Voice/Rani/Convo7_AhYourCompatriots #cutscene
+Rani: Noisy folk.  #event:/Voice/Rani/Convo7_NoisyFolk #cutscene
+Rani: Now that we're on the subject. Why are you people here?  #event:/Voice/Rani/WhyAreYouPeopleHere
 Rani: sir?  #event:/Voice/Rani/Sir
 Rani: Why are you here, sir?  #event:/Voice/Rani/WhyAreYouHereSir
-
-Onwell: THE MISSION.  #event:/Voice/Onwell/TheMission
-Rani: Which entails what, exactly?  #event:/Voice/Rani/WhichEntailsWhatExactly
 Rani: Sir?  #event:/Voice/Rani/Sir2
 Rani: Sir?  #event:/Voice/Rani/Sir3
 -
 ->DONE
  
 ===Ending===
+Onwell: THE MISSION.  #event:/Voice/Onwell/TheMission
 Rani: No. #event:/Voice/Rani/No
 ->DONE
+
+
+
+===NotUsed===
+* [Rani: Wow!] #cutscene
+    Rani: This flight technology your kind has is highly impressive!  #event:/Voice/Rani/Convo7_ThisFlightTechnology #cutscene
+    Rani: Present company excluded, of course! #event:/Voice/Rani/Convo7_PresentCompanyExcluded #cutscene
+    ->DONE

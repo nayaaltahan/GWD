@@ -158,7 +158,7 @@ public class DialogueManager : MonoBehaviour
     private bool playedCutscene = false;
     private IEnumerator StartStoryCoroutine()
     {
-        if (!playedCutscene)
+        if (!playedCutscene && GameManager.instance.playCutscene)
         {
             // TODO: Not hardcode
             yield return new WaitForSeconds(19);
