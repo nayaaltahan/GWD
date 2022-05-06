@@ -7465,7 +7465,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590596095}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 81.96, y: 10.63, z: 174.95}
+  m_LocalPosition: {x: 81.455, y: 10.63, z: 174.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 639863411}
@@ -57464,7 +57464,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637853819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 77.47996, y: 13.192, z: 174.45}
+  m_LocalPosition: {x: 75.25, y: 10.82, z: 174.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 639863411}
@@ -78535,10 +78535,6 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 819364577}
-    - target: {fileID: 387807507081568831, guid: 056471c7ea6298349a2a788162b4fdd6, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7456909820792309574, guid: 056471c7ea6298349a2a788162b4fdd6, type: 3}
       propertyPath: m_Name
       value: Puzzle Cameras
@@ -78702,11 +78698,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5160539113669242277, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5507386223301689629, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: m_Name
       value: Onwell
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507386223301689629, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6975667150327388034, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: m_margin.w
