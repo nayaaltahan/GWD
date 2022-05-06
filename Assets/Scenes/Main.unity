@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.28462005, g: 0.37120837, b: 0.4988044, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -78702,7 +78702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5160539113669242277, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5507386223301689629, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
       propertyPath: m_Name
@@ -78969,6 +78969,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1794748018}
     - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: subtitleColorFrog.b
+      value: 0.061943766
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: subtitleColorFrog.g
+      value: 0.25369936
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: subtitleColorFrog.r
+      value: 0.4528302
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
       propertyPath: robotInputController
       value: 
       objectReference: {fileID: 187288575}
@@ -78976,6 +78988,18 @@ PrefabInstance:
       propertyPath: robotSpeechIndicator
       value: 
       objectReference: {fileID: 2184401118622004516}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: subtitleColorRobot.b
+      value: 0.3301887
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: subtitleColorRobot.g
+      value: 0.24327292
+      objectReference: {fileID: 0}
+    - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
+      propertyPath: subtitleColorRobot.r
+      value: 0.10746708
+      objectReference: {fileID: 0}
     - target: {fileID: 4996483780890822932, guid: 6acadc07c66cc4b44a37fa5710c746de, type: 3}
       propertyPath: playerChoiceTimeLimit
       value: 10

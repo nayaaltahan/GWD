@@ -34,7 +34,7 @@ public class SubtitleBackgroundController : MonoBehaviour
     private IEnumerator EnableImageCoroutine()
     {
         yield return new WaitForEndOfFrame();
-        currentTween = image.DOColor(Color.white, 0.5f).intId;
+        currentTween = image.DOColor(new Color(255, 255, 255, 0.2f), 0.5f).intId;
 
     }
 
