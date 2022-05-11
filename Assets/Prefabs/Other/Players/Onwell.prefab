@@ -243,9 +243,9 @@ MonoBehaviour:
   minJumpHeight: 1
   timeToJumpApex: 0.6
   coyoteTime: 0.3
-  wallJumpClimb: {x: 5, y: 10}
-  wallJumpOff: {x: 20, y: 20}
-  wallLeap: {x: 20, y: 20}
+  wallJumpClimb: {x: 10, y: 10}
+  wallJumpOff: {x: 10, y: 10}
+  wallLeap: {x: 15, y: 15}
   wallSlideSpeedMax: 2
   wallStickTime: 0.8
   fastSpeed: 6
@@ -255,6 +255,7 @@ MonoBehaviour:
   modelTransform: {fileID: 5536676941353187103}
   velocity: {x: 0, y: 0, z: 0}
   movingToPoint: 0
+  standingOnConveyorBelt: 0
 --- !u!114 &2184401117478815374
 MonoBehaviour:
   m_ObjectHideFlags: 0

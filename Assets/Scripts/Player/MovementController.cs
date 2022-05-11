@@ -167,6 +167,11 @@ public class MovementController : RaycastController
 					collisions.rightWall = directionX == 1;
 				}
 			}
+			else
+			{
+				collisions.leftWall = false;
+				collisions.rightWall = false;
+			}
 		}
 	}
 
