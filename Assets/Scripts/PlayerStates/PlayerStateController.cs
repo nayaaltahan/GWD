@@ -262,7 +262,7 @@ public class PlayerStateController : MonoBehaviour
         if (MovementController.collisions.below || coyoteTimer > 0)
         {
             Animations.SetBool(Constants.FALLING, false);
-            Animations.SetBool("isGrounded", true);
+            Animations.SetBool("IsGrounded", true);
             if (!InputController.IsJumping)
             {
                 Animations.SetFloat("Blend", Math.Abs(velocity.x));
@@ -275,7 +275,7 @@ public class PlayerStateController : MonoBehaviour
         }
         else
         {
-            Animations.SetBool("isGrounded", false);
+            Animations.SetBool("IsGrounded", false);
         }
 
         if (movingToPoint)
