@@ -7,7 +7,6 @@ public class WalkState : PlayerState
 {
     public override void EnterState(PlayerStateController player)
     {
-        player.Animations.SetFloat("Blend", Math.Abs(player.velocity.x));
     }
 
     public override void FixedUpdate(PlayerStateController player)

@@ -241,42 +241,42 @@ public class PlayerStateController : MonoBehaviour
 
         velocity.y += gravity * Time.fixedDeltaTime;
         MovementController.Move(velocity * Time.fixedDeltaTime);
+        
+        if (velocity.y > 0)
+        {
+            Animations.SetBool(Constants.JUMPING, true);
 
-        if (velocity.x != 0 && (MovementController.collisions.above || MovementController.collisions.below))
-        {
-            SetCurrentState(WalkState);
-        }
-        else if (velocity.y < 0)
-        {
-            SetCurrentState(FallState);
-        }
-        else if (velocity.y > 0)
-        {
-            SetCurrentState(JumpState);
-
-        }
-        else if (velocity.y == 0 && velocity.x == 0)
-        {
-            SetCurrentState(IdleState);
         }
 
         // animations
-        if (!MovementController.collisions.below)
+        if (!MovementController.collisions.below && velocity.y < 0)
         {
             Animations.SetBool(Constants.FALLING, true);
         }
 
-        if (MovementController.collisions.below)
+        if (!InputController.IsJumping)
         {
-            //Debug.Log("Collisions below, finish falling/jumping animations");
-            //Animations.SetLayerWeight(1,1);
-            Animations.SetBool(Constants.FALLING, false);
             Animations.SetBool(Constants.JUMPING, false);
-            //Animations.SetLayerWeight(1,0);
-
         }
 
+        if (MovementController.collisions.below || coyoteTimer > 0)
+        {
+            Animations.SetBool(Constants.FALLING, false);
+            Animations.SetBool("isGrounded", true);
+            if (!InputController.IsJumping)
+            {
+                Animations.SetFloat("Blend", Math.Abs(velocity.x));
+            }
+            else
+            {
+                Animations.SetBool(Constants.JUMPING, true);
 
+            }
+        }
+        else
+        {
+            Animations.SetBool("isGrounded", false);
+        }
 
         if (movingToPoint)
         {
