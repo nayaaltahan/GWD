@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject[] childrenToActivate;
 
     [SerializeField]
     private Transform playerSpawn;
@@ -21,18 +19,15 @@ public class PlayerController : MonoBehaviour
     }
 
     //Activate Children
-    private void PlayGame()
+    private void PlayGame(bool activateModel)
     {
-        foreach (var child in childrenToActivate)
-        {
-            child.SetActive(true);
-        }
+        transform.GetChild(0).gameObject.SetActive(activateModel);
     }
 
     //TODO: Implement this
-    public void SetUpPlayer(bool isPlayerOne)
+    public void SetUpPlayer(bool activateModel)
     {
-        PlayGame();
+        PlayGame(activateModel);
         //TODO: Set this as spawn point
         transform.position = playerSpawn.position;
         //Add differences here for players
