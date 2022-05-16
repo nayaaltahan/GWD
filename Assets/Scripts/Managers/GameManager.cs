@@ -1,3 +1,4 @@
+using Cinemachine;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
 using Unity.Services.Core.Environments;
@@ -26,7 +27,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Debug")]
     // TODO: Spawn only 1 player when this is true
-    [SerializeField] public bool allowSinglePlayer = false;
+    public bool allowSinglePlayer = false;
+    public bool turnOnDialogue = true;
     [SerializeField] private PlayerType playerType = PlayerType.frog;
     [SerializeField] private GameObject CineMachineCamera;
     [SerializeField] private GameObject CutsceneObj;
@@ -72,17 +74,23 @@ public class GameManager : MonoBehaviour
         else
         {
             SwitchState(GameStates.CHARACTERSELECT);
-
         }
 
 
         PuzzleInteractible[] temp = FindObjectsOfType<PuzzleInteractible>();
+
+        ActivateDialogue();
     }
 
-    // Update is called once per frame
-    void Update()
+    //TODO: Make this function work
+    void ActivateDialogue()
     {
-        
+        DialogueTrigger[] triggers = FindObjectsOfType<DialogueTrigger>();
+
+        for (int i = 0; i < triggers.Length; i++)
+        {
+            triggers[i].gameObject.SetActive(turnOnDialogue);
+        }
     }
 
     public void StartRobotsCutscene()
@@ -113,8 +121,21 @@ public void SwitchState(GameStates state)
                 if (playCutscene)
                 {
                     CutsceneObj.SetActive(true);
-                    CineMachineCamera.SetActive(true);
                 }
+                else
+                {
+                    CutsceneObj.SetActive(false);
+                    CineMachineCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+                    Debug.Log("Don't play cutscene");
+                }
+
+                if(!turnOnDialogue || !playCutscene)
+                {
+                    playerOne.GetComponent<PlayerController>().SetUpPlayer(true);
+                    playerTwo.GetComponent<PlayerController>().SetUpPlayer(true);
+                }
+
+                CineMachineCamera.SetActive(true);
                 //Turn off any U.I. or objects that don't belong to PlayGame State
                 break;
             case GameStates.SINGLEPLAYGAME:

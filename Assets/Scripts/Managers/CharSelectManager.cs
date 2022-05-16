@@ -119,9 +119,11 @@ public class CharSelectManager : MonoBehaviour
         if (isP1Ready == false || isP2Ready == false)
             return;
 
+        GameManager.instance.playerOne.GetComponent<PlayerController>().SetUpPlayer(false);
+        GameManager.instance.playerTwo.GetComponent<PlayerController>().SetUpPlayer(false);
         GameManager.instance.SwitchState(GameStates.PLAYGAME);
-        GameManager.instance.playerOne.GetComponent<PlayerController>().SetUpPlayer(isP1Left);
-        GameManager.instance.playerTwo.GetComponent<PlayerController>().SetUpPlayer(isP2Left);
+        Debug.Log("IS P1 LEFT: " + isP1Left);
+        Debug.Log("IS P2 LEFT: " + isP2Left);
     }
 
     //Update images to make sure only selected one shows for player one
