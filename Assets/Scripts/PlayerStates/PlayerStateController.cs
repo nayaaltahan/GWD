@@ -105,7 +105,7 @@ public class PlayerStateController : MonoBehaviour
 
         var input = canMove ? InputController.MoveDirection : Vector3.zero;
 
-        int wallDirX = (MovementController.collisions.left) ? -1 : 1;
+        int wallDirX = (MovementController.collisions.leftWall) ? -1 : 1;
 
         float targetVelocityX = 0.0f;
 
@@ -200,18 +200,21 @@ public class PlayerStateController : MonoBehaviour
         {
             if ((MovementController.collisions.leftWall || MovementController.collisions.rightWall) && !MovementController.collisions.below && velocity.y < 0)
             {
-                if (wallDirX == input.x)
+                if (wallDirX * input.x > 0)
                 {
+                    Debug.Log("Wall Climb");
                     velocity.x = -wallDirX * wallJumpClimb.x;
                     velocity.y = wallJumpClimb.y;
                 }
                 else if (input.x == 0)
                 {
+                    Debug.Log("Wall Jump Off");
                     velocity.x = -wallDirX * wallJumpOff.x;
                     velocity.y = wallJumpOff.y;
                 }
-                else
+                else if (wallDirX * input.x < 0)
                 {
+                    Debug.Log("Wall Leap");
                     velocity.x = -wallDirX * wallLeap.x;
                     velocity.y = wallLeap.y;
                 }
