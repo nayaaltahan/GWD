@@ -8,6 +8,7 @@ public class JumpState : PlayerState
     public override void EnterState(PlayerStateController player)
     {
         // TODO Initial velocity on enter jump
+        if (!player.CanMove) return;
         player.Animations.SetBool("Jumping", true);
     }
 
