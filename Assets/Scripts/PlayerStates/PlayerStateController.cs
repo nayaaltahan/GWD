@@ -87,7 +87,7 @@ public class PlayerStateController : MonoBehaviour
     {
         MovementController = GetComponent<MovementController>();
         animator = modelTransform.GetComponent<Animator>();
-        InputController = GetComponent<PlayerInputController>();
+        InputController = GetComponentInParent<PlayerInputController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         SetCurrentState(IdleState);
         movementTargets = GameObject.FindGameObjectsWithTag("MovementTarget");

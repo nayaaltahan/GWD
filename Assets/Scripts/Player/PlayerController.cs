@@ -16,6 +16,13 @@ public class PlayerController : MonoBehaviour
     {
         amountPlayers += 1;
         playerNumber = amountPlayers;
+        CharSelectManager.instance.OnPlayersConnected += () =>
+        {
+            if (gameObject.name == "Onwell") 
+                playerSpawn = GameObject.Find("RobotSpawn").transform;
+            else 
+                playerSpawn = GameObject.Find("FrogSpawn").transform;
+        };
     }
 
     //Activate Children

@@ -57,7 +57,7 @@ public class PuzzleMovingPlatform : PuzzleObject
         if (other.gameObject.tag != Constants.PLAYER)
             return;
 
-        other.gameObject.transform.parent = null;
+        other.gameObject.transform.parent.parent = null;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -65,7 +65,7 @@ public class PuzzleMovingPlatform : PuzzleObject
         if (other.gameObject.tag != Constants.PLAYER)
             return;
 
-       other.gameObject.transform.parent = transform;
+       other.gameObject.transform.parent.parent = transform;
     }
 
     IEnumerator MovePlatform(Vector3 _target, float velocity)

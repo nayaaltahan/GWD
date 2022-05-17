@@ -120,8 +120,8 @@ public void SwitchState(GameStates state)
             case GameStates.PLAYGAME:
                 this.state = GameStates.PLAYGAME;
                 UIManager.instance.TurnCharSelectUIOn(false);
-                CameraManager.instance.AddPlayerToTargetGroup(playerOne);
-                CameraManager.instance.AddPlayerToTargetGroup(playerTwo);
+                CameraManager.instance.AddPlayerToTargetGroup(CharSelectManager.instance.FrogPlayer.transform.GetChild(0).gameObject);
+                CameraManager.instance.AddPlayerToTargetGroup(CharSelectManager.instance.RobotPlayer.transform.GetChild(1).gameObject);
 
                 if (playCutscene)
                 {
@@ -136,8 +136,8 @@ public void SwitchState(GameStates state)
 
                 if(!turnOnDialogue || !playCutscene)
                 {
-                    playerOne.GetComponent<PlayerController>().SetUpPlayer(true);
-                    playerTwo.GetComponent<PlayerController>().SetUpPlayer(true);
+                    playerOne.GetComponentInChildren<PlayerController>().SetUpPlayer(true);
+                    playerTwo.GetComponentInChildren<PlayerController>().SetUpPlayer(true);
                 }
 
                 CineMachineCamera.SetActive(true);

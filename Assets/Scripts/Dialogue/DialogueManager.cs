@@ -6,6 +6,8 @@ using System.Linq;
 using FMOD.Studio;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 using Object = System.Object;
 using Random = System.Random;
 
@@ -77,9 +79,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] 
     private float playerChoiceTimeLimit = 6.0f;
 
-    [SerializeField] private GameObject cinematicRobot, playerRobot;
-
     [SerializeField] private SubtitleBackgroundController subtitleBackground;
+    [SerializeField] private PlayableDirector playableDirector;
     
     public float PlayerChoiceTimeLimit => playerChoiceTimeLimit;
 
@@ -112,8 +113,32 @@ public class DialogueManager : MonoBehaviour
             dialogueSnapshotInstance = FMODUnity.RuntimeManager.CreateInstance(dialogueSnapshot.Guid);
             CharSelectManager.instance.OnPlayersConnected += () =>
             {
-                frogPlayerController = frogInputController.GetComponent<PlayerStateController>();
-                robotPlayerController = robotInputController.GetComponent<PlayerStateController>();
+                var frog = CharSelectManager.instance.FrogPlayer;
+                var robot = CharSelectManager.instance.RobotPlayer;
+                var frogInfo = frog.GetComponent<PlayerInfo>();
+                var robotInfo = robot.GetComponent<PlayerInfo>();
+                frogInputController = frog.GetComponent<PlayerInputController>();
+                robotInputController = robot.GetComponent<PlayerInputController>();
+                robotSpeechBubbles = robotInfo.RobotSpeechBubbles;
+                frogSpeechBubbles = frogInfo.FrogSpeechBubbles;
+                frogSpeechIndicator = frogInfo.FrogSpeechIndicator;
+                robotSpeechIndicator = robotInfo.RobotSpeechIndicator;
+                frogOptionalChatIndicator = frogInfo.FrogOptionalSpeechIndicator;
+                robotOptionalChatIndicator = robotInfo.RobotOptionalSpeechIndicator;
+                robotModel = robotInfo.RobotModel;
+                // playableDirector.SetGenericBinding("Activation Track (3)", robotModel);
+                var outputs = playableDirector.playableAsset.outputs;
+                Debug.Log("=================");
+                foreach (var output in outputs)
+                {
+                    if(output.streamName.Equals("Activation Track (3)"))
+                        playableDirector.SetGenericBinding(output.sourceObject, frogInfo.RaniModel);
+                }
+                
+                Debug.Log("=================");
+
+                frogPlayerController = CharSelectManager.instance.FrogPlayer.GetComponentInChildren<PlayerStateController>();
+                robotPlayerController = CharSelectManager.instance.RobotPlayer.GetComponentInChildren<PlayerStateController>();
             };
         }
         else
@@ -219,8 +244,6 @@ public class DialogueManager : MonoBehaviour
 
             ParseDialogueType();
 
-            if (currentStory.currentTags.Count > 0)
-                Debug.Log(currentStory.currentTags[0]);
 
             yield return new WaitForSeconds(0.2f);
             bool shouldSkip = DisplaySubtitles(currentText);
@@ -341,7 +364,6 @@ public class DialogueManager : MonoBehaviour
             float n;
             string tag = currentStory.currentTags[currentStory.currentTags.IndexOf("OnwellPoint") + 1];
             bool faceRight = currentStory.currentTags[currentStory.currentTags.IndexOf("OnwellPoint") + 2] == "FaceRight";
-            Debug.Log("Onwell should face right is " + faceRight);
 
 
             if (float.TryParse(tag, out n))
@@ -359,7 +381,6 @@ public class DialogueManager : MonoBehaviour
             float n;
             string tag = currentStory.currentTags[currentStory.currentTags.IndexOf("RaniPoint") + 1];
             bool faceRight = currentStory.currentTags[currentStory.currentTags.IndexOf("RaniPoint") + 2] == "FaceRight";
-            Debug.Log("Rani should face right is " + faceRight);
 
             if (float.TryParse(tag, out n))
             {
@@ -375,7 +396,6 @@ public class DialogueManager : MonoBehaviour
         {
             robotModel.SetActive(true);
             cutsceneRobot.SetActive(false);
-            Debug.Log("Activated Onwell");
         }
     }
 

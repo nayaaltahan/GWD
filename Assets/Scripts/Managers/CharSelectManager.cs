@@ -20,6 +20,8 @@ public class CharSelectManager : MonoBehaviour
     [SerializeField] private List<Button> p1Buttons;
     [SerializeField] private List<Button> p2Buttons;
 
+    [SerializeField] private GameObject p1JoinButton, p2JoinButton;
+    
     [HideInInspector] public GameObject p1MidButton;
     [HideInInspector] public GameObject p2MidButton;
 
@@ -36,10 +38,16 @@ public class CharSelectManager : MonoBehaviour
     private bool isP2Left;
 
     public delegate void OnPlayersConnectedDelegate();
+
     public OnPlayersConnectedDelegate OnPlayersConnected; // TODO: MAKE ACTION PLAYER WHEN WE START THE GAME
+
     public delegate void OnPlayerJoined();
+
     public OnPlayerJoined OnPlayerOneJoined;
     public OnPlayerJoined OnPlayerTwoJoined;
+
+    public GameObject FrogPlayer => isP1Left ? GameManager.instance.playerOne : GameManager.instance.playerTwo;
+    public GameObject RobotPlayer => isP1Left ? GameManager.instance.playerTwo : GameManager.instance.playerOne;
 
 
     private void Awake()
@@ -54,20 +62,20 @@ public class CharSelectManager : MonoBehaviour
         {
             foreach (var button in p1Buttons)
                 button.gameObject.SetActive(true);
+            p1JoinButton.SetActive(false);
             p1multiplayerES = GameManager.instance.playerOne.GetComponent<MultiplayerEventSystem>();
             p1MidButton = p1Buttons[1].gameObject;
             ActivatePlayerSelectionUI(ref p1multiplayerES, p1Buttons);
-
         };
 
         OnPlayerTwoJoined += () =>
         {
             foreach (var button in p2Buttons)
                 button.gameObject.SetActive(true);
+            p2JoinButton.SetActive(false);
             p2multiplayerES = GameManager.instance.playerTwo.GetComponent<MultiplayerEventSystem>();
             p2MidButton = p2Buttons[1].gameObject;
             ActivatePlayerSelectionUI(ref p2multiplayerES, p2Buttons);
-            
         };
     }
 
@@ -151,18 +159,37 @@ public class CharSelectManager : MonoBehaviour
     {
         if (isP1Ready == false || isP2Ready == false)
             return;
-
-        GameManager.instance.playerOne.GetComponent<PlayerController>().SetUpPlayer(false);
-        GameManager.instance.playerTwo.GetComponent<PlayerController>().SetUpPlayer(false);
-        GameManager.instance.SwitchState(GameStates.PLAYGAME);
         Debug.Log("IS P1 LEFT: " + isP1Left);
         Debug.Log("IS P2 LEFT: " + isP2Left);
+        
+        if (isP1Left)
+        {
+            var p1 = p1multiplayerES.transform.GetChild(0).gameObject;
+            var p2 = p2multiplayerES.transform.GetChild(1).gameObject;
+            p1.SetActive(true);
+            p2.SetActive(true);
+            OnPlayersConnected?.Invoke();
+            p1.GetComponent<PlayerController>().SetUpPlayer(false);
+            p2.GetComponent<PlayerController>().SetUpPlayer(false);
+        }
+        else
+        {
+            var p1 = p1multiplayerES.transform.GetChild(1).gameObject;
+            var p2 = p2multiplayerES.transform.GetChild(0).gameObject;
+            p1.SetActive(true);
+            p2.SetActive(true);
+            OnPlayersConnected?.Invoke();
+            p1.GetComponent<PlayerController>().SetUpPlayer(false);
+            p2.GetComponent<PlayerController>().SetUpPlayer(false);
+        }
+        FrogPlayer.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        RobotPlayer.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        GameManager.instance.SwitchState(GameStates.PLAYGAME);
     }
 
     //Update images to make sure only selected one shows for player one
     private void UpdatePlayerOneSelection()
     {
-        Debug.Log("p1 selection");
         bool temp = false;
         for (int i = 0; i < p1Buttons.Count; i++)
         {
@@ -185,8 +212,6 @@ public class CharSelectManager : MonoBehaviour
     //Update images to make sure only selected one shows for player Two
     private void UpdatePlayerTwoSelection()
     {
-        Debug.Log("p2 selection");
-
         bool temp = false;
         for (int i = 0; i < p2Buttons.Count; i++)
         {
@@ -204,13 +229,5 @@ public class CharSelectManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void OnGUI()
-    {
-            var startX = Screen.width / 2;
-            var startY = Screen.height - 250;
-            var gamepads = Gamepad.all;
-            GUI.Box(new Rect(startX - 100, startY + 80, 200, 50), "Connected controllers: " + gamepads.Count);
     }
 }
