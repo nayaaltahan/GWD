@@ -32160,10 +32160,10 @@ MonoBehaviour:
   canvas: {fileID: 5788553121441116599}
   playerOne: {fileID: 5507386222626771236}
   playerTwo: {fileID: 1335777642}
-  playCutscene: 1
+  playCutscene: 0
   robotsFlyingCutscene: {fileID: 312612918}
   allowSinglePlayer: 0
-  turnOnDialogue: 1
+  turnOnDialogue: 0
   playerType: 0
   CineMachineCamera: {fileID: 1099337285}
   CutsceneObj: {fileID: 729591773}
@@ -78315,6 +78315,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 387807506062216016, guid: 056471c7ea6298349a2a788162b4fdd6, type: 3}
+      propertyPath: m_BiasX
+      value: 0.016
+      objectReference: {fileID: 0}
+    - target: {fileID: 387807506062216016, guid: 056471c7ea6298349a2a788162b4fdd6, type: 3}
+      propertyPath: m_ScreenY
+      value: 0.67
+      objectReference: {fileID: 0}
     - target: {fileID: 387807507039487763, guid: 056471c7ea6298349a2a788162b4fdd6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 35.89
