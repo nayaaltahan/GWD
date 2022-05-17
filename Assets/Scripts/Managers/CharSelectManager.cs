@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using TMPro;
 using DG.Tweening;
+using MonKey.Extensions;
 using UnityEngine.XR;
 using InputDevice = UnityEngine.XR.InputDevice;
 
@@ -76,12 +77,15 @@ public class CharSelectManager : MonoBehaviour
             if (p1Buttons[i].gameObject == p1multiplayerES.currentSelectedGameObject)
             {
                 if (isP1Ready)
-                    tempString = "Ready";
+                    foreach (var arrow in p1Buttons[i].transform.GetChildren())
+                    {
+                        arrow.gameObject.SetActive(false);
+                    }
             }
             else
                 p1Buttons[i].enabled = !isP1Ready;
 
-            p1Buttons[i].transform.GetChild(0).GetComponent<TMP_Text>().text = tempString;
+            //p1Buttons[i].transform.GetChild(0).GetComponent<TMP_Text>().text = tempString;
         }
 
         Ready();
@@ -102,12 +106,15 @@ public class CharSelectManager : MonoBehaviour
             if (p2Buttons[i].gameObject == p2multiplayerES.currentSelectedGameObject)
             {
                 if (isP2Ready)
-                    tempString = "Ready";
+                    foreach (var arrow in p2Buttons[i].transform.GetChildren())
+                    {
+                        arrow.gameObject.SetActive(false);
+                    }
             }
             else
                 p2Buttons[i].enabled = !isP2Ready;
 
-            p2Buttons[i].transform.GetChild(0).GetComponent<TMP_Text>().text = tempString;
+            //p2Buttons[i].transform.GetChild(0).GetComponent<TMP_Text>().text = tempString;
         }
 
         Ready();
@@ -139,7 +146,13 @@ public class CharSelectManager : MonoBehaviour
 
 
             p1Buttons[i].GetComponent<Image>().enabled = temp;
-            p1Buttons[i].transform.GetChild(0).gameObject.SetActive(temp);
+            if (!isP1Ready)
+            {
+                foreach (var arrow in p1Buttons[i].transform.GetChildren())
+                {
+                    arrow.gameObject.SetActive(temp);
+                }
+            }
         }
     }
 
@@ -155,7 +168,13 @@ public class CharSelectManager : MonoBehaviour
                 temp = true;
 
             p2Buttons[i].GetComponent<Image>().enabled = temp;
-            p2Buttons[i].transform.GetChild(0).gameObject.SetActive(temp);
+            if (!isP2Ready)
+            {
+                foreach (var arrow in p2Buttons[i].transform.GetChildren())
+                {
+                    arrow.gameObject.SetActive(temp);
+                }
+            }
         }
     }
 
