@@ -693,36 +693,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3541355682626318027, guid: 537681112763fdc4289502bb507acf2f, type: 3}
   m_PrefabInstance: {fileID: 271223060}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &297291062
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 297291063}
-  m_Layer: 0
-  m_Name: FrogSpawn (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &297291063
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297291062}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1149.6, y: 162, z: 174.45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 639863411}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &304387847
 GameObject:
   m_ObjectHideFlags: 0
@@ -7329,8 +7299,8 @@ Transform:
   - {fileID: 1637853820}
   - {fileID: 590596096}
   - {fileID: 985710328}
-  - {fileID: 297291063}
-  - {fileID: 1032823838}
+  - {fileID: 1711562774}
+  - {fileID: 1394392196}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32164,9 +32134,12 @@ MonoBehaviour:
   robotsFlyingCutscene: {fileID: 312612918}
   allowSinglePlayer: 0
   turnOnDialogue: 0
+  turnOnTestSpawn: 0
   playerType: 0
   CineMachineCamera: {fileID: 1099337285}
   CutsceneObj: {fileID: 729591773}
+  robotTestSpawn: {fileID: 1394392196}
+  raniTestSpawn: {fileID: 1711562774}
 --- !u!1 &1010760743 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1509828551056702052, guid: dbc750191232028418a54d8533ac0a23, type: 3}
@@ -32212,36 +32185,6 @@ MonoBehaviour:
   speed: 3
   delay: 1.5
   flyTime: 5
---- !u!1 &1032823837
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1032823838}
-  m_Layer: 0
-  m_Name: RobotSpawn (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1032823838
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1032823837}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1154.0801, y: 159.43802, z: 174.95}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 639863411}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1039188914
 GameObject:
   m_ObjectHideFlags: 0
@@ -47395,6 +47338,36 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1394392195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1394392196}
+  m_Layer: 0
+  m_Name: TestRobotSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1394392196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394392195}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 959.9151, y: 43.13, z: 174.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 639863411}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1399164643 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5160539113669242277, guid: 9ffbdfc08da3d0c44a005474e3385eed, type: 3}
@@ -57987,6 +57960,36 @@ MonoBehaviour:
   speed: 2
   delay: 1.3
   flyTime: 5
+--- !u!1 &1711562773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1711562774}
+  m_Layer: 0
+  m_Name: TestFrogSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1711562774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711562773}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 953.71, y: 43.32, z: 174.45}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 639863411}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1712561968
 GameObject:
   m_ObjectHideFlags: 0

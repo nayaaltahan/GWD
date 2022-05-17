@@ -29,7 +29,18 @@ public class PlayerController : MonoBehaviour
     {
         PlayGame(activateModel);
         //TODO: Set this as spawn point
-        transform.position = playerSpawn.position;
+        if(GameManager.instance.turnOnTestSpawn)
+        {
+            if (playerSpawn.name == "RobotSpawn")
+            {
+                Debug.Log("ROBOT SPAWN");
+                transform.position = GameManager.instance.robotTestSpawn.position;
+            }
+            else
+                transform.position = GameManager.instance.raniTestSpawn.position;
+        }
+        else
+            transform.position = playerSpawn.position;
         //Add differences here for players
     }
 }
