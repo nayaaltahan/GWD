@@ -397,8 +397,8 @@ public class PlayerStateController : MonoBehaviour
             isFacingRight = false;
             if (diff < 1.5)
             {
-                transform.Translate(Vector3.right);
-                otherPlayer.Translate(Vector3.left);
+                transform.GetComponent<MovementController>().Move(Vector3.right);
+                otherPlayer.GetComponent<MovementController>().Move(Vector3.left);
             }
         }
         if (transform.position.x < otherPlayer.position.x)
@@ -408,8 +408,8 @@ public class PlayerStateController : MonoBehaviour
             isFacingRight = true;
             if (diff < 1.5)
             {
-                transform.Translate(Vector3.left);
-                otherPlayer.Translate(Vector3.right);
+                transform.GetComponent<MovementController>().Move(Vector3.left);
+                otherPlayer.GetComponent<MovementController>().Move(Vector3.right);
             }
         }
     }
