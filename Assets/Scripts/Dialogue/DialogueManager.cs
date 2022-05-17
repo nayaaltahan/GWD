@@ -109,9 +109,12 @@ public class DialogueManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            frogPlayerController = frogInputController.GetComponent<PlayerStateController>();
-            robotPlayerController = robotInputController.GetComponent<PlayerStateController>();
             dialogueSnapshotInstance = FMODUnity.RuntimeManager.CreateInstance(dialogueSnapshot.Guid);
+            CharSelectManager.instance.OnPlayersConnected += () =>
+            {
+                frogPlayerController = frogInputController.GetComponent<PlayerStateController>();
+                robotPlayerController = robotInputController.GetComponent<PlayerStateController>();
+            };
         }
         else
             Debug.LogError("More than one Dialogue Manager in the scene");

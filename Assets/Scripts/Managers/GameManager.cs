@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
@@ -162,5 +163,25 @@ public void SwitchState(GameStates state)
             default:
                 break;
         }
+    }
+
+    public void ConnectNewPlayer(GameObject player)
+    {
+        if (playerOne == null)
+        {
+            Debug.Log("Player one joined", player);
+
+            playerOne = player;
+            CharSelectManager.instance.OnPlayerOneJoined?.Invoke();            
+        }
+
+        else if (playerTwo == null)
+        {
+            Debug.Log("Player two joined", player);
+            playerTwo = player;
+            CharSelectManager.instance.OnPlayerTwoJoined?.Invoke();            
+        }
+        else
+            throw new Exception("Tried to connect a third player");
     }
 }

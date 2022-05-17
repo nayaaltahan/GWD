@@ -8,6 +8,7 @@ using UnityEngine.InputSystem.UI;
 using TMPro;
 using DG.Tweening;
 using MonKey.Extensions;
+using UnityEngine.EventSystems;
 using UnityEngine.XR;
 using InputDevice = UnityEngine.XR.InputDevice;
 
@@ -34,24 +35,49 @@ public class CharSelectManager : MonoBehaviour
     private bool isP1Left;
     private bool isP2Left;
 
-    [SerializeField] private PlayerInputManager playerInputManager;
+    public delegate void OnPlayersConnectedDelegate();
+    public OnPlayersConnectedDelegate OnPlayersConnected; // TODO: MAKE ACTION PLAYER WHEN WE START THE GAME
+    public delegate void OnPlayerJoined();
+    public OnPlayerJoined OnPlayerOneJoined;
+    public OnPlayerJoined OnPlayerTwoJoined;
 
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         if (instance == null)
             instance = this;
         else
             Debug.LogError("More than one Character Selection Manager in the scene");
 
-        p1MidButton = p1Buttons[1].gameObject;
-        p2MidButton = p2Buttons[1].gameObject;
 
-        p1multiplayerES = GameManager.instance.playerOne.GetComponent<MultiplayerEventSystem>();
-        p2multiplayerES = GameManager.instance.playerTwo.GetComponent<MultiplayerEventSystem>();
-        
+        OnPlayerOneJoined += () =>
+        {
+            foreach (var button in p1Buttons)
+                button.gameObject.SetActive(true);
+            p1multiplayerES = GameManager.instance.playerOne.GetComponent<MultiplayerEventSystem>();
+            p1MidButton = p1Buttons[1].gameObject;
+            ActivatePlayerSelectionUI(ref p1multiplayerES, p1Buttons);
+
+        };
+
+        OnPlayerTwoJoined += () =>
+        {
+            foreach (var button in p2Buttons)
+                button.gameObject.SetActive(true);
+            p2multiplayerES = GameManager.instance.playerTwo.GetComponent<MultiplayerEventSystem>();
+            p2MidButton = p2Buttons[1].gameObject;
+            ActivatePlayerSelectionUI(ref p2multiplayerES, p2Buttons);
+            
+        };
     }
+
+    private void ActivatePlayerSelectionUI(ref MultiplayerEventSystem mes, List<Button> buttons)
+    {
+        mes.SetSelectedGameObject(buttons[1].gameObject);
+        mes.firstSelectedGameObject = buttons[1].gameObject;
+        mes.playerRoot = buttons[0].transform.parent.parent.gameObject;
+    }
+
 
     private void Update()
     {
@@ -136,6 +162,7 @@ public class CharSelectManager : MonoBehaviour
     //Update images to make sure only selected one shows for player one
     private void UpdatePlayerOneSelection()
     {
+        Debug.Log("p1 selection");
         bool temp = false;
         for (int i = 0; i < p1Buttons.Count; i++)
         {
@@ -143,7 +170,6 @@ public class CharSelectManager : MonoBehaviour
 
             if (p1Buttons[i].gameObject == p1multiplayerES.currentSelectedGameObject)
                 temp = true;
-
 
             p1Buttons[i].GetComponent<Image>().enabled = temp;
             if (!isP1Ready)
@@ -159,6 +185,8 @@ public class CharSelectManager : MonoBehaviour
     //Update images to make sure only selected one shows for player Two
     private void UpdatePlayerTwoSelection()
     {
+        Debug.Log("p2 selection");
+
         bool temp = false;
         for (int i = 0; i < p2Buttons.Count; i++)
         {
@@ -180,35 +208,9 @@ public class CharSelectManager : MonoBehaviour
 
     private void OnGUI()
     {
-        if (GameManager.instance.state == GameStates.CHARACTERSELECT)
-        {
             var startX = Screen.width / 2;
             var startY = Screen.height - 250;
             var gamepads = Gamepad.all;
-
-            var playerInput1 = p1multiplayerES.GetComponent<PlayerInput>();
-            var playerInput2 = p2multiplayerES.GetComponent<PlayerInput>();
-            if (GUI.Button(new Rect(startX - 50, startY, 100, 50), "Use controllers"))
-            {
-                playerInput1.SwitchCurrentControlScheme("Gamepad", gamepads[0]);
-                playerInput2.SwitchCurrentControlScheme("Gamepad", gamepads[1]);
-            }
-
-            if (!playerInput1.currentControlScheme.Equals("Gamepad") ||
-                !playerInput2.currentControlScheme.Equals("Gamepad"))
-            {
-                var style = new GUIStyle();
-                style.fontSize = 30;
-                style.fontStyle = FontStyle.Bold;
-                style.normal.textColor = Color.red;
-                GUI.Label(new Rect(startX - 270, startY + 80, 200, 50), "MOUSE&KEYBOARD DETECTED", style);
-            }
-            else
-            {
-                GUI.Box(new Rect(startX - 100, startY + 80, 200, 50), "Connected controllers: " + gamepads.Count);
-
-            }
-        }
+            GUI.Box(new Rect(startX - 100, startY + 80, 200, 50), "Connected controllers: " + gamepads.Count);
     }
-
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,11 @@ public class PlayerInputController : MonoBehaviour
     private bool pressedButton1, pressedButton2, pressedButton3;
     public bool ReleasedJump { get; private set; } = false;
 
-    public PlayerAudio audio;
+
+    private void OnEnable()
+    {
+        GameManager.instance.ConnectNewPlayer(gameObject);
+    }
 
     public void Jump(InputAction.CallbackContext value)
     {
@@ -58,4 +63,11 @@ public class PlayerInputController : MonoBehaviour
             SelectedChoice = -1;
         }
     }
+
+    public void OnControlsChanged(PlayerInput playerInput)
+    {
+        Debug.LogWarning("Device changed: " + playerInput.name);
+    }
+    
+    
 }
