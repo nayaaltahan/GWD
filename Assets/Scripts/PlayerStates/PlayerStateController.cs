@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerStateController : MonoBehaviour
 {
+    public bool CanMove => canMove;
     private PlayerState currentState;
 
     public readonly IdleState IdleState = new IdleState();
@@ -246,7 +247,6 @@ public class PlayerStateController : MonoBehaviour
         if (velocity.y > 0)
         {
             Animations.SetBool(Constants.JUMPING, true);
-
         }
 
         // animations
@@ -268,10 +268,9 @@ public class PlayerStateController : MonoBehaviour
             {
                 Animations.SetFloat("Blend", Math.Abs(velocity.x));
             }
-            else
+            else if(canMove) // Prevent jumping during cutscene dialogue
             {
                 Animations.SetBool(Constants.JUMPING, true);
-
             }
         }
         else
@@ -331,6 +330,7 @@ public class PlayerStateController : MonoBehaviour
     {
         velocity = springVelocity;
         isForceAdded = true;
+        Debug.Log("Springboard");
         SetCurrentState(JumpState);
         coyoteTimer = -1f;
         SpringVelocity = springVelocity;
