@@ -29,12 +29,16 @@ public class GameManager : MonoBehaviour
     // TODO: Spawn only 1 player when this is true
     public bool allowSinglePlayer = false;
     public bool turnOnDialogue = true;
+    public bool turnOnTestSpawn;
     [SerializeField] private PlayerType playerType = PlayerType.frog;
     [SerializeField] private GameObject CineMachineCamera;
     [SerializeField] private GameObject CutsceneObj;
 
+    public Transform robotTestSpawn;
+    public Transform raniTestSpawn;
+
     // Start is called before the first frame update
-    async void Start()
+    async void Awake()
     {
         if (instance == null)
             instance = this;
@@ -141,7 +145,17 @@ public void SwitchState(GameStates state)
             case GameStates.SINGLEPLAYGAME:
                 this.state = GameStates.SINGLEPLAYGAME;
                 UIManager.instance.TurnCharSelectUIOn(false);
-                CutsceneObj.SetActive(true);
+                if (playCutscene)
+                {
+                    CutsceneObj.SetActive(true);
+                }
+                else
+                {
+                    CutsceneObj.SetActive(false);
+                    CineMachineCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+                    Debug.Log("Don't play cutscene");
+                }
+
                 CineMachineCamera.SetActive(true);
                 //Turn off any U.I. or objects that don't belong to PlayGame State
                 break;

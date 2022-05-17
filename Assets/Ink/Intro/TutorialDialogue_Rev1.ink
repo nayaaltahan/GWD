@@ -9,7 +9,7 @@ This is the first cutscene #cutscene #OnwellPoint #OnwellIntroPoint #FaceRight #
 
 *[Rani: Are you okay?] #cutscene 
     Rani: Great sprout! Are you alive, sir? #event:/Voice/Rani/Convo1_GreatSprout #cutscene 
-    NO LINE #OnwellPoint #-1 #FaceLeft
+    NO LINE #OnwellPoint #-1 #FaceLeft #cutscene
     **[Onwell: WHAT IS ALIVE?] #cutscene 
         Onwell: WHAT IS ALIVE? #event:/Voice/Onwell/Convo1_WhatIsAlive #cutscene
         Rani: Ha! A philosopher I take it? Let's get you up, then! #event:/Voice/Rani/Convo1_HaAPhilosopher #cutscene
@@ -18,7 +18,7 @@ This is the first cutscene #cutscene #OnwellPoint #OnwellIntroPoint #FaceRight #
         Rani: In my cabbages, I'm afraid. Perhaps you could be persuaded to move? #event:/Voice/Rani/Convo1_InMyCabbages #cutscene
 *[Rani: My cabbages!!!] #cutscene
     Rani: My cabbages! You imbecile. You call that a landing?  #event:/Voice/Rani/Convo1_MyCabbages #cutscene
-    NO LINE #OnwellPoint #-1 #FaceLeft
+    NO LINE #OnwellPoint #-1 #FaceLeft #cutscene
     **[Onwell: I fall where I must.] #cutscene 
         Onwell: I FALL WHERE I MUST. CABBAGES ARE IRRELEVANT. #event:/Voice/Onwell/Convo1_IFallWhere #cutscene
         Rani: Perhaps to you, you brute! #event:/Voice/Rani/Convo1_PerhapsToYou #cutscene
@@ -31,7 +31,7 @@ This is the first cutscene #cutscene #OnwellPoint #OnwellIntroPoint #FaceRight #
     --Rani: In any case, get out of my patch. Please!  #event:/Voice/Rani/Convo1_InAnyCase #cutscene
 
 -
-Onwell gets up. #ActivateOnwell
+Onwell gets up. #ActivateOnwell #cutscene
     Onwell: I NEED ASSISTANCE, FROG-PERSON. #event:/Voice/Onwell/Convo2_INeedAssistance #cutscene
     Onwell: MY KIN DEMANDS IT. #event:/Voice/Onwell/Convo2_MyKinDemands #cutscene
     Onwell: I SEEK THE GREAT OAKS. #event:/Voice/Onwell/ISeekTheGreat #cutscene
@@ -39,7 +39,7 @@ Onwell gets up. #ActivateOnwell
 *[Rani: Your kin?] #cutscene
 Rani: More characters like you around, then? Hm. #event:/Voice/Rani/Convo2_MoreCharactersLike #cutscene
 *[Rani: That dump?] #cutscene
-Rani: Oh, that dreary old place? #event:/Voice/Rani/Convo2_OhThatDreary cutscene
+Rani: Oh, that dreary old place? #event:/Voice/Rani/Convo2_OhThatDreary #cutscene
 -
 Rani: Well, I'm headed there myself for some restocking. #event:/Voice/Rani/Convo2_WellImHeaded #cutscene 
 Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe #cutscene #RaniPoint #15 #FaceRight
