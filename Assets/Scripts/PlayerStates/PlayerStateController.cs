@@ -148,7 +148,7 @@ public class PlayerStateController : MonoBehaviour
 
         bool wallSliding = false;
 
-        if ((MovementController.collisions.left || MovementController.collisions.right) && !MovementController.collisions.below && velocity.y < 0)
+        if ((MovementController.collisions.left || MovementController.collisions.right) && (!MovementController.collisions.below || MovementController.collisions.slopeAngle > MovementController.maxClimbAngle) && velocity.y < 0)
         {
             wallSliding = true;
 
@@ -178,7 +178,7 @@ public class PlayerStateController : MonoBehaviour
 
         }
 
-        if (MovementController.collisions.above || (MovementController.collisions.below && !isForceAdded) || standingOnConveyorBelt)
+        if (MovementController.collisions.above || (MovementController.collisions.below && !isForceAdded && MovementController.collisions.slopeAngle < MovementController.maxClimbAngle) || standingOnConveyorBelt)
         {
             velocity.y = 0;
         }
@@ -186,7 +186,7 @@ public class PlayerStateController : MonoBehaviour
         if (coyoteTimer > 0f)
             coyoteTimer -= Time.fixedDeltaTime;
 
-        if (MovementController.collisions.below || standingOnConveyorBelt)
+        if (MovementController.collisions.below && MovementController.collisions.slopeAngle < MovementController.maxClimbAngle || standingOnConveyorBelt)
         {
             coyoteTimer = 0.3f;
 
@@ -247,6 +247,7 @@ public class PlayerStateController : MonoBehaviour
         }
 
         velocity.y += gravity * Time.fixedDeltaTime;
+
         MovementController.Move(velocity * Time.fixedDeltaTime);
         
         if (velocity.y > 0)
