@@ -6,8 +6,8 @@ using UnityEngine.Serialization;
 
 public class MovementController : RaycastController
 {
-	float maxClimbAngle = 80;
-	float maxDescendAngle = 80;
+	public float maxClimbAngle = 30;
+	public float maxDescendAngle = 30;
 
 	public CollisionInfo collisions;
 
@@ -29,11 +29,13 @@ public class MovementController : RaycastController
 		UpdateRaycastOrigins();
 		collisions.Reset();
 		collisions.velocityOld = velocity;
+		print(collisions.slopeAngle);
 
 		if (velocity.x != 0)
 		{
 			collisions.faceDir = (int)Mathf.Sign(velocity.x);
 		}
+
 
 		if (velocity.y < 0)
 		{
@@ -73,6 +75,8 @@ public class MovementController : RaycastController
 
 	void HorizontalCollisions(ref Vector3 velocity)
 	{
+		
+
 		float directionX = collisions.faceDir;
 		float rayLength = Mathf.Abs(velocity.x) + skinWidth;
 
@@ -140,7 +144,7 @@ public class MovementController : RaycastController
 
 		if (Mathf.Abs(velocity.x) < skinWidth)
 		{
-			rayLength = 2 * skinWidth;
+			rayLength = 10 * skinWidth;
 		}
 
 		for (int i = 0; i < horizontalRayCount; i++)

@@ -105,7 +105,7 @@ public class PlayerStateController : MonoBehaviour
 
         var input = canMove ? InputController.MoveDirection : Vector3.zero;
 
-        int wallDirX = (MovementController.collisions.left) ? -1 : 1;
+        int wallDirX = (MovementController.collisions.leftWall) ? -1 : 1;
 
         float targetVelocityX = 0.0f;
 
@@ -148,7 +148,7 @@ public class PlayerStateController : MonoBehaviour
 
         bool wallSliding = false;
 
-        if ((MovementController.collisions.left || MovementController.collisions.right) && !MovementController.collisions.below && velocity.y < 0)
+        if ((MovementController.collisions.left || MovementController.collisions.right) && (!MovementController.collisions.below || MovementController.collisions.slopeAngle > MovementController.maxClimbAngle) && velocity.y < 0)
         {
             wallSliding = true;
 
@@ -178,7 +178,7 @@ public class PlayerStateController : MonoBehaviour
 
         }
 
-        if (MovementController.collisions.above || (MovementController.collisions.below && !isForceAdded) || standingOnConveyorBelt)
+        if (MovementController.collisions.above || (MovementController.collisions.below && !isForceAdded && MovementController.collisions.slopeAngle < MovementController.maxClimbAngle) || standingOnConveyorBelt)
         {
             velocity.y = 0;
         }
@@ -186,7 +186,7 @@ public class PlayerStateController : MonoBehaviour
         if (coyoteTimer > 0f)
             coyoteTimer -= Time.fixedDeltaTime;
 
-        if (MovementController.collisions.below || standingOnConveyorBelt)
+        if (MovementController.collisions.below && MovementController.collisions.slopeAngle < MovementController.maxClimbAngle || standingOnConveyorBelt)
         {
             coyoteTimer = 0.3f;
 
@@ -200,18 +200,21 @@ public class PlayerStateController : MonoBehaviour
         {
             if ((MovementController.collisions.leftWall || MovementController.collisions.rightWall) && !MovementController.collisions.below && velocity.y < 0)
             {
-                if (wallDirX == input.x)
+                if (wallDirX * input.x > 0)
                 {
+                    Debug.Log("Wall Climb");
                     velocity.x = -wallDirX * wallJumpClimb.x;
                     velocity.y = wallJumpClimb.y;
                 }
                 else if (input.x == 0)
                 {
+                    Debug.Log("Wall Jump Off");
                     velocity.x = -wallDirX * wallJumpOff.x;
                     velocity.y = wallJumpOff.y;
                 }
-                else
+                else if (wallDirX * input.x < 0)
                 {
+                    Debug.Log("Wall Leap");
                     velocity.x = -wallDirX * wallLeap.x;
                     velocity.y = wallLeap.y;
                 }
@@ -244,6 +247,7 @@ public class PlayerStateController : MonoBehaviour
         }
 
         velocity.y += gravity * Time.fixedDeltaTime;
+
         MovementController.Move(velocity * Time.fixedDeltaTime);
         
         if (velocity.y > 0)
