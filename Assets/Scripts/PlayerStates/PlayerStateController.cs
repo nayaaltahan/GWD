@@ -284,6 +284,13 @@ public class PlayerStateController : MonoBehaviour
             Animations.SetBool("IsGrounded", false);
         }
 
+        if (!canMove)
+        {
+            Animations.SetBool(Constants.JUMPING, false);
+            Animations.SetBool(Constants.FALLING, false);
+            Animations.SetFloat("Blend", Math.Abs(velocity.x));
+        }
+
         if (movingToPoint)
         {
             float difference = movementTarget.x - transform.position.x;
