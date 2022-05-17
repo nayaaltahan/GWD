@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -41,6 +42,24 @@ public class CheckpointManager : MonoBehaviour
             Destroy(this);
             Debug.LogWarning("More than one CheckpointManager in scene!");
         }
+
+
+    }
+
+    private void Start()
+    {
+        CharSelectManager.instance.OnPlayersConnected += () =>
+        {
+            if (GameManager.instance.allowSinglePlayer)
+            {
+                Rani = GameObject.Find("Rani").GetComponent<PlayerStateController>();
+            }
+            else
+            {
+                Onwell = CharSelectManager.instance.RobotPlayer.GetComponentInChildren<PlayerStateController>(); 
+                Rani = CharSelectManager.instance.FrogPlayer.GetComponentInChildren<PlayerStateController>();
+            }
+        };
     }
 
     public void RespawnPlayers()

@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
@@ -61,19 +62,6 @@ public class GameManager : MonoBehaviour
 
         if (allowSinglePlayer)
         {
-            if (playerType == PlayerType.robot)
-            {
-                playerOne.GetComponent<PlayerController>().SetUpPlayer(true);
-                CameraManager.instance.AddPlayerToTargetGroup(playerOne);
-                playerTwo.GetComponent<PlayerController>().enabled = false;
-            }
-            else if(playerType == PlayerType.frog)
-            {
-                playerTwo.GetComponent<PlayerController>().SetUpPlayer(true);
-                CameraManager.instance.AddPlayerToTargetGroup(playerTwo);
-                playerOne.GetComponent<PlayerController>().enabled = false;
-            }
-            SwitchState(GameStates.SINGLEPLAYGAME);
         }
         else
         {
@@ -119,8 +107,13 @@ public void SwitchState(GameStates state)
             case GameStates.PLAYGAME:
                 this.state = GameStates.PLAYGAME;
                 UIManager.instance.TurnCharSelectUIOn(false);
-                CameraManager.instance.AddPlayerToTargetGroup(playerOne);
-                CameraManager.instance.AddPlayerToTargetGroup(playerTwo);
+                if(allowSinglePlayer)
+                    CameraManager.instance.AddPlayerToTargetGroup(GameObject.Find("Rani"));
+                else
+                {
+                    CameraManager.instance.AddPlayerToTargetGroup(CharSelectManager.instance.FrogPlayer.transform.GetChild(0).gameObject);
+                    CameraManager.instance.AddPlayerToTargetGroup(CharSelectManager.instance.RobotPlayer.transform.GetChild(1).gameObject);
+                }
 
                 if (playCutscene)
                 {
@@ -135,8 +128,9 @@ public void SwitchState(GameStates state)
 
                 if(!turnOnDialogue || !playCutscene)
                 {
-                    playerOne.GetComponent<PlayerController>().SetUpPlayer(true);
-                    playerTwo.GetComponent<PlayerController>().SetUpPlayer(true);
+                    playerOne.GetComponentInChildren<PlayerController>().SetUpPlayer(true);
+                    if(!allowSinglePlayer)
+                        playerTwo.GetComponentInChildren<PlayerController>().SetUpPlayer(true);
                 }
 
                 CineMachineCamera.SetActive(true);
@@ -162,5 +156,25 @@ public void SwitchState(GameStates state)
             default:
                 break;
         }
+    }
+
+    public void ConnectNewPlayer(GameObject player)
+    {
+        if (playerOne == null)
+        {
+            Debug.Log("Player one joined", player);
+
+            playerOne = player;
+            CharSelectManager.instance.OnPlayerOneJoined?.Invoke();            
+        }
+
+        else if (playerTwo == null)
+        {
+            Debug.Log("Player two joined", player);
+            playerTwo = player;
+            CharSelectManager.instance.OnPlayerTwoJoined?.Invoke();            
+        }
+        else
+            throw new Exception("Tried to connect a third player");
     }
 }
