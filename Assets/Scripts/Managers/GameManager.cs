@@ -29,9 +29,13 @@ public class GameManager : MonoBehaviour
     // TODO: Spawn only 1 player when this is true
     public bool allowSinglePlayer = false;
     public bool turnOnDialogue = true;
+    public bool turnOnTestSpawn;
     [SerializeField] private PlayerType playerType = PlayerType.frog;
     [SerializeField] private GameObject CineMachineCamera;
     [SerializeField] private GameObject CutsceneObj;
+
+    public Transform robotTestSpawn;
+    public Transform raniTestSpawn;
 
     // Start is called before the first frame update
     async void Awake()
