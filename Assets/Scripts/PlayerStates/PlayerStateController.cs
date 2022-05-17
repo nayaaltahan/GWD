@@ -383,6 +383,37 @@ public class PlayerStateController : MonoBehaviour
         Debug.LogError("Failed to move point - point was not found");
     }
 
+    public void FaceOtherPlayerWhileTalking()
+    {
+        Debug.Log($"transform.name is {transform.name}" );
+        var otherPlayerName = transform.name == "Onwell" ? "Rani" : "Onwell";
+        var otherPlayer = GameObject.Find(otherPlayerName).transform;
+        //if (1 <= x && x <= 100)   //true
+        var diff = Mathf.Abs(transform.position.x - otherPlayer.position.x);
+        if (transform.position.x > otherPlayer.position.x)
+        {
+            // face left
+            modelTransform.eulerAngles = new Vector3(0, -90, 0);
+            isFacingRight = false;
+            if (diff < 1.5)
+            {
+                transform.Translate(Vector3.right);
+                otherPlayer.Translate(Vector3.left);
+            }
+        }
+        if (transform.position.x < otherPlayer.position.x)
+        {
+            // face right
+            modelTransform.eulerAngles = new Vector3(0, 90, 0);
+            isFacingRight = true;
+            if (diff < 1.5)
+            {
+                transform.Translate(Vector3.left);
+                otherPlayer.Translate(Vector3.right);
+            }
+        }
+    }
+
 
     //private void OnTriggerStay(Collider other)
     //{
