@@ -91,7 +91,9 @@ public class PlayerStateController : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         SetCurrentState(IdleState);
         movementTargets = GameObject.FindGameObjectsWithTag("MovementTarget");
-        SetCanMove(false);
+
+        if(GameManager.instance.playCutscene && GameManager.instance.turnOnDialogue)
+            SetCanMove(false);
     }
 
     // Update is called once per frame
