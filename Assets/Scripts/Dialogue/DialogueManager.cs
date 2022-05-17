@@ -441,9 +441,9 @@ public class DialogueManager : MonoBehaviour
         {
             // Fade out the selected choice AFTER fading out all the other choices
             if(idx == index && index != -1)
-                StartCoroutine(speechBubble.GetComponent<ChatBubbleController>().DisableSpeechBubble(0.8f, 1.0f));
+                StartCoroutine(speechBubble.GetComponent<ChatBubbleController>().DisableSpeechBubble(0.5f, 1.0f));
             else
-                StartCoroutine(speechBubble.GetComponent<ChatBubbleController>().DisableSpeechBubble(0.8f));
+                StartCoroutine(speechBubble.GetComponent<ChatBubbleController>().DisableSpeechBubble(0.5f));
             idx++;
 
         }
