@@ -76,6 +76,7 @@ public class CharSelectManager : MonoBehaviour
             p2multiplayerES = GameManager.instance.playerTwo.GetComponent<MultiplayerEventSystem>();
             p2MidButton = p2Buttons[1].gameObject;
             ActivatePlayerSelectionUI(ref p2multiplayerES, p2Buttons);
+            FindObjectOfType<PlayerInputManager>().DisableJoining();
         };
     }
 
@@ -157,12 +158,22 @@ public class CharSelectManager : MonoBehaviour
     //Check if game is Ready to play, start PlayState and setup players
     public void Ready()
     {
-        if (isP1Ready == false || isP2Ready == false)
+        if ((isP1Ready == false || isP2Ready == false) && !GameManager.instance.allowSinglePlayer)
             return;
         Debug.Log("IS P1 LEFT: " + isP1Left);
         Debug.Log("IS P2 LEFT: " + isP2Left);
-        
-        if (isP1Left)
+        if (GameManager.instance.allowSinglePlayer)
+        {
+            var p1 = p1multiplayerES.transform.GetChild(0).gameObject;
+            p1.SetActive(true);
+            OnPlayersConnected?.Invoke();
+            p1.GetComponent<PlayerController>().SetUpPlayer(false);
+            GameManager.instance.SwitchState(GameStates.PLAYGAME);
+            p1multiplayerES.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+            return;
+
+        }
+        else if (isP1Left)
         {
             var p1 = p1multiplayerES.transform.GetChild(0).gameObject;
             var p2 = p2multiplayerES.transform.GetChild(1).gameObject;

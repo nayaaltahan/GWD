@@ -50,8 +50,15 @@ public class CheckpointManager : MonoBehaviour
     {
         CharSelectManager.instance.OnPlayersConnected += () =>
         {
-            Onwell = CharSelectManager.instance.RobotPlayer.GetComponentInChildren<PlayerStateController>();
-            Rani = CharSelectManager.instance.FrogPlayer.GetComponentInChildren<PlayerStateController>();
+            if (GameManager.instance.allowSinglePlayer)
+            {
+                Rani = GameObject.Find("Rani").GetComponent<PlayerStateController>();
+            }
+            else
+            {
+                Onwell = CharSelectManager.instance.RobotPlayer.GetComponentInChildren<PlayerStateController>(); 
+                Rani = CharSelectManager.instance.FrogPlayer.GetComponentInChildren<PlayerStateController>();
+            }
         };
     }
 

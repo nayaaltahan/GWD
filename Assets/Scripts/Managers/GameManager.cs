@@ -62,19 +62,6 @@ public class GameManager : MonoBehaviour
 
         if (allowSinglePlayer)
         {
-            if (playerType == PlayerType.robot)
-            {
-                playerOne.GetComponent<PlayerController>().SetUpPlayer(true);
-                CameraManager.instance.AddPlayerToTargetGroup(playerOne);
-                playerTwo.GetComponent<PlayerController>().enabled = false;
-            }
-            else if(playerType == PlayerType.frog)
-            {
-                playerTwo.GetComponent<PlayerController>().SetUpPlayer(true);
-                CameraManager.instance.AddPlayerToTargetGroup(playerTwo);
-                playerOne.GetComponent<PlayerController>().enabled = false;
-            }
-            SwitchState(GameStates.SINGLEPLAYGAME);
         }
         else
         {
@@ -120,8 +107,13 @@ public void SwitchState(GameStates state)
             case GameStates.PLAYGAME:
                 this.state = GameStates.PLAYGAME;
                 UIManager.instance.TurnCharSelectUIOn(false);
-                CameraManager.instance.AddPlayerToTargetGroup(CharSelectManager.instance.FrogPlayer.transform.GetChild(0).gameObject);
-                CameraManager.instance.AddPlayerToTargetGroup(CharSelectManager.instance.RobotPlayer.transform.GetChild(1).gameObject);
+                if(allowSinglePlayer)
+                    CameraManager.instance.AddPlayerToTargetGroup(GameObject.Find("Rani"));
+                else
+                {
+                    CameraManager.instance.AddPlayerToTargetGroup(CharSelectManager.instance.FrogPlayer.transform.GetChild(0).gameObject);
+                    CameraManager.instance.AddPlayerToTargetGroup(CharSelectManager.instance.RobotPlayer.transform.GetChild(1).gameObject);
+                }
 
                 if (playCutscene)
                 {
@@ -137,7 +129,8 @@ public void SwitchState(GameStates state)
                 if(!turnOnDialogue || !playCutscene)
                 {
                     playerOne.GetComponentInChildren<PlayerController>().SetUpPlayer(true);
-                    playerTwo.GetComponentInChildren<PlayerController>().SetUpPlayer(true);
+                    if(!allowSinglePlayer)
+                        playerTwo.GetComponentInChildren<PlayerController>().SetUpPlayer(true);
                 }
 
                 CineMachineCamera.SetActive(true);

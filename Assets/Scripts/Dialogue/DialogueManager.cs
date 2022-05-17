@@ -113,6 +113,8 @@ public class DialogueManager : MonoBehaviour
             dialogueSnapshotInstance = FMODUnity.RuntimeManager.CreateInstance(dialogueSnapshot.Guid);
             CharSelectManager.instance.OnPlayersConnected += () =>
             {
+                if (GameManager.instance.allowSinglePlayer)
+                    return;
                 var frog = CharSelectManager.instance.FrogPlayer;
                 var robot = CharSelectManager.instance.RobotPlayer;
                 var frogInfo = frog.GetComponent<PlayerInfo>();
