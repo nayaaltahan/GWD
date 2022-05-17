@@ -64,7 +64,7 @@ Rani: Even so. #event:/Voice/Rani/EvenSo
 
 ===TalkingUnderTheTree===
 TalkingUnderTree #cutscene
-*[Onwell: This is "nature", right?]#cutscene
+*[Onwell: This is "nature", right?] #cutscene
     Onwell: FROG-PERSON. DOES ALL THIS TRULY GROW? #event:/Voice/Onwell/DoesAllThisTrulyGrow #cutscene
     Onwell: THIS EARTH STRETCHING TOWARDS SKY.  #event:/Voice/Onwell/ThisEarthStretching #cutscene
         **[Rani: Yes!]
@@ -88,7 +88,7 @@ TalkingUnderTree #cutscene
             Rani: And I have possibly the best head.  #event:/Voice/Rani/AndIHavePossiblyTheBest #cutscene
         **[Rani: I'm squishy!] #cutscene
             Rani: We'll, I'm a frog, sir. I'm quite elastic. #event:/Voice/Rani/WellImAFrog #cutscene
-            Rani: I can take fall, no problem #event:/Voice/Rani/ICanTakeAFall #cutscene
+            Rani: I can take a fall, no problem #event:/Voice/Rani/ICanTakeAFall #cutscene
         **[Rani: I have guns] #cutscene
             Rani: Well, I have mechanical means of protection you know. #event:/Voice/Rani/WellIHaveMechanicalMeans #cutscene
             Rani: Rather like yourself, actually. #event:/Voice/Rani/RatherLikeYourself #cutscene
