@@ -90,6 +90,7 @@ public class PlayerStateController : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         SetCurrentState(IdleState);
         movementTargets = GameObject.FindGameObjectsWithTag("MovementTarget");
+        SetCanMove(false);
     }
 
     // Update is called once per frame
