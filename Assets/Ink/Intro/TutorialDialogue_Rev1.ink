@@ -104,7 +104,7 @@ TalkingUnderTree #cutscene
             Rani: I used to have a home in the Oaks.  #event:/Voice/Rani/IUsedToHaveAHome #cutscene
             Rani: But they are small-minded there.  No understanding of big ideas.  #event:/Voice/Rani/ButTheyAreSmallMinded #cutscene
             Rani: So I moved here to work.  #event:/Voice/Rani/SoIMovedHere #cutscene
-            Onwell: BECAUSE THIS SWAMP UNDERSTANDS IDEAS. #event:/Voice/Onwell/BecauseThisSwampUnderstands #cutscene
+            Onwell: BECAUSE THE SWAMP UNDERSTANDS IDEAS. #event:/Voice/Onwell/BecauseThisSwampUnderstands #cutscene
             Rani: Well yes. Or, rather, it does not fail to understand them.  #event:/Voice/Rani/WellYesOrRather #cutscene
                         
     
