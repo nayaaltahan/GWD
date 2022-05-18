@@ -8,6 +8,7 @@ using UnityEngine.InputSystem.UI;
 using TMPro;
 using DG.Tweening;
 using MonKey.Extensions;
+using UnityEngine.EventSystems;
 using UnityEngine.XR;
 using InputDevice = UnityEngine.XR.InputDevice;
 
@@ -19,6 +20,8 @@ public class CharSelectManager : MonoBehaviour
     [SerializeField] private List<Button> p1Buttons;
     [SerializeField] private List<Button> p2Buttons;
 
+    [SerializeField] private GameObject p1JoinButton, p2JoinButton;
+    
     [HideInInspector] public GameObject p1MidButton;
     [HideInInspector] public GameObject p2MidButton;
 
@@ -34,24 +37,56 @@ public class CharSelectManager : MonoBehaviour
     private bool isP1Left;
     private bool isP2Left;
 
-    [SerializeField] private PlayerInputManager playerInputManager;
+    public delegate void OnPlayersConnectedDelegate();
+
+    public OnPlayersConnectedDelegate OnPlayersConnected; // TODO: MAKE ACTION PLAYER WHEN WE START THE GAME
+
+    public delegate void OnPlayerJoined();
+
+    public OnPlayerJoined OnPlayerOneJoined;
+    public OnPlayerJoined OnPlayerTwoJoined;
+
+    public GameObject FrogPlayer => isP1Left ? GameManager.instance.playerOne : GameManager.instance.playerTwo;
+    public GameObject RobotPlayer => isP1Left ? GameManager.instance.playerTwo : GameManager.instance.playerOne;
 
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         if (instance == null)
             instance = this;
         else
             Debug.LogError("More than one Character Selection Manager in the scene");
 
-        p1MidButton = p1Buttons[1].gameObject;
-        p2MidButton = p2Buttons[1].gameObject;
 
-        p1multiplayerES = GameManager.instance.playerOne.GetComponent<MultiplayerEventSystem>();
-        p2multiplayerES = GameManager.instance.playerTwo.GetComponent<MultiplayerEventSystem>();
-        
+        OnPlayerOneJoined += () =>
+        {
+            foreach (var button in p1Buttons)
+                button.gameObject.SetActive(true);
+            p1JoinButton.SetActive(false);
+            p1multiplayerES = GameManager.instance.playerOne.GetComponent<MultiplayerEventSystem>();
+            p1MidButton = p1Buttons[1].gameObject;
+            ActivatePlayerSelectionUI(ref p1multiplayerES, p1Buttons);
+        };
+
+        OnPlayerTwoJoined += () =>
+        {
+            foreach (var button in p2Buttons)
+                button.gameObject.SetActive(true);
+            p2JoinButton.SetActive(false);
+            p2multiplayerES = GameManager.instance.playerTwo.GetComponent<MultiplayerEventSystem>();
+            p2MidButton = p2Buttons[1].gameObject;
+            ActivatePlayerSelectionUI(ref p2multiplayerES, p2Buttons);
+            FindObjectOfType<PlayerInputManager>().DisableJoining();
+        };
     }
+
+    private void ActivatePlayerSelectionUI(ref MultiplayerEventSystem mes, List<Button> buttons)
+    {
+        mes.SetSelectedGameObject(buttons[1].gameObject);
+        mes.firstSelectedGameObject = buttons[1].gameObject;
+        mes.playerRoot = buttons[0].transform.parent.parent.gameObject;
+    }
+
 
     private void Update()
     {
@@ -123,14 +158,44 @@ public class CharSelectManager : MonoBehaviour
     //Check if game is Ready to play, start PlayState and setup players
     public void Ready()
     {
-        if (isP1Ready == false || isP2Ready == false)
+        if ((isP1Ready == false || isP2Ready == false) && !GameManager.instance.allowSinglePlayer)
             return;
-
-        GameManager.instance.playerOne.GetComponent<PlayerController>().SetUpPlayer(false);
-        GameManager.instance.playerTwo.GetComponent<PlayerController>().SetUpPlayer(false);
-        GameManager.instance.SwitchState(GameStates.PLAYGAME);
         Debug.Log("IS P1 LEFT: " + isP1Left);
         Debug.Log("IS P2 LEFT: " + isP2Left);
+        if (GameManager.instance.allowSinglePlayer)
+        {
+            var p1 = p1multiplayerES.transform.GetChild(0).gameObject;
+            p1.SetActive(true);
+            OnPlayersConnected?.Invoke();
+            p1.GetComponent<PlayerController>().SetUpPlayer(false);
+            GameManager.instance.SwitchState(GameStates.PLAYGAME);
+            p1multiplayerES.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+            return;
+
+        }
+        else if (isP1Left)
+        {
+            var p1 = p1multiplayerES.transform.GetChild(0).gameObject;
+            var p2 = p2multiplayerES.transform.GetChild(1).gameObject;
+            p1.SetActive(true);
+            p2.SetActive(true);
+            OnPlayersConnected?.Invoke();
+            p1.GetComponent<PlayerController>().SetUpPlayer(false);
+            p2.GetComponent<PlayerController>().SetUpPlayer(false);
+        }
+        else
+        {
+            var p1 = p1multiplayerES.transform.GetChild(1).gameObject;
+            var p2 = p2multiplayerES.transform.GetChild(0).gameObject;
+            p1.SetActive(true);
+            p2.SetActive(true);
+            OnPlayersConnected?.Invoke();
+            p1.GetComponent<PlayerController>().SetUpPlayer(false);
+            p2.GetComponent<PlayerController>().SetUpPlayer(false);
+        }
+        FrogPlayer.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        RobotPlayer.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        GameManager.instance.SwitchState(GameStates.PLAYGAME);
     }
 
     //Update images to make sure only selected one shows for player one
@@ -143,7 +208,6 @@ public class CharSelectManager : MonoBehaviour
 
             if (p1Buttons[i].gameObject == p1multiplayerES.currentSelectedGameObject)
                 temp = true;
-
 
             p1Buttons[i].GetComponent<Image>().enabled = temp;
             if (!isP1Ready)
@@ -177,38 +241,4 @@ public class CharSelectManager : MonoBehaviour
             }
         }
     }
-
-    private void OnGUI()
-    {
-        if (GameManager.instance.state == GameStates.CHARACTERSELECT)
-        {
-            var startX = Screen.width / 2;
-            var startY = Screen.height - 250;
-            var gamepads = Gamepad.all;
-
-            var playerInput1 = p1multiplayerES.GetComponent<PlayerInput>();
-            var playerInput2 = p2multiplayerES.GetComponent<PlayerInput>();
-            if (GUI.Button(new Rect(startX - 50, startY, 100, 50), "Use controllers"))
-            {
-                playerInput1.SwitchCurrentControlScheme("Gamepad", gamepads[0]);
-                playerInput2.SwitchCurrentControlScheme("Gamepad", gamepads[1]);
-            }
-
-            if (!playerInput1.currentControlScheme.Equals("Gamepad") ||
-                !playerInput2.currentControlScheme.Equals("Gamepad"))
-            {
-                var style = new GUIStyle();
-                style.fontSize = 30;
-                style.fontStyle = FontStyle.Bold;
-                style.normal.textColor = Color.red;
-                GUI.Label(new Rect(startX - 270, startY + 80, 200, 50), "MOUSE&KEYBOARD DETECTED", style);
-            }
-            else
-            {
-                GUI.Box(new Rect(startX - 100, startY + 80, 200, 50), "Connected controllers: " + gamepads.Count);
-
-            }
-        }
-    }
-
 }

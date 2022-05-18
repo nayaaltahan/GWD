@@ -203,7 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7401736fce464b2eb9f3c1c4cca7067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 1399164646}
 --- !u!114 &593648584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,11 +218,13 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 769
-  horizontalRayCount: 4
+  horizontalRayCount: 2
   verticalRayCount: 4
   horizontalRaySpacing: 0
   verticalRaySpacing: 0
   collider: {fileID: 0}
+  maxClimbAngle: 32.68
+  maxDescendAngle: 45
   wallCollisionMask:
     serializedVersion: 2
     m_Bits: 512
@@ -268,7 +269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c52c8fca7eb3cb47b78e8ca622312ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  childrenToActivate: []
   playerSpawn: {fileID: 0}
   playerNumber: 0
 --- !u!114 &2086471165371487224
@@ -1266,44 +1266,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b71fb5bd139af461facc65cd90a8da22, type: 3}
   m_PrefabInstance: {fileID: 5430359469459411188}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &4944219184361167755
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5160539113669242277}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a86b6fd92d0e74f729027bd2e91184b0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1399164646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5160539113669242277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75408dbb520005a4d981442d6d2d97ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stepEvent:
-    Guid:
-      Data1: -2085831431
-      Data2: 1288386424
-      Data3: -34368074
-      Data4: 217743387
-    Path: event:/SFX/Onwell/Onwell_Step
 --- !u!198 &1399164645
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -6134,3 +6096,41 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!95 &4944219184361167755
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5160539113669242277}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a86b6fd92d0e74f729027bd2e91184b0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1399164646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5160539113669242277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75408dbb520005a4d981442d6d2d97ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepEvent:
+    Guid:
+      Data1: -2085831431
+      Data2: 1288386424
+      Data3: -34368074
+      Data4: 217743387
+    Path: event:/SFX/Onwell/Onwell_Step

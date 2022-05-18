@@ -42,7 +42,7 @@ Rani: More characters like you around, then? Hm. #event:/Voice/Rani/Convo2_MoreC
 Rani: Oh, that dreary old place? #event:/Voice/Rani/Convo2_OhThatDreary #cutscene
 -
 Rani: Well, I'm headed there myself for some restocking. #event:/Voice/Rani/Convo2_WellImHeaded #cutscene 
-Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe #cutscene #RaniPoint #15 #FaceRight
+Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe #cutscene #RaniPoint #10 #FaceRight
 
 -
 -> DONE
@@ -64,7 +64,7 @@ Rani: Even so. #event:/Voice/Rani/EvenSo
 
 ===TalkingUnderTheTree===
 TalkingUnderTree #cutscene
-*[Onwell: This is "nature", right?]#cutscene
+*[Onwell: This is "nature", right?] #cutscene
     Onwell: FROG-PERSON. DOES ALL THIS TRULY GROW? #event:/Voice/Onwell/DoesAllThisTrulyGrow #cutscene
     Onwell: THIS EARTH STRETCHING TOWARDS SKY.  #event:/Voice/Onwell/ThisEarthStretching #cutscene
         **[Rani: Yes!]
@@ -88,7 +88,7 @@ TalkingUnderTree #cutscene
             Rani: And I have possibly the best head.  #event:/Voice/Rani/AndIHavePossiblyTheBest #cutscene
         **[Rani: I'm squishy!] #cutscene
             Rani: We'll, I'm a frog, sir. I'm quite elastic. #event:/Voice/Rani/WellImAFrog #cutscene
-            Rani: I can take fall, no problem #event:/Voice/Rani/ICanTakeAFall #cutscene
+            Rani: I can take a fall, no problem #event:/Voice/Rani/ICanTakeAFall #cutscene
         **[Rani: I have guns] #cutscene
             Rani: Well, I have mechanical means of protection you know. #event:/Voice/Rani/WellIHaveMechanicalMeans #cutscene
             Rani: Rather like yourself, actually. #event:/Voice/Rani/RatherLikeYourself #cutscene
@@ -104,7 +104,7 @@ TalkingUnderTree #cutscene
             Rani: I used to have a home in the Oaks.  #event:/Voice/Rani/IUsedToHaveAHome #cutscene
             Rani: But they are small-minded there.  No understanding of big ideas.  #event:/Voice/Rani/ButTheyAreSmallMinded #cutscene
             Rani: So I moved here to work.  #event:/Voice/Rani/SoIMovedHere #cutscene
-            Onwell: BECAUSE THIS SWAMP UNDERSTANDS IDEAS. #event:/Voice/Onwell/BecauseThisSwampUnderstands #cutscene
+            Onwell: BECAUSE THE SWAMP UNDERSTANDS IDEAS. #event:/Voice/Onwell/BecauseThisSwampUnderstands #cutscene
             Rani: Well yes. Or, rather, it does not fail to understand them.  #event:/Voice/Rani/WellYesOrRather #cutscene
                         
     
