@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerStateController : MonoBehaviour
 {
-    public bool CanMove => canMove;
     private PlayerState currentState;
 
     public readonly IdleState IdleState = new IdleState();
@@ -87,13 +86,10 @@ public class PlayerStateController : MonoBehaviour
     {
         MovementController = GetComponent<MovementController>();
         animator = modelTransform.GetComponent<Animator>();
-        InputController = GetComponentInParent<PlayerInputController>();
+        InputController = GetComponent<PlayerInputController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         SetCurrentState(IdleState);
         movementTargets = GameObject.FindGameObjectsWithTag("MovementTarget");
-
-        if(GameManager.instance.playCutscene && GameManager.instance.turnOnDialogue)
-            SetCanMove(false);
     }
 
     // Update is called once per frame
@@ -105,7 +101,7 @@ public class PlayerStateController : MonoBehaviour
 
         var input = canMove ? InputController.MoveDirection : Vector3.zero;
 
-        int wallDirX = (MovementController.collisions.leftWall) ? -1 : 1;
+        int wallDirX = (MovementController.collisions.left) ? -1 : 1;
 
         float targetVelocityX = 0.0f;
 
@@ -148,7 +144,7 @@ public class PlayerStateController : MonoBehaviour
 
         bool wallSliding = false;
 
-        if ((MovementController.collisions.left || MovementController.collisions.right) && (!MovementController.collisions.below || MovementController.collisions.slopeAngle > MovementController.maxClimbAngle) && velocity.y < 0)
+        if ((MovementController.collisions.left || MovementController.collisions.right) && !MovementController.collisions.below && velocity.y < 0)
         {
             wallSliding = true;
 
@@ -178,7 +174,7 @@ public class PlayerStateController : MonoBehaviour
 
         }
 
-        if (MovementController.collisions.above || (MovementController.collisions.below && !isForceAdded && MovementController.collisions.slopeAngle < MovementController.maxClimbAngle) || standingOnConveyorBelt)
+        if (MovementController.collisions.above || (MovementController.collisions.below && !isForceAdded) || standingOnConveyorBelt)
         {
             velocity.y = 0;
         }
@@ -186,7 +182,7 @@ public class PlayerStateController : MonoBehaviour
         if (coyoteTimer > 0f)
             coyoteTimer -= Time.fixedDeltaTime;
 
-        if (MovementController.collisions.below && MovementController.collisions.slopeAngle < MovementController.maxClimbAngle || standingOnConveyorBelt)
+        if (MovementController.collisions.below || standingOnConveyorBelt)
         {
             coyoteTimer = 0.3f;
 
@@ -200,21 +196,18 @@ public class PlayerStateController : MonoBehaviour
         {
             if ((MovementController.collisions.leftWall || MovementController.collisions.rightWall) && !MovementController.collisions.below && velocity.y < 0)
             {
-                if (wallDirX * input.x > 0)
+                if (wallDirX == input.x)
                 {
-                    Debug.Log("Wall Climb");
                     velocity.x = -wallDirX * wallJumpClimb.x;
                     velocity.y = wallJumpClimb.y;
                 }
                 else if (input.x == 0)
                 {
-                    Debug.Log("Wall Jump Off");
                     velocity.x = -wallDirX * wallJumpOff.x;
                     velocity.y = wallJumpOff.y;
                 }
-                else if (wallDirX * input.x < 0)
+                else
                 {
-                    Debug.Log("Wall Leap");
                     velocity.x = -wallDirX * wallLeap.x;
                     velocity.y = wallLeap.y;
                 }
@@ -247,12 +240,12 @@ public class PlayerStateController : MonoBehaviour
         }
 
         velocity.y += gravity * Time.fixedDeltaTime;
-
         MovementController.Move(velocity * Time.fixedDeltaTime);
-        
+
         if (velocity.y > 0)
         {
             Animations.SetBool(Constants.JUMPING, true);
+
         }
 
         // animations
@@ -266,7 +259,7 @@ public class PlayerStateController : MonoBehaviour
             Animations.SetBool(Constants.JUMPING, false);
         }
 
-        if (MovementController.collisions.below)
+        if (MovementController.collisions.below || coyoteTimer > 0)
         {
             Animations.SetBool(Constants.FALLING, false);
             Animations.SetBool("IsGrounded", true);
@@ -274,21 +267,15 @@ public class PlayerStateController : MonoBehaviour
             {
                 Animations.SetFloat("Blend", Math.Abs(velocity.x));
             }
-            else if(canMove) // Prevent jumping during cutscene dialogue
+            else
             {
                 Animations.SetBool(Constants.JUMPING, true);
+
             }
         }
         else
         {
             Animations.SetBool("IsGrounded", false);
-        }
-
-        if (!canMove)
-        {
-            Animations.SetBool(Constants.JUMPING, false);
-            Animations.SetBool(Constants.FALLING, false);
-            Animations.SetFloat("Blend", Math.Abs(velocity.x));
         }
 
         if (movingToPoint)
@@ -343,7 +330,6 @@ public class PlayerStateController : MonoBehaviour
     {
         velocity = springVelocity;
         isForceAdded = true;
-        Debug.Log("Springboard");
         SetCurrentState(JumpState);
         coyoteTimer = -1f;
         SpringVelocity = springVelocity;
@@ -381,37 +367,6 @@ public class PlayerStateController : MonoBehaviour
         }
 
         Debug.LogError("Failed to move point - point was not found");
-    }
-
-    public void FaceOtherPlayerWhileTalking()
-    {
-        Debug.Log($"transform.name is {transform.name}" );
-        var otherPlayerName = transform.name == "Onwell" ? "Rani" : "Onwell";
-        var otherPlayer = GameObject.Find(otherPlayerName).transform;
-        //if (1 <= x && x <= 100)   //true
-        var diff = Mathf.Abs(transform.position.x - otherPlayer.position.x);
-        if (transform.position.x > otherPlayer.position.x)
-        {
-            // face left
-            modelTransform.eulerAngles = new Vector3(0, -90, 0);
-            isFacingRight = false;
-            if (diff < 1.5)
-            {
-                transform.GetComponent<MovementController>().Move(Vector3.right);
-                otherPlayer.GetComponent<MovementController>().Move(Vector3.left);
-            }
-        }
-        if (transform.position.x < otherPlayer.position.x)
-        {
-            // face right
-            modelTransform.eulerAngles = new Vector3(0, 90, 0);
-            isFacingRight = true;
-            if (diff < 1.5)
-            {
-                transform.GetComponent<MovementController>().Move(Vector3.left);
-                otherPlayer.GetComponent<MovementController>().Move(Vector3.right);
-            }
-        }
     }
 
 
