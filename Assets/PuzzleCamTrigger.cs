@@ -29,28 +29,54 @@ public class PuzzleCamTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-          
-            
-            if (other.name == "Rani")
-                raniTriggered = !raniTriggered;
-            
-            else if (other.name == "Onwell")
-                onwellTriggered = !onwellTriggered;
-            
-            if (isExitTrigger && exitTriggered && fromCam.Priority != 11)
-                return;
+   
+   
+        }
+    }
 
-            if (raniTriggered && onwellTriggered)
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (other.transform.position.x > transform.position.x)
             {
-                if (isExitTrigger)
-                    exitTriggered = true;
-                
-                toCam.gameObject.SetActive(true);
-                fromCam.Priority = 10;
-                toCam.Priority = 11;
+                if (other.name == "Rani")
+                    raniTriggered = true;
+            
+                if (other.name == "Onwell")
+                    onwellTriggered = true;
+            
+                if (isExitTrigger && exitTriggered && fromCam.Priority != 11)
+                    return;
+
+                if (raniTriggered && onwellTriggered)
+                {
+                    toCam.gameObject.SetActive(true);
+                    fromCam.Priority = 10;
+                    toCam.Priority = 11;
+                    if (isExitTrigger)
+                    {
+                        fromCam.gameObject.SetActive(false);
+                        exitTriggered = true;
+                    }
+                }
             }
-            else
+            else if (isExitTrigger)
             {
+                if (other.name == "Rani")
+                    raniTriggered = false;
+            
+                if (other.name == "Onwell")
+                    onwellTriggered = false;
+            }
+            else if(!isExitTrigger)
+            {
+                if (other.name == "Rani")
+                    raniTriggered = false;
+            
+                if (other.name == "Onwell")
+                    onwellTriggered = false;
+                
                 toCam.gameObject.SetActive(false);
                 toCam.Priority = 10;
                 fromCam.Priority = 11;
@@ -60,13 +86,14 @@ public class PuzzleCamTrigger : MonoBehaviour
 
     public void Reset()
     {
-        Debug.LogWarning("RESET");
         raniTriggered = false;
         onwellTriggered = false;
         if (isExitTrigger)
         {
+            toCam.Priority = 11;
+            fromCam.Priority = 10;
             exitTriggered = false;
-            fromCam?.gameObject?.SetActive(false);            
+            fromCam.gameObject.SetActive(false);            
         }
         else
         {
