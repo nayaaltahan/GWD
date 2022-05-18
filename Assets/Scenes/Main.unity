@@ -73437,6 +73437,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 980255217517857178, guid: 816bd3904c27430418ca19feffee4abe, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9e84da04c6eaff448b8ace4260e8e110, type: 2}
     - target: {fileID: 1735257855974374217, guid: 816bd3904c27430418ca19feffee4abe, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -73555,7 +73559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3336541663063995714, guid: 816bd3904c27430418ca19feffee4abe, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3606556951540073683, guid: 816bd3904c27430418ca19feffee4abe, type: 3}
       propertyPath: m_SceneBindings.Array.size
@@ -73592,6 +73596,10 @@ PrefabInstance:
     - target: {fileID: 6798585732018929626, guid: 816bd3904c27430418ca19feffee4abe, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613239011297870966, guid: 816bd3904c27430418ca19feffee4abe, type: 3}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 816bd3904c27430418ca19feffee4abe, type: 3}
