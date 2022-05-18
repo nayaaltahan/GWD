@@ -6,8 +6,8 @@ using UnityEngine.Serialization;
 
 public class MovementController : RaycastController
 {
-	float maxClimbAngle = 80;
-	float maxDescendAngle = 80;
+	public float maxClimbAngle = 45;
+	public float maxDescendAngle = 45;
 
 	public CollisionInfo collisions;
 
@@ -39,15 +39,38 @@ public class MovementController : RaycastController
 		{
 			DescendSlope(ref velocity);
 		}
+
 		if (velocity.x != 0)
 		{
 			HorizontalCollisions(ref velocity);
 			WallCollisions(ref velocity);
 		}
+		else
+        {
+			Vector3 rayOrigin = raycastOrigins.bottomLeft;
+
+			if (Physics.Raycast(rayOrigin, -Vector3.up, out var raycastHit, Mathf.Infinity, collisionMask))
+			{
+				float slopeAngle = Vector3.Angle(raycastHit.normal, Vector3.up);
+				if (slopeAngle >= maxDescendAngle)
+				{
+					velocity.x = -0.05f;
+					velocity.y = -0.2f;
+
+					DescendSlope(ref velocity);
+				}
+			}
+		}
+
+
 		if (velocity.y != 0)
 		{
 			VerticalCollisions(ref velocity);
 		}
+
+
+
+
 
 		if (standingOnConveyor)
 		{

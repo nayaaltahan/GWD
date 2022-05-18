@@ -219,7 +219,8 @@ public class PlayerStateController : MonoBehaviour
                     velocity.y = wallLeap.y;
                 }
             }
-            if (coyoteTimer > 0 && !isForceAdded)
+
+            if (coyoteTimer > 0 && !isForceAdded && MovementController.collisions.slopeAngle < MovementController.maxClimbAngle)
             {
                 velocity.y = maxJumpVelocity;
                 coyoteTimer = -1f;
