@@ -32134,7 +32134,7 @@ MonoBehaviour:
   robotsFlyingCutscene: {fileID: 312612918}
   allowSinglePlayer: 0
   turnOnDialogue: 0
-  turnOnTestSpawn: 0
+  turnOnTestSpawn: 1
   playerType: 0
   CineMachineCamera: {fileID: 1099337285}
   CutsceneObj: {fileID: 729591773}
@@ -47362,7 +47362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394392195}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 959.9151, y: 43.13, z: 174.95}
+  m_LocalPosition: {x: 1068.165, y: 89.88, z: 174.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 639863411}
@@ -57984,7 +57984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711562773}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 953.71, y: 43.32, z: 174.45}
+  m_LocalPosition: {x: 1061.96, y: 90.07, z: 174.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 639863411}
@@ -78586,6 +78586,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 767293234, guid: 816bd3904c27430418ca19feffee4abe, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1735257856932255089, guid: 816bd3904c27430418ca19feffee4abe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
