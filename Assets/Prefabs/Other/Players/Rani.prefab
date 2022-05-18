@@ -202,7 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7401736fce464b2eb9f3c1c4cca7067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 1794748024}
 --- !u!114 &8868738726889057812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +222,8 @@ MonoBehaviour:
   horizontalRaySpacing: 0
   verticalRaySpacing: 0
   collider: {fileID: 0}
+  maxClimbAngle: 45
+  maxDescendAngle: 45
   wallCollisionMask:
     serializedVersion: 2
     m_Bits: 512
