@@ -29,27 +29,30 @@ public class MovementController : RaycastController
 		UpdateRaycastOrigins();
 		collisions.Reset();
 		collisions.velocityOld = velocity;
-		print(collisions.slopeAngle);
+		
 
 		if (velocity.x != 0)
 		{
 			collisions.faceDir = (int)Mathf.Sign(velocity.x);
 		}
 
+		if (velocity.y == 0)
+			velocity.y = -1;
 
-		if (velocity.y < 0)
+		VerticalCollisions(ref velocity);
+
+		if (velocity.y <= 0)
 		{
 			DescendSlope(ref velocity);
 		}
+
 		if (velocity.x != 0)
 		{
+
 			HorizontalCollisions(ref velocity);
 			WallCollisions(ref velocity);
 		}
-		if (velocity.y != 0)
-		{
-			VerticalCollisions(ref velocity);
-		}
+		
 
 		if (standingOnConveyor)
 		{
@@ -64,6 +67,8 @@ public class MovementController : RaycastController
 		{
 			collisions.below = true;
 		}
+
+		print(collisions.slopeAngle);
 
 		Debug.DrawRay(transform.position, Vector3.down * 0.5f, Color.blue);
 		if (Physics.Raycast(transform.position, Vector3.down, out var hit, 0.5f, collisionMask, QueryTriggerInteraction.Ignore))
@@ -111,6 +116,7 @@ public class MovementController : RaycastController
 						velocity = collisions.velocityOld;
 					}
 					float distanceToSlopeStart = 0;
+
 					if (slopeAngle != collisions.slopeAngleOld)
 					{
 						distanceToSlopeStart = hit.distance - skinWidth;
@@ -122,12 +128,13 @@ public class MovementController : RaycastController
 
 				if (!collisions.climbingSlope || slopeAngle > maxClimbAngle)
 				{
-					velocity.x = (hit.distance - skinWidth) * directionX;
+					velocity.x = (hit.distance - skinWidth) * hit.normal.x;
 					rayLength = hit.distance;
 
-					if (collisions.climbingSlope)
+					if (slopeAngle > maxClimbAngle)
 					{
 						velocity.y = Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(velocity.x);
+						DescendSlope(ref velocity);
 					}
 
 					collisions.left = directionX == -1;

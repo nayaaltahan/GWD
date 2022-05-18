@@ -42,7 +42,7 @@ Rani: More characters like you around, then? Hm. #event:/Voice/Rani/Convo2_MoreC
 Rani: Oh, that dreary old place? #event:/Voice/Rani/Convo2_OhThatDreary #cutscene
 -
 Rani: Well, I'm headed there myself for some restocking. #event:/Voice/Rani/Convo2_WellImHeaded #cutscene 
-Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe #cutscene #RaniPoint #15 #FaceRight
+Rani: Follow me! #event:/Voice/Rani/Convo2_FollowMe #cutscene #RaniPoint #10 #FaceRight
 
 -
 -> DONE
