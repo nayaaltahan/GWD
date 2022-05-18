@@ -6,8 +6,8 @@ using UnityEngine.Serialization;
 
 public class MovementController : RaycastController
 {
-	public float maxClimbAngle = 30;
-	public float maxDescendAngle = 30;
+	float maxClimbAngle = 80;
+	float maxDescendAngle = 80;
 
 	public CollisionInfo collisions;
 
@@ -29,30 +29,25 @@ public class MovementController : RaycastController
 		UpdateRaycastOrigins();
 		collisions.Reset();
 		collisions.velocityOld = velocity;
-		
 
 		if (velocity.x != 0)
 		{
 			collisions.faceDir = (int)Mathf.Sign(velocity.x);
 		}
 
-		if (velocity.y == 0)
-			velocity.y = -1;
-
-		VerticalCollisions(ref velocity);
-
-		if (velocity.y <= 0)
+		if (velocity.y < 0)
 		{
 			DescendSlope(ref velocity);
 		}
-
 		if (velocity.x != 0)
 		{
-
 			HorizontalCollisions(ref velocity);
 			WallCollisions(ref velocity);
 		}
-		
+		if (velocity.y != 0)
+		{
+			VerticalCollisions(ref velocity);
+		}
 
 		if (standingOnConveyor)
 		{
@@ -62,26 +57,22 @@ public class MovementController : RaycastController
 		{
 			transform.Translate(velocity);
 		}
-		
+
 		if (standingOnPlatform)
 		{
 			collisions.below = true;
 		}
 
-		print(collisions.slopeAngle);
-
 		Debug.DrawRay(transform.position, Vector3.down * 0.5f, Color.blue);
 		if (Physics.Raycast(transform.position, Vector3.down, out var hit, 0.5f, collisionMask, QueryTriggerInteraction.Ignore))
-			transform.parent.parent = null;
+			transform.parent = null;
 		else
-			transform.parent.parent = null;
+			transform.parent = null;
 
 	}
 
 	void HorizontalCollisions(ref Vector3 velocity)
 	{
-		
-
 		float directionX = collisions.faceDir;
 		float rayLength = Mathf.Abs(velocity.x) + skinWidth;
 
@@ -116,7 +107,6 @@ public class MovementController : RaycastController
 						velocity = collisions.velocityOld;
 					}
 					float distanceToSlopeStart = 0;
-
 					if (slopeAngle != collisions.slopeAngleOld)
 					{
 						distanceToSlopeStart = hit.distance - skinWidth;
@@ -128,13 +118,12 @@ public class MovementController : RaycastController
 
 				if (!collisions.climbingSlope || slopeAngle > maxClimbAngle)
 				{
-					velocity.x = (hit.distance - skinWidth) * hit.normal.x;
+					velocity.x = (hit.distance - skinWidth) * directionX;
 					rayLength = hit.distance;
 
-					if (slopeAngle > maxClimbAngle)
+					if (collisions.climbingSlope)
 					{
 						velocity.y = Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(velocity.x);
-						DescendSlope(ref velocity);
 					}
 
 					collisions.left = directionX == -1;
@@ -151,7 +140,7 @@ public class MovementController : RaycastController
 
 		if (Mathf.Abs(velocity.x) < skinWidth)
 		{
-			rayLength = 10 * skinWidth;
+			rayLength = 2 * skinWidth;
 		}
 
 		for (int i = 0; i < horizontalRayCount; i++)
