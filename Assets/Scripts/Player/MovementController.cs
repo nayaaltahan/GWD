@@ -6,8 +6,8 @@ using UnityEngine.Serialization;
 
 public class MovementController : RaycastController
 {
-	public float maxClimbAngle = 30;
-	public float maxDescendAngle = 30;
+	public float maxClimbAngle = 45;
+	public float maxDescendAngle = 45;
 
 	public CollisionInfo collisions;
 
@@ -29,27 +29,48 @@ public class MovementController : RaycastController
 		UpdateRaycastOrigins();
 		collisions.Reset();
 		collisions.velocityOld = velocity;
-		print(collisions.slopeAngle);
 
 		if (velocity.x != 0)
 		{
 			collisions.faceDir = (int)Mathf.Sign(velocity.x);
 		}
 
-
 		if (velocity.y < 0)
 		{
 			DescendSlope(ref velocity);
 		}
+
 		if (velocity.x != 0)
 		{
 			HorizontalCollisions(ref velocity);
 			WallCollisions(ref velocity);
 		}
+		else
+        {
+			Vector3 rayOrigin = raycastOrigins.bottomLeft;
+
+			if (Physics.Raycast(rayOrigin, -Vector3.up, out var raycastHit, Mathf.Infinity, collisionMask))
+			{
+				float slopeAngle = Vector3.Angle(raycastHit.normal, Vector3.up);
+				if (slopeAngle >= maxDescendAngle)
+				{
+					velocity.x = -0.05f;
+					velocity.y = -0.2f;
+
+					DescendSlope(ref velocity);
+				}
+			}
+		}
+
+
 		if (velocity.y != 0)
 		{
 			VerticalCollisions(ref velocity);
 		}
+
+
+
+
 
 		if (standingOnConveyor)
 		{
@@ -59,7 +80,7 @@ public class MovementController : RaycastController
 		{
 			transform.Translate(velocity);
 		}
-		
+
 		if (standingOnPlatform)
 		{
 			collisions.below = true;
@@ -67,16 +88,14 @@ public class MovementController : RaycastController
 
 		Debug.DrawRay(transform.position, Vector3.down * 0.5f, Color.blue);
 		if (Physics.Raycast(transform.position, Vector3.down, out var hit, 0.5f, collisionMask, QueryTriggerInteraction.Ignore))
-			transform.parent.parent = null;
+			transform.parent = null;
 		else
-			transform.parent.parent = null;
+			transform.parent = null;
 
 	}
 
 	void HorizontalCollisions(ref Vector3 velocity)
 	{
-		
-
 		float directionX = collisions.faceDir;
 		float rayLength = Mathf.Abs(velocity.x) + skinWidth;
 
@@ -144,7 +163,7 @@ public class MovementController : RaycastController
 
 		if (Mathf.Abs(velocity.x) < skinWidth)
 		{
-			rayLength = 10 * skinWidth;
+			rayLength = 2 * skinWidth;
 		}
 
 		for (int i = 0; i < horizontalRayCount; i++)

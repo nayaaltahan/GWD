@@ -219,7 +219,8 @@ public class PlayerStateController : MonoBehaviour
                     velocity.y = wallLeap.y;
                 }
             }
-            if (coyoteTimer > 0 && !isForceAdded)
+
+            if (coyoteTimer > 0 && !isForceAdded && MovementController.collisions.slopeAngle < MovementController.maxClimbAngle)
             {
                 velocity.y = maxJumpVelocity;
                 coyoteTimer = -1f;
@@ -266,7 +267,7 @@ public class PlayerStateController : MonoBehaviour
             Animations.SetBool(Constants.JUMPING, false);
         }
 
-        if (MovementController.collisions.below || coyoteTimer > 0)
+        if (MovementController.collisions.below)
         {
             Animations.SetBool(Constants.FALLING, false);
             Animations.SetBool("IsGrounded", true);
