@@ -136,7 +136,7 @@ Rani: Though it is calibrated for cabbages... #event:/Voice/Rani/Convo4_ThoughIt
 
 ===SymbolRock===
 Rani: What in the rotting apple? What is happening? #event:/Voice/Rani/WhatInTheRotting #cutscene
-*[Onwell: The rock speaks to me] #cutscene
+*[Onwell: It calls to me] #cutscene
     Onwell: THE ROCK SPEAKS TO ME. #event:/Voice/Onwell/TheRockSpeaksToMe #cutscene
     Onwell: IT WELCOMES ME BACK.   #event:/Voice/Onwell/ItWelcomesMeBack #cutscene
     Onwell: GREETS ME AFTER ITS SLUMBER.  #event:/Voice/Onwell/GreetsMeAfterItsSlumber #cutscene
@@ -145,7 +145,7 @@ Rani: What in the rotting apple? What is happening? #event:/Voice/Rani/WhatInThe
         **[Rani: It is unnerving] #cutscene
             Rani: I have never seen anything like it. #event:/Voice/Rani/IveNeverSeenAnythingLikeIt #cutscene
             Rani: It somehow frightens me. #event:/Voice/Rani/ItSomehowFrightensMe #cutscene
-*[Onwell: You will not understand] #cutscene
+*[Onwell: It's complex] #cutscene
     Onwell: I WOULD EXPLAIN THIS, FROG-PERSON.  #event:/Voice/Onwell/IWouldExplainThis #cutscene
     Onwell: BUT IT CANNOT BE EXPLAINED WITH YOUR WORDS. #event:/Voice/Onwell/ButItCannotBeExplained #cutscene
         **[Rani: Try me] #cutscene

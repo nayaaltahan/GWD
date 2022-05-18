@@ -88,9 +88,9 @@ public class MovementController : RaycastController
 
 		Debug.DrawRay(transform.position, Vector3.down * 0.5f, Color.blue);
 		if (Physics.Raycast(transform.position, Vector3.down, out var hit, 0.5f, collisionMask, QueryTriggerInteraction.Ignore))
-			transform.parent = null;
+			transform.parent.parent = null;
 		else
-			transform.parent = null;
+			transform.parent.parent = null;
 
 	}
 
