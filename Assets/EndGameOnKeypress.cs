@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EndGameOnKeypress : MonoBehaviour
 {
-    float exitTime = 10f;
+    float exitTime = 20f;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        
+        StartCoroutine(EndGame());
     }
 
     // Update is called once per frame
@@ -22,6 +22,7 @@ public class EndGameOnKeypress : MonoBehaviour
     IEnumerator EndGame()
     {
         yield return new WaitForSeconds(exitTime);
+        Debug.Log("End");
 
         Application.Quit();
 
