@@ -14,6 +14,9 @@ public class Pushable : MonoBehaviour
         //    return;
         Debug.Log("PUSHING");
 
+        if (other.GetComponent<PlayerStateController>().InputController.MoveDirection.x < 0)
+            return;
+
         if (other.GetComponent<PlayerStateController>().InputController.MoveDirection.x != 0)
         {
             other.GetComponent<PlayerStateController>().Animations.SetBool(Constants.PUSHING, true);
