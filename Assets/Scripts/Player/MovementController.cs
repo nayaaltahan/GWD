@@ -190,6 +190,23 @@ public class MovementController : RaycastController
 					collisions.rightWall = directionX == 1;
 				}
 			}
+			else if (Physics.Raycast(rayOrigin, Vector3.left * directionX, out var backHit, rayLength, wallCollisionMask, QueryTriggerInteraction.Ignore))
+			{
+				Debug.DrawLine(transform.position, backHit.point, Color.yellow, 5);
+
+				if (backHit.distance == 0)
+				{
+					continue;
+				}
+
+				float slopeAngle = Vector3.Angle(backHit.normal, Vector3.up);
+
+				if (!collisions.climbingSlope || slopeAngle > maxClimbAngle)
+				{
+					collisions.leftWall = directionX == -1;
+					collisions.rightWall = directionX == 1;
+				}
+			}
 			else
 			{
 				collisions.leftWall = false;
