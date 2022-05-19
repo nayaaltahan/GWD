@@ -169,12 +169,17 @@ public class MovementController : RaycastController
 
 		for (int i = 0; i < horizontalRayCount; i++)
 		{
-			Vector3 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
-			rayOrigin += Vector3.up * (horizontalRaySpacing * i);
+			Vector3 frontRayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
+			frontRayOrigin += Vector3.up * (horizontalRaySpacing * i);
+			Vector3 backRayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
+			backRayOrigin += Vector3.up * (horizontalRaySpacing * i);
 
-			Debug.DrawRay(rayOrigin, Vector3.right * directionX * rayLength, Color.red);
 
-			if (Physics.Raycast(rayOrigin, Vector3.right * directionX, out var hit, rayLength, wallCollisionMask, QueryTriggerInteraction.Ignore))
+			Debug.DrawRay(frontRayOrigin, Vector3.right * directionX * rayLength, Color.red);
+			Debug.DrawRay(backRayOrigin, Vector3.right * -directionX * rayLength, Color.yellow);
+
+
+			if (Physics.Raycast(frontRayOrigin, Vector3.right * directionX, out var hit, rayLength, wallCollisionMask, QueryTriggerInteraction.Ignore))
 			{
 				Debug.DrawLine(transform.position, hit.point, Color.blue, 5);
 
@@ -189,6 +194,25 @@ public class MovementController : RaycastController
 				{
 					collisions.leftWall = directionX == -1;
 					collisions.rightWall = directionX == 1;
+				}
+			}
+			else if (Physics.Raycast(backRayOrigin, Vector3.right * -directionX, out var backHit, rayLength, wallCollisionMask, QueryTriggerInteraction.Ignore))
+			{
+				// Debug.DrawRay(rayOrigin, Vector3.right * directionX * rayLength, Color.red);
+				Debug.DrawLine(transform.position, backHit.point, Color.white, 5);
+
+
+				if (backHit.distance == 0)
+				{
+					continue;
+				}
+
+				float slopeAngle = Vector3.Angle(backHit.normal, Vector3.up);
+
+				if (!collisions.climbingSlope || slopeAngle > maxClimbAngle)
+				{
+					collisions.leftWall = directionX == 1;
+					collisions.rightWall = directionX == -1;
 				}
 			}
 			else
