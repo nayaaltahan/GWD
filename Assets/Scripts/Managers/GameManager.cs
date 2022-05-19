@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
         else
             Debug.LogError("More than one Game Manager in the scene");
         
+        Cursor.visible = false;
+        
         var options = new InitializationOptions();
         options.SetEnvironmentName(Debug.isDebugBuild ? "dev" : "live");
         
