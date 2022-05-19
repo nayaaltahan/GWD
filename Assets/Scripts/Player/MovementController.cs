@@ -109,7 +109,7 @@ public class MovementController : RaycastController
 			Vector3 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
 			rayOrigin += Vector3.up * (horizontalRaySpacing * i);
 
-			Debug.DrawRay(rayOrigin, Vector3.right * directionX * rayLength, Color.red);
+			Debug.DrawRay(rayOrigin, Vector3.right * directionX, Color.red);
 
 			if (Physics.Raycast(rayOrigin, Vector3.right * directionX, out var hit, rayLength, collisionMask, QueryTriggerInteraction.Ignore))
 			{
@@ -122,7 +122,7 @@ public class MovementController : RaycastController
 
 				float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
 
-				if (i == 0 && slopeAngle <= maxClimbAngle)
+				if (i == 1 && slopeAngle <= maxClimbAngle)
 				{
 					if (collisions.descendingSlope)
 					{
@@ -171,7 +171,7 @@ public class MovementController : RaycastController
 			Vector3 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
 			rayOrigin += Vector3.up * (horizontalRaySpacing * i);
 
-			Debug.DrawRay(rayOrigin, Vector3.right * directionX * rayLength, Color.red);
+			Debug.DrawRay(rayOrigin, Vector3.right * directionX, Color.red);
 
 			if (Physics.Raycast(rayOrigin, Vector3.right * directionX, out var hit, rayLength, wallCollisionMask, QueryTriggerInteraction.Ignore))
 			{
@@ -208,7 +208,7 @@ public class MovementController : RaycastController
 			Vector3 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
 			rayOrigin += Vector3.right * (verticalRaySpacing * i + velocity.x);
 
-			Debug.DrawRay(rayOrigin, Vector3.up * directionY * rayLength, Color.red);
+			Debug.DrawRay(rayOrigin, Vector3.up * directionY, Color.red);
 
 			if (Physics.Raycast(rayOrigin, Vector3.up * directionY, out var hit, rayLength, collisionMask, QueryTriggerInteraction.Ignore))
 			{
