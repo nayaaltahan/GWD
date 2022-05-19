@@ -40,6 +40,13 @@ public class MovementController : RaycastController
 			DescendSlope(ref velocity);
 		}
 
+		Vector3 rayOrigin = raycastOrigins.bottomLeft;
+
+		if (Physics.Raycast(rayOrigin, -Vector3.up, out var raycastHit, Mathf.Infinity, collisionMask))
+		{
+			collisions.slopeAngle = Vector3.Angle(raycastHit.normal, Vector3.up);
+		}
+
 		if (velocity.x != 0)
 		{
 			HorizontalCollisions(ref velocity);
@@ -47,18 +54,12 @@ public class MovementController : RaycastController
 		}
 		else
         {
-			Vector3 rayOrigin = raycastOrigins.bottomLeft;
-
-			if (Physics.Raycast(rayOrigin, -Vector3.up, out var raycastHit, Mathf.Infinity, collisionMask))
+			if (collisions.slopeAngle >= maxDescendAngle)
 			{
-				float slopeAngle = Vector3.Angle(raycastHit.normal, Vector3.up);
-				if (slopeAngle >= maxDescendAngle)
-				{
-					velocity.x = -0.05f;
-					velocity.y = -0.2f;
+				velocity.x = -0.05f;
+				velocity.y = -0.2f;
 
-					DescendSlope(ref velocity);
-				}
+				DescendSlope(ref velocity);
 			}
 		}
 
