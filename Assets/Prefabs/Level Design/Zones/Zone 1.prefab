@@ -15696,6 +15696,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1597151681075495131}
     m_Modifications:
+    - target: {fileID: 7568582140075818795, guid: 76e4ecca6efffe44683a075155c2d05a, type: 3}
+      propertyPath: cabbagePrefab
+      value: 
+      objectReference: {fileID: 3299086591641580177, guid: 97d8686080c3c5340a6f94c11e65b9e2, type: 3}
     - target: {fileID: -8679921383154817045, guid: 40c418363d4196b4cbee49cacb8c215d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -15760,10 +15764,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EA_Swamp_Leaf_01a (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 7568582140075818795, guid: 76e4ecca6efffe44683a075155c2d05a, type: 3}
-      propertyPath: cabbagePrefab
-      value: 
-      objectReference: {fileID: 3299086591641580177, guid: 97d8686080c3c5340a6f94c11e65b9e2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40c418363d4196b4cbee49cacb8c215d, type: 3}
 --- !u!1 &794679299801264536 stripped
@@ -20703,6 +20703,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1082976375787522976}
     m_Modifications:
+    - target: {fileID: 2881324309653904533, guid: 5ad2b1ce03d94ed4ab641dbc42f6a700, type: 3}
+      propertyPath: m_Radius
+      value: 37.19396
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881324309653904533, guid: 5ad2b1ce03d94ed4ab641dbc42f6a700, type: 3}
+      propertyPath: m_Center.y
+      value: 40.601307
+      objectReference: {fileID: 0}
     - target: {fileID: 7026067186175740858, guid: 5ad2b1ce03d94ed4ab641dbc42f6a700, type: 3}
       propertyPath: m_RootOrder
       value: 6
