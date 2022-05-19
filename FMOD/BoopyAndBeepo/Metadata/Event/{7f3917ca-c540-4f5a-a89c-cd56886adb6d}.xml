@@ -213,7 +213,7 @@
 			<value>-4.5</value>
 		</property>
 		<property name="polyphony">
-			<value>13</value>
+			<value>9</value>
 		</property>
 		<property name="minimumTimeBetweenSounds">
 			<value>18</value>
@@ -501,6 +501,9 @@
 		<property name="pitch">
 			<value>-1.20000005</value>
 		</property>
+		<property name="looping">
+			<value>true</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{623c1900-61f5-490c-ab1e-544eb150d556}</destination>
 		</relationship>
@@ -532,13 +535,16 @@
 		<property name="pitch">
 			<value>0.900000036</value>
 		</property>
+		<property name="looping">
+			<value>true</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{66f4c733-24ff-43a8-81c3-6c4a6a27b2df}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{d5100d09-4124-4183-bbe0-10b867a75a8f}">
 		<property name="volume">
-			<value>-8</value>
+			<value>-13.5</value>
 		</property>
 		<property name="name">
 			<value>Audio 9</value>
@@ -1142,7 +1148,7 @@
 			<value>4.576271186440664</value>
 		</property>
 		<property name="value">
-			<value>-9.78496552</value>
+			<value>-11.8690643</value>
 		</property>
 		<property name="curveShape">
 			<value>0.446385592</value>
@@ -1153,7 +1159,7 @@
 			<value>-80</value>
 		</property>
 		<property name="value">
-			<value>-35.0999985</value>
+			<value>-39.2681961</value>
 		</property>
 		<property name="curveShape">
 			<value>-0.499387681</value>
@@ -1164,7 +1170,7 @@
 			<value>80</value>
 		</property>
 		<property name="value">
-			<value>-35.0999985</value>
+			<value>-39.2681961</value>
 		</property>
 	</object>
 	<object class="LFOModulator" id="{a32ebd6d-e7f5-4e25-8a76-90693dcc84c8}">
