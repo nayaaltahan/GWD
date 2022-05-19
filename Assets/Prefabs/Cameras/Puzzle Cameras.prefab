@@ -275,7 +275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770780314}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 240.31, y: 1.16, z: 0}
+  m_LocalPosition: {x: 236.91, y: 1.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8890535756337372486}
@@ -419,7 +419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084934225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 312.59, y: 5.22, z: 0}
+  m_LocalPosition: {x: 310.47, y: 5.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8890535756337372486}
@@ -840,7 +840,7 @@ MonoBehaviour:
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.39
-  m_ScreenY: 0.7
+  m_ScreenY: 0.67
   m_CameraDistance: 15
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
@@ -848,16 +848,16 @@ MonoBehaviour:
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.62
   m_SoftZoneHeight: 1.06
-  m_BiasX: 0
+  m_BiasX: 0.016
   m_BiasY: 0.13999996
   m_CenterOnActivate: 1
   m_GroupFramingMode: 2
   m_AdjustmentMode: 2
   m_GroupFramingSize: 0.5
   m_MaxDollyIn: 0
-  m_MaxDollyOut: 5000
+  m_MaxDollyOut: 10
   m_MinimumDistance: 1
-  m_MaximumDistance: 5000
+  m_MaximumDistance: 10
   m_MinimumFOV: 51
   m_MaximumFOV: 110
   m_MinimumOrthoSize: 1
@@ -906,7 +906,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387807506380917226}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 96.95, y: 0, z: 0}
+  m_LocalPosition: {x: 93.07, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8890535756337372486}
@@ -1315,7 +1315,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387807507039487767}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 32.630005, y: 0, z: 0}
+  m_LocalPosition: {x: 31.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8890535756337372486}
