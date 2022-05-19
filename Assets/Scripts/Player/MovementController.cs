@@ -163,7 +163,7 @@ public class MovementController : RaycastController
 
 		if (Mathf.Abs(velocity.x) < skinWidth)
 		{
-			rayLength = 2 * skinWidth;
+			rayLength = 10 * skinWidth;
 		}
 
 		for (int i = 0; i < horizontalRayCount; i++)

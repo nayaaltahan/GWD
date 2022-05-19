@@ -268,8 +268,11 @@ public class DialogueManager : MonoBehaviour
     {
         robotPlayerController.SetCanMove(!shouldFreeze);
         frogPlayerController.SetCanMove(!shouldFreeze);
-        frogPlayerController.FaceOtherPlayerWhileTalking();
-        robotPlayerController.FaceOtherPlayerWhileTalking();
+        if (shouldFreeze)
+        {
+            frogPlayerController.FaceOtherPlayerWhileTalking();
+            robotPlayerController.FaceOtherPlayerWhileTalking();
+        }
     }
 
     private void SlowPlayers(bool shouldSlowDown)
